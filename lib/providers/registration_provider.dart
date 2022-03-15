@@ -7,4 +7,9 @@ class RegistrationProvider with ChangeNotifier {
   String get countryCode => _countryCode;
 
   //setter
+
+  setCountryCode(value) {
+    _countryCode = value;
+    notifyListeners();
+  }
 }
