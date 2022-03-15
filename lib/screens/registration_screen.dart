@@ -21,7 +21,7 @@ class Registration extends StatelessWidget {
             margin: const EdgeInsets.only(left: 20, right: 20),
             padding: const EdgeInsets.only(left: 20, right: 20),
             decoration: BoxDecoration(
-              color: Colors.black45,
+              color: Colors.black54,
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),

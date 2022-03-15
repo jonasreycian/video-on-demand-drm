@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/screens/registration_dart.dart';
+import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
 
 void main() {
