@@ -7,9 +7,9 @@ class Previews extends StatelessWidget {
   final List<Content> contentList;
 
   const Previews({
-    Key key,
-    @required this.title,
-    @required this.contentList,
+    Key? key,
+    required this.title,
+    required this.contentList,
   }) : super(key: key);
 
   @override
@@ -50,11 +50,11 @@ class Previews extends StatelessWidget {
                       width: 130.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(content.imageUrl),
+                          image: AssetImage(content.imageUrl!),
                           fit: BoxFit.cover,
                         ),
                         shape: BoxShape.circle,
-                        border: Border.all(color: content.color, width: 4.0),
+                        border: Border.all(color: content.color!, width: 4.0),
                       ),
                     ),
                     Container(
@@ -72,7 +72,7 @@ class Previews extends StatelessWidget {
                           end: Alignment.topCenter,
                         ),
                         shape: BoxShape.circle,
-                        border: Border.all(color: content.color, width: 4.0),
+                        border: Border.all(color: content.color!, width: 4.0),
                       ),
                     ),
                     Positioned(
@@ -81,7 +81,7 @@ class Previews extends StatelessWidget {
                       bottom: 0,
                       child: SizedBox(
                         height: 60.0,
-                        child: Image.asset(content.titleImageUrl),
+                        child: Image.asset(content.titleImageUrl!),
                       ),
                     ),
                   ],

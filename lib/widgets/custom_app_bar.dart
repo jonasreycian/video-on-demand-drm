@@ -7,7 +7,7 @@ class CustomAppBar extends StatelessWidget {
   final double scrollOffset;
 
   const CustomAppBar({
-    Key key,
+    Key? key,
     this.scrollOffset = 0.0,
   }) : super(key: key);
 
@@ -18,9 +18,9 @@ class CustomAppBar extends StatelessWidget {
         vertical: 10.0,
         horizontal: 24.0,
       ),
-      color:
-          Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
+      color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1).toDouble()),
       child: Responsive(
+        tablet: _CustomAppBarMobile(),
         mobile: _CustomAppBarMobile(),
         desktop: _CustomAppBarDesktop(),
       ),
@@ -141,12 +141,12 @@ class _CustomAppBarDesktop extends StatelessWidget {
 
 class _AppBarButton extends StatelessWidget {
   final String title;
-  final Function onTap;
+  final void Function() onTap;
 
   const _AppBarButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   @override

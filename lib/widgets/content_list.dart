@@ -8,9 +8,9 @@ class ContentList extends StatelessWidget {
   final bool isOriginals;
 
   const ContentList({
-    Key key,
-    @required this.title,
-    @required this.contentList,
+    Key? key,
+    required this.title,
+    required this.contentList,
     this.isOriginals = false,
   }) : super(key: key);
 
@@ -51,7 +51,7 @@ class ContentList extends StatelessWidget {
                     width: isOriginals ? 200.0 : 130.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(content.imageUrl),
+                        image: AssetImage(content.imageUrl!),
                         fit: BoxFit.cover,
                       ),
                     ),
