@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 
 class Registration extends StatelessWidget {
-  const Registration({Key? key}) : super(key: key);
-
+  Registration({Key? key}) : super(key: key);
+  final TextEditingController firstName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +20,7 @@ class Registration extends StatelessWidget {
             height: 250,
             width: double.infinity,
             margin: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             decoration: BoxDecoration(
               color: Colors.black45,
               borderRadius: BorderRadius.all(
@@ -32,6 +35,18 @@ class Registration extends StatelessWidget {
                   width: 150,
                 ),
                 Text("Hello background"),
+                InputTextField(
+                  controller: firstName,
+                  hintText: 'First Name',
+                  height: 50,
+                  keyboardType: TextInputType.visiblePassword,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  padding: const EdgeInsets.only(top: 0),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: HexColor('#BEBBBB'),
+                  ),
+                ),
               ],
             ),
           ),
