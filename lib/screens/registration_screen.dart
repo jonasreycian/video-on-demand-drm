@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
 import 'package:provider/provider.dart';
@@ -155,15 +156,34 @@ class Registration extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 100,
                 color: Colors.white,
-                child: CountryCodePicker(
-                  onChanged: (value) {
-                    Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value);
-                    Navigator.of(context).pop();
-                  },
-                  initialSelection: 'PH',
-                  showCountryOnly: true,
-                  showOnlyCountryWhenClosed: true,
-                  alignLeft: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Please Select Country Code',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 13,
+                        color: Colors.black,
+                      ),
+                    ),
+                    CountryCodePicker(
+                      onChanged: (value) {
+                        Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value.dialCode);
+                        Navigator.of(context).pop();
+                      },
+                      initialSelection: 'PH',
+                      showCountryOnly: false,
+                      showOnlyCountryWhenClosed: true,
+                      alignLeft: false,
+                      backgroundColor: Colors.black87,
+                      barrierColor: Colors.black54,
+                    ),
+                  ],
                 ),
               ),
             ),
