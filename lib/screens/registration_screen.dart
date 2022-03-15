@@ -124,7 +124,7 @@ class Registration extends StatelessWidget {
   }
 
   countryCodeDialog({required BuildContext context}) {
-    Future.delayed(const Duration(milliseconds: 2000), () => Navigator.of(context).pop());
+    // Future.delayed(const Duration(milliseconds: 2000), () => Navigator.of(context).pop());
     showGeneralDialog(
       barrierDismissible: false,
       context: context,
@@ -154,9 +154,7 @@ class Registration extends StatelessWidget {
                 child: CountryCodePicker(
                   onChanged: (value) {
                     print(value);
-                    Navigator.of(context)
-                      ..pop()
-                      ..pop();
+                    Navigator.of(context).pop();
                   },
                   initialSelection: 'PH',
                   showCountryOnly: true,
