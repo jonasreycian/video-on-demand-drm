@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
 
 class Registration extends StatelessWidget {
   Registration({Key? key}) : super(key: key);
@@ -24,12 +25,12 @@ class Registration extends StatelessWidget {
             child: Container(
               height: 750,
               width: double.infinity,
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
               decoration: BoxDecoration(
                 color: Colors.black54,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(15),
                 ),
               ),
               child: Column(
@@ -78,7 +79,7 @@ class Registration extends StatelessWidget {
                   const SizedBox(height: 20),
                   InputTextField(
                     controller: password,
-                    hintText: 'Passwords',
+                    hintText: 'Password',
                     height: 55,
                     keyboardType: TextInputType.text,
                     obscureText: true,
@@ -94,6 +95,18 @@ class Registration extends StatelessWidget {
                     obscureText: true,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
                     padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                  ),
+                  const SizedBox(height: 20),
+                  PrimaryButton(
+                    height: 50,
+                    action: () {
+                      // emailFocus.unfocus();
+                      // passwordFocus.unfocus();
+                      // dialog(context: context);
+                      // data.loadData(email.text, password.text);
+                    },
+                    width: double.infinity,
+                    label: 'Register',
                   ),
                 ],
               ),
