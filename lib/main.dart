@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
+import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return DismissKeyboard(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
+          ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
         ],
         child: MaterialApp(
           title: 'Flutter Netflix UI',
