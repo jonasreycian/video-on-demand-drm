@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 
 class Registration extends StatelessWidget {
@@ -34,18 +33,13 @@ class Registration extends StatelessWidget {
                   height: 150,
                   width: 150,
                 ),
-                Text("Hello background"),
                 InputTextField(
                   controller: firstName,
                   hintText: 'First Name',
-                  height: 50,
+                  height: 55,
                   keyboardType: TextInputType.visiblePassword,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  padding: const EdgeInsets.only(top: 0),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: HexColor('#BEBBBB'),
-                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
                 ),
               ],
             ),
