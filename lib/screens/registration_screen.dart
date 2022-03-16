@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
@@ -38,6 +39,13 @@ class Registration extends StatelessWidget {
                 ),
               ),
               child: Consumer<RegistrationProvider>(builder: (context, value, child) {
+                Future.delayed(const Duration(milliseconds: 100), () {
+                  if (!value.isLoading) {
+                    generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                    value.reset();
+                  }
+                });
+
                 return Column(
                   children: [
                     Image.asset(
@@ -77,13 +85,13 @@ class Registration extends StatelessWidget {
                       controller: mobileNumber,
                       hintText: 'Mobile Number',
                       height: 55,
-                      keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
+                      keyboardType: TextInputType.number,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
                       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                      prefixIconPadding: const EdgeInsets.only(top: 10, right: 0, left: 0),
+                      prefixIconPadding: const EdgeInsets.only(top: 7, bottom: 10),
                       prefixIcon: GestureDetector(
                         onTap: () => countryCodeDialog(context: context),
-                        child: Text(value.countryCode),
+                        child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -92,9 +100,18 @@ class Registration extends StatelessWidget {
                       hintText: 'Password',
                       height: 55,
                       keyboardType: TextInputType.text,
-                      obscureText: true,
+                      obscureText: value.isObscurePassword,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
+                      suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+                      suffixIcon: IconButton(
+                        onPressed: () => value.setIsObscurePassword(),
+                        icon: Icon(
+                          value.isObscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          color: HexColor('#BEBBBB'),
+                          size: 20,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     InputTextField(
@@ -102,21 +119,74 @@ class Registration extends StatelessWidget {
                       hintText: 'Confirm Password',
                       height: 55,
                       keyboardType: TextInputType.text,
-                      obscureText: true,
+                      obscureText: value.isObscureConfirmPassword,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
                       padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                      suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+                      suffixIcon: IconButton(
+                        onPressed: () => value.setIsObscureConfirmPassword(),
+                        icon: Icon(
+                          value.isObscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          color: HexColor('#BEBBBB'),
+                          size: 20,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     PrimaryButton(
                       height: 50,
                       action: () {
-                        // emailFocus.unfocus();
-                        // passwordFocus.unfocus();
-                        // dialog(context: context);
-                        // data.loadData(email.text, password.text);
+                        if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
+                          value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
+                          generalDialog(
+                            context: context,
+                            message: value.message,
+                            isAutoClose: true,
+                            isLoading: true,
+                          );
+                        } else {
+                          generalDialog(
+                            context: context,
+                            message: 'Please Fill-out all fields',
+                            isAutoClose: true,
+                            isLoading: false,
+                          );
+                        }
                       },
                       width: double.infinity,
                       label: 'Register',
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already on AQ-Prime?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 13,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: const Text(
+                            'Sign-in',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 13,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 );
@@ -167,21 +237,34 @@ class Registration extends StatelessWidget {
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
-                        fontSize: 13,
+                        fontSize: 15,
                         color: Colors.black,
                       ),
                     ),
-                    CountryCodePicker(
-                      onChanged: (value) {
-                        Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value.dialCode);
-                        Navigator.of(context).pop();
-                      },
-                      initialSelection: 'PH',
-                      showCountryOnly: false,
-                      showOnlyCountryWhenClosed: true,
-                      alignLeft: false,
-                      backgroundColor: Colors.black87,
-                      barrierColor: Colors.black54,
+                    SizedBox(
+                      width: double.infinity,
+                      child: CountryCodePicker(
+                        onChanged: (value) {
+                          Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value);
+                          Navigator.of(context).pop();
+                        },
+                        initialSelection: Provider.of<RegistrationProvider>(context, listen: false).countryCode.code,
+                        favorite: ['PH', 'US'],
+                        showCountryOnly: false,
+                        hideSearch: true,
+                        showOnlyCountryWhenClosed: true,
+                        alignLeft: false,
+                        showDropDownButton: true,
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.transparent,
+                        boxDecoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        dialogSize: Size(MediaQuery.of(context).size.width - 40, 350),
+                      ),
                     ),
                   ],
                 ),

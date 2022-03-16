@@ -13,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.fontSize = 16,
     this.image = '',
     this.margin,
+    this.borderRadius,
     Key? key,
   }) : super(key: key);
 
@@ -25,6 +26,7 @@ class PrimaryButton extends StatelessWidget {
   final double fontSize;
   final String image;
   EdgeInsets? margin;
+  double? borderRadius;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,7 +42,7 @@ class PrimaryButton extends StatelessWidget {
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(borderRadius == null ? 12.0 : borderRadius!),
               ),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
