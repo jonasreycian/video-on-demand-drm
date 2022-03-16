@@ -227,19 +227,19 @@ class Registration extends StatelessWidget {
             opacity: anim1.value,
             child: AlertDialog(
               actionsAlignment: MainAxisAlignment.center,
-              contentPadding: const EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 15),
+              contentPadding: const EdgeInsets.all(15),
               actionsPadding: const EdgeInsets.only(bottom: 10),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(20.0),
                 ),
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.black87,
               content: AnimatedContainer(
                 duration: const Duration(milliseconds: 50),
                 width: MediaQuery.of(context).size.width,
                 height: 100,
-                color: Colors.white,
+                color: Colors.transparent,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -252,33 +252,44 @@ class Registration extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
                         fontSize: 15,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: CountryCodePicker(
-                        onChanged: (value) {
-                          Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value);
-                          Navigator.of(context).pop();
-                        },
-                        initialSelection: Provider.of<RegistrationProvider>(context, listen: false).countryCode.code,
-                        favorite: ['PH', 'US'],
-                        showCountryOnly: false,
-                        hideSearch: true,
-                        showOnlyCountryWhenClosed: true,
-                        alignLeft: false,
-                        showDropDownButton: true,
-                        backgroundColor: Colors.transparent,
-                        barrierColor: Colors.transparent,
-                        boxDecoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                        dialogSize: Size(MediaQuery.of(context).size.width - 40, 350),
+                    CountryCodePicker(
+                      onChanged: (value) {
+                        Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value);
+                        Navigator.of(context).pop();
+                      },
+                      initialSelection: Provider.of<RegistrationProvider>(context, listen: false).countryCode.code,
+                      favorite: ['PH', 'US'],
+                      showCountryOnly: false,
+                      hideSearch: true,
+                      showOnlyCountryWhenClosed: true,
+                      alignLeft: true,
+                      showDropDownButton: true,
+                      backgroundColor: Colors.transparent,
+                      barrierColor: Colors.transparent,
+                      textStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 15,
+                        color: Colors.white,
                       ),
+                      dialogTextStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
+                      boxDecoration: BoxDecoration(
+                        color: Colors.black87,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                      ),
+                      dialogSize: Size(MediaQuery.of(context).size.width - 40, 350),
                     ),
                   ],
                 ),

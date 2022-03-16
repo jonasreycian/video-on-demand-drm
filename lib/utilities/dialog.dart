@@ -25,19 +25,19 @@ generalDialog({
           opacity: anim1.value,
           child: AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
-            contentPadding: const EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 15),
+            contentPadding: const EdgeInsets.all(15),
             actionsPadding: const EdgeInsets.only(bottom: 10),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
+                Radius.circular(15.0),
               ),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black87,
             content: AnimatedContainer(
               duration: const Duration(milliseconds: 50),
               width: MediaQuery.of(context).size.width,
               height: 40,
-              color: Colors.white,
+              color: Colors.transparent,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,10 +48,10 @@ generalDialog({
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),
