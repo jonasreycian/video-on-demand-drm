@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/screens/forgot_password.dart';
 import 'package:flutter_netflix_responsive_ui/screens/login_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
@@ -21,10 +22,10 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
         ],
         child: MaterialApp(
-          title: 'Flutter Netflix UI',
+          title: 'AQ-Prime',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.red,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             scaffoldBackgroundColor: Colors.black,
           ),
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
             NavScreen.routeName: (context) => NavScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
             Registration.routeName: (context) => Registration(),
+            ForgotPassword.routeName: (context) => ForgotPassword(),
           },
         ),
       ),

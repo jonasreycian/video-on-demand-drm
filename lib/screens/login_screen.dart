@@ -6,6 +6,7 @@ import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/text_and_link.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -88,7 +89,13 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 10),
+                    TextAndLink(
+                      text: 'Forgot Password?',
+                      link: 'Tap here',
+                      onTap: () {},
+                    ),
+                    const SizedBox(height: 15),
                     PrimaryButton(
                       label: 'Login',
                       width: double.infinity,
@@ -114,37 +121,11 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                     ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Don\'t have account?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pushNamed(Registration.routeName),
-                          child: const Text(
-                            'Register',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(height: 15),
+                    TextAndLink(
+                      text: 'Don\'t have account?',
+                      link: 'Register',
+                      onTap: () => Navigator.of(context).pushNamed(Registration.routeName),
                     ),
                   ],
                 );

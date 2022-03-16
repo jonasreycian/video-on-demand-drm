@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 
 generalDialog({
   required BuildContext context,
@@ -62,7 +61,7 @@ generalDialog({
                           width: 25,
                           height: 25,
                           child: CircularProgressIndicator(
-                            color: Colors.black,
+                            color: Colors.red,
                             strokeWidth: 2.5,
                           ),
                         )
