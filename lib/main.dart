@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/screens/login_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
+          ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
         ],
         child: MaterialApp(
           title: 'Flutter Netflix UI',
@@ -25,9 +28,11 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             scaffoldBackgroundColor: Colors.black,
           ),
-          home: Registration(),
+          home: LoginScreen(),
           routes: {
             NavScreen.routeName: (context) => NavScreen(),
+            LoginScreen.routeName: (context) => LoginScreen(),
+            Registration.routeName: (context) => Registration(),
           },
         ),
       ),

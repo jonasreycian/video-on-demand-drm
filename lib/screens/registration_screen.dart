@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class Registration extends StatelessWidget {
   Registration({Key? key}) : super(key: key);
+  static const routeName = '/registrationScreen';
   // final TextEditingController firstName = TextEditingController(text: 'Juan');
   // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
   // final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
