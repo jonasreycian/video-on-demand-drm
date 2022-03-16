@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.black,
           ),
           home: Registration(),
+          routes: {
+            NavScreen.routeName: (context) => NavScreen(),
+          },
         ),
       ),
     );

@@ -7,6 +7,7 @@ import 'package:flutter_netflix_responsive_ui/widgets/widgets.dart';
 class NavScreen extends StatefulWidget {
   @override
   _NavScreenState createState() => _NavScreenState();
+  static const routeName = '/Home';
 }
 
 class _NavScreenState extends State<NavScreen> {

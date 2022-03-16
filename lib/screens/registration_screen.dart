@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
+import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
@@ -9,6 +10,12 @@ import 'package:provider/provider.dart';
 
 class Registration extends StatelessWidget {
   Registration({Key? key}) : super(key: key);
+  // final TextEditingController firstName = TextEditingController(text: 'Juan');
+  // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
+  // final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
+  // final TextEditingController mobileNumber = TextEditingController(text: '91643489');
+  // final TextEditingController password = TextEditingController(text: 'passwordMatch');
+  // final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
@@ -42,6 +49,12 @@ class Registration extends StatelessWidget {
                 Future.delayed(const Duration(milliseconds: 100), () {
                   if (!value.isLoading) {
                     generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                    value.reset();
+                  }
+                });
+                Future.delayed(const Duration(milliseconds: 2000), () {
+                  if (value.isSuccess) {
+                    Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
                     value.reset();
                   }
                 });

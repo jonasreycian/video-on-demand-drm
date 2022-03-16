@@ -67,7 +67,7 @@ class RegistrationProvider with ChangeNotifier {
 
   reset() {
     _message = 'Please Wait...';
-    _isSuccess = false;
+    // _isSuccess = false;
     _isLoading = true;
     _isObscurePassword = true;
     _isObscureConfirmPassword = true;
