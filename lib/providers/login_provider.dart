@@ -28,6 +28,12 @@ class LoginProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
+      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)) {
+        _message = 'Invalid Email Address';
+        _isSuccess = false;
+        _isLoading = false;
+        notifyListeners();
+      }
       if (password.length < 8) {
         _message = 'Password must be\n8 characters above';
         _isSuccess = false;
@@ -38,7 +44,7 @@ class LoginProvider with ChangeNotifier {
   }
 
   reset() {
-    _isSuccess = false;
+    // _isSuccess = false;
     _isLoading = true;
     _message = 'Please Wait...';
     _passwordObscure = true;
