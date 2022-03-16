@@ -36,7 +36,7 @@ class Registration extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Container(
-              height: 750,
+              height: 730,
               width: double.infinity,
               margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
               padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -63,9 +63,9 @@ class Registration extends StatelessWidget {
                 return Column(
                   children: [
                     Image.asset(
-                      'assets/images/netflixLogo.png',
-                      height: 150,
-                      width: 150,
+                      'assets/images/SampleLogo.png',
+                      height: 130,
+                      width: 130,
                     ),
                     const SizedBox(height: 25),
                     InputTextField(

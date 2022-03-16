@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
+import 'package:flutter_netflix_responsive_ui/screens/forgot_password.dart';
 import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Container(
-              height: 500,
+              height: 450,
               width: double.infinity,
               margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
               padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -55,9 +56,9 @@ class LoginScreen extends StatelessWidget {
                 return Column(
                   children: [
                     Image.asset(
-                      'assets/images/netflixLogo.png',
-                      height: 150,
-                      width: 150,
+                      'assets/images/SampleLogo.png',
+                      height: 130,
+                      width: 130,
                     ),
                     const SizedBox(height: 25),
                     InputTextField(
@@ -93,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                     TextAndLink(
                       text: 'Forgot Password?',
                       link: 'Tap here',
-                      onTap: () {},
+                      onTap: () => Navigator.of(context).pushNamed(ForgotPassword.routeName),
                     ),
                     const SizedBox(height: 15),
                     PrimaryButton(

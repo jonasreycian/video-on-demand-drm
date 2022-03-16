@@ -33,6 +33,16 @@ class PrimaryButton extends StatelessWidget {
       margin: margin ??= const EdgeInsets.all(0),
       height: height,
       width: width == null ? double.infinity : width!,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.red.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 10,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
       child: Opacity(
         opacity: isDisabled ? 0.5 : 1.0,
         child: ElevatedButton(
