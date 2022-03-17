@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/enter_new_password.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/enter_otp_card.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/reset_password_email_card.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/reset_password_mobile_card.dart';
@@ -11,17 +12,25 @@ class ForgotPassword extends StatelessWidget {
   ForgotPassword({Key? key}) : super(key: key);
   static const routeName = '/forgotPassword';
   late Widget currentWidget;
+  late double height;
   @override
   Widget build(BuildContext context) {
     ForgotPasswordProvider forgotPasswordProvider = Provider.of<ForgotPasswordProvider>(context);
     if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[0]) {
       currentWidget = ResetPasswordCardMobile();
+      height = 400;
     }
     if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[1]) {
       currentWidget = ResetPasswordCardEmail();
+      height = 400;
     }
-    if (forgotPasswordProvider.isSuccess) {
+    if (forgotPasswordProvider.isSuccess && forgotPasswordProvider.isSuccessOtp) {
+      currentWidget = EnterNewPassword();
+      height = 400;
+    }
+    if (forgotPasswordProvider.isSuccess && !forgotPasswordProvider.isSuccessOtp) {
       currentWidget = EnterOtpCard();
+      height = 340;
     }
     return Container(
       decoration: BoxDecoration(
@@ -38,8 +47,9 @@ class ForgotPassword extends StatelessWidget {
           child: AnimationConfiguration.staggeredList(
             position: 0,
             child: SingleChildScrollView(
-              child: Container(
-                height: 400,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                height: height,
                 width: double.infinity,
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -50,12 +60,12 @@ class ForgotPassword extends StatelessWidget {
                   ),
                 ),
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 800),
                   layoutBuilder: (widget, animation) {
                     return FadeInAnimation(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 800),
                       child: widget!,
-                      delay: const Duration(milliseconds: 100),
+                      delay: const Duration(milliseconds: 1000),
                     );
                   },
                   child: currentWidget,

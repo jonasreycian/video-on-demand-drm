@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordProvider with ChangeNotifier {
+  bool _isSuccessOtp = false;
   bool _isSuccess = false;
   bool _isLoading = true;
   CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
@@ -16,6 +17,7 @@ class ForgotPasswordProvider with ChangeNotifier {
   TextInputType get textInputType => _textInputType;
   String get message => _message;
   bool get isSuccess => _isSuccess;
+  bool get isSuccessOtp => _isSuccessOtp;
   bool get isLoading => _isLoading;
   String get selectedWidgetCard => _selectedWidgetCard;
   List<String> get choices => [..._choices];
@@ -68,8 +70,15 @@ class ForgotPasswordProvider with ChangeNotifier {
     });
   }
 
+  sendOTP(otpValue) {
+    _isSuccess = true;
+    _isSuccessOtp = true;
+    notifyListeners();
+  }
+
   reset() {
     _isSuccess = false;
+    _isSuccessOtp = false;
     _isLoading = true;
     // _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
     // _hintText = 'Email';

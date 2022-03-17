@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 class EnterOtpCard extends StatelessWidget {
   EnterOtpCard({Key? key}) : super(key: key);
   final TextEditingController controller = TextEditingController();
+  final FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
           generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
-
           value.reset();
         }
       });
@@ -40,15 +40,13 @@ class EnterOtpCard extends StatelessWidget {
               ),
             ),
             controller: controller,
+            focusNode: focusNode,
             textInputAction: TextInputAction.go,
             enabled: true,
             keyboardType: TextInputType.number,
             textCapitalization: TextCapitalization.characters,
             onSubmit: (pin) {
               debugPrint('submit pin:$pin');
-            },
-            onChanged: (pin) {
-              debugPrint('onChanged execute. pin:$pin');
             },
             enableInteractiveSelection: false,
           ),
@@ -58,23 +56,17 @@ class EnterOtpCard extends StatelessWidget {
             width: double.infinity,
             height: 50,
             action: () {
-              // if (emailNumber.text.isNotEmpty) {
-              //   value.sendAPI(emailNumber.text);
-              //   emailNumberFocus.unfocus();
-              //   generalDialog(
-              //     context: context,
-              //     message: value.message,
-              //     isAutoClose: true,
-              //     isLoading: true,
-              //   );
-              // } else {
-              //   generalDialog(
-              //     context: context,
-              //     message: 'Please Enter Mobile Number',
-              //     isAutoClose: true,
-              //     isLoading: false,
-              //   );
-              // }
+              if (controller.text.isNotEmpty) {
+                value.sendOTP(controller.text);
+                focusNode.unfocus();
+              } else {
+                generalDialog(
+                  context: context,
+                  message: 'Please Enter OTP.',
+                  isAutoClose: true,
+                  isLoading: false,
+                );
+              }
             },
           ),
         ],
