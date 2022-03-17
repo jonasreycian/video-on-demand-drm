@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
+import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dropdown_card.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
@@ -16,6 +17,19 @@ class ResetPasswordCardEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (!value.isLoading) {
+          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+          value.reset();
+        }
+      });
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        if (value.isSuccess) {
+          // print('success');
+          // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+          value.reset();
+        }
+      });
       return Column(
         children: [
           Image.asset(
@@ -47,7 +61,25 @@ class ResetPasswordCardEmail extends StatelessWidget {
             label: 'Mail OTP',
             width: double.infinity,
             height: 50,
-            action: () {},
+            action: () {
+              if (emailNumber.text.isNotEmpty) {
+                value.sendAPI(emailNumber.text);
+                emailNumberFocus.unfocus();
+                generalDialog(
+                  context: context,
+                  message: value.message,
+                  isAutoClose: true,
+                  isLoading: true,
+                );
+              } else {
+                generalDialog(
+                  context: context,
+                  message: 'Please Enter Email Address',
+                  isAutoClose: true,
+                  isLoading: false,
+                );
+              }
+            },
           ),
         ],
       );
@@ -65,6 +97,19 @@ class ResetPasswordCardMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (!value.isLoading) {
+          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+          value.reset();
+        }
+      });
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        if (value.isSuccess) {
+          // print('success');
+          // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+          value.reset();
+        }
+      });
       return Column(
         children: [
           Image.asset(
@@ -101,7 +146,25 @@ class ResetPasswordCardMobile extends StatelessWidget {
             label: 'Send OTP',
             width: double.infinity,
             height: 50,
-            action: () {},
+            action: () {
+              if (emailNumber.text.isNotEmpty) {
+                value.sendAPI(emailNumber.text);
+                emailNumberFocus.unfocus();
+                generalDialog(
+                  context: context,
+                  message: value.message,
+                  isAutoClose: true,
+                  isLoading: true,
+                );
+              } else {
+                generalDialog(
+                  context: context,
+                  message: 'Please Enter Mobile Number',
+                  isAutoClose: true,
+                  isLoading: false,
+                );
+              }
+            },
           ),
         ],
       );
