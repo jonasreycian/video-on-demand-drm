@@ -44,7 +44,7 @@ class ForgotPasswordProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  sendAPI(value) {
+  sendEmailOrNumber(value) {
     reset();
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;

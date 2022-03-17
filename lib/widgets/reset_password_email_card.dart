@@ -62,7 +62,7 @@ class ResetPasswordCardEmail extends StatelessWidget {
             height: 50,
             action: () {
               if (emailNumber.text.isNotEmpty) {
-                value.sendAPI(emailNumber.text);
+                value.sendEmailOrNumber(emailNumber.text);
                 emailNumberFocus.unfocus();
                 generalDialog(
                   context: context,
