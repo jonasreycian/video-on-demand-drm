@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/reset_password_card.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/reset_password_email_card.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/reset_password_mobile_card.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
