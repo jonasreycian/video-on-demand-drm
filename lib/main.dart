@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
 import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
 import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
 import 'package:flutter_netflix_responsive_ui/screens/forgot_password.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
           ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
+          ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
         ],
         child: MaterialApp(
           title: 'AQ-Prime',

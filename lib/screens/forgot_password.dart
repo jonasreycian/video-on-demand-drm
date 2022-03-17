@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/dropdown_card.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/reset_password_card.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -10,7 +8,7 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget currentWidget = ResetPasswordCard();
+    Widget currentWidget = ResetPasswordCardEmail();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -24,77 +22,32 @@ class ForgotPassword extends StatelessWidget {
             position: 0,
             child: SingleChildScrollView(
               child: Container(
-                  height: 500,
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
+                height: 500,
+                width: double.infinity,
+                margin: const EdgeInsets.all(20),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
                   ),
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    layoutBuilder: (widget, animation) {
-                      return FadeInAnimation(
-                        duration: const Duration(milliseconds: 500),
-                        child: widget!,
-                        delay: const Duration(milliseconds: 100),
-                      );
-                    },
-                    child: currentWidget,
-                  )),
+                ),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  layoutBuilder: (widget, animation) {
+                    return FadeInAnimation(
+                      duration: const Duration(milliseconds: 500),
+                      child: widget!,
+                      delay: const Duration(milliseconds: 100),
+                    );
+                  },
+                  child: currentWidget,
+                ),
+              ),
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class ResetPasswordCard extends StatelessWidget {
-  ResetPasswordCard({
-    Key? key,
-  }) : super(key: key);
-
-  final TextEditingController emailNumber = TextEditingController();
-  final FocusNode emailNumberFocus = FocusNode();
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          'assets/images/SampleLogo.png',
-          height: 130,
-          width: 130,
-        ),
-        const SizedBox(height: 25),
-        Dropdown(
-          width: double.infinity,
-          height: 50,
-          hint: 'Reset via',
-          choices: ['Reset via Mobile Number', 'Reset via Email'],
-          onChanged: (value) {},
-        ),
-        const SizedBox(height: 25),
-        InputTextField(
-          focusNode: emailNumberFocus,
-          controller: emailNumber,
-          hintText: 'Email',
-          height: 55,
-          keyboardType: TextInputType.text,
-          floatingLabelBehavior: FloatingLabelBehavior.auto,
-          padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-        ),
-        const SizedBox(height: 20),
-        PrimaryButton(
-          label: 'Reset Password',
-          width: double.infinity,
-          height: 50,
-          action: () {},
-        ),
-      ],
     );
   }
 }

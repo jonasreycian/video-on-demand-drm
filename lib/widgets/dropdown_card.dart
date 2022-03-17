@@ -77,7 +77,7 @@ class _DropdownState extends State<Dropdown> {
                   fontWeight: widget.hint == value ? FontWeight.w700 : FontWeight.w500,
                   fontStyle: FontStyle.normal,
                   fontSize: 14,
-                  color: widget.hint != value ? Colors.black : HexColor('#006B83'),
+                  color: widget.hint != value ? Colors.black : Colors.red,
                 ),
               ),
             );
