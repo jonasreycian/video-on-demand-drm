@@ -9,9 +9,7 @@ import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
