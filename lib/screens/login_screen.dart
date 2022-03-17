@@ -125,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 15),
                     TextAndLink(
                       text: 'Don\'t have account?',
-                      link: 'Register',
+                      link: 'Register Here',
                       onTap: () => Navigator.of(context).pushNamed(Registration.routeName),
                     ),
                   ],
