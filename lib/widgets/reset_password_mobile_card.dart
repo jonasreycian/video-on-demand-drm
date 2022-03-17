@@ -18,18 +18,18 @@ class ResetPasswordCardMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 100), () {
-        if (!value.isLoading) {
+        if (!value.isLoading && !value.isSuccess) {
           generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
           value.reset();
         }
       });
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        if (value.isSuccess) {
-          // print('success');
-          // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
-          value.reset();
-        }
-      });
+      // Future.delayed(const Duration(milliseconds: 2000), () {
+      //   if (value.isSuccess) {
+      //     print('success');
+      //     // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+      //     value.reset();
+      //   }
+      // });
       return Column(
         children: [
           Image.asset(

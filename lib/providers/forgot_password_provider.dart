@@ -25,6 +25,10 @@ class ForgotPasswordProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setStateHAHA() {
+    notifyListeners();
+  }
+
   setSelectedWidgetCard(value) {
     _selectedWidgetCard = value;
     if (_selectedWidgetCard == _choices[0]) {
