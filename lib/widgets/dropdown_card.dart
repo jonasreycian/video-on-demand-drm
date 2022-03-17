@@ -46,7 +46,7 @@ class _DropdownState extends State<Dropdown> {
         isDense: true,
         icon: Icon(
           Icons.keyboard_arrow_down,
-          color: HexColor('#006B83'),
+          color: Colors.red,
           size: 25,
         ),
         hint: Padding(

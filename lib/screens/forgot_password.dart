@@ -20,29 +20,32 @@ class ForgotPassword extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-                height: 500,
-                width: double.infinity,
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                decoration: BoxDecoration(
-                  color: Colors.black54,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+          child: AnimationConfiguration.staggeredList(
+            position: 0,
+            child: SingleChildScrollView(
+              child: Container(
+                  height: 500,
+                  width: double.infinity,
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
                   ),
-                ),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  layoutBuilder: (widget, animation) {
-                    return FadeInAnimation(
-                      duration: const Duration(milliseconds: 500),
-                      child: widget!,
-                      delay: const Duration(milliseconds: 100),
-                    );
-                  },
-                  child: currentWidget,
-                )),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    layoutBuilder: (widget, animation) {
+                      return FadeInAnimation(
+                        duration: const Duration(milliseconds: 500),
+                        child: widget!,
+                        delay: const Duration(milliseconds: 100),
+                      );
+                    },
+                    child: currentWidget,
+                  )),
+            ),
           ),
         ),
       ),
@@ -61,16 +64,18 @@ class ResetPasswordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Dropdown(
-          hint: 'Reset via',
-          choices: ['Mobile Number', 'Email'],
-          onChanged: (value) {},
-        ),
-        const SizedBox(height: 25),
         Image.asset(
           'assets/images/SampleLogo.png',
           height: 130,
           width: 130,
+        ),
+        const SizedBox(height: 25),
+        Dropdown(
+          width: double.infinity,
+          height: 50,
+          hint: 'Reset via',
+          choices: ['Reset via Mobile Number', 'Reset via Email'],
+          onChanged: (value) {},
         ),
         const SizedBox(height: 25),
         InputTextField(
