@@ -90,7 +90,7 @@ class ResetPasswordCardMobile extends StatelessWidget {
             keyboardType: value.textInputType,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            prefixIconPadding: const EdgeInsets.only(top: 7, bottom: 10),
+            prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
             prefixIcon: GestureDetector(
               onTap: () => countryCodeDialog(context: context),
               child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),

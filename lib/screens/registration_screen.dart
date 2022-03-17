@@ -6,6 +6,7 @@ import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class Registration extends StatelessWidget {
@@ -36,177 +37,190 @@ class Registration extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              height: 730,
-              width: double.infinity,
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              decoration: BoxDecoration(
-                color: Colors.black54,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: Consumer<RegistrationProvider>(builder: (context, value, child) {
-                Future.delayed(const Duration(milliseconds: 100), () {
-                  if (!value.isLoading) {
-                    generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
-                    value.reset();
-                  }
-                });
-                Future.delayed(const Duration(milliseconds: 2000), () {
-                  if (value.isSuccess) {
-                    Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
-                    value.reset();
-                  }
-                });
+          child: AnimationConfiguration.staggeredList(
+            position: 0,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              layoutBuilder: (widget, animation) {
+                return FadeInAnimation(
+                  duration: const Duration(milliseconds: 500),
+                  child: widget!,
+                  delay: const Duration(milliseconds: 100),
+                );
+              },
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 730,
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
+                  child: Consumer<RegistrationProvider>(builder: (context, value, child) {
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      if (!value.isLoading) {
+                        generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                        value.reset();
+                      }
+                    });
+                    Future.delayed(const Duration(milliseconds: 2000), () {
+                      if (value.isSuccess) {
+                        Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+                        value.reset();
+                      }
+                    });
 
-                return Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/SampleLogo.png',
-                      height: 130,
-                      width: 130,
-                    ),
-                    const SizedBox(height: 25),
-                    InputTextField(
-                      controller: firstName,
-                      hintText: 'First Name',
-                      height: 55,
-                      keyboardType: TextInputType.text,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                    ),
-                    const SizedBox(height: 20),
-                    InputTextField(
-                      controller: lastName,
-                      hintText: 'Last Name',
-                      height: 55,
-                      keyboardType: TextInputType.text,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                    ),
-                    const SizedBox(height: 20),
-                    InputTextField(
-                      controller: email,
-                      hintText: 'E-mail',
-                      height: 55,
-                      keyboardType: TextInputType.text,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                    ),
-                    const SizedBox(height: 20),
-                    InputTextField(
-                      controller: mobileNumber,
-                      hintText: 'Mobile Number',
-                      height: 55,
-                      keyboardType: TextInputType.number,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                      prefixIconPadding: const EdgeInsets.only(top: 7, bottom: 10),
-                      prefixIcon: GestureDetector(
-                        onTap: () => countryCodeDialog(context: context),
-                        child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    InputTextField(
-                      controller: password,
-                      hintText: 'Password',
-                      height: 55,
-                      keyboardType: TextInputType.text,
-                      obscureText: value.isObscurePassword,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
-                      suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-                      suffixIcon: IconButton(
-                        onPressed: () => value.setIsObscurePassword(),
-                        icon: Icon(
-                          value.isObscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                          color: HexColor('#BEBBBB'),
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    InputTextField(
-                      controller: confirmPassword,
-                      hintText: 'Confirm Password',
-                      height: 55,
-                      keyboardType: TextInputType.text,
-                      obscureText: value.isObscureConfirmPassword,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                      suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-                      suffixIcon: IconButton(
-                        onPressed: () => value.setIsObscureConfirmPassword(),
-                        icon: Icon(
-                          value.isObscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                          color: HexColor('#BEBBBB'),
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    PrimaryButton(
-                      height: 50,
-                      action: () {
-                        if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
-                          value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
-                          generalDialog(
-                            context: context,
-                            message: value.message,
-                            isAutoClose: true,
-                            isLoading: true,
-                          );
-                        } else {
-                          generalDialog(
-                            context: context,
-                            message: 'Please Fill-out all fields',
-                            isAutoClose: true,
-                            isLoading: false,
-                          );
-                        }
-                      },
-                      width: double.infinity,
-                      label: 'Register',
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    return Column(
                       children: [
-                        Text(
-                          'Already on AQ-Prime?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 13,
-                            color: Colors.white,
+                        Image.asset(
+                          'assets/images/SampleLogo.png',
+                          height: 130,
+                          width: 130,
+                        ),
+                        const SizedBox(height: 25),
+                        InputTextField(
+                          controller: firstName,
+                          hintText: 'First Name',
+                          height: 55,
+                          keyboardType: TextInputType.text,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                        ),
+                        const SizedBox(height: 20),
+                        InputTextField(
+                          controller: lastName,
+                          hintText: 'Last Name',
+                          height: 55,
+                          keyboardType: TextInputType.text,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                        ),
+                        const SizedBox(height: 20),
+                        InputTextField(
+                          controller: email,
+                          hintText: 'E-mail',
+                          height: 55,
+                          keyboardType: TextInputType.text,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                        ),
+                        const SizedBox(height: 20),
+                        InputTextField(
+                          controller: mobileNumber,
+                          hintText: 'Mobile Number',
+                          height: 55,
+                          keyboardType: TextInputType.number,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                          prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
+                          prefixIcon: GestureDetector(
+                            onTap: () => countryCodeDialog(context: context),
+                            child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),
                           ),
                         ),
-                        const SizedBox(width: 5),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: const Text(
-                            'Sign-in',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 13,
-                              color: Colors.red,
+                        const SizedBox(height: 20),
+                        InputTextField(
+                          controller: password,
+                          hintText: 'Password',
+                          height: 55,
+                          keyboardType: TextInputType.text,
+                          obscureText: value.isObscurePassword,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
+                          suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+                          suffixIcon: IconButton(
+                            onPressed: () => value.setIsObscurePassword(),
+                            icon: Icon(
+                              value.isObscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                              color: HexColor('#BEBBBB'),
+                              size: 20,
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        InputTextField(
+                          controller: confirmPassword,
+                          hintText: 'Confirm Password',
+                          height: 55,
+                          keyboardType: TextInputType.text,
+                          obscureText: value.isObscureConfirmPassword,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+                          suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+                          suffixIcon: IconButton(
+                            onPressed: () => value.setIsObscureConfirmPassword(),
+                            icon: Icon(
+                              value.isObscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                              color: HexColor('#BEBBBB'),
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        PrimaryButton(
+                          height: 50,
+                          action: () {
+                            if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
+                              value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
+                              generalDialog(
+                                context: context,
+                                message: value.message,
+                                isAutoClose: true,
+                                isLoading: true,
+                              );
+                            } else {
+                              generalDialog(
+                                context: context,
+                                message: 'Please Fill-out all fields',
+                                isAutoClose: true,
+                                isLoading: false,
+                              );
+                            }
+                          },
+                          width: double.infinity,
+                          label: 'Register',
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Already on AQ-Prime?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: const Text(
+                                'Sign-in',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 13,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
-                    ),
-                  ],
-                );
-              }),
+                    );
+                  }),
+                ),
+              ),
             ),
           ),
         ),

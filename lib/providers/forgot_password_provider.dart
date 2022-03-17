@@ -21,7 +21,6 @@ class ForgotPasswordProvider with ChangeNotifier {
   }
 
   setSelectedWidgetCard(value) {
-    print(value);
     _selectedWidgetCard = value;
     if (_selectedWidgetCard == _choices[0]) {
       _hintText = 'Mobile number';
