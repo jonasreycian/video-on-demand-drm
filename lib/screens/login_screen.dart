@@ -20,15 +20,17 @@ class LoginScreen extends StatelessWidget {
   final FocusNode emailNumberFocus = FocusNode();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background.png'),
+          fit: BoxFit.cover,
         ),
-        child: Center(
+      ),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        body: Center(
           child: AnimationConfiguration.staggeredList(
             position: 0,
             child: AnimatedSwitcher(

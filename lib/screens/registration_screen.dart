@@ -26,17 +26,18 @@ class Registration extends StatelessWidget {
   final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/background.png"),
+          fit: BoxFit.cover,
         ),
-        child: Center(
+      ),
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: Colors.transparent),
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        body: Center(
           child: AnimationConfiguration.staggeredList(
             position: 0,
             child: AnimatedSwitcher(

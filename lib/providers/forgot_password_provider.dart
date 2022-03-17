@@ -47,7 +47,8 @@ class ForgotPasswordProvider with ChangeNotifier {
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;
       if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) || value.length >= 8) {
-        _message = 'Sending OTP\nPlease wait...';
+        if (_hintText == 'Mobile number') _message = 'Please check your SMS inbox';
+        if (_hintText == 'Email') _message = 'Please check your Email';
         _isSuccess = true;
         _isLoading = false;
         notifyListeners();

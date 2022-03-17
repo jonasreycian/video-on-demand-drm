@@ -11,11 +11,10 @@ class EnterOtpCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
-      Future.delayed(const Duration(milliseconds: 2000), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
-          print('success');
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess);
-          // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
+
           value.reset();
         }
       });
