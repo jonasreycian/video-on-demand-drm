@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
-import 'package:flutter_netflix_responsive_ui/screens/forgot_password.dart';
+import 'package:flutter_netflix_responsive_ui/screens/forgot_password_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
