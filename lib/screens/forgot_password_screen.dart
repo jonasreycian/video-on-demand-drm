@@ -8,8 +8,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
-class ForgotPassword extends StatelessWidget {
-  ForgotPassword({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatelessWidget {
+  ForgotPasswordScreen({Key? key}) : super(key: key);
   static const routeName = '/forgotPassword';
   late Widget currentWidget;
   late double height;

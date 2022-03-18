@@ -9,8 +9,8 @@ import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
-class Registration extends StatelessWidget {
-  Registration({Key? key}) : super(key: key);
+class RegistrationScreen extends StatelessWidget {
+  RegistrationScreen({Key? key}) : super(key: key);
   static const routeName = '/registrationScreen';
   // final TextEditingController firstName = TextEditingController(text: 'Juan');
   // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');

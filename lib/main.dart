@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
           routes: {
             NavScreen.routeName: (context) => NavScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
-            Registration.routeName: (context) => Registration(),
-            ForgotPassword.routeName: (context) => ForgotPassword(),
+            RegistrationScreen.routeName: (context) => RegistrationScreen(),
+            ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
           },
         ),
       ),

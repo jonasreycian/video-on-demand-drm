@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                         TextAndLink(
                           text: 'Forgot Password?',
                           link: 'Tap here',
-                          onTap: () => Navigator.of(context).pushNamed(ForgotPassword.routeName),
+                          onTap: () => Navigator.of(context).pushNamed(ForgotPasswordScreen.routeName),
                         ),
                         const SizedBox(height: 15),
                         PrimaryButton(
@@ -140,7 +140,7 @@ class LoginScreen extends StatelessWidget {
                         TextAndLink(
                           text: 'Don\'t have account?',
                           link: 'Register Here',
-                          onTap: () => Navigator.of(context).pushNamed(Registration.routeName),
+                          onTap: () => Navigator.of(context).pushNamed(RegistrationScreen.routeName),
                         ),
                       ],
                     );
