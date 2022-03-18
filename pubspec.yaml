@@ -1,5 +1,5 @@
-name: flutter_netflix_responsive_ui
-description: A new Flutter project.
+name: aq_prime
+description: Video on Demand with DRM Services.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

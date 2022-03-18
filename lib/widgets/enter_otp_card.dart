@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:aq_prime/providers/forgot_password_provider.dart';
+import 'package:aq_prime/utilities/dialog.dart';
+import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 

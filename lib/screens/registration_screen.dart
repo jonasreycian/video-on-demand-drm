@@ -1,11 +1,11 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
-import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:aq_prime/providers/registration_provider.dart';
+import 'package:aq_prime/screens/nav_screen.dart';
+import 'package:aq_prime/utilities/dialog.dart';
+import 'package:aq_prime/utilities/hex_color.dart';
+import 'package:aq_prime/widgets/input_textfield.dart';
+import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 

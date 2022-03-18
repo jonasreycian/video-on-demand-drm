@@ -1,10 +1,10 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/dropdown_card.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
+import 'package:aq_prime/providers/forgot_password_provider.dart';
+import 'package:aq_prime/utilities/dialog.dart';
+import 'package:aq_prime/widgets/dropdown_card.dart';
+import 'package:aq_prime/widgets/input_textfield.dart';
+import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordCardMobile extends StatelessWidget {

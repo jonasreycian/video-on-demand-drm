@@ -1,4 +1,4 @@
-package com.example.flutter_netflix_responsive_ui
+package com.snapworxdigital.aq_prime
 
 import io.flutter.embedding.android.FlutterActivity
 

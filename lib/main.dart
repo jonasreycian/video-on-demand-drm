@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
-import 'package:flutter_netflix_responsive_ui/providers/login_provider.dart';
-import 'package:flutter_netflix_responsive_ui/providers/registration_provider.dart';
-import 'package:flutter_netflix_responsive_ui/screens/forgot_password_screen.dart';
-import 'package:flutter_netflix_responsive_ui/screens/login_screen.dart';
-import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
-import 'package:flutter_netflix_responsive_ui/screens/registration_screen.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/dismiss_keyboard.dart';
+import 'package:aq_prime/providers/forgot_password_provider.dart';
+import 'package:aq_prime/providers/login_provider.dart';
+import 'package:aq_prime/providers/registration_provider.dart';
+import 'package:aq_prime/screens/forgot_password_screen.dart';
+import 'package:aq_prime/screens/login_screen.dart';
+import 'package:aq_prime/screens/nav_screen.dart';
+import 'package:aq_prime/screens/registration_screen.dart';
+import 'package:aq_prime/widgets/dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -17,9 +17,12 @@ class MyApp extends StatelessWidget {
     return DismissKeyboard(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
-          ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
-          ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
+          ChangeNotifierProvider<RegistrationProvider>(
+              create: (context) => RegistrationProvider()),
+          ChangeNotifierProvider<LoginProvider>(
+              create: (context) => LoginProvider()),
+          ChangeNotifierProvider<ForgotPasswordProvider>(
+              create: (context) => ForgotPasswordProvider()),
         ],
         child: MaterialApp(
           title: 'AQ-Prime',
