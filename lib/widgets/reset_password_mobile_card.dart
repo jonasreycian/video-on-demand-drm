@@ -58,7 +58,7 @@ class ResetPasswordCardMobile extends StatelessWidget {
             prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
             prefixIcon: GestureDetector(
               onTap: () => countryCodeDialog(context: context),
-              child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),
+              child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15, color: Colors.black)),
             ),
           ),
           const SizedBox(height: 20),

@@ -71,6 +71,20 @@ class ForgotPasswordEnterOtpCard extends StatelessWidget {
               }
             },
           ),
+          const SizedBox(height: 15),
+          SecondaryButton(
+            label: 'Resend OTP',
+            width: double.infinity,
+            height: 50,
+            action: () {
+              generalDialog(
+                context: context,
+                message: 'Please wait 60 seconds\nBefore resending...',
+                isAutoClose: true,
+                isLoading: false,
+              );
+            },
+          ),
         ],
       );
     });
@@ -149,7 +163,7 @@ class RegistraionEnterOtpCard extends StatelessWidget {
             action: () {
               generalDialog(
                 context: context,
-                message: 'Please wait 60 seconds\nBefore sending...',
+                message: 'Please wait 60 seconds\nBefore resending...',
                 isAutoClose: true,
                 isLoading: false,
               );
