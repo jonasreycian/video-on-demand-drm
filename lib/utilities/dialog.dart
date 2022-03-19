@@ -98,8 +98,8 @@ calendarDialog(BuildContext context, DateTime? initialDate, Function(DateTime) o
           child: AlertDialog(
             shape: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
             content: SizedBox(
-              height: 300,
-              width: 500,
+              height: 380,
+              width: 450,
               child: CalendarDatePicker(
                 firstDate: DateTime(1950),
                 lastDate: DateTime.now(),

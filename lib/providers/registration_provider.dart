@@ -10,7 +10,36 @@ class RegistrationProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isObscurePassword = true;
   bool _isObscureConfirmPassword = true;
+
+  String _firstName = '';
+  String _lastName = '';
+  String _email = '';
+  String _mobileNumber = '';
+  String _password = '';
+  String _confirmPassword = '';
   //getter
+  String getField(name) {
+    if (name == 'firstName') {
+      return _firstName;
+    }
+    if (name == 'lastName') {
+      return _lastName;
+    }
+    if (name == 'email') {
+      return _email;
+    }
+    if (name == 'mobileNumber') {
+      return _mobileNumber;
+    }
+    if (name == 'password') {
+      return _password;
+    }
+    if (name == 'confirmPassword') {
+      return _confirmPassword;
+    } else
+      return '';
+  }
+
   CountryCode get countryCode => _countryCode;
   String get message => _message;
   bool get isSuccess => _isSuccess;
@@ -18,9 +47,20 @@ class RegistrationProvider with ChangeNotifier {
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
   String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
+
   //setter
+  setField(String field, String value) {
+    if (field == 'firstName') _firstName = value;
+    if (field == 'lastName') _lastName = value;
+    if (field == 'email') _email = value;
+    if (field == 'mobileNumber') _mobileNumber = value;
+    if (field == 'password') _password = value;
+    if (field == 'confirmPassword') _confirmPassword = value;
+  }
+
   setBirthDay(DateTime? value) {
     _birthDay = value;
+    notifyListeners();
   }
 
   setCountryCode(value) {
