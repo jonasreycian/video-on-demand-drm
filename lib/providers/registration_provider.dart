@@ -1,8 +1,10 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 class RegistrationProvider with ChangeNotifier {
   CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
+  DateTime? _birthDay;
   String _message = 'Please Wait...';
   bool _isSuccess = false;
   bool _isLoading = true;
@@ -15,8 +17,11 @@ class RegistrationProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
-
+  String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
   //setter
+  setBirthDay(DateTime? value) {
+    _birthDay = value;
+  }
 
   setCountryCode(value) {
     _countryCode = value;

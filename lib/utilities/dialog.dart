@@ -82,3 +82,37 @@ generalDialog({
     },
   );
 }
+
+calendarDialog(BuildContext context, DateTime? initialDate, Function(DateTime) onValue) {
+  return showGeneralDialog(
+    context: context,
+    pageBuilder: (context, anim1, anim2) {
+      return const SizedBox();
+    },
+    transitionBuilder: (context, anim1, anim2, child) {
+      final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
+      return Transform(
+        transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+        child: Opacity(
+          opacity: anim1.value,
+          child: AlertDialog(
+            shape: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
+            content: SizedBox(
+              height: 300,
+              width: 500,
+              child: CalendarDatePicker(
+                firstDate: DateTime(1950),
+                lastDate: DateTime.now(),
+                initialDate: initialDate ?? DateTime.now(),
+                onDateChanged: onValue,
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 200),
+    barrierDismissible: true,
+    barrierLabel: '',
+  );
+}

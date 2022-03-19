@@ -4,6 +4,8 @@ import 'package:flutter_netflix_responsive_ui/providers/registration_provider.da
 import 'package:flutter_netflix_responsive_ui/screens/nav_screen.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/dialog.dart';
 import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/calendar_card.dart';
+import 'package:flutter_netflix_responsive_ui/widgets/calendar_card.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/input_textfield.dart';
 import 'package:flutter_netflix_responsive_ui/widgets/primary_button.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -34,48 +36,51 @@ class RegistrationScreen extends StatelessWidget {
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(backgroundColor: Colors.transparent),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.transparent,
         body: Center(
           child: AnimationConfiguration.staggeredList(
             position: 0,
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 800),
               layoutBuilder: (widget, animation) {
                 return FadeInAnimation(
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 800),
                   child: widget!,
-                  delay: const Duration(milliseconds: 100),
+                  delay: const Duration(milliseconds: 1000),
                 );
               },
-              child: SingleChildScrollView(
-                child: Container(
-                  height: 730,
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
+              child: Container(
+                // height: 730,
+                width: double.infinity,
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
                   ),
-                  child: Consumer<RegistrationProvider>(builder: (context, value, child) {
-                    Future.delayed(const Duration(milliseconds: 100), () {
-                      if (!value.isLoading) {
-                        generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
-                        value.reset();
-                      }
-                    });
-                    Future.delayed(const Duration(milliseconds: 2000), () {
-                      if (value.isSuccess) {
-                        Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
-                        value.reset();
-                      }
-                    });
+                ),
+                child: Consumer<RegistrationProvider>(builder: (context, value, child) {
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    if (!value.isLoading) {
+                      generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                      value.reset();
+                    }
+                  });
+                  Future.delayed(const Duration(milliseconds: 2000), () {
+                    if (value.isSuccess) {
+                      Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+                      value.reset();
+                    }
+                  });
 
-                    return Column(
+                  return SingleChildScrollView(
+                    child: Column(
                       children: [
                         Image.asset(
                           'assets/images/SampleLogo.png',
@@ -110,6 +115,20 @@ class RegistrationScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
                         ),
                         const SizedBox(height: 20),
+                        CalendarField(
+                          selectedDate: value.birthDayString,
+                          withShadow: true,
+                          isDateRange: false,
+                          function: () => calendarDialog(
+                            context,
+                            DateTime.now(),
+                            (p0) {
+                              Navigator.of(context).pop();
+                              value.setBirthDay(p0);
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 20),
                         InputTextField(
                           controller: mobileNumber,
                           hintText: 'Mobile Number',
@@ -120,7 +139,7 @@ class RegistrationScreen extends StatelessWidget {
                           prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
                           prefixIcon: GestureDetector(
                             onTap: () => countryCodeDialog(context: context),
-                            child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15)),
+                            child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -165,7 +184,7 @@ class RegistrationScreen extends StatelessWidget {
                         PrimaryButton(
                           height: 50,
                           action: () {
-                            if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
+                            if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty && value.birthDayString != null) {
                               value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
                               generalDialog(
                                 context: context,
@@ -218,9 +237,9 @@ class RegistrationScreen extends StatelessWidget {
                           ],
                         ),
                       ],
-                    );
-                  }),
-                ),
+                    ),
+                  );
+                }),
               ),
             ),
           ),
