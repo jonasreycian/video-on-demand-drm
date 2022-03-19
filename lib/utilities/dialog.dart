@@ -36,7 +36,7 @@ generalDialog({
             content: AnimatedContainer(
               duration: const Duration(milliseconds: 50),
               width: MediaQuery.of(context).size.width,
-              height: 40,
+              height: 50,
               color: Colors.transparent,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

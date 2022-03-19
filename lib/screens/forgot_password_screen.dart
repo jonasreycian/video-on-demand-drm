@@ -29,7 +29,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       height = 400;
     }
     if (forgotPasswordProvider.isSuccess && !forgotPasswordProvider.isSuccessOtp) {
-      currentWidget = EnterOtpCard();
+      currentWidget = ForgotPasswordEnterOtpCard();
       height = 340;
     }
     return Container(

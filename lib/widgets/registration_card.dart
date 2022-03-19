@@ -31,6 +31,11 @@ class RegistrationCard extends StatelessWidget {
       mobileNumber.text = value.getField('mobileNumber');
       password.text = value.getField('password');
       confirmPassword.text = value.getField('confirmPassword');
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (!value.isLoading) {
+          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: false);
+        }
+      });
       return Column(
         children: [
           Image.asset(

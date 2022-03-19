@@ -83,7 +83,7 @@ class RegistrationProvider with ChangeNotifier {
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;
       if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8 && password == confirmPassword) {
-        _message = 'Registration Complete\nPlease wait...';
+        _message = 'Please check your SMS inbox';
         _isSuccess = true;
         _isLoading = false;
         notifyListeners();
@@ -108,6 +108,10 @@ class RegistrationProvider with ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  sendOTP(value) {
+    print(value);
   }
 
   reset() {
