@@ -1,3 +1,5 @@
+import 'package:aq_prime/widgets/enter_otp_card.dart';
+import 'package:aq_prime/widgets/registration_card.dart';
 import 'package:flutter/material.dart';
 import 'package:aq_prime/providers/registration_provider.dart';
 import 'package:aq_prime/screens/nav_screen.dart';
