@@ -2,9 +2,19 @@
 documentation](doc/development/changelog.md) for instructions on adding your own
 entry.
 
+## AQP 0.1.1 (2022-03-20)
+
+### Added (1 change)
+
+- Added basic functionality and UI for SMS OTP
+
+### Fixed (1 change)
+
+- Fix some UI dialog messages
+
 ## AQP 0.1.0 (2022-03-19)
 
-### Added (3 change)
+### Added (5 change)
 
 - Added basic functionality and UI for Login Screen
 - Added basic functionality and UI for Registration Screen
