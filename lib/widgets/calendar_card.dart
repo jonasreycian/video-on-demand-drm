@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/utilities/hex_color.dart';
+import 'package:aq_prime/utilities/hex_color.dart';
 // import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 // ignore: must_be_immutable
