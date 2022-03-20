@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
               create: (context) => ForgotPasswordProvider()),
         ],
         child: MaterialApp(
+          darkTheme: ThemeData.dark(),
           title: 'AQ-Prime',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

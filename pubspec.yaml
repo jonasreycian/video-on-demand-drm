@@ -33,6 +33,9 @@ dependencies:
   provider: ^6.0.0
   flutter_staggered_animations: "^1.0.0"
   pin_input_text_field: ^4.1.1
+  syncfusion_flutter_core: ^19.4.50
+  syncfusion_flutter_datepicker: ^19.4.55
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
