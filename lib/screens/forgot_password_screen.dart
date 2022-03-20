@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive_ui/providers/forgot_password_provider.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/enter_new_password.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/enter_otp_card.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/reset_password_email_card.dart';
-import 'package:flutter_netflix_responsive_ui/widgets/reset_password_mobile_card.dart';
+import 'package:aq_prime/providers/forgot_password_provider.dart';
+import 'package:aq_prime/widgets/enter_new_password.dart';
+import 'package:aq_prime/widgets/enter_otp_card.dart';
+import 'package:aq_prime/widgets/reset_password_email_card.dart';
+import 'package:aq_prime/widgets/reset_password_mobile_card.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
@@ -15,16 +15,20 @@ class ForgotPasswordScreen extends StatelessWidget {
   late double height;
   @override
   Widget build(BuildContext context) {
-    ForgotPasswordProvider forgotPasswordProvider = Provider.of<ForgotPasswordProvider>(context);
-    if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[0]) {
+    ForgotPasswordProvider forgotPasswordProvider =
+        Provider.of<ForgotPasswordProvider>(context);
+    if (forgotPasswordProvider.selectedWidgetCard ==
+        forgotPasswordProvider.choices[0]) {
       currentWidget = ResetPasswordCardMobile();
       height = 400;
     }
-    if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[1]) {
+    if (forgotPasswordProvider.selectedWidgetCard ==
+        forgotPasswordProvider.choices[1]) {
       currentWidget = ResetPasswordCardEmail();
       height = 400;
     }
-    if (forgotPasswordProvider.isSuccess && forgotPasswordProvider.isSuccessOtp) {
+    if (forgotPasswordProvider.isSuccess &&
+        forgotPasswordProvider.isSuccessOtp) {
       currentWidget = EnterNewPassword();
       height = 400;
     }
