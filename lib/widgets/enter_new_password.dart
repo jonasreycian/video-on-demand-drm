@@ -15,9 +15,9 @@ class EnterNewPassword extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          'assets/images/SampleLogo.png',
+          'assets/images/AQ_PRIME_LOGO_2.png',
           height: 130,
-          width: 130,
+          width: double.infinity,
         ),
         const SizedBox(height: 25),
         InputTextField(
