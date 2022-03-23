@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/my_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aq_prime/cubits/cubits.dart';
@@ -16,15 +17,15 @@ class _NavScreenState extends State<NavScreen> {
     Scaffold(),
     Scaffold(),
     Scaffold(),
-    Scaffold(),
+    MyAccountScreen(),
   ];
 
   final Map<String, IconData> _icons = const {
     'Home': Icons.home,
-    'Search': Icons.search,
-    'Coming Soon': Icons.queue_play_next,
-    'Downloads': Icons.file_download,
-    'More': Icons.menu,
+    'Categories': Icons.video_camera_front_rounded,
+    'My Watch List': Icons.queue_play_next,
+    'Continue': Icons.tv_rounded,
+    'My Account': Icons.person,
   };
 
   int _currentIndex = 0;
