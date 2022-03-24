@@ -17,12 +17,9 @@ class MyApp extends StatelessWidget {
     return DismissKeyboard(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<RegistrationProvider>(
-              create: (context) => RegistrationProvider()),
-          ChangeNotifierProvider<LoginProvider>(
-              create: (context) => LoginProvider()),
-          ChangeNotifierProvider<ForgotPasswordProvider>(
-              create: (context) => ForgotPasswordProvider()),
+          ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
+          ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
+          ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
         ],
         child: MaterialApp(
           darkTheme: ThemeData.dark(),

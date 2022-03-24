@@ -22,10 +22,10 @@ class _NavScreenState extends State<NavScreen> {
 
   final Map<String, IconData> _icons = const {
     'Home': Icons.home,
-    'Categories': Icons.video_camera_front_rounded,
+    'Categories': Icons.apps,
     'My Watch List': Icons.queue_play_next,
-    'Continue': Icons.tv_rounded,
-    'My Account': Icons.person,
+    'Continue \nWatching': Icons.play_arrow,
+    'My Account': Icons.account_circle_rounded,
   };
 
   int _currentIndex = 0;
