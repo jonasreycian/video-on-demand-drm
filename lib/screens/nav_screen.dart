@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/categories_screen.dart';
 import 'package:aq_prime/screens/my_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(key: PageStorageKey('homeScreen')),
-    Scaffold(),
+    CatergoriesScreen(),
     Scaffold(),
     Scaffold(),
     MyAccountScreen(),
