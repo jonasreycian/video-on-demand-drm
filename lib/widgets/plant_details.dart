@@ -1,3 +1,4 @@
+import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class PlanDetailsCard extends StatelessWidget {
@@ -36,18 +37,19 @@ class PlanDetailsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ultra HD / Premium',
+                    'Ultra 4K UHD / Premium',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w300,
                       fontStyle: FontStyle.normal,
                       fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   Text(
-                    '549 PHP',
+                    '799 PHP',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Roboto',
@@ -59,12 +61,16 @@ class PlanDetailsCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Icon(Icons.tv_sharp),
-              ),
+              Padding(padding: const EdgeInsets.only(right: 10), child: Icon(Icons.tv_sharp)),
             ],
-          )
+          ),
+          const SizedBox(height: 20),
+          PrimaryButton(
+            height: 50,
+            action: () {},
+            width: double.infinity,
+            label: 'Change Plan',
+          ),
         ],
       ),
     );

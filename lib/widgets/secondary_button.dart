@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:aq_prime/utilities/hex_color.dart';
 
 // ignore: must_be_immutable
 class SecondaryButton extends StatelessWidget {
