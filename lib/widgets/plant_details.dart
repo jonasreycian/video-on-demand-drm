@@ -12,7 +12,7 @@ class PlanDetailsCard extends StatelessWidget {
         color: Colors.grey.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: const EdgeInsets.only(left: 25, right: 25, top: 20),
+      margin: const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 10),
       padding: const EdgeInsets.only(left: 20, right: 20, top: 25, bottom: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
