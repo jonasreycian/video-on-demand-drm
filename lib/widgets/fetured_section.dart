@@ -26,9 +26,9 @@ class FeaturedSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         Container(
-          height: 415,
+          height: 450,
           color: Colors.transparent,
           child: CarouselSlider.builder(
             options: CarouselOptions(

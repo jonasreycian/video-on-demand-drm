@@ -18,8 +18,8 @@ class FeaturedBannerCard extends StatelessWidget {
           height: 380,
           width: 280,
           decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(20),
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
               image: AssetImage(imageUrl),
               fit: BoxFit.cover,
@@ -27,6 +27,43 @@ class FeaturedBannerCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.timer_outlined, size: 13),
+                Text(
+                  ' 104 min',
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 13,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 20),
+            Row(
+              children: [
+                Icon(Icons.calendar_month, size: 13),
+                Text(
+                  ' • 2019',
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 13,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 5),
         Text(
           title,
           style: const TextStyle(

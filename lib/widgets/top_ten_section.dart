@@ -1,5 +1,5 @@
 import 'package:aq_prime/data/data.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:aq_prime/widgets/top_ten_card.dart';
 import 'package:flutter/material.dart';
 
 class TopTenSection extends StatelessWidget {
@@ -13,7 +13,7 @@ class TopTenSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Text(
-            'Top 10',
+            'Top 10 Films',
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w700,
@@ -23,30 +23,20 @@ class TopTenSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         Container(
-          height: 150,
+          height: 180,
           color: Colors.transparent,
-          child: CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 150,
-              enableInfiniteScroll: true,
-              autoPlayAnimationDuration: const Duration(seconds: 5),
-              pageSnapping: true,
-            ),
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 0, bottom: 0),
+            physics: const AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
             itemCount: trending.length,
-            itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  image: DecorationImage(
-                    image: AssetImage(trending[index].imageUrl!),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                height: 150,
-                width: 280,
-                margin: const EdgeInsets.only(right: 20),
+            itemBuilder: (context, index) {
+              return TopTenCard(
+                title: trending[index].name!,
+                imageUrl: trending[index].imageUrl!,
               );
             },
           ),
