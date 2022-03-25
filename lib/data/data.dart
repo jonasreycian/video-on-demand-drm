@@ -7,8 +7,7 @@ final Content sintelContent = Content(
   imageUrl: Assets.sintel,
   titleImageUrl: Assets.sintelTitle,
   videoUrl: Assets.sintelVideoUrl,
-  description:
-      'A lonely young woman, Sintel, helps and befriends a dragon,\nwhom she calls Scales. But when he is kidnapped by an adult\ndragon, Sintel decides to embark on a dangerous quest to find\nher lost friend Scales.',
+  description: 'A lonely young woman, Sintel, helps and befriends a dragon,\nwhom she calls Scales. But when he is kidnapped by an adult\ndragon, Sintel decides to embark on a dangerous quest to find\nher lost friend Scales.',
 );
 
 final List<Content> previews = const [
@@ -74,7 +73,7 @@ final List<Content> previews = const [
   ),
 ];
 
-final List<Content> myList = const [
+List<Content> myList = const [
   Content(name: 'Violet Evergarden', imageUrl: Assets.violetEvergarden),
   Content(name: 'How to Sell Drugs Online (Fast)', imageUrl: Assets.htsdof),
   Content(name: 'Kakegurui', imageUrl: Assets.kakegurui),
@@ -100,7 +99,7 @@ final List<Content> originals = const [
   Content(name: 'The End of the F***ing World', imageUrl: Assets.teotfw),
 ];
 
-final List<Content> trending = const [
+List<Content> trending = const [
   Content(name: 'Explained', imageUrl: Assets.explained),
   Content(name: 'Avatar The Last Airbender', imageUrl: Assets.atla),
   Content(name: 'Tiger King', imageUrl: Assets.tigerKing),
@@ -112,3 +111,16 @@ final List<Content> trending = const [
   Content(name: 'The Crown', imageUrl: Assets.crown),
   Content(name: 'Dogs', imageUrl: Assets.dogs),
 ];
+
+List combine() {
+  return [...myList, ...trending];
+}
+
+List<Content> combine1() {
+  List<Content> copy = [...trending];
+  List<Content> shuffled = [];
+  for (var i = 0; i < myList.length; i++) {
+    shuffled.add((copy..shuffle()).first);
+  }
+  return shuffled;
+}

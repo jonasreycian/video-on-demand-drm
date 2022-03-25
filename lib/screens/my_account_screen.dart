@@ -12,15 +12,29 @@ class MyAccountScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text('My Account'),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   title: Text('My Account'),
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 20),
+                child: Text(
+                  'My Account',
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 22,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
               AccountInfoCard(),
               PlanDetailsCard(),
             ],
