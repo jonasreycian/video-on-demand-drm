@@ -4,6 +4,7 @@ import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/popular_section.dart';
 import 'package:aq_prime/widgets/top_ten_card.dart';
 import 'package:aq_prime/widgets/top_ten_section.dart';
+import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -46,6 +47,8 @@ class CatergoriesScreen extends StatelessWidget {
               OnlyAQprimeSection(),
               const SizedBox(height: 15),
               TrendingSection(),
+              const SizedBox(height: 15),
+              OthersSection(),
             ],
           ),
         ),
@@ -54,8 +57,8 @@ class CatergoriesScreen extends StatelessWidget {
   }
 }
 
-class TrendingSection extends StatelessWidget {
-  const TrendingSection({Key? key}) : super(key: key);
+class OthersSection extends StatelessWidget {
+  const OthersSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,7 @@ class TrendingSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Text(
-            'Trending',
+            'Other Categories',
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w700,
@@ -79,18 +82,20 @@ class TrendingSection extends StatelessWidget {
         Container(
           height: 180,
           color: Colors.transparent,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(top: 0, bottom: 0),
-            physics: const AlwaysScrollableScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: trending.length,
-            itemBuilder: (context, index) {
-              return TopTenCard(
-                title: trending[index].name!,
-                imageUrl: trending[index].imageUrl!,
-              );
-            },
+          child: AnimationLimiter(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 0, bottom: 0),
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: trending.length,
+              itemBuilder: (context, index) {
+                return TopTenCard(
+                  title: trending[index].name!,
+                  imageUrl: trending[index].imageUrl!,
+                );
+              },
+            ),
           ),
         ),
       ],
