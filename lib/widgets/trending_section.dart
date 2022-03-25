@@ -33,15 +33,15 @@ class TrendingSection extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: trending.length,
+            itemCount: combine1().length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
-                title: trending[index].name!,
-                imageUrl: trending[index].imageUrl!,
-                heroTag: 'trendingSection ${trending[index].name} $index',
+                title: combine1()[index].name!,
+                imageUrl: combine1()[index].imageUrl!,
+                heroTag: 'trendingSection ${combine1()[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                   'data': combine1()[index],
-                  'heroTag': 'trendingSection ${trending[index].name} $index',
+                  'heroTag': 'trendingSection ${combine1()[index].imageUrl} $index',
                 }),
               );
             },

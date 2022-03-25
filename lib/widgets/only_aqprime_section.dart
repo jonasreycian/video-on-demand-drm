@@ -33,15 +33,15 @@ class OnlyAQprimeSection extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: combine1().length,
+            itemCount: trending.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
-                title: combine1()[index].name!,
-                imageUrl: combine1()[index].imageUrl!,
-                heroTag: 'onlyAQprime${trending[index].name} $index',
+                title: trending[index].name!,
+                imageUrl: trending[index].imageUrl!,
+                heroTag: 'onlyAQprime${trending[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                  'data': combine1()[index],
-                  'heroTag': 'onlyAQprime${trending[index].name} $index',
+                  'data': trending[index],
+                  'heroTag': 'onlyAQprime${trending[index].imageUrl} $index',
                 }),
               );
             },

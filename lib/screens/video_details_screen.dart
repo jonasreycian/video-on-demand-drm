@@ -10,7 +10,6 @@ class VideoDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    print(data);
     return PrimeSliverAppBar(
       title: '',
       isImageUrl: false,

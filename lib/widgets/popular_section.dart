@@ -38,10 +38,10 @@ class PopularSection extends StatelessWidget {
               return ThumbnailCard(
                 title: combine()[index].name!,
                 imageUrl: combine()[index].imageUrl!,
-                heroTag: 'popularSection ${trending[index].name} $index',
+                heroTag: 'popularSection ${combine()[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                  'data': combine1()[index],
-                  'heroTag': 'popularSection ${trending[index].name} $index',
+                  'data': combine()[index],
+                  'heroTag': 'popularSection ${combine()[index].imageUrl} $index',
                 }),
               );
             },
