@@ -117,10 +117,5 @@ List combine() {
 }
 
 List<Content> combine1() {
-  List<Content> copy = [...trending];
-  List<Content> shuffled = [];
-  for (var i = 0; i < myList.length; i++) {
-    shuffled.add((copy..shuffle()).first);
-  }
-  return shuffled;
+  return [...trending, ...myList];
 }

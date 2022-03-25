@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/video_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aq_prime/providers/forgot_password_provider.dart';
 import 'package:aq_prime/providers/login_provider.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (context) => LoginScreen(),
             RegistrationScreen.routeName: (context) => RegistrationScreen(),
             ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+            VideoDetailsPage.routeName: (context) => VideoDetailsPage(),
           },
         ),
       ),

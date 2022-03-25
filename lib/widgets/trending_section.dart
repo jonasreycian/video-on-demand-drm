@@ -1,5 +1,6 @@
 import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/widgets/top_ten_card.dart';
+import 'package:aq_prime/screens/video_details_screen.dart';
+import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 
 class TrendingSection extends StatelessWidget {
@@ -34,9 +35,14 @@ class TrendingSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: trending.length,
             itemBuilder: (context, index) {
-              return TopTenCard(
+              return ThumbnailCard(
                 title: trending[index].name!,
                 imageUrl: trending[index].imageUrl!,
+                heroTag: 'trendingSection ${trending[index].name} $index',
+                onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                  'data': combine1()[index],
+                  'heroTag': 'trendingSection ${trending[index].name} $index',
+                }),
               );
             },
           ),
