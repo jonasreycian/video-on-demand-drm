@@ -1,6 +1,7 @@
 import 'package:aq_prime/data/data.dart';
 import 'package:aq_prime/widgets/top_ten_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class TopTenSection extends StatelessWidget {
   const TopTenSection({Key? key}) : super(key: key);
@@ -27,18 +28,20 @@ class TopTenSection extends StatelessWidget {
         Container(
           height: 180,
           color: Colors.transparent,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(top: 0, bottom: 0),
-            physics: const AlwaysScrollableScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: trending.length,
-            itemBuilder: (context, index) {
-              return TopTenCard(
-                title: trending[index].name!,
-                imageUrl: trending[index].imageUrl!,
-              );
-            },
+          child: AnimationLimiter(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 0, bottom: 0),
+              physics: const BouncingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: trending.length,
+              itemBuilder: (context, index) {
+                return TopTenCard(
+                  title: trending[index].name!,
+                  imageUrl: trending[index].imageUrl!,
+                );
+              },
+            ),
           ),
         ),
       ],
