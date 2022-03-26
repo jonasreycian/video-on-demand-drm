@@ -2,8 +2,6 @@ import 'package:aq_prime/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../models/content_model.dart';
-
 class VideoDetailsPage extends StatelessWidget {
   const VideoDetailsPage({Key? key}) : super(key: key);
   static const routeName = '/videoDetailsPage';
