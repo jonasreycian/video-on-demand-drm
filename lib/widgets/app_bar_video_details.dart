@@ -18,7 +18,7 @@ class AppBarVideoDetails extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
             width: double.infinity,
             height: 60,
             decoration: BoxDecoration(
@@ -26,7 +26,7 @@ class AppBarVideoDetails extends StatelessWidget {
               borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 InfoCardTop(
@@ -41,24 +41,28 @@ class AppBarVideoDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.20),
-                InfoCardTop(
-                  widget: Text(
-                    'Rate it!',
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15,
-                      color: Colors.white,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InfoCardTop(
+                      widget: Text(
+                        'Add Watch List!',
+                        style: const TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                      color: Color.fromRGBO(30, 31, 65, 1),
                     ),
-                  ),
-                  color: Color.fromRGBO(30, 31, 65, 1),
-                ),
-                const SizedBox(width: 10),
-                InfoCardTop(
-                  widget: Icon(Icons.bookmark_outline, color: Colors.white),
-                  color: Color.fromRGBO(30, 31, 65, 1),
+                    const SizedBox(width: 10),
+                    InfoCardTop(
+                      widget: Icon(Icons.bookmark_outline, color: Colors.white),
+                      color: Color.fromRGBO(30, 31, 65, 1),
+                    ),
+                  ],
                 ),
               ],
             ),

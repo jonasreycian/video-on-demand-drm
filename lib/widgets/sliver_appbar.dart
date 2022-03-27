@@ -2,8 +2,8 @@ import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class PrimeSliverAppBar extends StatelessWidget {
-  PrimeSliverAppBar({
+class AqPrimeSliverAppBar extends StatelessWidget {
+  AqPrimeSliverAppBar({
     Key? key,
     required this.container,
     this.drawer,
@@ -63,15 +63,16 @@ class PrimeSliverAppBar extends StatelessWidget {
                             return FlexibleSpaceBar(
                               title: Text(
                                 scrolled ? title : '',
-                                textAlign: TextAlign.center,
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
                                   fontSize: 20,
-                                  color: Colors.white,
+                                  color: scrolled ? Colors.white : Colors.black,
                                 ),
                               ),
+                              titlePadding: EdgeInsets.only(bottom: scrolled ? 20 : 65),
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),
                                 child: Stack(
@@ -109,7 +110,7 @@ class PrimeSliverAppBar extends StatelessWidget {
                             );
                           },
                         ),
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.black,
                         iconTheme: IconThemeData(
                           color: Colors.red, //change your color here
                         ),
