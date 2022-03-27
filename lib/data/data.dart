@@ -188,12 +188,12 @@ final List<Content> originals = const [
     genre: ['Drama', 'Fantasy', 'Horror'],
     director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
     cast: [
-      Person(fullName: 'Daniel Lapaine', castName: 'Dawson', imageUrl: 'https://m.media-amazon.com/images/M/MV5BODcwNjkwNjE3NF5BMl5BanBnXkFtZTgwNjUyODgyNzE@._V1_UY317_CR20,0,214,317_AL_.jpg'),
-      Person(fullName: 'Hanna John-Kamen', castName: 'Selma Telse', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZGMwMmNmNWItZWI4Mi00OWY5LThjZmUtMjg2NDcxZDljYjYyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
-      Person(fullName: 'Charles Babalola', castName: 'Tusk', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2JkODdiNWMtMjg3Yi00ZDVjLWIzYTktYjEyYWQ5MGRmMTVjXkEyXkFqcGdeQXVyNTQxMDI2MTI@._V1_UY317_CR20,0,214,317_AL_.jpg'),
-      Person(fullName: 'Rory Kinnear', castName: 'Micheal Callow', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTQwOTMwMDM5OV5BMl5BanBnXkFtZTcwODQ1MDExOA@@._V1_UY317_CR6,0,214,317_AL_.jpg'),
-      Person(fullName: 'Lenoar Crichlow', castName: 'Vitoria Skillane', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZmViMGIxNTAtYzQ0ZS00YjJjLTk3NjktY2U4NGI0MzY3YTcyXkEyXkFqcGdeQXVyODUxODg4MjI@._V1_UY317_CR51,0,214,317_AL_.jpg'),
-      Person(fullName: 'Bracy Dala Howard', castName: 'Lacie Pound', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNzExZDkyNWItMDYzNS00MGVlLTllZTctMjYyZGE1MmY0MThhXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UY317_CR20,0,214,317_AL_.jpg'),
+      Person(fullName: 'Millie Bobby Brown', castName: 'Eleven', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA5NzA0NzQzMF5BMl5BanBnXkFtZTgwMTQxNjUzNjM@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+      Person(fullName: 'Finn Wolfhard', castName: 'Mike Wheeler', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYjlkNTdhNjYtYTFhNy00MTUxLWIwNTgtMTE5NTY5Y2I3MDc0XkEyXkFqcGdeQXVyNjY5NDgzNjQ@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+      Person(fullName: 'Winona Ryder', castName: 'Joyce Byers', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTQ3NzM3MTc2NF5BMl5BanBnXkFtZTcwODMxNjA0NA@@._V1_UY317_CR9,0,214,317_AL_.jpg'),
+      Person(fullName: 'David Harbour', castName: 'Jim Hopper', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZTc5ODUzMDAtZGFhZS00NmExLTlhYWYtZDY0NGI2MGMwYTIzXkEyXkFqcGdeQXVyODY0MzQyODc@._V1_UY317_CR20,0,214,317_AL_.jpg'),
+      Person(fullName: 'Gaten Matarazzo', castName: 'Dustin Henderson', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNTkyNDIyMzQ5OF5BMl5BanBnXkFtZTgwNDUwMDM2NDM@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+      Person(fullName: 'Caleb MacLaughlin', castName: 'Lucas Sinclair', imageUrl: 'https://m.media-amazon.com/images/M/MV5BOTY2NDY0NDgwNF5BMl5BanBnXkFtZTgwNTE3NTUzNjM@._V1_UX214_CR0,0,214,317_AL_.jpg'),
     ],
     description:
         'In a small town where everyone knows everyone, a peculiar incident starts a chain of events that leads to the disappearance of a child, which begins to tear at the fabric of an otherwise peaceful community. Dark government agencies and seemingly malevolent supernatural forces converge on the town, while a few of the locals begin to understand that there\'s more going on than meets the eye',
