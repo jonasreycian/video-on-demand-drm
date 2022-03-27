@@ -1,4 +1,5 @@
 import 'package:aq_prime/data/data.dart';
+import 'package:aq_prime/screens/video_details_screen.dart';
 import 'package:aq_prime/widgets/featured_banner_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,13 @@ class FeaturedSection extends StatelessWidget {
               return FeaturedBannerCard(
                 imageUrl: myList[index].imageUrl!,
                 title: myList[index].name!,
+                releaseYear: myList[index].releaseYear!,
+                runTime: myList[index].runTime!.inMinutes.toString(),
+                heroTag: 'featured ${myList[index].imageUrl} $index',
+                onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                  'data': myList[index],
+                  'heroTag': 'featured ${myList[index].imageUrl} $index',
+                }),
               );
             },
           ),

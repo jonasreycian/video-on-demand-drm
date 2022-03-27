@@ -26,7 +26,7 @@ class PopularSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 180,
+          height: 350,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),
@@ -38,6 +38,8 @@ class PopularSection extends StatelessWidget {
               return ThumbnailCard(
                 title: combine()[index].name!,
                 imageUrl: combine()[index].imageUrl!,
+                releaseYear: combine()[index].releaseYear!,
+                runTime: combine()[index].runTime!.inMinutes.toString(),
                 heroTag: 'popularSection ${combine()[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                   'data': combine()[index],

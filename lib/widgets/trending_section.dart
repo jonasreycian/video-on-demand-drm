@@ -26,7 +26,7 @@ class TrendingSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 180,
+          height: 350,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),
@@ -38,6 +38,8 @@ class TrendingSection extends StatelessWidget {
               return ThumbnailCard(
                 title: combine1()[index].name!,
                 imageUrl: combine1()[index].imageUrl!,
+                releaseYear: combine1()[index].releaseYear!,
+                runTime: combine1()[index].runTime!.inMinutes.toString(),
                 heroTag: 'trendingSection ${combine1()[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                   'data': combine1()[index],

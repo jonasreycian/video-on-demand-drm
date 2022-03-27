@@ -27,7 +27,7 @@ class TopTenSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 180,
+          height: 350,
           color: Colors.transparent,
           child: AnimationLimiter(
             child: ListView.builder(
@@ -40,6 +40,8 @@ class TopTenSection extends StatelessWidget {
                 return ThumbnailCard(
                   title: trending[index].name!,
                   imageUrl: trending[index].imageUrl!,
+                  releaseYear: trending[index].releaseYear!,
+                  runTime: trending[index].runTime!.inMinutes.toString(),
                   heroTag: 'top10 ${trending[index].imageUrl} $index',
                   onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                     'data': trending[index],

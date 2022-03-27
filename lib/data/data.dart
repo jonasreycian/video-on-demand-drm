@@ -291,7 +291,7 @@ List<Content> trending = const [
     releaseYear: '2018',
     accessibility: 'TV-MA',
     type: FilmType.series,
-    runTime: Duration(minutes: 18),
+    runTime: Duration(hours: 2, minutes: 12),
     genre: ['Documentary'],
     director: Person(fullName: 'Aya Cash', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2I3N2QwY2QtZTMyMy00Zjk5LThkYmItYWY0MDNhYjFmM2U0XkEyXkFqcGdeQXVyMjczNzE2OQ@@._V1_UY317_CR13,0,214,317_AL_.jpg'),
     cast: [

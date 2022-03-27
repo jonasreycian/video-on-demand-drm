@@ -27,7 +27,7 @@ class OthersSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 180,
+          height: 350,
           color: Colors.transparent,
           child: AnimationLimiter(
             child: ListView.builder(
@@ -41,6 +41,8 @@ class OthersSection extends StatelessWidget {
                   title: trending[index].name!,
                   imageUrl: trending[index].imageUrl!,
                   heroTag: 'otherSection ${trending[index].name} $index',
+                  releaseYear: trending[index].releaseYear!,
+                  runTime: trending[index].runTime!.inMinutes.toString(),
                   onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                     'data': combine1()[index],
                     'heroTag': 'otherSection ${trending[index].name} $index',

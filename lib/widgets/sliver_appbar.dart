@@ -13,7 +13,7 @@ class PrimeSliverAppBar extends StatelessWidget {
     this.appBarContainer,
     this.floatingActionButton,
     this.tabNumber = 1,
-    this.expandedHeight = 350,
+    this.expandedHeight = 325,
     this.isImageUrl = false,
     this.heroTag = '',
   }) : super(key: key);
@@ -53,7 +53,7 @@ class PrimeSliverAppBar extends StatelessWidget {
                     return <Widget>[
                       SliverAppBar(
                         expandedHeight: expandedHeight,
-                        elevation: 3,
+                        elevation: 0,
                         floating: false,
                         pinned: true,
                         flexibleSpace: LayoutBuilder(
@@ -61,9 +61,21 @@ class PrimeSliverAppBar extends StatelessWidget {
                             top = constraints.biggest.height;
                             scrolled = (top == navBarHeight);
                             return FlexibleSpaceBar(
+                              title: Text(
+                                scrolled ? title : '',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),
-                                child: Column(
+                                child: Stack(
+                                  alignment: Alignment.bottomCenter,
                                   children: [
                                     !isImageUrl
                                         ? Hero(
@@ -71,7 +83,6 @@ class PrimeSliverAppBar extends StatelessWidget {
                                             transitionOnUserGestures: true,
                                             child: Image.asset(
                                               backgroundImage!,
-                                              height: 300,
                                               width: double.infinity,
                                               fit: BoxFit.fitWidth,
                                             ),
@@ -86,38 +97,21 @@ class PrimeSliverAppBar extends StatelessWidget {
                                               )
                                             ],
                                           ),
-                                    Visibility(
-                                      visible: appBarContainer != null,
-                                      child: Column(
-                                        children: [
-                                          const SizedBox(height: 10),
-                                          appBarContainer!,
-                                          const SizedBox(height: 15),
-                                        ],
+                                    Positioned(
+                                      child: Visibility(
+                                        visible: appBarContainer != null,
+                                        child: appBarContainer!,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
                             );
                           },
                         ),
-                        backgroundColor: Colors.black,
+                        backgroundColor: Colors.transparent,
                         iconTheme: IconThemeData(
                           color: Colors.red, //change your color here
-                        ),
-                        title: Center(
-                          child: Text(
-                            title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 18,
-                              color: HexColor('#006B83'),
-                            ),
-                          ),
                         ),
                         bottom: PreferredSize(
                           preferredSize: Size.fromHeight((bottom != null) ? 40.0 : 0.0),

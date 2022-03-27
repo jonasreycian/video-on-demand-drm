@@ -26,7 +26,7 @@ class OnlyAQprimeSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 180,
+          height: 350,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),
@@ -38,6 +38,8 @@ class OnlyAQprimeSection extends StatelessWidget {
               return ThumbnailCard(
                 title: trending[index].name!,
                 imageUrl: trending[index].imageUrl!,
+                releaseYear: trending[index].releaseYear!,
+                runTime: trending[index].runTime!.inMinutes.toString(),
                 heroTag: 'onlyAQprime${trending[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                   'data': trending[index],

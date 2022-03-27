@@ -9,19 +9,22 @@ class VideoDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map data = ModalRoute.of(context)!.settings.arguments as Map;
     return PrimeSliverAppBar(
-      title: '',
+      title: data['data'].name!,
       isImageUrl: false,
       backgroundImage: data['data'].imageUrl,
       heroTag: data['heroTag'],
       appBarContainer: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         width: double.infinity,
-        color: Colors.transparent,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
             AnimationConfiguration.staggeredList(
               position: 0,
               duration: const Duration(milliseconds: 500),
@@ -44,7 +47,11 @@ class VideoDetailsPage extends StatelessWidget {
           ],
         ),
       ),
-      container: Container(),
+      container: Container(
+        decoration: BoxDecoration(
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }
