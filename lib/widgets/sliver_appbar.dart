@@ -13,7 +13,7 @@ class PrimeSliverAppBar extends StatelessWidget {
     this.appBarContainer,
     this.floatingActionButton,
     this.tabNumber = 1,
-    this.expandedHeight = 325,
+    this.expandedHeight = 400,
     this.isImageUrl = false,
     this.heroTag = '',
   }) : super(key: key);
@@ -87,15 +87,15 @@ class PrimeSliverAppBar extends StatelessWidget {
                                               fit: BoxFit.fitWidth,
                                             ),
                                           )
-                                        : Column(
-                                            children: [
-                                              Image.network(
-                                                backgroundImage!,
-                                                height: 300,
-                                                fit: BoxFit.cover,
-                                                width: double.infinity,
-                                              )
-                                            ],
+                                        : Hero(
+                                            tag: heroTag,
+                                            transitionOnUserGestures: true,
+                                            child: Image.network(
+                                              backgroundImage!,
+                                              height: 300,
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                            ),
                                           ),
                                     Positioned(
                                       child: Visibility(

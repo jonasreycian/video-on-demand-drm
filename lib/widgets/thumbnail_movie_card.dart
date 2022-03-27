@@ -39,7 +39,7 @@ class ThumbnailCard extends StatelessWidget {
                     tag: heroTag,
                     transitionOnUserGestures: true,
                     child: Container(
-                      height: 300,
+                      height: 285,
                       width: 190,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
@@ -61,7 +61,8 @@ class ThumbnailCard extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.timer_outlined, size: 13),
+                                Icon(Icons.timer_outlined, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
+                                const SizedBox(width: 5),
                                 Text(
                                   runTime + ' min •', //first word
                                   overflow: TextOverflow.ellipsis,
@@ -81,7 +82,8 @@ class ThumbnailCard extends StatelessWidget {
                             const SizedBox(width: 10),
                             Row(
                               children: [
-                                Icon(Icons.calendar_month, size: 13),
+                                Icon(Icons.calendar_month, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
+                                const SizedBox(width: 5),
                                 Text(
                                   ' $releaseYear', //first word
                                   overflow: TextOverflow.ellipsis,
@@ -105,13 +107,13 @@ class ThumbnailCard extends StatelessWidget {
                           title, //first word
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          maxLines: 1,
+                          maxLines: 2,
                           softWrap: true,
                           style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
-                            fontSize: 14,
+                            fontSize: 15,
                             color: Colors.white,
                           ),
                         ),
