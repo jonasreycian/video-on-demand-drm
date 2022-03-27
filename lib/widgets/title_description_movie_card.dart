@@ -24,8 +24,8 @@ class TitleAndDecription extends StatelessWidget {
               color: Color.fromRGBO(30, 31, 65, 1),
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            margin: const EdgeInsets.all(20),
             padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

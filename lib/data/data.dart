@@ -387,7 +387,11 @@ List<Content> trending = const [
 ];
 
 List combine() {
-  return [...myList, ...trending];
+  return [
+    ...originals,
+    ...myList,
+    ...trending,
+  ];
 }
 
 List<Content> combine1() {

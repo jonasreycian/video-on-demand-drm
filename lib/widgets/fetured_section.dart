@@ -38,17 +38,17 @@ class FeaturedSection extends StatelessWidget {
               autoPlayAnimationDuration: const Duration(seconds: 5),
               pageSnapping: true,
             ),
-            itemCount: myList.length,
+            itemCount: combine().length,
             itemBuilder: (BuildContext context, int index, int pageViewIndex) {
               return FeaturedBannerCard(
-                imageUrl: myList[index].imageUrl!,
-                title: myList[index].name!,
-                releaseYear: myList[index].releaseYear!,
-                runTime: myList[index].runTime!.inMinutes.toString(),
-                heroTag: 'featured ${myList[index].imageUrl} $index',
+                imageUrl: combine()[index].imageUrl!,
+                title: combine()[index].name!,
+                releaseYear: combine()[index].releaseYear!,
+                runTime: combine()[index].runTime!.inMinutes.toString(),
+                heroTag: 'featured ${combine()[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                  'data': myList[index],
-                  'heroTag': 'featured ${myList[index].imageUrl} $index',
+                  'data': combine()[index],
+                  'heroTag': 'featured ${combine()[index].imageUrl} $index',
                 }),
               );
             },

@@ -18,12 +18,12 @@ class AppBarVideoDetails extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
             width: double.infinity,
             height: 60,
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(20)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
