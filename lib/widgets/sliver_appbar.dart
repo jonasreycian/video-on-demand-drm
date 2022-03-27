@@ -1,6 +1,5 @@
 import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PrimeSliverAppBar extends StatelessWidget {
