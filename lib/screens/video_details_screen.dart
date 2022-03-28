@@ -24,6 +24,7 @@ class VideoDetailsPage extends StatelessWidget {
           color: Colors.black,
         ),
         child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,6 +64,7 @@ class VideoDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
+              SectionTitle(title: 'Genre'),
             ],
           ),
         ),

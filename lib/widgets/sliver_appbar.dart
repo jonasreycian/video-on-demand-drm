@@ -101,14 +101,19 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                             ),
                                           ),
                                     Positioned(
-                                      bottom: 220,
-                                      child: IconButton(
-                                        iconSize: 65,
-                                        alignment: Alignment.center,
-                                        tooltip: 'Play',
-                                        onPressed: () {},
-                                        icon: Icon(Icons.play_circle),
-                                        color: Color.fromRGBO(209, 52, 53, 1),
+                                      bottom: 200,
+                                      child: AnimatedSwitcher(
+                                        duration: const Duration(milliseconds: 500),
+                                        child: !scrolled
+                                            ? IconButton(
+                                                iconSize: 65,
+                                                alignment: Alignment.center,
+                                                tooltip: 'Play',
+                                                onPressed: () {},
+                                                icon: Icon(Icons.play_circle),
+                                                color: Color.fromRGBO(209, 52, 53, 1),
+                                              )
+                                            : const SizedBox(),
                                       ),
                                     ),
                                     Positioned(

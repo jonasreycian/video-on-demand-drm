@@ -15,9 +15,9 @@ class SectionTitle extends StatelessWidget {
         textAlign: TextAlign.left,
         style: const TextStyle(
           fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
           fontStyle: FontStyle.normal,
-          fontSize: 23,
+          fontSize: 25,
           color: Colors.white,
         ),
       ),
