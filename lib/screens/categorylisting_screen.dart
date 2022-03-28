@@ -15,7 +15,8 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
   FocusNode _focus = FocusNode();
   TextEditingController _controller = TextEditingController();
   bool isSearchbarFocused = false;
-
+  List<Color> colors = [Colors.red, Colors.green, Colors.yellow, Colors.pink, Colors.blue, Colors.cyan, Colors.orange];
+  List<String> genre = ["Anime","Action", "Drama", "Adventure", "Korean", "Blockbuster", "Filipino"];
 
   @override
   void initState() {
@@ -82,7 +83,7 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
                      ),
                   ),
                ),
-               Container(
+                Container(
                   margin: EdgeInsets.only(left: 10, top: 20),
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -97,34 +98,51 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
                         ),
                      ),
                   ),
-               ),
+                ),
                Container(
                   margin: EdgeInsets.only(top: 20),
-                  height: MediaQuery.of(context).size.height * 0.65, 
+                  height: MediaQuery.of(context).size.height * 0.45, 
                   width: MediaQuery.of(context).size.width,
                   child:  GridView.count(
                      primary: false,
                      crossAxisCount: 2,
                      childAspectRatio: (1 / 0.5),
                      physics: const NeverScrollableScrollPhysics(),
-                     children: List.generate(12, (index) {
+                     children: List.generate(colors.length, (index) {
                         return Center(
                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.47,
+                              margin: EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
+                              width: MediaQuery.of(context).size.width * 0.50,
                               child : Card(
-                                 semanticContainer: true,
-                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                 ),
-                                 clipBehavior: Clip.antiAlias,
-                                 color: Colors.red,
-                                 child: Image.network('https://source.unsplash.com/random',fit: BoxFit.fill)
+                                semanticContainer: true,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                color: colors[index],
+                                child: Container(
+                                  height: 300,
+                                  width: double.infinity,
+                                  child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(genre[index], 
+                                    style: TextStyle(         
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
-                           ),
+                            ),
+                          ),
                         );
-                     }
+                      }
+                    ),
                   ),
-               ),
+                ),
             Container(
                margin: EdgeInsets.only(top: 10),
                height: 150, 
@@ -154,35 +172,35 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
                      ),
                   ),
                ),
-            ),
-            Container(
-               margin: EdgeInsets.only(top: 20),
-               height: MediaQuery.of(context).size.height * 0.65, 
-               width: MediaQuery.of(context).size.width,
-               child:  GridView.count(
-                  primary: false,
-                  crossAxisCount: 2,
-                  childAspectRatio: (1 / 0.5),
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: List.generate(12, (index) {
-                     return Center(
-                        child: Container(
-                           width: MediaQuery.of(context).size.width * 0.47,
-                           child: Card(
-                              semanticContainer: true,
-                              shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              color: Colors.red,
-                              child: Image.network('https://source.unsplash.com/random',fit: BoxFit.fill)
-                           ), 
-                        ),
-                     );
-                  }
-               ),
-            ),
-            ),
+            
+            // Container(
+            //    margin: EdgeInsets.only(top: 20),
+            //    height: MediaQuery.of(context).size.height * 0.65, 
+            //    width: MediaQuery.of(context).size.width,
+            //    child:  GridView.count(
+            //       primary: false,
+            //       crossAxisCount: 2,
+            //       childAspectRatio: (1 / 0.5),
+            //       physics: const NeverScrollableScrollPhysics(),
+            //       children: List.generate(12, (index) {
+            //          return Center(
+            //             child: Container(
+            //                width: MediaQuery.of(context).size.width * 0.47,
+            //                child: Card(
+            //                   semanticContainer: true,
+            //                   shape: RoundedRectangleBorder(
+            //                      borderRadius: BorderRadius.circular(5.0),
+            //                   ),
+            //                   clipBehavior: Clip.antiAlias,
+            //                   color: Colors.red,
+            //                   child: Image.network('https://source.unsplash.com/random',fit: BoxFit.fill)
+            //                ), 
+            //             ),
+            //          );
+            //       }
+            //    ),
+            // ),
+            // ),
 
             ],
           )
