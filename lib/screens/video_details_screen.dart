@@ -38,7 +38,7 @@ class VideoDetailsPage extends StatelessWidget {
                   itemCount: data['data'].cast.length,
                   itemBuilder: (context, index) {
                     return ProfileCard(
-                      isLast: data['data'].cast.length == (index + 1) ? true : false,
+                      isLast: data['data'].cast.length == (index + 1),
                       imageUrl: data['data'].cast[index].imageUrl,
                       fullName: data['data'].cast[index].fullName,
                       castName: data['data'].cast[index].castName,
@@ -46,7 +46,7 @@ class VideoDetailsPage extends StatelessWidget {
                   },
                 ),
               ),
-              SectionTitle(title: 'Video Details'),
+              SectionTitle(title: 'Details'),
               TitleAndDecription(title: data['data'].name, description: data['data'].description),
               Container(
                 height: 180,

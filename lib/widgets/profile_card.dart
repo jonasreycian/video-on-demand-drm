@@ -38,7 +38,7 @@ class ProfileCard extends StatelessWidget {
                   width: 85,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(60),
-                    color: Color.fromRGBO(30, 31, 65, 1).withOpacity(0.9),
+                    color: Color.fromRGBO(209, 52, 53, 1).withOpacity(0.9),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.5),
@@ -49,7 +49,6 @@ class ProfileCard extends StatelessWidget {
                     ],
                   ),
                   child: ClipOval(
-                    clipBehavior: Clip.hardEdge,
                     child: FadeInImage.assetNetwork(
                       fadeInCurve: Curves.easeInQuart,
                       fadeOutCurve: Curves.easeInQuart,

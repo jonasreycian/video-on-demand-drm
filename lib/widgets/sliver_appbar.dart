@@ -61,18 +61,20 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                             top = constraints.biggest.height;
                             scrolled = (top == navBarHeight);
                             return FlexibleSpaceBar(
-                              title: Text(
-                                scrolled ? title : '',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 20,
-                                  color: scrolled ? Colors.white : Colors.black,
+                              title: Center(
+                                child: Text(
+                                  scrolled ? title : '',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 20,
+                                    color: scrolled ? Colors.white : Colors.black,
+                                  ),
                                 ),
                               ),
-                              titlePadding: EdgeInsets.only(bottom: scrolled ? 20 : 65),
+                              titlePadding: scrolled ? EdgeInsets.only(top: 45) : EdgeInsets.only(bottom: 65),
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),
                                 child: Stack(
@@ -99,8 +101,19 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                             ),
                                           ),
                                     Positioned(
+                                      bottom: 220,
+                                      child: IconButton(
+                                        iconSize: 65,
+                                        alignment: Alignment.center,
+                                        tooltip: 'Play',
+                                        onPressed: () {},
+                                        icon: Icon(Icons.play_circle),
+                                        color: Color.fromRGBO(209, 52, 53, 1),
+                                      ),
+                                    ),
+                                    Positioned(
                                       child: Visibility(
-                                        visible: appBarContainer != null,
+                                        visible: appBarContainer != null && !scrolled,
                                         child: appBarContainer!,
                                       ),
                                     ),
