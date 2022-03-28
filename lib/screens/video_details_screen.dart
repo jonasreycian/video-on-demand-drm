@@ -6,6 +6,7 @@ import 'package:aq_prime/widgets/section_title_card.dart';
 import 'package:aq_prime/widgets/sliver_appbar.dart';
 import 'package:aq_prime/widgets/title_description_movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class VideoDetailsPage extends StatelessWidget {
   const VideoDetailsPage({Key? key}) : super(key: key);
@@ -58,13 +59,30 @@ class VideoDetailsPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     MovieInfoCard(type: 'Duration', value: '${data['data'].runTime.inMinutes.toString()} min', iconData: Icons.timer_outlined),
-                    MovieInfoCard(type: 'Release', value: data['data'].releaseYear, iconData: Icons.calendar_today_outlined),
+                    MovieInfoCard(type: 'Release', value: data['data'].releaseYear, iconData: Icons.calendar_month_outlined),
                     MovieInfoCard(type: 'Accessibility', value: data['data'].accessibility, iconData: Icons.lock_outline_rounded),
                     MovieInfoCard(type: 'Film Type', value: filmType(data['data'].type), iconData: Icons.video_camera_back_outlined, isLast: true),
                   ],
                 ),
               ),
               SectionTitle(title: 'Genre'),
+              Container(
+                height: 55,
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data['data'].genre.length,
+                  itemBuilder: (context, index) {
+                    return GenreCard(
+                      isLast: data['data'].genre.length == (index + 1),
+                      genreName: data['data'].genre[index],
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -84,5 +102,50 @@ class VideoDetailsPage extends StatelessWidget {
     } else {
       return '';
     }
+  }
+}
+
+class GenreCard extends StatelessWidget {
+  const GenreCard({
+    required this.isLast,
+    required this.genreName,
+    Key? key,
+  }) : super(key: key);
+  final bool isLast;
+  final String genreName;
+  @override
+  Widget build(BuildContext context) {
+    return AnimationConfiguration.staggeredList(
+      position: 1,
+      duration: const Duration(milliseconds: 500),
+      child: FadeInAnimation(
+        child: SlideAnimation(
+          horizontalOffset: 100,
+          child: Container(
+            width: 220,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(30, 31, 65, 1),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+            margin: EdgeInsets.only(right: isLast ? 0 : 20, bottom: 0),
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Center(
+              child: Text(
+                genreName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 19,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

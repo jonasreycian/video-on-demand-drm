@@ -68,6 +68,8 @@ class ProfileCard extends StatelessWidget {
                   children: [
                     Text(
                       fullName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w300,

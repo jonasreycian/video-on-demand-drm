@@ -74,6 +74,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              centerTitle: true,
                               titlePadding: scrolled ? EdgeInsets.only(top: 45) : EdgeInsets.only(bottom: 65),
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),

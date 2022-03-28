@@ -34,7 +34,7 @@ class MovieInfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(iconData, color: Colors.white, size: 35),
+                Icon(iconData, color: Colors.white, size: 45),
                 InfoMovieCardText(type: type, value: value),
               ],
             ),
