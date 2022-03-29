@@ -1,3 +1,5 @@
+import 'package:aq_prime/screens/categories_screen.dart';
+import 'package:aq_prime/screens/my_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aq_prime/cubits/cubits.dart';
@@ -41,12 +43,15 @@ class _NavScreenState extends State<NavScreen> {
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.black,
               items: _icons
-                  .map((title, icon) => MapEntry(
+                  .map(
+                    (title, icon) => MapEntry(
                       title,
                       BottomNavigationBarItem(
                         icon: Icon(icon, size: 30.0),
                         label: title,
-                      )))
+                      ),
+                    ),
+                  )
                   .values
                   .toList(),
               currentIndex: _currentIndex,

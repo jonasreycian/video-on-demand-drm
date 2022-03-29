@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/video_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aq_prime/providers/forgot_password_provider.dart';
 import 'package:aq_prime/providers/login_provider.dart';
@@ -17,12 +18,9 @@ class MyApp extends StatelessWidget {
     return DismissKeyboard(
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<RegistrationProvider>(
-              create: (context) => RegistrationProvider()),
-          ChangeNotifierProvider<LoginProvider>(
-              create: (context) => LoginProvider()),
-          ChangeNotifierProvider<ForgotPasswordProvider>(
-              create: (context) => ForgotPasswordProvider()),
+          ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
+          ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
+          ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
         ],
         child: MaterialApp(
           darkTheme: ThemeData.dark(),
@@ -39,6 +37,7 @@ class MyApp extends StatelessWidget {
             LoginScreen.routeName: (context) => LoginScreen(),
             RegistrationScreen.routeName: (context) => RegistrationScreen(),
             ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+            VideoDetailsPage.routeName: (context) => VideoDetailsPage(),
           },
         ),
       ),
