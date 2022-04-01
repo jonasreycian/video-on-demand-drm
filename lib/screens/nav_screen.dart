@@ -17,8 +17,8 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(key: PageStorageKey('homeScreen')),
     SearchScreen(key: PageStorageKey('searchScreen')),
     CategoryListingScreen(key: PageStorageKey('categoryListingScreen')),
-    Scaffold(),
-    Scaffold(),
+    CatergoriesScreen(),
+    MyAccountScreen(),
   ];
 
   final Map<String, IconData> _icons = const {
