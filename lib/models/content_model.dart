@@ -13,9 +13,11 @@ class Person {
   final String? fullName;
   final String? castName;
   final String? imageUrl;
+  final String? biography;
   const Person({
     @required this.fullName,
     this.castName,
+    this.biography,
     @required this.imageUrl,
   });
 }

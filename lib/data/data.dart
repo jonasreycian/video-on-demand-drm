@@ -82,7 +82,7 @@ List<Content> myList = const [
     type: FilmType.anime,
     runTime: Duration(hours: 1, minutes: 45),
     genre: ['Animation', 'Drama', 'Fantasy', 'Romance', 'Sci-Fi'],
-    director: Person(fullName: 'Toshiko Sawada', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNDgxY2UxYTYtOWY5Ni00MzJkLWE5ZDItOWNiYmQ0MWVhNmMwXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Toshiko Sawada', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTA0NjEwMzQxNTdeQTJeQWpwZ15BbWU3MDcwMTk4MzI@._V1_UY317_CR11,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Yui Ishikaawa', castName: 'Violet Evergardend', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNzdlOTdlNDEtZTViMy00NGQyLTg2YWQtYWY1YWUzY2E2MjFhXkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_UY317_CR5,0,214,317_AL_.jpg'),
       Person(fullName: 'Kyle MacCarley', castName: 'Claudia Hodgins', imageUrl: 'https://m.media-amazon.com/images/M/MV5BY2YxZGMxMjItODc3Ny00OGFmLTg5NGEtYjBiMmI4NjQ1OTllXkEyXkFqcGdeQXVyNDg2MzAzNw@@._V1_UY317_CR20,0,214,317_AL_.jpg'),
@@ -102,7 +102,8 @@ List<Content> myList = const [
     type: FilmType.series,
     runTime: Duration(minutes: 30),
     genre: ['Comedy', 'Crime', 'Drama', 'Romance'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Maximillan Mundt', castName: 'Morits Zimmermann', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMmNiMWZlYTMtY2IxMS00OWE2LWE4MDktMjgyMTFhMWFmYWQ1XkEyXkFqcGdeQXVyMTA1ODE4OTYw._V1_UX214_CR0,0,214,317_AL_.jpg'),
       Person(fullName: 'Markoesa Hammer', castName: 'Marlene', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjE2ZmZmMGYtOTBjYy00NDZiLWE4ZjItZjIyMjAwMWJhYjMzXkEyXkFqcGdeQXVyMTIzNTgzMTI4._V1_UY317_CR20,0,214,317_AL_.jpg'),
@@ -122,7 +123,8 @@ List<Content> myList = const [
     type: FilmType.anime,
     runTime: Duration(minutes: 48),
     genre: ['Animation', 'Drama', 'Mystery', 'Thriller'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Saori Hayami', castName: 'Yumeko Jabami', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDcyYjdmNWEtZTFjOS00MGE4LTkwYTQtMTQ1ZmJkODFmYjg5XkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_UY317_CR8,0,214,317_AL_.jpg'),
       Person(fullName: 'Miyuki Sawashiro', castName: 'Kirari MomoBami', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZjBhN2JkNDctMTA5Ni00MjBhLTkxYWQtODcwNDY5MjJjZDE4XkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_UY317_CR21,0,214,317_AL_.jpg'),
@@ -143,7 +145,8 @@ List<Content> myList = const [
     type: FilmType.anime,
     runTime: Duration(minutes: 27),
     genre: ['Animation', 'Drama', 'Music'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Saori Hayami', castName: 'Yumeko Jabami', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDcyYjdmNWEtZTFjOS00MGE4LTkwYTQtMTQ1ZmJkODFmYjg5XkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_UY317_CR8,0,214,317_AL_.jpg'),
       Person(fullName: 'Miyuki Sawashiro', castName: 'Kirari MomoBami', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZjBhN2JkNDctMTA5Ni00MjBhLTkxYWQtODcwNDY5MjJjZDE4XkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_UY317_CR21,0,214,317_AL_.jpg'),
@@ -163,7 +166,8 @@ List<Content> myList = const [
     type: FilmType.series,
     runTime: Duration(hours: 1, minutes: 33),
     genre: ['Drama', 'Mystery', 'Sci-Fi'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Daniel Lapaine', castName: 'Dawson', imageUrl: 'https://m.media-amazon.com/images/M/MV5BODcwNjkwNjE3NF5BMl5BanBnXkFtZTgwNjUyODgyNzE@._V1_UY317_CR20,0,214,317_AL_.jpg'),
       Person(fullName: 'Hanna John-Kamen', castName: 'Selma Telse', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZGMwMmNmNWItZWI4Mi00OWY5LThjZmUtMjg2NDcxZDljYjYyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -186,7 +190,8 @@ final List<Content> originals = const [
     type: FilmType.series,
     runTime: Duration(hours: 1, minutes: 33),
     genre: ['Drama', 'Fantasy', 'Horror'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Millie Bobby Brown', castName: 'Eleven', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA5NzA0NzQzMF5BMl5BanBnXkFtZTgwMTQxNjUzNjM@._V1_UX214_CR0,0,214,317_AL_.jpg'),
       Person(fullName: 'Finn Wolfhard', castName: 'Mike Wheeler', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYjlkNTdhNjYtYTFhNy00MTUxLWIwNTgtMTE5NTY5Y2I3MDc0XkEyXkFqcGdeQXVyNjY5NDgzNjQ@._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -207,7 +212,8 @@ final List<Content> originals = const [
     type: FilmType.series,
     runTime: Duration(hours: 1, minutes: 13),
     genre: ['Action', 'Adventure', 'Drama', 'Fantasy', 'Mystery'],
-    director: Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg'),
+    director:
+        Person(fullName: 'Langston Uibel', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZDYzNzJkOTItMzY5Yi00MzY3LWE5M2MtYWQ3NWJhN2IwZTk0XkEyXkFqcGdeQXVyMjk1MTEwMjY@._V1_UY317_CR19,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Henry Cavil', castName: 'Geralt of Rivia', imageUrl: 'https://m.media-amazon.com/images/M/MV5BODI0MTYzNTIxNl5BMl5BanBnXkFtZTcwNjg2Nzc0NA@@._V1_UY317_CR26,0,214,317_AL_.jpg'),
       Person(fullName: 'Freya Allan', castName: 'Ciri', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZTYxMDc0Y2UtZWJjYi00Yjk1LWE5NWQtMGNmMmVhNzkwYmQ4XkEyXkFqcGdeQXVyMTI5Njc2ODg3._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -228,7 +234,7 @@ final List<Content> originals = const [
     type: FilmType.series,
     runTime: Duration(hours: 2, minutes: 34),
     genre: ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Sci-Fi'],
-    director: Person(fullName: 'Robert Sheehan', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzk1MjAyNzUtNWYyNi00YTM5LTkxY2ItMmYyY2I0ZjU3NTI3XkEyXkFqcGdeQXVyMTYwMDE3NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Robert Sheehan', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzk1MjAyNzUtNWYyNi00YTM5LTkxY2ItMmYyY2I0ZjU3NTI3XkEyXkFqcGdeQXVyMTYwMDE3NA@@._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Elliot Page', castName: 'Vanya Hargreeves', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYWY0NzFmYjAtYzMwNC00ODc3LWI2ZWEtOTU3YTM0Y2ZiNTM5XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UY317_CR11,0,214,317_AL_.jpg'),
       Person(fullName: 'Tom Hopper', castName: 'Ciri', imageUrl: 'https://m.media-amazon.com/images/M/MV5BZTYxMDc0Y2UtZWJjYi00Yjk1LWE5NWQtMGNmMmVhNzkwYmQ4XkEyXkFqcGdeQXVyMTI5Njc2ODg3._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -249,7 +255,7 @@ final List<Content> originals = const [
     type: FilmType.series,
     runTime: Duration(minutes: 57),
     genre: ['Drama', 'Mystery', 'Thriller'],
-    director: Person(fullName: 'Robert Sheehan', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzk1MjAyNzUtNWYyNi00YTM5LTkxY2ItMmYyY2I0ZjU3NTI3XkEyXkFqcGdeQXVyMTYwMDE3NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Robert Sheehan', imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzk1MjAyNzUtNWYyNi00YTM5LTkxY2ItMmYyY2I0ZjU3NTI3XkEyXkFqcGdeQXVyMTYwMDE3NA@@._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Dylan Minnette', castName: 'Clay Jensen', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNTk0ZmNkMWEtNzI0Yy00ZTAzLThiNWMtZWMwMDkzZmJjZmU3XkEyXkFqcGdeQXVyNTYxNDQ4NQ@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
       Person(fullName: 'Katherine Langford', castName: 'Hannah Baker', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTA0ODU1OTE5NTNeQTJeQWpwZ15BbWU4MDUwMzg2NDQz._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -270,7 +276,7 @@ final List<Content> originals = const [
     type: FilmType.series,
     runTime: Duration(minutes: 25),
     genre: ['Aventure', 'Comedy', 'Crime', 'Drama', 'Romance', 'Thriller'],
-    director: Person(fullName: 'Katherine Langford', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTA0ODU1OTE5NTNeQTJeQWpwZ15BbWU4MDUwMzg2NDQz._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Katherine Langford', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTA0ODU1OTE5NTNeQTJeQWpwZ15BbWU4MDUwMzg2NDQz._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Jessica Barden', castName: 'Alyssa', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjQ2NjU3MzcyM15BMl5BanBnXkFtZTgwNzY1MzU2NDM@._V1_UY317_CR33,0,214,317_AL_.jpg'),
       Person(fullName: 'Alex Lawther', castName: 'James', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjI2OTk0NDM4OV5BMl5BanBnXkFtZTgwMTc2MTUyMDI@._V1_UY317_CR8,0,214,317_AL_.jpg'),
@@ -293,7 +299,7 @@ List<Content> trending = const [
     type: FilmType.series,
     runTime: Duration(hours: 2, minutes: 12),
     genre: ['Documentary'],
-    director: Person(fullName: 'Aya Cash', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2I3N2QwY2QtZTMyMy00Zjk5LThkYmItYWY0MDNhYjFmM2U0XkEyXkFqcGdeQXVyMjczNzE2OQ@@._V1_UY317_CR13,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Aya Cash', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2I3N2QwY2QtZTMyMy00Zjk5LThkYmItYWY0MDNhYjFmM2U0XkEyXkFqcGdeQXVyMjczNzE2OQ@@._V1_UY317_CR13,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Estelle Caswell', castName: 'Self-Narrator', imageUrl: 'https://m.media-amazon.com/images/M/MV5BODhjMzcxZWQtZmRjOC00ODIyLWI1YmItMTI1Y2YwMWYxYWY1XkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_UY317_CR1,0,214,317_AL_.jpg'),
       Person(fullName: 'Carly Rae Jepsen', castName: 'Self-Narrator', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTM2NDg5ODQ5MF5BMl5BanBnXkFtZTcwMTE5OTQwOA@@._V1_UY317_CR2,0,214,317_AL_.jpg'),
@@ -310,7 +316,7 @@ List<Content> trending = const [
     type: FilmType.series,
     runTime: Duration(minutes: 23),
     genre: ['Animation', 'Action', 'Adventure', 'Family', 'Fantasy', 'Mystery'],
-    director: Person(fullName: 'Aya Cash', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2I3N2QwY2QtZTMyMy00Zjk5LThkYmItYWY0MDNhYjFmM2U0XkEyXkFqcGdeQXVyMjczNzE2OQ@@._V1_UY317_CR13,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Aya Cash', imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2I3N2QwY2QtZTMyMy00Zjk5LThkYmItYWY0MDNhYjFmM2U0XkEyXkFqcGdeQXVyMjczNzE2OQ@@._V1_UY317_CR13,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Dee Bradley Baker', castName: 'Appa', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
       Person(fullName: 'Zach Tyler Eisen', castName: 'Aang', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTI4NTU5NzczNF5BMl5BanBnXkFtZTYwNTY4NTY2._V1_UY317_CR2,0,214,317_AL_.jpg'),
@@ -331,7 +337,7 @@ List<Content> trending = const [
     type: FilmType.series,
     runTime: Duration(minutes: 45),
     genre: ['Documentary', 'Biography', 'Crime'],
-    director: Person(fullName: 'Aya Crypto', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Aya Crypto', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Joe Exotic', castName: 'Self - G.W Zoo', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNWY4NzQ1MTctMzA0ZS00OGJjLTkwMzctYjc4MWQwZThiNjNlXkEyXkFqcGdeQXVyMTM1NTI3Mjcy._V1_UY317_CR51,0,214,317_AL_.jpg'),
       Person(fullName: 'Carole Baskin', castName: 'Self - Big Cat Rescue', imageUrl: 'https://m.media-amazon.com/images/M/MV5BOGU3Yjc2MDQtM2Y0Mi00Zjc3LTk0N2UtMDdjMmRjYTE1NGMxXkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_UY317_CR5,0,214,317_AL_.jpg'),
@@ -352,7 +358,7 @@ List<Content> trending = const [
     type: FilmType.series,
     runTime: Duration(minutes: 58),
     genre: ['Biography', 'Drama', 'History'],
-    director: Person(fullName: 'Erin Doherty', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Erin Doherty', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Claire Foy', castName: 'Queen Elizabeth II', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNTI5OTMwNzM4NV5BMl5BanBnXkFtZTcwNDY1NjkyNA@@._V1_UY317_CR7,0,214,317_AL_.jpg'),
       Person(fullName: 'Imelda Staunton', castName: 'Queen Elizabeth II', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTQ0NzcwOTE0NF5BMl5BanBnXkFtZTYwNjAxOTI1._V1_UX214_CR0,0,214,317_AL_.jpg'),
@@ -373,7 +379,7 @@ List<Content> trending = const [
     type: FilmType.series,
     runTime: Duration(minutes: 50),
     genre: ['Documentary'],
-    director: Person(fullName: 'Dominic West', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg'),
+    director: Person(fullName: 'Dominic West', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTk4MzkzMzk0MF5BMl5BanBnXkFtZTcwNDIwMjM4NA@@._V1_UX214_CR0,0,214,317_AL_.jpg', biography: 'Tony Azzolino was born on October 22, 1980. He is known for Violet Evergarden (2018), Beastars (2019) and Aggretsuko (2018).'),
     cast: [
       Person(fullName: 'Claire Foy', castName: 'Queen Elizabeth II', imageUrl: 'https://m.media-amazon.com/images/M/MV5BNTI5OTMwNzM4NV5BMl5BanBnXkFtZTcwNDY1NjkyNA@@._V1_UY317_CR7,0,214,317_AL_.jpg'),
       Person(fullName: 'Imelda Staunton', castName: 'Queen Elizabeth II', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTQ0NzcwOTE0NF5BMl5BanBnXkFtZTYwNjAxOTI1._V1_UX214_CR0,0,214,317_AL_.jpg'),
