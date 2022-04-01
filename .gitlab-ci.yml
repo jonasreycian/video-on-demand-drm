@@ -7,4 +7,7 @@ flutter_test:
 #    - flutter test
     - flutter analyze
   tags:
-    - flutter # Tags for runner
+    - flutter
+    - android
+    - feature
+    - dev
