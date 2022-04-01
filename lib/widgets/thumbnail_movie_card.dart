@@ -82,7 +82,7 @@ class ThumbnailCard extends StatelessWidget {
                             const SizedBox(width: 10),
                             Row(
                               children: [
-                                Icon(Icons.calendar_month, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
+                                Icon(Icons.calendar_view_month, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
                                 const SizedBox(width: 5),
                                 Text(
                                   ' $releaseYear', //first word

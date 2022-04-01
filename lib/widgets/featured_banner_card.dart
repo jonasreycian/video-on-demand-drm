@@ -62,7 +62,7 @@ class FeaturedBannerCard extends StatelessWidget {
               const SizedBox(width: 20),
               Row(
                 children: [
-                  Icon(Icons.calendar_month, size: 13),
+                  Icon(Icons.calendar_view_month, size: 13),
                   Text(
                     ' • $releaseYear',
                     style: const TextStyle(
