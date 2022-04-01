@@ -27,7 +27,6 @@ class CatergoriesScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // const SizedBox(height: 20),
               AnimationConfiguration.staggeredList(
                 position: 0,
                 duration: duration,

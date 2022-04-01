@@ -12,11 +12,6 @@ class MyAccountScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.transparent,
-      //   title: Text('My Account'),
-      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

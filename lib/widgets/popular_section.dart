@@ -26,7 +26,7 @@ class PopularSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 350,
+          height: 200,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),

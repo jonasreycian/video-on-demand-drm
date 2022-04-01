@@ -27,7 +27,7 @@ class TopTenSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 350,
+          height: 200,
           color: Colors.transparent,
           child: AnimationLimiter(
             child: ListView.builder(
