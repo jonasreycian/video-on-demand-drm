@@ -16,7 +16,8 @@ class ForgotPasswordEnterOtpCard extends StatelessWidget {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
+          generalDialog(
+              context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
           value.reset();
         }
       });
@@ -100,7 +101,8 @@ class RegistraionEnterOtpCard extends StatelessWidget {
     return Consumer<RegistrationProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
+          generalDialog(
+              context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
           value.reset();
         }
       });

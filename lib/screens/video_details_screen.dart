@@ -62,7 +62,7 @@ class VideoDetailsPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     MovieInfoCard(type: 'Duration', value: '${data['data'].runTime.inMinutes.toString()} min', iconData: Icons.timer_outlined),
-                    MovieInfoCard(type: 'Release', value: data['data'].releaseYear, iconData: Icons.calendar_month_outlined),
+                    MovieInfoCard(type: 'Release', value: data['data'].releaseYear, iconData: Icons.calendar_view_month_outlined),
                     MovieInfoCard(type: 'Accessibility', value: data['data'].accessibility, iconData: Icons.lock_outline_rounded),
                     MovieInfoCard(type: 'Film Type', value: filmType(data['data'].type), iconData: Icons.video_camera_back_outlined, isLast: true),
                   ],
