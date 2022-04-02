@@ -1,5 +1,6 @@
 import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 // ignore: must_be_immutable
 class AqPrimeSliverAppBar extends StatelessWidget {
@@ -8,12 +9,12 @@ class AqPrimeSliverAppBar extends StatelessWidget {
     required this.container,
     this.drawer,
     this.bottom,
-    this.backgroundImage = 'assets/images/my-record.png',
+    required this.backgroundImage,
     required this.title,
     this.appBarContainer,
     this.floatingActionButton,
     this.tabNumber = 1,
-    this.expandedHeight = 400,
+    this.expandedHeight = 300,
     this.isImageUrl = false,
     this.heroTag = '',
   }) : super(key: key);
@@ -44,10 +45,11 @@ class AqPrimeSliverAppBar extends StatelessWidget {
           child: Scaffold(
             key: _key,
             drawer: drawer,
-            body: DefaultTabController(
-              length: tabNumber,
-              child: Container(
-                color: Colors.black,
+            body: Container(
+              color: Colors.black,
+              child: DefaultTabController(
+                length: tabNumber,
+                initialIndex: 0,
                 child: NestedScrollView(
                   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
@@ -59,23 +61,20 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         flexibleSpace: LayoutBuilder(
                           builder: (BuildContext context, BoxConstraints constraints) {
                             top = constraints.biggest.height;
-                            scrolled = (top == navBarHeight);
                             return FlexibleSpaceBar(
-                              title: Center(
-                                child: Text(
-                                  scrolled ? title : '',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w700,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 20,
-                                    color: scrolled ? Colors.white : Colors.black,
-                                  ),
+                              title: Text(
+                                top == 144.0 ? title : '',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 20,
+                                  color: Colors.white,
                                 ),
                               ),
                               centerTitle: true,
-                              titlePadding: scrolled ? EdgeInsets.only(top: 45) : EdgeInsets.only(bottom: 65),
+                              titlePadding: EdgeInsets.only(top: 0, bottom: 65),
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),
                                 child: Stack(
@@ -88,7 +87,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                             child: Image.asset(
                                               backgroundImage!,
                                               width: double.infinity,
-                                              fit: BoxFit.fitWidth,
+                                              fit: BoxFit.cover,
                                             ),
                                           )
                                         : Hero(
@@ -96,30 +95,35 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                             transitionOnUserGestures: true,
                                             child: Image.network(
                                               backgroundImage!,
-                                              height: 300,
                                               fit: BoxFit.cover,
                                               width: double.infinity,
                                             ),
                                           ),
                                     Positioned(
-                                      bottom: 200,
-                                      child: AnimatedSwitcher(
-                                        duration: const Duration(milliseconds: 500),
-                                        child: !scrolled
-                                            ? IconButton(
-                                                iconSize: 65,
-                                                alignment: Alignment.center,
-                                                tooltip: 'Play',
-                                                onPressed: () {},
-                                                icon: Icon(Icons.play_circle),
-                                                color: Color.fromRGBO(209, 52, 53, 1),
-                                              )
-                                            : const SizedBox(),
+                                      top: 80,
+                                      child: AnimationConfiguration.staggeredList(
+                                        position: 0,
+                                        duration: const Duration(milliseconds: 1500),
+                                        child: FadeInAnimation(
+                                          delay: const Duration(milliseconds: 1000),
+                                          child: Container(
+                                            child: top != 144.0
+                                                ? IconButton(
+                                                    iconSize: 65,
+                                                    alignment: Alignment.center,
+                                                    tooltip: 'Play',
+                                                    onPressed: () {},
+                                                    icon: Icon(Icons.play_circle),
+                                                    color: Colors.white,
+                                                  )
+                                                : const SizedBox(),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Positioned(
                                       child: Visibility(
-                                        visible: appBarContainer != null && !scrolled,
+                                        visible: appBarContainer != null && top != 144.0,
                                         child: appBarContainer!,
                                       ),
                                     ),
@@ -137,7 +141,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                           preferredSize: Size.fromHeight((bottom != null) ? 40.0 : 0.0),
                           child: (bottom != null)
                               ? Container(
-                                  color: HexColor('#DBF9FF'),
+                                  color: Colors.black,
                                   child: bottom!,
                                 )
                               : Container(),

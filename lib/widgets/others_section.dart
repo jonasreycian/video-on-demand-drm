@@ -1,5 +1,5 @@
 import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/screens/video_details_screen.dart';
+import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

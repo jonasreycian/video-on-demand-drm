@@ -15,13 +15,13 @@ class CategoriesScreen extends StatelessWidget {
   final Duration duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
-    final String categoryName = ModalRoute.of(context)!.settings.arguments as String;
+    final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(categoryName),
+        title: Text(categoryName ?? ''),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
