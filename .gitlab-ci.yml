@@ -1,55 +1,19 @@
-image: cirrusci/flutter:stable
-
 stages:
-#  - build
-  - analyze
-#  - test
-
-before_script:
-  - flutter pub get
-  - flutter clean
-
-#build:
-#  stage: build
-#  script:
-#    - flutter build aot
-#  tags:
-#    - ios
-#  only:
-#    - merge_requests
-
-#unit_test:
-#  stage: test
-#  script:
-#    - flutter test test/*
-#  tags:
-#    - ios
-#  only:
-#    - merge_requests
-
-dart_analysis:
-  stage: analyze
-  script:
-    - flutter analyze
-#  tags:
-#    - android
-  only:
-    - merge_requests
-    - dev
-    - main
-    - release
-
-#stages:
 #  - environment
 #  - dependencies
-#  - check
-#  - test
+  - check
+  - test
 #  - build
 ##  - internal
 ##  - alpha
 ##  - beta
 ##  - production
-#
+
+.clean_build:
+  before_script:
+    - flutter pub get
+    - flutter clean
+
 #variables:
 #  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 #
@@ -109,31 +73,33 @@ dart_analysis:
 #      - pubspec.lock
 #
 #
-#.checkJob:
-#  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-#  stage: check
-#  only:
-#    - master
-#    - dev
-#    - merge_request
-#    - tags
-#
-#analyze:
-#  extends: .checkJob
-#  script:
-#    - flutter analyze
-#
-#format:
-#  extends: .checkJob
-#  script:
-#    - flutter format -n --set-exit-if-changed .
-#
-#test:
-#  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-#  stage: test
-#  script:
-#    - flutter test
-#
+.checkJob:
+  image: cirrusci/flutter:stable
+  extends: [ .clean_build ]
+  stage: check
+  only:
+    - main
+    - dev
+    - merge_requests
+    - tags
+
+check_dart_lints:
+  extends: [ .checkJob ]
+  script:
+    - flutter analyze
+
+check_format:
+  extends: [ .checkJob ]
+  script:
+    - flutter format -n --set-exit-if-changed .
+
+unit_test:
+  image: cirrusci/flutter:stable
+  extends: [ .clean_build ]
+  stage: test
+  script:
+    - flutter test
+
 #.build_job:
 #  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 #  stage: build

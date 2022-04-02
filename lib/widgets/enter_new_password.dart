@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/utilities/hex_color.dart';

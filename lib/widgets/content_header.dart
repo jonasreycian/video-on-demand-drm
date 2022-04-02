@@ -226,7 +226,9 @@ class _PlayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
     return FlatButton.icon(
-      padding: !Responsive.isDesktop(context) ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0) : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+      padding: !Responsive.isDesktop(context)
+          ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0)
+          : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
       onPressed: () => print('Play'),
       color: Colors.white,
       icon: const Icon(Icons.play_arrow, size: 30.0),
