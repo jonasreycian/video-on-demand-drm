@@ -48,14 +48,16 @@ class ForgotPasswordProvider with ChangeNotifier {
     reset();
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;
-      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) || value.length >= 8) {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ||
+          value.length >= 8) {
         if (_hintText == 'Mobile number') _message = 'Please check your SMS inbox';
         if (_hintText == 'Email') _message = 'Please check your Email';
         _isSuccess = true;
         _isLoading = false;
         notifyListeners();
       }
-      if (_hintText == 'Email' && !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
+      if (_hintText == 'Email' &&
+          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
         _message = 'Invalid Email Address';
         _isSuccess = false;
         _isLoading = false;

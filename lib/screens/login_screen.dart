@@ -57,7 +57,8 @@ class LoginScreen extends StatelessWidget {
                   child: Consumer<LoginProvider>(builder: (context, value, child) {
                     Future.delayed(const Duration(milliseconds: 100), () {
                       if (!value.isLoading) {
-                        generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                        generalDialog(
+                            context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
                         value.reset();
                       }
                     });

@@ -22,7 +22,8 @@ class LoginProvider with ChangeNotifier {
     reset();
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;
-      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) &&
+          password.length >= 8) {
         _message = 'Login Success\nPlease wait...';
         _isSuccess = true;
         _isLoading = false;
