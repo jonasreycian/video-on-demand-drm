@@ -99,7 +99,8 @@ class RegistrationCard extends StatelessWidget {
             prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
             prefixIcon: GestureDetector(
               onTap: () => countryCodeDialog(context: context),
-              child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
+              child: Text(value.countryCode.dialCode.toString(),
+                  style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
             ),
           ),
           const SizedBox(height: 20),
@@ -146,8 +147,15 @@ class RegistrationCard extends StatelessWidget {
           PrimaryButton(
             height: 50,
             action: () {
-              if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty && value.birthDayString != null) {
-                value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
+              if (firstName.text.isNotEmpty &&
+                  lastName.text.isNotEmpty &&
+                  email.text.isNotEmpty &&
+                  mobileNumber.text.isNotEmpty &&
+                  password.text.isNotEmpty &&
+                  confirmPassword.text.isNotEmpty &&
+                  value.birthDayString != null) {
+                value.sendAPI(
+                    firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
                 generalDialog(
                   context: context,
                   message: value.message,

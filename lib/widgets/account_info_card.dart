@@ -113,6 +113,7 @@ class AccountInfoCard extends StatelessWidget {
             suffixIcon: IconButton(
               onPressed: () {},
               icon: Icon(
+                // ignore: dead_code
                 false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,
@@ -133,6 +134,7 @@ class AccountInfoCard extends StatelessWidget {
             suffixIcon: IconButton(
               onPressed: () {},
               icon: Icon(
+                // ignore: dead_code
                 false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,

@@ -15,20 +15,16 @@ class ForgotPasswordScreen extends StatelessWidget {
   late double height;
   @override
   Widget build(BuildContext context) {
-    ForgotPasswordProvider forgotPasswordProvider =
-        Provider.of<ForgotPasswordProvider>(context);
-    if (forgotPasswordProvider.selectedWidgetCard ==
-        forgotPasswordProvider.choices[0]) {
+    ForgotPasswordProvider forgotPasswordProvider = Provider.of<ForgotPasswordProvider>(context);
+    if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[0]) {
       currentWidget = ResetPasswordCardMobile();
       height = 400;
     }
-    if (forgotPasswordProvider.selectedWidgetCard ==
-        forgotPasswordProvider.choices[1]) {
+    if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[1]) {
       currentWidget = ResetPasswordCardEmail();
       height = 400;
     }
-    if (forgotPasswordProvider.isSuccess &&
-        forgotPasswordProvider.isSuccessOtp) {
+    if (forgotPasswordProvider.isSuccess && forgotPasswordProvider.isSuccessOtp) {
       currentWidget = EnterNewPassword();
       height = 400;
     }
