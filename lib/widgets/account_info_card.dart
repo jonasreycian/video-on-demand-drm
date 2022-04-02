@@ -97,8 +97,7 @@ class AccountInfoCard extends StatelessWidget {
             prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
             prefixIcon: GestureDetector(
               onTap: () {},
-              child:
-                  Text('+63', style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
+              child: Text('+63', style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
             ),
           ),
           const SizedBox(height: 20),

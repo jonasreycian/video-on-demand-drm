@@ -91,7 +91,7 @@ check_dart_lints:
 check_format:
   extends: [ .checkJob ]
   script:
-    - flutter format -l 120 --set-exit-if-changed .
+    - flutter format -l 125 --set-exit-if-changed .
 
 unit_test:
   image: cirrusci/flutter:stable
