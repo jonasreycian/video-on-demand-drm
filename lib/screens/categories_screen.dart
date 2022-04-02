@@ -7,19 +7,21 @@ import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class CatergoriesScreen extends StatelessWidget {
-  const CatergoriesScreen({
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({
     Key? key,
   }) : super(key: key);
+  static const routeName = '/categoriesScreen';
   final Duration duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
+    final String categoryName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Action'),
+        title: Text(categoryName),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
