@@ -19,6 +19,7 @@ class AccountInfoCard extends StatelessWidget {
   final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
   @override
   Widget build(BuildContext context) {
+    var icons = false;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -113,7 +114,7 @@ class AccountInfoCard extends StatelessWidget {
             suffixIcon: IconButton(
               onPressed: () {},
               icon: Icon(
-                false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                icons ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,
               ),
@@ -133,7 +134,7 @@ class AccountInfoCard extends StatelessWidget {
             suffixIcon: IconButton(
               onPressed: () {},
               icon: Icon(
-                false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                icons ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,
               ),

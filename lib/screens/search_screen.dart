@@ -1,8 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:aq_prime/cubits/cubits.dart';
-import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/widgets/widgets.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -20,7 +16,6 @@ class _SearchScreenState extends State<SearchScreen> {
   "The Men Who Stare at Goats", "Atlantis: The Lost Empire", "Howel's Moving Castel",
   "Kiki's Delivery Service"];
   FocusNode _focus = FocusNode();
-  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -157,7 +152,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,

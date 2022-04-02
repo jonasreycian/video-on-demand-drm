@@ -27,7 +27,7 @@ before_script:
 #  only:
 #    - merge_requests
 
-analyze:
+dart_analysis:
   stage: analyze
   script:
     - flutter analyze
@@ -35,7 +35,9 @@ analyze:
 #    - android
   only:
     - merge_requests
-
+    - dev
+    - main
+    - release
 
 #stages:
 #  - environment

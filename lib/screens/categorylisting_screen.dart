@@ -1,8 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:aq_prime/cubits/cubits.dart';
-import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/widgets/widgets.dart';
 
 class CategoryListingScreen extends StatefulWidget {
   const CategoryListingScreen({Key? key}) : super(key: key);
@@ -13,7 +9,6 @@ class CategoryListingScreen extends StatefulWidget {
 
 class _CategoryListingScreenState extends State<CategoryListingScreen> {
   FocusNode _focus = FocusNode();
-  TextEditingController _controller = TextEditingController();
   bool isSearchbarFocused = false;
   List<Color> colors = [Colors.red, Colors.green, Colors.yellow, Colors.pink, Colors.blue, Colors.cyan, Colors.orange];
   List<String> genre = ["Anime","Action", "Drama", "Adventure", "Korean", "Blockbuster", "Filipino"];
@@ -51,7 +46,6 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
 
    @override
    Widget build(BuildContext context) {
-   final Size screenSize = MediaQuery.of(context).size;
    return Scaffold(
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,

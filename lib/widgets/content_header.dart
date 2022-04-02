@@ -183,6 +183,7 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                   children: [
                     _PlayButton(),
                     const SizedBox(width: 16.0),
+                    // ignore: deprecated_member_use
                     FlatButton.icon(
                       padding: const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
                       onPressed: () => print('More Info'),
@@ -223,6 +224,7 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
 class _PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return FlatButton.icon(
       padding: !Responsive.isDesktop(context) ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0) : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
       onPressed: () => print('Play'),

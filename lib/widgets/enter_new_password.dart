@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/utilities/hex_color.dart';
@@ -12,6 +13,7 @@ class EnterNewPassword extends StatelessWidget {
   final FocusNode focusNodeConfirmPassword = FocusNode();
   @override
   Widget build(BuildContext context) {
+    var icons = true;
     return Column(
       children: [
         Image.asset(
@@ -32,7 +34,7 @@ class EnterNewPassword extends StatelessWidget {
           suffixIcon: IconButton(
             onPressed: () {},
             icon: Icon(
-              true ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+              icons ? Icons.visibility_off_outlined : Icons.visibility_outlined,
               color: HexColor('#BEBBBB'),
               size: 20,
             ),
@@ -51,7 +53,7 @@ class EnterNewPassword extends StatelessWidget {
           suffixIcon: IconButton(
             onPressed: () {},
             icon: Icon(
-              true ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+              icons ? Icons.visibility_off_outlined : Icons.visibility_outlined,
               color: HexColor('#BEBBBB'),
               size: 20,
             ),
