@@ -6,6 +6,7 @@ import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:aq_prime/widgets/app_bar_video_details.dart';
 import 'package:aq_prime/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class VideoDetailsPage extends StatelessWidget {
   const VideoDetailsPage({Key? key}) : super(key: key);
@@ -30,47 +31,54 @@ class VideoDetailsPage extends StatelessWidget {
         castList: movieData.cast ?? [],
         director: movieData.director?.fullName ?? '',
       ),
-      bottom: TabBar(
-        onTap: (value) {},
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
-        labelPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-        labelColor: Colors.white,
-        unselectedLabelStyle: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w400,
-          fontStyle: FontStyle.normal,
-          fontSize: 18,
-          color: HexColor('#7D9297'),
-        ),
-        unselectedLabelColor: HexColor('#7D9297'),
-        indicatorColor: Colors.red,
-        labelStyle: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w700,
-          fontStyle: FontStyle.normal,
-          fontSize: 18,
-          color: HexColor('#006B83'),
-        ),
-        isScrollable: true,
-        tabs: [
-          Text('EPISODES'),
-          Text('TRAILERS & MORE'),
-          Text('MORE LIKE THIS'),
-        ],
-      ),
-      container: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: SizedBox(
-          height: 55,
-          width: double.infinity,
-          child: TabBarView(
-            physics: AlwaysScrollableScrollPhysics(),
-            children: [
-              EpisodesTab(),
-              TrailersAndMoreTab(),
-              MoreLikeThisTab(),
-            ],
+      bottom: AnimationConfiguration.staggeredList(
+        position: 0,
+        duration: const Duration(milliseconds: 1500),
+        child: FadeInAnimation(
+          duration: const Duration(milliseconds: 1500),
+          child: SlideAnimation(
+            verticalOffset: 10,
+            child: TabBar(
+              onTap: (value) {},
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
+              labelPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+              labelColor: Colors.white,
+              unselectedLabelStyle: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+                fontSize: 18,
+                color: HexColor('#7D9297'),
+              ),
+              unselectedLabelColor: HexColor('#7D9297'),
+              indicatorColor: Colors.red,
+              labelStyle: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.normal,
+                fontSize: 18,
+                color: HexColor('#006B83'),
+              ),
+              isScrollable: true,
+              tabs: [
+                Text('EPISODES'),
+                Text('TRAILERS & MORE'),
+                Text('MORE LIKE THIS'),
+              ],
+            ),
           ),
+        ),
+      ),
+      container: SizedBox(
+        height: 400,
+        width: double.infinity,
+        child: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            EpisodesTab(episodes: movieData.episode ?? []),
+            TrailersAndMoreTab(),
+            MoreLikeThisTab(),
+          ],
         ),
       ),
     );

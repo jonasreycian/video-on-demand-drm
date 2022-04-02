@@ -22,6 +22,17 @@ class Person {
   });
 }
 
+class Episode {
+  final String? name;
+  final Duration? runTime;
+  final String? imageUrl;
+  const Episode({
+    @required this.name,
+    @required this.runTime,
+    @required this.imageUrl,
+  });
+}
+
 enum FilmType { movie, series, anime }
 
 class Content {
@@ -39,6 +50,7 @@ class Content {
   final String? accessibility;
   final Color? color;
   final FilmType? type;
+  final List<Episode>? episode;
 
   const Content({
     @required this.name,
@@ -55,5 +67,6 @@ class Content {
     this.genre,
     this.accessibility,
     this.type,
+    this.episode,
   });
 }

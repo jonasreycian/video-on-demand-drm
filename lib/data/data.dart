@@ -306,6 +306,13 @@ List<Content> trending = const [
       Person(fullName: 'Kristen Bell', castName: 'Self-Narrator', imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA1Njc0MTUzN15BMl5BanBnXkFtZTgwNTg1MjEwNDI@._V1_UX214_CR0,0,214,317_AL_.jpg'),
     ],
     description: 'A documentary series that looks to explore the big questions of today.',
+    episode: [
+      Episode(name: 'Sugar', runTime: Duration(minutes: 34, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMDVhMzFlZDEtYjlmMC00YTY1LTg4MjItMmEzMDg5NTYwNTMxXkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_QL75_UY266_CR147,0,180,266_.jpg'),
+      Episode(name: 'Royalty', runTime: Duration(minutes: 12, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BY2RmNWE4NDUtOWFmNy00MWIzLWFmNDQtM2VjNTRmNzg5NjlmXkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_QL75_UY266_CR99,0,180,266_.jpg'),
+      Episode(name: 'The End of Oil', runTime: Duration(minutes: 57), imageUrl: 'https://m.media-amazon.com/images/M/MV5BOWY2NTEyZjUtMjlmZi00MjcxLTg1ZDgtNzM4NTA2ODZmNzVmXkEyXkFqcGdeQXVyODQ4MjU1MDk@._V1_QL75_UY266_CR147,0,180,266_.jpg'),
+      Episode(name: 'Hurricanes', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzNmMDc3NjgtODUzNi00ZGJjLTk2OWMtYzJiNzI5MzMyYmM3XkEyXkFqcGdeQXVyODQ4MjU1MDk@._V1_QL75_UY266_CR147,0,180,266_.jpg'),
+      Episode(name: 'Fairy Tales', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzU2MTVhOTItYWNkYi00MjFmLTk5NmMtMzlhZTk2NDk2NDc4XkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_QL75_UY266_CR146,0,180,266_.jpg'),
+    ],
   ),
   Content(
     name: 'Avatar The Last Airbender',

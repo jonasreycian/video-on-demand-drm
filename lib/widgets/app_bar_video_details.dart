@@ -1,7 +1,7 @@
 import 'package:aq_prime/models/content_model.dart';
+import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
-import 'package:aq_prime/widgets/info_card_top.dart';
 import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -79,11 +79,16 @@ class AppBarVideoDetails extends StatelessWidget {
                 const SizedBox(height: 10),
                 Subtext(text: 'More...', fontWeight: FontWeight.w700),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButtonWithName(title: 'My List', iconData: Icons.add_outlined, onPressed: () {}),
-                    const SizedBox(width: 10),
-                    IconButtonWithName(title: 'Rate', iconData: Icons.thumb_up_outlined, onPressed: () {}),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButtonWithName(title: 'My List', iconData: Icons.add_outlined, onPressed: () {}),
+                        const SizedBox(width: 10),
+                        IconButtonWithName(title: 'Rate', iconData: Icons.thumb_up_outlined, onPressed: () {}),
+                      ],
+                    ),
                     const SizedBox(width: 10),
                     IconButtonWithName(title: 'Share', iconData: Icons.share_outlined, onPressed: () {}),
                   ],
@@ -102,33 +107,5 @@ class AppBarVideoDetails extends StatelessWidget {
       names.add(element.fullName);
     }
     return names.join(', ');
-  }
-
-  format(Duration d) => d.toString().split('.').first.padLeft(8, "0");
-  String netflixDurationFormat(Duration duration) {
-    var components = <String>[];
-    var days = duration.inDays;
-    if (days != 0) {
-      components.add('${days}d ');
-    }
-    var hours = duration.inHours % 24;
-    if (hours != 0) {
-      components.add('${hours}h ');
-    }
-    var minutes = duration.inMinutes % 60;
-    if (minutes != 0) {
-      components.add('${minutes}m ');
-    }
-    var seconds = duration.inSeconds % 60;
-    var centiseconds = (duration.inMilliseconds % 1000) ~/ 10;
-    if (components.isEmpty || seconds != 0 || centiseconds != 0) {
-      components.add('$seconds');
-      if (centiseconds != 0) {
-        components.add('.');
-        components.add(centiseconds.toString().padLeft(2, '0'));
-      }
-      components.add('s');
-    }
-    return components.join();
   }
 }
