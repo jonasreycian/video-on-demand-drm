@@ -70,7 +70,7 @@ class VideoDetailsPage extends StatelessWidget {
         ),
       ),
       container: SizedBox(
-        height: 400,
+        height: MediaQuery.of(context).size.height,
         width: double.infinity,
         child: TabBarView(
           physics: NeverScrollableScrollPhysics(),

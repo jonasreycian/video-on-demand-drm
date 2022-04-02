@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 class EpisodeCard extends StatelessWidget {
   const EpisodeCard({
+    required this.index,
     required this.title,
     required this.runTime,
     required this.imageUrl,
     Key? key,
   }) : super(key: key);
+  final int index;
   final String title;
   final Duration runTime;
   final String imageUrl;
@@ -47,7 +49,7 @@ class EpisodeCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 Text(
-                  title,
+                  '${(index + 1)}. $title',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w800,

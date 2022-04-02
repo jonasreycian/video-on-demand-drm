@@ -12,20 +12,35 @@ class EpisodesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 10, bottom: 0),
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: episodes.length,
-        itemBuilder: (context, index) {
-          return EpisodeCard(
-            title: episodes[index].name!,
-            runTime: episodes[index].runTime!,
-            imageUrl: episodes[index].imageUrl!,
-          );
-        },
-      ),
+      child: episodes.isNotEmpty
+          ? ListView.builder(
+              padding: const EdgeInsets.only(top: 10, bottom: 0),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: episodes.length,
+              itemBuilder: (context, index) {
+                return EpisodeCard(
+                  index: index,
+                  title: episodes[index].name!,
+                  runTime: episodes[index].runTime!,
+                  imageUrl: episodes[index].imageUrl!,
+                );
+              },
+            )
+          : SizedBox(
+              width: double.infinity,
+              child: Center(
+                child: SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: 2.5,
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }
