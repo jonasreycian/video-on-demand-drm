@@ -76,7 +76,7 @@ class VideoDetailsPage extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           children: [
             EpisodesTab(episodes: movieData.episode ?? []),
-            TrailersAndMoreTab(trailers: movieData.moreLikeThis ?? []),
+            TrailersAndMoreTab(trailers: movieData.episode ?? []),
             MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
           ],
         ),
