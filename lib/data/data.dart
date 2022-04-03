@@ -347,10 +347,10 @@ List<Content> trending = [
       Episode(name: 'The Beach', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjE0MzY4Njg3Nl5BMl5BanBnXkFtZTgwOTU5MTg3MjE@._V1_FMjpg_UX320_.jpg'),
     ],
     moreLikeThis: [
-      Content(name: 'Tiger King', imageUrl: Assets.tigerKing),
-      Content(name: 'The Crown', imageUrl: Assets.crown),
-      Content(name: 'Dogs', imageUrl: Assets.dogs),
-      Content(name: 'The End of the F***ing World', imageUrl: Assets.teotfw),
+      Content(name: 'Tiger King', imageUrl: Assets.tigerKing, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
+      Content(name: 'The Crown', imageUrl: Assets.crown, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
+      Content(name: 'Dogs', imageUrl: Assets.dogs, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
+      Content(name: 'The End of the F***ing World', imageUrl: Assets.teotfw, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
     ],
   ),
   Content(

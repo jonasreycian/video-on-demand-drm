@@ -1,4 +1,6 @@
 import 'package:aq_prime/models/content_model.dart';
+import 'package:aq_prime/screens/video_details/video_details_screen.dart';
+import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 
 class MoreLikeThisTab extends StatelessWidget {
@@ -21,10 +23,20 @@ class MoreLikeThisTab extends StatelessWidget {
                 crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                mainAxisExtent: 160, // here set custom Height You Want
+                mainAxisExtent: 200, // here set custom Height You Want
               ),
               itemBuilder: (context, index) {
-                return MovieThumbNail(imageUrl: moreLikeThis[index].imageUrl!);
+                return ThumbnailCard(
+                  title: moreLikeThis[index].name!,
+                  imageUrl: moreLikeThis[index].imageUrl!,
+                  releaseYear: moreLikeThis[index].releaseYear!,
+                  runTime: moreLikeThis[index].runTime!.inMinutes.toString(),
+                  heroTag: 'moreLikeThis${moreLikeThis[index].imageUrl} $index',
+                  onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                    'data': moreLikeThis[index],
+                    'heroTag': 'moreLikeThis${moreLikeThis[index].imageUrl} $index',
+                  }),
+                );
               },
             )
           : SizedBox(
