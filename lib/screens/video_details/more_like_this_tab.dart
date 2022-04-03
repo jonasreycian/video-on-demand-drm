@@ -1,16 +1,68 @@
+import 'package:aq_prime/models/content_model.dart';
 import 'package:flutter/material.dart';
 
 class MoreLikeThisTab extends StatelessWidget {
   const MoreLikeThisTab({
+    required this.moreLikeThis,
     Key? key,
   }) : super(key: key);
-
+  final List<Content> moreLikeThis;
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
-      height: 150,
-      width: double.infinity,
+      color: Colors.transparent,
+      child: moreLikeThis.isNotEmpty
+          ? GridView.builder(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              itemCount: moreLikeThis.length,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                mainAxisExtent: 160, // here set custom Height You Want
+              ),
+              itemBuilder: (context, index) {
+                return MovieThumbNail(imageUrl: moreLikeThis[index].imageUrl!);
+              },
+            )
+          : SizedBox(
+              width: double.infinity,
+              child: Center(
+                child: SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: 2.5,
+                  ),
+                ),
+              ),
+            ),
+    );
+  }
+}
+
+class MovieThumbNail extends StatelessWidget {
+  const MovieThumbNail({
+    required this.imageUrl,
+    Key? key,
+  }) : super(key: key);
+  final String imageUrl;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(1),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Image.asset(
+        imageUrl,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

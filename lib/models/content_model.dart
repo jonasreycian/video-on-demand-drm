@@ -51,7 +51,7 @@ class Content {
   final Color? color;
   final FilmType? type;
   final List<Episode>? episode;
-
+  final List<Content>? moreLikeThis;
   const Content({
     @required this.name,
     @required this.imageUrl,
@@ -68,5 +68,6 @@ class Content {
     this.accessibility,
     this.type,
     this.episode,
+    this.moreLikeThis,
   });
 }

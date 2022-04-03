@@ -289,7 +289,7 @@ final List<Content> originals = const [
   ),
 ];
 
-List<Content> trending = const [
+List<Content> trending = [
   Content(
     name: 'Explained',
     imageUrl: Assets.explained,
@@ -334,6 +334,24 @@ List<Content> trending = const [
     ],
     description:
         'The world is divided into four elemental nations: The Northern and Southern Water Tribes, the Earth Kingdom, the Fire Nation, and the Air Nomads. The Avatar upholds the balance between the nations, but everything changed when the Fire Nation invaded. Only the Avatar, master of all four elements, can stop them. But when the world needs him most, he vanishes. A hundred years later Katara and Sokka discover the new Avatar, an airbender named Aang. Together they must help Aang master the elements and save the world.',
+    episode: [
+      Episode(name: 'The HeadBand', runTime: Duration(minutes: 34, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMDE4N2MyYzUtYTIzZS00YzBkLTg4M2MtNTE5YzYxZTM3MGEyXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'The Awekening', runTime: Duration(minutes: 12, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjZjYjFkOTEtY2M0NC00OWU1LTgwZTQtMDljN2Q4NzM3ZmJmXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'The Painted Lady', runTime: Duration(minutes: 57), imageUrl: 'https://m.media-amazon.com/images/M/MV5BZmE0YWNjZGUtMjAwNy00ZGE2LWE3ZWUtNTc4ZWM3Mzk4OGEzXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'Sokka\'s Master', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzNmMDc3NjgtODUzNi00ZGJjLTk2OWMtYzJiNzI5MzMyYmM3XkEyXkFqcGdeQXVyODQ4MjU1MDk@._V1_QL75_UY266_CR147,0,180,266_.jpg'),
+      Episode(name: 'The Beach', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjE0MzY4Njg3Nl5BMl5BanBnXkFtZTgwOTU5MTg3MjE@._V1_FMjpg_UX320_.jpg'),
+      Episode(name: 'The HeadBand', runTime: Duration(minutes: 34, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMDE4N2MyYzUtYTIzZS00YzBkLTg4M2MtNTE5YzYxZTM3MGEyXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'The Awekening', runTime: Duration(minutes: 12, hours: 1), imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjZjYjFkOTEtY2M0NC00OWU1LTgwZTQtMDljN2Q4NzM3ZmJmXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'The Painted Lady', runTime: Duration(minutes: 57), imageUrl: 'https://m.media-amazon.com/images/M/MV5BZmE0YWNjZGUtMjAwNy00ZGE2LWE3ZWUtNTc4ZWM3Mzk4OGEzXkEyXkFqcGdeQXVyMjgyOTI4Mg@@._V1_.jpg'),
+      Episode(name: 'Sokka\'s Master', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BYzNmMDc3NjgtODUzNi00ZGJjLTk2OWMtYzJiNzI5MzMyYmM3XkEyXkFqcGdeQXVyODQ4MjU1MDk@._V1_QL75_UY266_CR147,0,180,266_.jpg'),
+      Episode(name: 'The Beach', runTime: Duration(minutes: 23), imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjE0MzY4Njg3Nl5BMl5BanBnXkFtZTgwOTU5MTg3MjE@._V1_FMjpg_UX320_.jpg'),
+    ],
+    moreLikeThis: [
+      Content(name: 'Tiger King', imageUrl: Assets.tigerKing),
+      Content(name: 'The Crown', imageUrl: Assets.crown),
+      Content(name: 'Dogs', imageUrl: Assets.dogs),
+      Content(name: 'The End of the F***ing World', imageUrl: Assets.teotfw),
+    ],
   ),
   Content(
     name: 'Tiger King',
