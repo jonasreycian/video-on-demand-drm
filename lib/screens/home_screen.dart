@@ -1,7 +1,9 @@
+import 'package:aq_prime/data/data.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/others_section.dart';
 import 'package:aq_prime/widgets/popular_section.dart';
+import 'package:aq_prime/widgets/section_card.dart';
 import 'package:aq_prime/widgets/top_ten_section.dart';
 import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +54,22 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 15),
               OnlyAQprimeSection(),
               const SizedBox(height: 15),
-              TrendingSection(),
-              const SizedBox(height: 15),
               TopTenSection(),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'New Releases', data: combine()),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'My Watch List', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Comedy', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Action', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Horror', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Drama', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Kids', data: trending),
+              TrendingSection(),
               const SizedBox(height: 15),
               OthersSection(),
             ],
