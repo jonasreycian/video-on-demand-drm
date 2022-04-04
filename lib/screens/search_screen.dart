@@ -25,9 +25,9 @@ class _SearchScreenState extends State<SearchScreen> {
     "Howel's Moving Castel",
     "Kiki's Delivery Service"
   ];
-  FocusNode _focus = FocusNode();
+  final FocusNode _focus = FocusNode();
   // ignore: unused_field
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {

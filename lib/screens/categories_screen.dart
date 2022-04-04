@@ -17,6 +17,7 @@ class CategoriesScreen extends StatelessWidget {
   final Duration duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       extendBodyBehindAppBar: true,

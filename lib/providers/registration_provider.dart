@@ -37,6 +37,7 @@ class RegistrationProvider with ChangeNotifier {
     if (name == 'confirmPassword') {
       return _confirmPassword;
     } else
+      // ignore: curly_braces_in_flow_control_structures
       return '';
   }
 

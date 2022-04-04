@@ -9,7 +9,7 @@ class ForgotPasswordProvider with ChangeNotifier {
   String _hintText = 'Email';
   TextInputType _textInputType = TextInputType.text;
   String _selectedWidgetCard = 'Reset via Email';
-  List<String> _choices = ['Reset via Mobile Number', 'Reset via Email'];
+  final List<String> _choices = ['Reset via Mobile Number', 'Reset via Email'];
   String _message = 'Please Wait...';
   //getter
   String get hintText => _hintText;

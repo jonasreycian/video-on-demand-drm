@@ -1,11 +1,9 @@
-import 'package:aq_prime/screens/categories_screen.dart';
 import 'package:aq_prime/screens/search_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as flutterbloc;
 import 'package:flutter/material.dart';
 import 'package:aq_prime/cubits/cubits.dart';
 import 'package:aq_prime/data/data.dart';
 import 'package:aq_prime/widgets/widgets.dart';
-import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:transition/transition.dart';
 
 class CategoryListingScreen extends StatefulWidget {
@@ -16,9 +14,10 @@ class CategoryListingScreen extends StatefulWidget {
 }
 
 class _CategoryListingScreenState extends State<CategoryListingScreen> {
+  // ignore: unused_field, prefer_final_fields
   FocusNode _focus = FocusNode();
   // ignore: unused_field
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   bool isSearchbarFocused = false;
   List<Color> colors = [
     Colors.red,
@@ -56,6 +55,7 @@ class _CategoryListingScreenState extends State<CategoryListingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,

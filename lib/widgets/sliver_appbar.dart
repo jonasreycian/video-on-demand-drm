@@ -1,4 +1,3 @@
-import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -37,6 +36,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var navBarHeight = MediaQuery.of(context).padding.top + kToolbarHeight;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
