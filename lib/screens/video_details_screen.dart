@@ -20,7 +20,15 @@ class VideoDetailsPage extends StatelessWidget {
       isImageUrl: false,
       backgroundImage: data['data'].imageUrl,
       heroTag: data['heroTag'],
-      appBarContainer: AppBarVideoDetails(rating: 'Rating: ' + data['data'].rate! + ' / 10'),
+      appBarContainer: AppBarVideoDetails(
+        title: data['data'].title!,
+        director: data['data'].director!,
+        description: data['data'].description!,
+        yearRelease: data["data"].yearRelease!,
+        accessibility: data["data"].accessibility!,
+        castList: [],
+        runTime: data["data"].runTime!,
+      ),
       container: Container(
         decoration: BoxDecoration(
           color: Colors.black,
@@ -36,7 +44,8 @@ class VideoDetailsPage extends StatelessWidget {
               Container(
                 height: 195,
                 child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      top: 0, bottom: 0, left: 20, right: 20),
                   physics: const AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -52,23 +61,31 @@ class VideoDetailsPage extends StatelessWidget {
                 ),
               ),
               SectionTitle(title: 'Details'),
-              TitleAndDecription(title: data['data'].name, description: data['data'].description),
+              TitleAndDecription(
+                  title: data['data'].name,
+                  description: data['data'].description),
               Container(
                 height: 180,
                 child: ListView(
-                  padding: const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      top: 0, bottom: 0, left: 20, right: 20),
                   physics: const AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: [
                     MovieInfoCard(
                         type: 'Duration',
-                        value: '${data['data'].runTime.inMinutes.toString()} min',
+                        value:
+                            '${data['data'].runTime.inMinutes.toString()} min',
                         iconData: Icons.timer_outlined),
                     MovieInfoCard(
-                        type: 'Release', value: data['data'].releaseYear, iconData: Icons.calendar_view_month_outlined),
+                        type: 'Release',
+                        value: data['data'].releaseYear,
+                        iconData: Icons.calendar_view_month_outlined),
                     MovieInfoCard(
-                        type: 'Accessibility', value: data['data'].accessibility, iconData: Icons.lock_outline_rounded),
+                        type: 'Accessibility',
+                        value: data['data'].accessibility,
+                        iconData: Icons.lock_outline_rounded),
                     MovieInfoCard(
                         type: 'Film Type',
                         value: filmType(data['data'].type),
@@ -81,7 +98,8 @@ class VideoDetailsPage extends StatelessWidget {
               Container(
                 height: 55,
                 child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      top: 0, bottom: 0, left: 20, right: 20),
                   physics: const AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,

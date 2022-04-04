@@ -1,11 +1,15 @@
-import 'package:aq_prime/data/data.dart';
 import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 
-class OnlyAQprimeSection extends StatelessWidget {
-  const OnlyAQprimeSection({Key? key}) : super(key: key);
-
+class SectionCard extends StatelessWidget {
+  const SectionCard({
+    required this.titleSection,
+    required this.data,
+    Key? key,
+  }) : super(key: key);
+  final String titleSection;
+  final List<dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,7 +18,7 @@ class OnlyAQprimeSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: Text(
-            'Only on AQ Prime',
+            titleSection,
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w700,
@@ -26,26 +30,24 @@ class OnlyAQprimeSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 350,
+          height: 200,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),
             physics: const AlwaysScrollableScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: trending.length,
+            itemCount: data.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
-                width: 250,
-                height: 320,
-                title: trending[index].name!,
-                imageUrl: trending[index].imageUrl!,
-                releaseYear: trending[index].releaseYear!,
-                runTime: trending[index].runTime!.inMinutes.toString(),
-                heroTag: 'onlyAQprime${trending[index].imageUrl} $index',
+                title: data[index].name!,
+                imageUrl: data[index].imageUrl!,
+                releaseYear: data[index].releaseYear!,
+                runTime: data[index].runTime!.inMinutes.toString(),
+                heroTag: '$titleSection ${data[index].imageUrl} $index',
                 onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                  'data': trending[index],
-                  'heroTag': 'onlyAQprime${trending[index].imageUrl} $index',
+                  'data': data[index],
+                  'heroTag': '$titleSection ${data[index].imageUrl} $index',
                 }),
               );
             },

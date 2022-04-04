@@ -1,94 +1,87 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:aq_prime/cubits/cubits.dart';
 import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/widgets/widgets.dart';
+import 'package:aq_prime/widgets/fetured_section.dart';
+import 'package:aq_prime/widgets/only_aqprime_section.dart';
+import 'package:aq_prime/widgets/others_section.dart';
+import 'package:aq_prime/widgets/popular_section.dart';
+import 'package:aq_prime/widgets/section_card.dart';
+import 'package:aq_prime/widgets/top_ten_section.dart';
+import 'package:aq_prime/widgets/trending_section.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:aq_prime/screens/search_screen.dart';
+import 'package:transition/transition.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController()
-      ..addListener(() {
-        context.read<AppBarCubit>().setOffset(_scrollController.offset);
-      });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.black,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[850],
-        child: const Icon(Icons.cast),
+        child: const Icon(Icons.cast, color: Colors.white),
         onPressed: () => print('Cast'),
       ),
-      appBar: PreferredSize(
-        preferredSize: Size(screenSize.width, 50.0),
-        child: BlocBuilder<AppBarCubit, double>(
-          builder: (context, scrollOffset) {
-            return CustomAppBar(scrollOffset: scrollOffset);
-          },
-        ),
-      ),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverToBoxAdapter(
-            child: ContentHeader(featuredContent: sintelContent),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(top: 20.0),
-            sliver: SliverToBoxAdapter(
-              child: Previews(
-                key: PageStorageKey('previews'),
-                title: 'Previews',
-                contentList: previews,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ContentList(
-              key: PageStorageKey('myList'),
-              title: 'My List',
-              contentList: myList,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ContentList(
-              key: PageStorageKey('originals'),
-              title: 'Netflix Originals',
-              contentList: originals,
-              isOriginals: true,
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            sliver: SliverToBoxAdapter(
-              child: ContentList(
-                key: PageStorageKey('trending'),
-                title: 'Trending',
-                contentList: trending,
-              ),
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leadingWidth: 65,
+        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                Transition(child: SearchScreen(), transitionEffect: TransitionEffect.BOTTOM_TO_TOP,)
+              );
+            },
+            icon: Icon(Icons.search, size: 30),
           )
         ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AnimationConfiguration.staggeredList(
+                position: 0,
+                duration: const Duration(milliseconds: 500),
+                child: FadeInAnimation(
+                  child: SlideAnimation(
+                    verticalOffset: 100,
+                    child: FeaturedSection(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              PopularSection(),
+              const SizedBox(height: 15),
+              OnlyAQprimeSection(),
+              const SizedBox(height: 15),
+              TopTenSection(),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'New Releases', data: combine()),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'My Watch List', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Comedy', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Action', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Horror', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Drama', data: trending),
+              const SizedBox(height: 15),
+              SectionCard(titleSection: 'Kids', data: trending),
+              TrendingSection(),
+              const SizedBox(height: 15),
+              OthersSection(),
+            ],
+          ),
+        ),
       ),
     );
   }

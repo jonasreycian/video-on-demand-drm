@@ -6,34 +6,45 @@ import 'package:aq_prime/widgets/top_ten_section.dart';
 import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:transition/transition.dart';
+import 'package:aq_prime/screens/search_screen.dart';
 
-class CatergoriesScreen extends StatelessWidget {
-  const CatergoriesScreen({
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({
     Key? key,
   }) : super(key: key);
+  static const routeName = '/categoriesScreen';
   final Duration duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
+    final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text('Action'),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // const SizedBox(height: 20),
+              IconButton(
+                icon: Icon(Icons.search,
+                color: Colors.white,
+                ),
+                onPressed: () {
+                    Navigator.push(
+                      context,
+                      Transition(child: SearchScreen(), transitionEffect: TransitionEffect.BOTTOM_TO_TOP)
+                    );
+                },
+              ),
               AnimationConfiguration.staggeredList(
                 position: 0,
                 duration: duration,
                 child: FadeInAnimation(
                   child: SlideAnimation(
-                    verticalOffset: 100,
+                    verticalOffset: 20,
                     child: FeaturedSection(),
                   ),
                 ),

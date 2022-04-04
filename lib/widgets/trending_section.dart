@@ -1,5 +1,5 @@
 import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/screens/video_details_screen.dart';
+import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class TrendingSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 350,
+          height: 200,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),

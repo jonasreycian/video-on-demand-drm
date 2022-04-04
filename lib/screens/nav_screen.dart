@@ -4,6 +4,9 @@ import 'package:aq_prime/cubits/cubits.dart';
 import 'package:aq_prime/screens/screens.dart';
 import 'package:aq_prime/widgets/widgets.dart';
 
+import 'categories_screen.dart';
+import 'my_account_screen.dart';
+
 class NavScreen extends StatefulWidget {
   @override
   _NavScreenState createState() => _NavScreenState();
@@ -15,8 +18,8 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(key: PageStorageKey('homeScreen')),
     SearchScreen(key: PageStorageKey('searchScreen')),
     CategoryListingScreen(key: PageStorageKey('categoryListingScreen')),
-    Scaffold(),
-    Scaffold(),
+    CategoriesScreen(),
+    MyAccountScreen(),
   ];
 
   final Map<String, IconData> _icons = const {

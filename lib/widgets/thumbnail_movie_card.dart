@@ -9,6 +9,8 @@ class ThumbnailCard extends StatelessWidget {
     required this.imageUrl,
     required this.onTap,
     required this.heroTag,
+    this.height,
+    this.width,
     Key? key,
   }) : super(key: key);
   final String imageUrl;
@@ -17,6 +19,8 @@ class ThumbnailCard extends StatelessWidget {
   final String releaseYear;
   final Function()? onTap;
   final String heroTag;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,18 +33,18 @@ class ThumbnailCard extends StatelessWidget {
             horizontalOffset: 100,
             child: Container(
               color: Colors.transparent,
-              height: 340,
-              width: 190,
-              margin: const EdgeInsets.only(right: 20, left: 20, top: 0, bottom: 0),
+              // height: 200,
+              width: width ?? 150,
+              margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Hero(
                     tag: heroTag,
                     transitionOnUserGestures: true,
                     child: Container(
-                      height: 285,
-                      width: 190,
+                      height: height ?? 160,
+                      width: width != null ? (width! - 20) : 130,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(15),
@@ -51,73 +55,19 @@ class ThumbnailCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 2),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.timer_outlined, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
-                                const SizedBox(width: 5),
-                                Text(
-                                  runTime + ' min •', //first word
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 10),
-                            Row(
-                              children: [
-                                Icon(Icons.calendar_view_month, size: 15, color: Color.fromRGBO(209, 52, 53, 1)),
-                                const SizedBox(width: 5),
-                                Text(
-                                  ' $releaseYear', //first word
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          title, //first word
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          softWrap: true,
-                          style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                  const SizedBox(height: 3),
+                  Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    softWrap: true,
+                    style: const TextStyle(
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                 ],

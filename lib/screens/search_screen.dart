@@ -73,7 +73,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     clipBehavior: Clip.antiAlias,
                     color: Colors.red,
-                    child: Image.network('https://source.unsplash.com/random', fit: BoxFit.fill)),
+                    child: Image.network('https://source.unsplash.com/random',
+                        fit: BoxFit.fill)),
               ),
             );
           }),
@@ -122,7 +123,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                   ),
                                   clipBehavior: Clip.antiAlias,
                                   color: Colors.red,
-                                  child: Image.network('https://source.unsplash.com/random', fit: BoxFit.fill)),
+                                  child: Image.network(
+                                      'https://source.unsplash.com/random',
+                                      fit: BoxFit.fill)),
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 20.0),
@@ -171,40 +174,56 @@ class _SearchScreenState extends State<SearchScreen> {
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       body: SafeArea(
-          child: Container(
-              color: Colors.black,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromRGBO(38, 38, 38, 1),
-                    ),
-                    height: 36,
-                    child: TextField(
-                      onChanged: (content) {
-                        setState(() {
-                          textLength = content.length;
-                        });
-                      },
-                      style: TextStyle(color: Colors.white),
-                      focusNode: _focus,
-                      decoration: InputDecoration(
-                        prefixIcon: searchIcon(),
-                        border: InputBorder.none,
-                        hintText: 'Search',
-                        hintStyle: TextStyle(
-                          color: Color.fromRGBO(125, 125, 125, 1),
-                        ),
-                      ),
+        child: Container(
+          color: Colors.black,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: <Widget>[
+              Row(children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                SizedBox(width: 30),
+                Text(
+                  "My List",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ]),
+              Container(
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromRGBO(38, 38, 38, 1),
+                ),
+                height: 36,
+                child: TextField(
+                  onChanged: (content) {
+                    setState(() {
+                      textLength = content.length;
+                    });
+                  },
+                  style: TextStyle(color: Colors.white),
+                  focusNode: _focus,
+                  decoration: InputDecoration(
+                    prefixIcon: searchIcon(),
+                    border: InputBorder.none,
+                    hintText: 'Search',
+                    hintStyle: TextStyle(
+                      color: Color.fromRGBO(125, 125, 125, 1),
                     ),
                   ),
-                  onType(),
-                ],
-              ))),
+                ),
+              ),
+              onType(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
