@@ -29,7 +29,7 @@ class AppBarVideoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
       position: 0,
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 500),
       child: FadeInAnimation(
         child: SlideAnimation(
           verticalOffset: 100,
@@ -39,7 +39,7 @@ class AppBarVideoDetails extends StatelessWidget {
             height: 370,
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(20)),
+              // borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(20)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

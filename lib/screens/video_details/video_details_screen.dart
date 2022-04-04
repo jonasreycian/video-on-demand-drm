@@ -17,7 +17,7 @@ class VideoDetailsPage extends StatelessWidget {
     final Content movieData = data['data'];
     return AqPrimeSliverAppBar(
       tabNumber: 3,
-      expandedHeight: 500,
+      expandedHeight: 650,
       title: movieData.name!,
       isImageUrl: false,
       backgroundImage: movieData.imageUrl,

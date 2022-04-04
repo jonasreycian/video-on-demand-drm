@@ -81,13 +81,17 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                   alignment: Alignment.bottomCenter,
                                   children: [
                                     !isImageUrl
-                                        ? Hero(
-                                            tag: heroTag,
-                                            transitionOnUserGestures: true,
-                                            child: Image.asset(
-                                              backgroundImage!,
-                                              width: double.infinity,
-                                              fit: BoxFit.cover,
+                                        ? SizedBox(
+                                            height: 750,
+                                            width: double.infinity,
+                                            child: Hero(
+                                              tag: heroTag,
+                                              transitionOnUserGestures: true,
+                                              child: Image.asset(
+                                                backgroundImage!,
+                                                width: double.infinity,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           )
                                         : Hero(
@@ -100,7 +104,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                             ),
                                           ),
                                     Positioned(
-                                      top: 80,
+                                      top: 130,
                                       child: AnimationConfiguration.staggeredList(
                                         position: 0,
                                         duration: const Duration(milliseconds: 1500),
@@ -122,10 +126,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                       ),
                                     ),
                                     Positioned(
-                                      child: Visibility(
-                                        visible: appBarContainer != null && top != 144.0,
-                                        child: appBarContainer!,
-                                      ),
+                                      child: appBarContainer!,
                                     ),
                                   ],
                                 ),
