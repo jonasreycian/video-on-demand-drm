@@ -168,6 +168,16 @@ class _SearchScreenState extends State<SearchScreen> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children:<Widget>[
+              Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ), 
+                  SizedBox(width: 30),
+                  Text("My List", style: TextStyle(color: Colors.white, fontSize: 20.0,),),
+                ]
+              ),
               Container(
                 margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 decoration: BoxDecoration(

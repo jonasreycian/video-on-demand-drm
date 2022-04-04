@@ -8,6 +8,8 @@ import 'package:aq_prime/widgets/top_ten_section.dart';
 import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:aq_prime/screens/search_screen.dart';
+import 'package:transition/transition.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,7 +30,12 @@ class HomeScreen extends StatelessWidget {
         leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                Transition(child: SearchScreen(), transitionEffect: TransitionEffect.BOTTOM_TO_TOP,)
+              );
+            },
             icon: Icon(Icons.search, size: 30),
           )
         ],

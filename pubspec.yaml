@@ -37,6 +37,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^19.4.55
   intl: ^0.17.0
   carousel_slider: ^4.0.0
+  transition: ^2.0.2
 
 dev_dependencies:
   lints: ^1.0.1
