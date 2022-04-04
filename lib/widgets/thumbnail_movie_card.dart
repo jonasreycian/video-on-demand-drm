@@ -9,6 +9,8 @@ class ThumbnailCard extends StatelessWidget {
     required this.imageUrl,
     required this.onTap,
     required this.heroTag,
+    this.height,
+    this.width,
     Key? key,
   }) : super(key: key);
   final String imageUrl;
@@ -17,6 +19,8 @@ class ThumbnailCard extends StatelessWidget {
   final String releaseYear;
   final Function()? onTap;
   final String heroTag;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,7 +34,7 @@ class ThumbnailCard extends StatelessWidget {
             child: Container(
               color: Colors.transparent,
               // height: 200,
-              width: 150,
+              width: width ?? 150,
               margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,8 +43,8 @@ class ThumbnailCard extends StatelessWidget {
                     tag: heroTag,
                     transitionOnUserGestures: true,
                     child: Container(
-                      height: 160,
-                      width: 130,
+                      height: height ?? 160,
+                      width: width != null ? (width! - 20) : 130,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(15),

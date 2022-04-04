@@ -26,7 +26,7 @@ class OnlyAQprimeSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Container(
-          height: 200,
+          height: 350,
           color: Colors.transparent,
           child: ListView.builder(
             padding: const EdgeInsets.only(top: 0, bottom: 0),
@@ -36,6 +36,8 @@ class OnlyAQprimeSection extends StatelessWidget {
             itemCount: trending.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
+                width: 250,
+                height: 320,
                 title: trending[index].name!,
                 imageUrl: trending[index].imageUrl!,
                 releaseYear: trending[index].releaseYear!,

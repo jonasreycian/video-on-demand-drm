@@ -36,7 +36,7 @@ class EpisodeCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 placeholderFit: BoxFit.cover,
                 placeholderScale: 15,
-                placeholder: 'assets/images/loader1.gif',
+                placeholder: 'assets/images/loading1.gif',
                 image: imageUrl,
               ),
             ),
