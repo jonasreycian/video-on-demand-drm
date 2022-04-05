@@ -38,6 +38,7 @@ class OthersSection extends StatelessWidget {
               itemCount: trending.length,
               itemBuilder: (context, index) {
                 return ThumbnailCard(
+                  index: index,
                   title: trending[index].name!,
                   imageUrl: trending[index].imageUrl!,
                   heroTag: 'otherSection ${trending[index].name} $index',

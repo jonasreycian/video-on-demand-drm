@@ -16,8 +16,8 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(key: PageStorageKey('homeScreen')),
-    SearchScreen(key: PageStorageKey('searchScreen')),
     CategoryListingScreen(key: PageStorageKey('categoryListingScreen')),
+    SearchScreen(key: PageStorageKey('searchScreen')),
     CategoriesScreen(),
     MyAccountScreen(),
   ];

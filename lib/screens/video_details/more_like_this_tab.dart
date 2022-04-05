@@ -27,6 +27,7 @@ class MoreLikeThisTab extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return ThumbnailCard(
+                  index: index,
                   title: moreLikeThis[index].name!,
                   imageUrl: moreLikeThis[index].imageUrl!,
                   releaseYear: moreLikeThis[index].releaseYear!,

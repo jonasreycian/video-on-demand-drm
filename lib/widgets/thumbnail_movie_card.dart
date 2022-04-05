@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ThumbnailCard extends StatelessWidget {
   const ThumbnailCard({
+    required this.index,
     required this.title,
     required this.releaseYear,
     required this.runTime,
@@ -13,6 +14,7 @@ class ThumbnailCard extends StatelessWidget {
     this.width,
     Key? key,
   }) : super(key: key);
+  final int index;
   final String imageUrl;
   final String title;
   final String runTime;
@@ -26,7 +28,7 @@ class ThumbnailCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimationConfiguration.staggeredList(
-        position: 0,
+        position: index,
         duration: const Duration(milliseconds: 500),
         child: FadeInAnimation(
           child: SlideAnimation(
