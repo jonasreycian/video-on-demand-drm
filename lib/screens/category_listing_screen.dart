@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/screens.dart';
 import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/category_card.dart';
 import 'package:aq_prime/widgets/search_button.dart';
@@ -22,7 +23,7 @@ class CategoryListingScreen extends StatelessWidget {
         leadingWidth: 65,
         leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () {}),
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       backgroundColor: Colors.black,

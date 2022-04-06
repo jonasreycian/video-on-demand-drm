@@ -1,4 +1,5 @@
 import 'package:aq_prime/data/data.dart';
+import 'package:aq_prime/screens/search_screen.dart';
 import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         leadingWidth: 65,
         leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () {}),
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(

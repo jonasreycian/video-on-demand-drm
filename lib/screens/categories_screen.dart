@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/screens.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/others_section.dart';
@@ -7,14 +8,13 @@ import 'package:aq_prime/widgets/title_text_card.dart';
 import 'package:aq_prime/widgets/top_ten_section.dart';
 import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     Key? key,
   }) : super(key: key);
   static const routeName = '/categoriesScreen';
-  final Duration duration = const Duration(milliseconds: 500);
+
   @override
   Widget build(BuildContext context) {
     final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
@@ -28,7 +28,7 @@ class CategoriesScreen extends StatelessWidget {
         leadingWidth: 65,
         leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back)),
         actions: [
-          SearchButton(onPressed: () {}),
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(
@@ -38,16 +38,7 @@ class CategoriesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AnimationConfiguration.staggeredList(
-                position: 0,
-                duration: duration,
-                child: FadeInAnimation(
-                  child: SlideAnimation(
-                    verticalOffset: 20,
-                    child: FeaturedSection(),
-                  ),
-                ),
-              ),
+              FeaturedSection(),
               const SizedBox(height: 15),
               OnlyAQprimeSection(),
               const SizedBox(height: 15),

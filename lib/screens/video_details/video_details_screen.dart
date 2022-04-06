@@ -22,15 +22,7 @@ class VideoDetailsPage extends StatelessWidget {
       isImageUrl: false,
       backgroundImage: movieData.imageUrl,
       heroTag: data['heroTag'],
-      appBarContainer: AppBarVideoDetails(
-        title: movieData.name ?? '',
-        yearRelease: movieData.releaseYear ?? '',
-        accessibility: movieData.accessibility ?? '',
-        runTime: movieData.runTime ?? Duration(seconds: 1),
-        description: movieData.description ?? '',
-        castList: movieData.cast ?? [],
-        director: movieData.director?.fullName ?? '',
-      ),
+      appBarContainer: AppBarVideoDetails(movieData: movieData),
       bottom: AnimationConfiguration.staggeredList(
         position: 0,
         duration: const Duration(milliseconds: 1500),
