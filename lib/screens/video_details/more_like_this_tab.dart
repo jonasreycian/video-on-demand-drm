@@ -26,7 +26,7 @@ class MoreLikeThisTab extends StatelessWidget {
                 mainAxisExtent: 200, // here set custom Height You Want
               ),
               itemBuilder: (context, index) {
-                return ThumbnailCard(
+                return ThumbnailCardForGrid(
                   index: index,
                   title: moreLikeThis[index].name!,
                   imageUrl: moreLikeThis[index].imageUrl!,
