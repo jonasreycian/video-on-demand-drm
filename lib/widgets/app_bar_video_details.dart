@@ -79,18 +79,11 @@ class AppBarVideoDetails extends StatelessWidget {
                 const SizedBox(height: 10),
                 Subtext(text: 'More...', fontWeight: FontWeight.w700),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButtonWithName(title: 'My List', iconData: Icons.add_outlined, onPressed: () {}),
-                        const SizedBox(width: 10),
-                        IconButtonWithName(title: 'Rate', iconData: Icons.thumb_up_outlined, onPressed: () {}),
-                      ],
-                    ),
+                    IconButtonWithName(title: 'My List', iconData: Icons.add_outlined, onPressed: () {}),
                     const SizedBox(width: 10),
-                    IconButtonWithName(title: 'Share', iconData: Icons.share_outlined, onPressed: () {}),
+                    IconButtonWithName(title: 'Rate', iconData: Icons.thumb_up_outlined, onPressed: () {}),
                   ],
                 ),
               ],

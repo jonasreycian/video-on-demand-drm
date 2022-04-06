@@ -1,3 +1,4 @@
+import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/category_card.dart';
 import 'package:aq_prime/widgets/search_button.dart';
 import 'package:aq_prime/widgets/section_card.dart';
@@ -26,11 +27,7 @@ class CategoryListingScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey[850],
-        child: const Icon(Icons.cast, color: Colors.white),
-        onPressed: () => print('Cast'),
-      ),
+      floatingActionButton: AqFloatingActionButton(onPressed: () {}),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -65,7 +62,7 @@ class CategoryListingScreen extends StatelessWidget {
                       return CategoryCard(
                         index: index,
                         color: colors[index],
-                        genre: '1st ' + genre[index] + ' ${(index + 1)}',
+                        genre: '1st Category\n' + genre[index] + ' ${(index + 1)}',
                       );
                     },
                   ),
@@ -89,7 +86,7 @@ class CategoryListingScreen extends StatelessWidget {
                       return CategoryCard(
                         index: colors.length + index,
                         color: colors[index],
-                        genre: '2nd ' + genre[index] + ' ${(index + 1)}',
+                        genre: '2nd Category\n' + genre[index] + ' ${(index + 1)}',
                       );
                     },
                   ),

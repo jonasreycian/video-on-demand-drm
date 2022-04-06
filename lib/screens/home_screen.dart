@@ -1,4 +1,5 @@
 import 'package:aq_prime/data/data.dart';
+import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/others_section.dart';
@@ -19,11 +20,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey[850],
-        child: const Icon(Icons.cast, color: Colors.white),
-        onPressed: () => print('Cast'),
-      ),
+      floatingActionButton: AqFloatingActionButton(onPressed: () {}),
       appBar: AppBar(
         elevation: 0,
         title: TitleTextCard(name: 'Home'),

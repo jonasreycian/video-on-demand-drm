@@ -58,6 +58,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         elevation: 0,
                         floating: false,
                         pinned: true,
+                        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back)),
                         flexibleSpace: LayoutBuilder(
                           builder: (BuildContext context, BoxConstraints constraints) {
                             top = constraints.biggest.height;

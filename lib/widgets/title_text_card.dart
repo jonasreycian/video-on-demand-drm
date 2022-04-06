@@ -15,6 +15,7 @@ class TitleTextCard extends StatelessWidget {
       child: FadeInAnimation(
         child: Text(
           name,
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w700,

@@ -41,7 +41,7 @@ class AccountInfoCard extends StatelessWidget {
                 Text(
                   'Account Info',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,

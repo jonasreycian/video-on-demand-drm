@@ -40,7 +40,7 @@ class SectionCard extends StatelessWidget {
             itemCount: data.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
-                index: index,
+                index: 0,
                 title: data[index].name!,
                 imageUrl: data[index].imageUrl!,
                 releaseYear: data[index].releaseYear!,

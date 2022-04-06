@@ -73,7 +73,7 @@ class VideoDetailsPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
         child: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             EpisodesTab(episodes: movieData.episode ?? []),
             TrailersAndMoreTab(trailers: movieData.episode ?? []),
