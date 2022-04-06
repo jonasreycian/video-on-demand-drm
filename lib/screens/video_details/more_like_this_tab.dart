@@ -23,12 +23,12 @@ class MoreLikeThisTab extends StatelessWidget {
                 crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                mainAxisExtent: 200, // here set custom Height You Want
+                mainAxisExtent: 175, // here set custom Height You Want
               ),
               itemBuilder: (context, index) {
                 return ThumbnailCardForGrid(
                   index: index,
-                  title: moreLikeThis[index].name!,
+                  // title: moreLikeThis[index].name!,
                   imageUrl: moreLikeThis[index].imageUrl!,
                   releaseYear: moreLikeThis[index].releaseYear!,
                   runTime: moreLikeThis[index].runTime!.inMinutes.toString(),

@@ -1,3 +1,4 @@
+import 'package:aq_prime/screens/continue_watching_screen.dart';
 import 'package:aq_prime/screens/my_watch_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(key: PageStorageKey('homeScreen')),
     CategoryListingScreen(key: PageStorageKey('categoryListingScreen')),
     MyWatchListScreen(),
-    SearchScreen(key: PageStorageKey('searchScreen')),
+    ContinueWatchingScreen(),
     MyAccountScreen(),
   ];
 

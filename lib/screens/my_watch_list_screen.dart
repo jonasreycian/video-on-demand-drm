@@ -47,12 +47,12 @@ class MyWatchListScreen extends StatelessWidget {
                               crossAxisCount: 3,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
-                              mainAxisExtent: 200, // here set custom Height You Want
+                              mainAxisExtent: 175, // here set custom Height You Want
                             ),
                             itemBuilder: (context, index) {
                               return ThumbnailCardForGrid(
                                 index: index,
-                                title: value.myWatchList[index].name!,
+                                // title: value.myWatchList[index].name!,
                                 imageUrl: value.myWatchList[index].imageUrl!,
                                 releaseYear: value.myWatchList[index].releaseYear!,
                                 runTime: value.myWatchList[index].runTime!.inMinutes.toString(),

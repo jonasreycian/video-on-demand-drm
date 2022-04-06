@@ -85,7 +85,7 @@ class ThumbnailCard extends StatelessWidget {
 class ThumbnailCardForGrid extends StatelessWidget {
   const ThumbnailCardForGrid({
     required this.index,
-    required this.title,
+    // required this.title,
     required this.releaseYear,
     required this.runTime,
     required this.imageUrl,
@@ -97,7 +97,6 @@ class ThumbnailCardForGrid extends StatelessWidget {
   }) : super(key: key);
   final int index;
   final String imageUrl;
-  final String title;
   final String runTime;
   final String releaseYear;
   final Function()? onTap;
@@ -141,21 +140,6 @@ class ThumbnailCardForGrid extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      title,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      softWrap: true,
-                      style: const TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 15,
-                        color: Colors.white,
                       ),
                     ),
                   ],
