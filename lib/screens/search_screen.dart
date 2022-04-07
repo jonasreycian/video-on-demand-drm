@@ -1,4 +1,5 @@
 import 'package:aq_prime/providers/search_provider.dart';
+import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/input_textfield.dart';
 import 'package:aq_prime/widgets/subtext_card.dart';
@@ -11,8 +12,10 @@ class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
   static const routeName = '/searchScreen';
   final TextEditingController searchField = TextEditingController();
+  final FocusNode focusSearch = FocusNode();
   @override
   Widget build(BuildContext context) {
+    initState(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -32,6 +35,7 @@ class SearchScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InputTextField(
+                    focusNode: focusSearch,
                     controller: searchField,
                     hintText: '',
                     height: 45,
@@ -59,6 +63,14 @@ class SearchScreen extends StatelessWidget {
                       title: value.searchData.isNotEmpty ? value.searchData[index].name! : value.data[index].name!,
                       imageUrl: value.searchData.isNotEmpty ? value.searchData[index].imageUrl! : value.data[index].imageUrl!,
                       runTime: value.searchData.isNotEmpty ? value.searchData[index].runTime! : value.data[index].runTime!,
+                      heroTag: value.searchData.isNotEmpty ? 'searchTag${value.searchData[index].imageUrl} $index' : 'searchTag${value.data[index].imageUrl} $index',
+                      onTap: () {
+                        focusSearch.unfocus();
+                        Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                          'data': value.searchData.isNotEmpty ? value.searchData[index] : value.data[index],
+                          'heroTag': value.searchData.isNotEmpty ? 'searchTag${value.searchData[index].imageUrl} $index' : 'searchTag${value.data[index].imageUrl} $index',
+                        });
+                      },
                     );
                   },
                 )
@@ -69,6 +81,13 @@ class SearchScreen extends StatelessWidget {
       ),
     );
   }
+
+  initState(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      SearchProvider getFeedback = Provider.of<SearchProvider>(context, listen: false);
+      getFeedback.reset();
+    });
+  }
 }
 
 class SearchCard extends StatelessWidget {
@@ -77,68 +96,79 @@ class SearchCard extends StatelessWidget {
     required this.title,
     required this.runTime,
     required this.imageUrl,
+    required this.heroTag,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
   final int index;
   final String title;
   final Duration runTime;
   final String imageUrl;
+  final String heroTag;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return AnimationConfiguration.staggeredList(
-      position: index,
-      duration: const Duration(milliseconds: 500),
-      child: FadeInAnimation(
-        child: SlideAnimation(
-          verticalOffset: 20,
-          child: Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            padding: const EdgeInsets.only(left: 10),
-            color: Colors.transparent,
-            height: 85,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 90,
-                  child: Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      // width: 65,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(imageUrl, fit: BoxFit.fitHeight, height: 80),
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimationConfiguration.staggeredList(
+        position: index,
+        duration: const Duration(milliseconds: 500),
+        child: FadeInAnimation(
+          child: SlideAnimation(
+            verticalOffset: 20,
+            child: Container(
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+              padding: const EdgeInsets.only(left: 10),
+              color: Colors.transparent,
+              height: 85,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 90,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        // width: 65,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Hero(
+                            child: Image.asset(imageUrl, fit: BoxFit.fitHeight, height: 80),
+                            tag: heroTag,
+                            transitionOnUserGestures: true,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Text(
-                        '${(index + 1)}. $title',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w800,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 15,
-                          color: Colors.white,
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        Text(
+                          '${(index + 1)}. $title',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Subtext(text: netflixDurationFormat(runTime), color: Color.fromRGBO(140, 140, 140, 1)),
-                    ],
+                        const SizedBox(height: 5),
+                        Subtext(text: netflixDurationFormat(runTime), color: Color.fromRGBO(140, 140, 140, 1)),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

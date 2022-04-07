@@ -25,5 +25,7 @@ class SearchProvider with ChangeNotifier {
   reset() {
     _isSearching = false;
     _isLoading = true;
+    _searchData.clear();
+    notifyListeners();
   }
 }
