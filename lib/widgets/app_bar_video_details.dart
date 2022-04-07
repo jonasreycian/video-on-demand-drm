@@ -1,8 +1,13 @@
 import 'package:aq_prime/models/content_model.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/screens/video_details/episode_tab.dart';
+import 'package:aq_prime/screens/video_details/more_like_this_tab.dart';
+import 'package:aq_prime/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
+import 'package:aq_prime/widgets/primary_button.dart';
+import 'package:aq_prime/widgets/secondary_button.dart';
 import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -25,12 +30,11 @@ class AppBarVideoDetails extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             width: double.infinity,
-            height: 370,
+            height: 360,
             decoration: BoxDecoration(
-              color: Colors.black,
-              // borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(20)),
+              color: Colors.transparent,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +62,7 @@ class AppBarVideoDetails extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 5),
-                Subtext(text: movieData.description ?? '', maxLines: 5),
+                Subtext(text: movieData.description ?? '', maxLines: 2),
                 const SizedBox(height: 5),
                 Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
                 const SizedBox(height: 5),
@@ -86,6 +90,13 @@ class AppBarVideoDetails extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ],
+                ),
+                const SizedBox(height: 20),
+                PrimaryButton(
+                  height: 50,
+                  action: () {},
+                  width: double.infinity,
+                  label: 'Play',
                 ),
               ],
             ),

@@ -104,28 +104,28 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                               width: double.infinity,
                                             ),
                                           ),
-                                    Positioned(
-                                      top: 130,
-                                      child: AnimationConfiguration.staggeredList(
-                                        position: 0,
-                                        duration: const Duration(milliseconds: 1500),
-                                        child: FadeInAnimation(
-                                          delay: const Duration(milliseconds: 1000),
-                                          child: Container(
-                                            child: top != 144.0
-                                                ? IconButton(
-                                                    iconSize: 65,
-                                                    alignment: Alignment.center,
-                                                    tooltip: 'Play',
-                                                    onPressed: () {},
-                                                    icon: Icon(Icons.play_circle),
-                                                    color: Colors.white,
-                                                  )
-                                                : const SizedBox(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Positioned(
+                                    //   top: 130,
+                                    //   child: AnimationConfiguration.staggeredList(
+                                    //     position: 0,
+                                    //     duration: const Duration(milliseconds: 1500),
+                                    //     child: FadeInAnimation(
+                                    //       delay: const Duration(milliseconds: 1000),
+                                    //       child: Container(
+                                    //         child: top != 144.0
+                                    //             ? IconButton(
+                                    //                 iconSize: 65,
+                                    //                 alignment: Alignment.center,
+                                    //                 tooltip: 'Play',
+                                    //                 onPressed: () {},
+                                    //                 icon: Icon(Icons.play_circle),
+                                    //                 color: Colors.white,
+                                    //               )
+                                    //             : const SizedBox(),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Positioned(
                                       child: appBarContainer!,
                                     ),

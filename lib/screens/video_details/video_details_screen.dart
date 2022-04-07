@@ -17,12 +17,12 @@ class VideoDetailsPage extends StatelessWidget {
     final Content movieData = data['data'];
     return AqPrimeSliverAppBar(
       tabNumber: 3,
-      expandedHeight: 650,
+      expandedHeight: 250,
       title: movieData.name!,
       isImageUrl: false,
       backgroundImage: movieData.imageUrl,
       heroTag: data['heroTag'],
-      appBarContainer: AppBarVideoDetails(movieData: movieData),
+      appBarContainer: const SizedBox(),
       bottom: AnimationConfiguration.staggeredList(
         position: 0,
         duration: const Duration(milliseconds: 1500),
@@ -62,12 +62,12 @@ class VideoDetailsPage extends StatelessWidget {
         ),
       ),
       container: SizedBox(
-        height: MediaQuery.of(context).size.height,
+        height: 750,
         width: double.infinity,
         child: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            EpisodesTab(episodes: movieData.episode ?? []),
+            EpisodesTab(episodes: movieData.episode ?? [], movieData: movieData),
             TrailersAndMoreTab(trailers: movieData.episode ?? []),
             MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
           ],
