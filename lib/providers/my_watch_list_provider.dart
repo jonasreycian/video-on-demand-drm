@@ -23,6 +23,7 @@ class MyWatchListProvider with ChangeNotifier {
     for (var i = 0; i < _myWatchList.length; i++) {
       if (data.name == _myWatchList[i].name) {
         returnVal = true;
+        break;
       } else {
         continue;
       }

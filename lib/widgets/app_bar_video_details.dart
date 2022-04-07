@@ -1,13 +1,9 @@
 import 'package:aq_prime/models/content_model.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
-import 'package:aq_prime/screens/video_details/episode_tab.dart';
-import 'package:aq_prime/screens/video_details/more_like_this_tab.dart';
-import 'package:aq_prime/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/widgets/primary_button.dart';
-import 'package:aq_prime/widgets/secondary_button.dart';
 import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

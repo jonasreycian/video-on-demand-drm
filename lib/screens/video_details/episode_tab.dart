@@ -15,39 +15,25 @@ class EpisodesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      child: episodes.isNotEmpty
-          ? ListView.builder(
-              padding: const EdgeInsets.only(top: 10, bottom: 0),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: episodes.length + 1,
-              itemBuilder: (context, index) {
-                if (index > 0) {
-                  return EpisodeCard(
-                    index: index,
-                    title: episodes[index - 1].name!,
-                    runTime: episodes[index - 1].runTime!,
-                    imageUrl: episodes[index - 1].imageUrl!,
-                  );
-                } else {
-                  return AppBarVideoDetails(movieData: movieData);
-                }
-              },
-            )
-          : SizedBox(
-              width: double.infinity,
-              child: Center(
-                child: SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: CircularProgressIndicator(
-                    color: Colors.red,
-                    strokeWidth: 2.5,
-                  ),
-                ),
-              ),
-            ),
+      child: ListView.builder(
+        padding: const EdgeInsets.only(top: 10, bottom: 0),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: episodes.length + 1,
+        itemBuilder: (context, index) {
+          if (index > 0 && episodes.isNotEmpty) {
+            return EpisodeCard(
+              index: index,
+              title: episodes[index - 1].name!,
+              runTime: episodes[index - 1].runTime!,
+              imageUrl: episodes[index - 1].imageUrl!,
+            );
+          } else {
+            return AppBarVideoDetails(movieData: movieData);
+          }
+        },
+      ),
     );
   }
 }
