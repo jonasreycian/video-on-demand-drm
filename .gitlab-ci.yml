@@ -88,17 +88,17 @@ check_dart_lints:
   script:
     - flutter analyze
 
-check_format:
-  extends: [ .checkJob ]
-  script:
-    - flutter format -l 125 --set-exit-if-changed .
+# check_format:
+#   extends: [ .checkJob ]
+#   script:
+#     - flutter format -l 125 --set-exit-if-changed .
 
-unit_test:
-  image: cirrusci/flutter:stable
-  extends: [ .clean_build ]
-  stage: test
-  script:
-    - flutter test
+# unit_test:
+#   image: cirrusci/flutter:stable
+#   extends: [ .clean_build ]
+#   stage: test
+#   script:
+#     - flutter test
 
 #.build_job:
 #  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
