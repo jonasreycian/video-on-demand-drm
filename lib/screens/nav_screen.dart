@@ -1,10 +1,10 @@
+import 'package:aq_prime/screens/continue_watching_screen.dart';
+import 'package:aq_prime/screens/my_watch_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aq_prime/cubits/cubits.dart';
 import 'package:aq_prime/screens/screens.dart';
 import 'package:aq_prime/widgets/widgets.dart';
-
-import 'categories_screen.dart';
 import 'my_account_screen.dart';
 
 class NavScreen extends StatefulWidget {
@@ -16,9 +16,9 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(key: PageStorageKey('homeScreen')),
-    SearchScreen(key: PageStorageKey('searchScreen')),
     CategoryListingScreen(key: PageStorageKey('categoryListingScreen')),
-    CategoriesScreen(),
+    MyWatchListScreen(),
+    ContinueWatchingScreen(),
     MyAccountScreen(),
   ];
 

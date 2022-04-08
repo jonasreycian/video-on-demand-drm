@@ -36,6 +36,7 @@ class TrendingSection extends StatelessWidget {
             itemCount: combine1().length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
+                index: index,
                 title: combine1()[index].name!,
                 imageUrl: combine1()[index].imageUrl!,
                 releaseYear: combine1()[index].releaseYear!,

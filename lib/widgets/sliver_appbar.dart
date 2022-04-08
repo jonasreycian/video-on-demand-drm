@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 // ignore: must_be_immutable
 class AqPrimeSliverAppBar extends StatelessWidget {
@@ -58,6 +57,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         elevation: 0,
                         floating: false,
                         pinned: true,
+                        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back, color: Colors.white)),
                         flexibleSpace: LayoutBuilder(
                           builder: (BuildContext context, BoxConstraints constraints) {
                             top = constraints.biggest.height;
@@ -103,28 +103,28 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                               width: double.infinity,
                                             ),
                                           ),
-                                    Positioned(
-                                      top: 130,
-                                      child: AnimationConfiguration.staggeredList(
-                                        position: 0,
-                                        duration: const Duration(milliseconds: 1500),
-                                        child: FadeInAnimation(
-                                          delay: const Duration(milliseconds: 1000),
-                                          child: Container(
-                                            child: top != 144.0
-                                                ? IconButton(
-                                                    iconSize: 65,
-                                                    alignment: Alignment.center,
-                                                    tooltip: 'Play',
-                                                    onPressed: () {},
-                                                    icon: Icon(Icons.play_circle),
-                                                    color: Colors.white,
-                                                  )
-                                                : const SizedBox(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Positioned(
+                                    //   top: 130,
+                                    //   child: AnimationConfiguration.staggeredList(
+                                    //     position: 0,
+                                    //     duration: const Duration(milliseconds: 1500),
+                                    //     child: FadeInAnimation(
+                                    //       delay: const Duration(milliseconds: 1000),
+                                    //       child: Container(
+                                    //         child: top != 144.0
+                                    //             ? IconButton(
+                                    //                 iconSize: 65,
+                                    //                 alignment: Alignment.center,
+                                    //                 tooltip: 'Play',
+                                    //                 onPressed: () {},
+                                    //                 icon: Icon(Icons.play_circle),
+                                    //                 color: Colors.white,
+                                    //               )
+                                    //             : const SizedBox(),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Positioned(
                                       child: appBarContainer!,
                                     ),

@@ -36,6 +36,7 @@ class OnlyAQprimeSection extends StatelessWidget {
             itemCount: trending.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
+                index: index,
                 width: 250,
                 height: 320,
                 title: trending[index].name!,

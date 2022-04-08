@@ -1,15 +1,17 @@
 import 'package:aq_prime/data/data.dart';
+import 'package:aq_prime/screens/search_screen.dart';
+import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/others_section.dart';
 import 'package:aq_prime/widgets/popular_section.dart';
+import 'package:aq_prime/widgets/search_button.dart';
 import 'package:aq_prime/widgets/section_card.dart';
+import 'package:aq_prime/widgets/title_text_card.dart';
 import 'package:aq_prime/widgets/top_ten_section.dart';
 import 'package:aq_prime/widgets/trending_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:aq_prime/screens/search_screen.dart';
-import 'package:transition/transition.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,25 +21,15 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey[850],
-        child: const Icon(Icons.cast, color: Colors.white),
-        onPressed: () => print('Cast'),
-      ),
+      floatingActionButton: AqFloatingActionButton(onPressed: () {}),
       appBar: AppBar(
+        elevation: 0,
+        title: TitleTextCard(name: 'Home'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
         leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                Transition(child: SearchScreen(), transitionEffect: TransitionEffect.BOTTOM_TO_TOP,)
-              );
-            },
-            icon: Icon(Icons.search, size: 30),
-          )
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(

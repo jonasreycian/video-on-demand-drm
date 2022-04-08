@@ -36,6 +36,7 @@ class PopularSection extends StatelessWidget {
             itemCount: combine().length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
+                index: index,
                 title: combine()[index].name!,
                 imageUrl: combine()[index].imageUrl!,
                 releaseYear: combine()[index].releaseYear!,

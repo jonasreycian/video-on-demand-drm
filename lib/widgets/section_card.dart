@@ -23,7 +23,7 @@ class SectionCard extends StatelessWidget {
               fontFamily: 'Roboto',
               fontWeight: FontWeight.w700,
               fontStyle: FontStyle.normal,
-              fontSize: 22,
+              fontSize: 20,
               color: Colors.white,
             ),
           ),
@@ -40,6 +40,7 @@ class SectionCard extends StatelessWidget {
             itemCount: data.length,
             itemBuilder: (context, index) {
               return ThumbnailCard(
+                index: 0,
                 title: data[index].name!,
                 imageUrl: data[index].imageUrl!,
                 releaseYear: data[index].releaseYear!,

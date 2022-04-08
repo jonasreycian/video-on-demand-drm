@@ -1,4 +1,7 @@
+import 'package:aq_prime/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/providers/search_provider.dart';
 import 'package:aq_prime/screens/categories_screen.dart';
+import 'package:aq_prime/screens/search_screen.dart';
 import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aq_prime/providers/forgot_password_provider.dart';
@@ -22,6 +25,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
           ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
           ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
+          ChangeNotifierProvider<MyWatchListProvider>(create: (context) => MyWatchListProvider()),
+          ChangeNotifierProvider<SearchProvider>(create: (context) => SearchProvider()),
         ],
         child: MaterialApp(
           darkTheme: ThemeData.dark(),
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
             ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
             VideoDetailsPage.routeName: (context) => VideoDetailsPage(),
             CategoriesScreen.routeName: (context) => CategoriesScreen(),
+            SearchScreen.routeName: (context) => SearchScreen(),
           },
         ),
       ),

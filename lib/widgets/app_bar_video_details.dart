@@ -1,30 +1,22 @@
 import 'package:aq_prime/models/content_model.dart';
+import 'package:aq_prime/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
+import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   const AppBarVideoDetails({
     Key? key,
-    required this.title,
-    required this.yearRelease,
-    required this.accessibility,
-    required this.runTime,
-    required this.description,
-    required this.castList,
-    required this.director,
+    required this.movieData,
   }) : super(key: key);
 
-  final String title;
-  final String yearRelease;
-  final String accessibility;
-  final Duration runTime;
-  final String description;
-  final List<Person> castList;
-  final String director;
+  final Content movieData;
+
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -34,19 +26,18 @@ class AppBarVideoDetails extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             width: double.infinity,
-            height: 370,
+            height: 360,
             decoration: BoxDecoration(
-              color: Colors.black,
-              // borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(20)),
+              color: Colors.transparent,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  movieData.name ?? '',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w800,
@@ -59,39 +50,51 @@ class AppBarVideoDetails extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Subtext(text: yearRelease),
+                    Subtext(text: movieData.releaseYear ?? ''),
                     const SizedBox(width: 10),
-                    AccessibilityCard(accessibility: accessibility),
+                    AccessibilityCard(accessibility: movieData.accessibility ?? ''),
                     const SizedBox(width: 10),
-                    Subtext(text: netflixDurationFormat(runTime)),
+                    Subtext(text: netflixDurationFormat(movieData.runTime ?? const Duration(milliseconds: 1))),
                   ],
                 ),
                 const SizedBox(height: 5),
-                Subtext(text: description, maxLines: 5),
+                Subtext(text: movieData.description ?? '', maxLines: 2),
                 const SizedBox(height: 5),
                 Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
                 const SizedBox(height: 5),
-                Subtext(text: castToString(castList)),
+                Subtext(text: castToString(movieData.cast ?? [])),
                 const SizedBox(height: 5),
                 Subtext(text: 'Director: ', fontWeight: FontWeight.w700),
                 const SizedBox(height: 5),
-                Subtext(text: director),
+                Subtext(text: movieData.director?.fullName ?? ''),
                 const SizedBox(height: 10),
                 Subtext(text: 'More...', fontWeight: FontWeight.w700),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButtonWithName(title: 'My List', iconData: Icons.add_outlined, onPressed: () {}),
-                        const SizedBox(width: 10),
-                        IconButtonWithName(title: 'Rate', iconData: Icons.thumb_up_outlined, onPressed: () {}),
-                      ],
-                    ),
+                    Consumer<MyWatchListProvider>(builder: (context, value, child) {
+                      return AddWatchListButton(
+                        title: 'My List',
+                        isExisting: value.isExisting(movieData),
+                        onPressed: value.isExisting(movieData) ? () => value.removeWatchList(movieData) : () => value.addMyWatchList(movieData),
+                      );
+                    }),
                     const SizedBox(width: 10),
-                    IconButtonWithName(title: 'Share', iconData: Icons.share_outlined, onPressed: () {}),
+                    IconButtonWithName(
+                      title: 'Rate',
+                      iconData: Icons.thumb_up_outlined,
+                      onPressed: () {
+                        ratingPopup(context: context);
+                      },
+                    ),
                   ],
+                ),
+                const SizedBox(height: 20),
+                PrimaryButton(
+                  height: 50,
+                  action: () {},
+                  width: double.infinity,
+                  label: 'Play',
                 ),
               ],
             ),

@@ -3,7 +3,6 @@ import 'package:aq_prime/screens/video_details/episode_tab.dart';
 import 'package:aq_prime/screens/video_details/more_like_this_tab.dart';
 import 'package:aq_prime/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/utilities/hex_color.dart';
-import 'package:aq_prime/widgets/app_bar_video_details.dart';
 import 'package:aq_prime/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -17,20 +16,12 @@ class VideoDetailsPage extends StatelessWidget {
     final Content movieData = data['data'];
     return AqPrimeSliverAppBar(
       tabNumber: 3,
-      expandedHeight: 650,
+      expandedHeight: 250,
       title: movieData.name!,
       isImageUrl: false,
       backgroundImage: movieData.imageUrl,
       heroTag: data['heroTag'],
-      appBarContainer: AppBarVideoDetails(
-        title: movieData.name ?? '',
-        yearRelease: movieData.releaseYear ?? '',
-        accessibility: movieData.accessibility ?? '',
-        runTime: movieData.runTime ?? Duration(seconds: 1),
-        description: movieData.description ?? '',
-        castList: movieData.cast ?? [],
-        director: movieData.director?.fullName ?? '',
-      ),
+      appBarContainer: const SizedBox(),
       bottom: AnimationConfiguration.staggeredList(
         position: 0,
         duration: const Duration(milliseconds: 1500),
@@ -39,6 +30,7 @@ class VideoDetailsPage extends StatelessWidget {
           child: SlideAnimation(
             verticalOffset: 10,
             child: TabBar(
+              indicatorWeight: 5,
               onTap: (value) {},
               padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
               labelPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -50,13 +42,13 @@ class VideoDetailsPage extends StatelessWidget {
                 fontSize: 18,
                 color: HexColor('#7D9297'),
               ),
-              unselectedLabelColor: HexColor('#7D9297'),
+              unselectedLabelColor: Colors.grey,
               indicatorColor: Colors.red,
               labelStyle: TextStyle(
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.w700,
                 fontStyle: FontStyle.normal,
-                fontSize: 18,
+                fontSize: 20,
                 color: HexColor('#006B83'),
               ),
               isScrollable: true,
@@ -70,12 +62,12 @@ class VideoDetailsPage extends StatelessWidget {
         ),
       ),
       container: SizedBox(
-        height: MediaQuery.of(context).size.height,
+        height: 750,
         width: double.infinity,
         child: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
-            EpisodesTab(episodes: movieData.episode ?? []),
+            EpisodesTab(episodes: movieData.episode ?? [], movieData: movieData),
             TrailersAndMoreTab(trailers: movieData.episode ?? []),
             MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
           ],
