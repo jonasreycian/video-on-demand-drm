@@ -19,6 +19,7 @@ class SearchProvider with ChangeNotifier {
         _searchData.add(_data[i]);
       }
     }
+
     notifyListeners();
   }
 

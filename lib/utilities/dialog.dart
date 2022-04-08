@@ -143,3 +143,70 @@ calendarDialog(BuildContext context, DateTime? initialDate, Function(DateTime) o
     barrierLabel: '',
   );
 }
+
+ratingPopup({
+  required BuildContext context,
+}) {
+  showGeneralDialog(
+    barrierDismissible: false,
+    context: context,
+    pageBuilder: (context, animation1, animation2) {
+      return const SizedBox();
+    },
+    transitionBuilder: (context, anim1, anim2, child) {
+      final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
+
+      return Transform(
+        transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+        child: Opacity(
+          opacity: anim1.value,
+          child: AlertDialog(
+            actionsAlignment: MainAxisAlignment.center,
+            // contentPadding: const EdgeInsets.all(15),
+            actionsPadding: const EdgeInsets.only(bottom: 10),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+            backgroundColor: Color.fromARGB(255, 99, 99, 99).withOpacity(0.3),
+            content: AnimatedContainer(
+              duration: const Duration(milliseconds: 50),
+              width: 30,
+              height: 40,
+              color: Colors.transparent,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    padding: const EdgeInsets.all(0),
+                    alignment: Alignment.center,
+                    iconSize: 35,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.thumb_up_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    padding: const EdgeInsets.all(0),
+                    alignment: Alignment.center,
+                    iconSize: 35,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.thumb_down_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}

@@ -153,7 +153,7 @@ class SearchCard extends StatelessWidget {
                       children: [
                         const SizedBox(height: 20),
                         Text(
-                          '${(index + 1)}. $title',
+                          title,
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w800,

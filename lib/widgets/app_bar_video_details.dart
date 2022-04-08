@@ -83,7 +83,9 @@ class AppBarVideoDetails extends StatelessWidget {
                     IconButtonWithName(
                       title: 'Rate',
                       iconData: Icons.thumb_up_outlined,
-                      onPressed: () {},
+                      onPressed: () {
+                        ratingPopup(context: context);
+                      },
                     ),
                   ],
                 ),
