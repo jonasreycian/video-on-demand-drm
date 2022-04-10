@@ -11,13 +11,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
-  const AppBarVideoDetails({
+  AppBarVideoDetails({
     Key? key,
     required this.movieData,
   }) : super(key: key);
 
   final Content movieData;
-
+  final Duration duration = Duration(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -84,11 +84,7 @@ class AppBarVideoDetails extends StatelessWidget {
                     Consumer<RatingProvider>(builder: (context, value, child) {
                       return IconButtonWithName(
                         title: 'Rate',
-                        iconData: value.isThumbsUp(movieData.name) == null
-                            ? Icons.thumb_up_alt_outlined
-                            : value.isThumbsUp(movieData.name)!
-                                ? Icons.thumb_up_alt
-                                : Icons.thumb_down_alt,
+                        iconData: icon(value.isThumbsUp(movieData.name)),
                         onPressed: () => ratingPopup(
                           context: context,
                           isThumbUp: value.isThumbsUp(movieData.name),
@@ -111,6 +107,17 @@ class AppBarVideoDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData icon(bool? value) {
+    if (value == null) {
+      return Icons.thumb_up_alt_outlined;
+    }
+    if (value) {
+      return Icons.thumb_up_alt;
+    } else {
+      return Icons.thumb_down_alt;
+    }
   }
 
   String castToString(List<Person> castList) {

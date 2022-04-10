@@ -47,7 +47,7 @@ class AddWatchListButton extends StatelessWidget {
 }
 
 class IconButtonWithName extends StatelessWidget {
-  const IconButtonWithName({
+  IconButtonWithName({
     required this.title,
     required this.iconData,
     required this.onPressed,
@@ -56,6 +56,7 @@ class IconButtonWithName extends StatelessWidget {
   final String title;
   final IconData iconData;
   final void Function()? onPressed;
+  final Duration duration = Duration(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
     return Container(

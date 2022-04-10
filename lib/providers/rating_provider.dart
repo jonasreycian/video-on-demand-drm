@@ -38,13 +38,8 @@ class RatingProvider with ChangeNotifier {
         }
       }
     }
-    if (removeLocation != -1) {
-      _data.removeAt(removeLocation);
-    }
-    if (!_isExist) {
-      _data.add(Rating(movieName: movieName, isThumbsUp: value));
-    }
-
+    if (removeLocation != -1) _data.removeAt(removeLocation);
+    if (!_isExist) _data.add(Rating(movieName: movieName, isThumbsUp: value));
     notifyListeners();
   }
 }
