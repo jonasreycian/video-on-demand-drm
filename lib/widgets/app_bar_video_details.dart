@@ -1,5 +1,6 @@
 import 'package:aq_prime/models/content_model.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
@@ -80,13 +81,21 @@ class AppBarVideoDetails extends StatelessWidget {
                       );
                     }),
                     const SizedBox(width: 10),
-                    IconButtonWithName(
-                      title: 'Rate',
-                      iconData: Icons.thumb_up_outlined,
-                      onPressed: () {
-                        ratingPopup(context: context);
-                      },
-                    ),
+                    Consumer<RatingProvider>(builder: (context, value, child) {
+                      return IconButtonWithName(
+                        title: 'Rate',
+                        iconData: value.isThumbsUp(movieData.name) == null
+                            ? Icons.thumb_up_alt_outlined
+                            : value.isThumbsUp(movieData.name)!
+                                ? Icons.thumb_up_alt
+                                : Icons.thumb_down_alt,
+                        onPressed: () => ratingPopup(
+                          context: context,
+                          isThumbUp: value.isThumbsUp(movieData.name),
+                          movieName: movieData.name ?? '',
+                        ),
+                      );
+                    }),
                   ],
                 ),
                 const SizedBox(height: 20),
