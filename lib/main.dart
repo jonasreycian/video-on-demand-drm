@@ -1,4 +1,5 @@
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:aq_prime/providers/search_provider.dart';
 import 'package:aq_prime/screens/categories_screen.dart';
 import 'package:aq_prime/screens/search_screen.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
           ChangeNotifierProvider<MyWatchListProvider>(create: (context) => MyWatchListProvider()),
           ChangeNotifierProvider<SearchProvider>(create: (context) => SearchProvider()),
+          ChangeNotifierProvider<RatingProvider>(create: (context) => RatingProvider()),
         ],
         child: MaterialApp(
           darkTheme: ThemeData.dark(),

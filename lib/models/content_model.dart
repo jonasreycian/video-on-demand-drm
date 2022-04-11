@@ -52,6 +52,7 @@ class Content {
   final FilmType? type;
   final List<Episode>? episode;
   final List<Content>? moreLikeThis;
+  final bool? isThumbsUp;
   const Content({
     @required this.name,
     @required this.imageUrl,
@@ -69,5 +70,6 @@ class Content {
     this.type,
     this.episode,
     this.moreLikeThis,
+    this.isThumbsUp,
   });
 }

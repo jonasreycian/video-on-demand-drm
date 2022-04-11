@@ -1,5 +1,6 @@
 import 'package:aq_prime/models/content_model.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/accessibility_card.dart';
 import 'package:aq_prime/widgets/icon_button_with_name.dart';
@@ -10,13 +11,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
-  const AppBarVideoDetails({
+  AppBarVideoDetails({
     Key? key,
     required this.movieData,
   }) : super(key: key);
 
   final Content movieData;
-
+  final Duration duration = Duration(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -80,13 +81,17 @@ class AppBarVideoDetails extends StatelessWidget {
                       );
                     }),
                     const SizedBox(width: 10),
-                    IconButtonWithName(
-                      title: 'Rate',
-                      iconData: Icons.thumb_up_outlined,
-                      onPressed: () {
-                        ratingPopup(context: context);
-                      },
-                    ),
+                    Consumer<RatingProvider>(builder: (context, value, child) {
+                      return IconButtonWithName(
+                        title: 'Rate',
+                        iconData: icon(value.isThumbsUp(movieData.name)),
+                        onPressed: () => ratingPopup(
+                          context: context,
+                          isThumbUp: value.isThumbsUp(movieData.name),
+                          movieName: movieData.name ?? '',
+                        ),
+                      );
+                    }),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -102,6 +107,17 @@ class AppBarVideoDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData icon(bool? value) {
+    if (value == null) {
+      return Icons.thumb_up_alt_outlined;
+    }
+    if (value) {
+      return Icons.thumb_up_alt;
+    } else {
+      return Icons.thumb_down_alt;
+    }
   }
 
   String castToString(List<Person> castList) {

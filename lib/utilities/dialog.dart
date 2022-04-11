@@ -1,4 +1,6 @@
+import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 String netflixDurationFormat(Duration duration) {
   var components = <String>[];
@@ -146,6 +148,8 @@ calendarDialog(BuildContext context, DateTime? initialDate, Function(DateTime) o
 
 ratingPopup({
   required BuildContext context,
+  required bool? isThumbUp,
+  required String movieName,
 }) {
   showGeneralDialog(
     barrierDismissible: false,
@@ -168,42 +172,46 @@ ratingPopup({
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
             backgroundColor: Color.fromARGB(255, 99, 99, 99).withOpacity(0.3),
-            content: AnimatedContainer(
-              duration: const Duration(milliseconds: 50),
-              width: 30,
-              height: 40,
-              color: Colors.transparent,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    padding: const EdgeInsets.all(0),
-                    alignment: Alignment.center,
-                    iconSize: 35,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(
-                      Icons.thumb_up_outlined,
-                      color: Colors.white,
+            content: Consumer<RatingProvider>(builder: (context, value, child) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                width: 30,
+                height: 40,
+                color: Colors.transparent,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsets.all(0),
+                      alignment: Alignment.center,
+                      iconSize: 35,
+                      onPressed: () {
+                        value.setThumbsUp(movieName, true);
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icon(
+                        isThumbUp == null || !isThumbUp ? Icons.thumb_up_outlined : Icons.thumb_up_alt,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    padding: const EdgeInsets.all(0),
-                    alignment: Alignment.center,
-                    iconSize: 35,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(
-                      Icons.thumb_down_outlined,
-                      color: Colors.white,
+                    IconButton(
+                      padding: const EdgeInsets.all(0),
+                      alignment: Alignment.center,
+                      iconSize: 35,
+                      onPressed: () {
+                        value.setThumbsUp(movieName, false);
+                        Navigator.of(context).pop();
+                      },
+                      icon: Icon(
+                        isThumbUp == null || isThumbUp ? Icons.thumb_down_outlined : Icons.thumb_down_alt,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
+                  ],
+                ),
+              );
+            }),
           ),
         ),
       );

@@ -92,6 +92,7 @@ List<Content> myList = const [
     ],
     description:
         'After four long years of conflict, The Great War has finally come to an end. Caught up in the bloodshed was Violet Evergarden, a young girl raised to be a deadly weapon on the battlefield. Hospitalized and maimed in a bloody skirmish during the War\'s final leg, she was left with only words from the person she held dearest, but no understanding of their meaning. Recovering from her wounds, Violet starts a new life working at CH Postal Services. There, she witnesses by pure chance the work of an "Auto Memory Doll", amanuenses that transcribe people\'s thoughts and feelings into words on paper. Moved by the notion, Violet begins work as an Auto Memory Doll, a trade that will take her on an adventure, one that will reshape the lives of her clients and hopefully lead to self-discovery.',
+    isThumbsUp: false,
   ),
   Content(
     name: 'How to Sell Drugs Online (Fast)',
@@ -352,6 +353,7 @@ List<Content> trending = [
       Content(name: 'Dogs', imageUrl: Assets.dogs, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
       Content(name: 'The End of the F***ing World', imageUrl: Assets.teotfw, releaseYear: '2020-2021', accessibility: 'TV-MA', type: FilmType.series, runTime: Duration(minutes: 45)),
     ],
+    isThumbsUp: true,
   ),
   Content(
     name: 'Tiger King',
