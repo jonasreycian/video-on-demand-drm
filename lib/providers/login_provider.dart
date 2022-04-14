@@ -1,3 +1,4 @@
+import 'package:aq_prime/utilities/api_request.dart';
 import 'package:flutter/foundation.dart';
 
 class LoginProvider with ChangeNotifier {
@@ -22,8 +23,11 @@ class LoginProvider with ChangeNotifier {
     reset();
     Future.delayed(const Duration(milliseconds: 2000), () {
       _isSuccess = true;
-      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) &&
-          password.length >= 8) {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
+        Map<String, dynamic> body = {};
+        body['email'] = email;
+        body['password'] = password;
+        API().request(body, '/api/v1/login');
         _message = 'Login Success\nPlease wait...';
         _isSuccess = true;
         _isLoading = false;
