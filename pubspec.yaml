@@ -41,6 +41,7 @@ dependencies:
   flutter_native_splash: ^2.1.5
   http: ^0.13.4
   shared_preferences: ^2.0.13
+  device_information: ^0.0.4
 
 dev_dependencies:
   lints: ^1.0.1

@@ -5,16 +5,26 @@ import 'package:aq_prime/utilities/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+enum RequestType { post, get }
+
 class API {
-  Future<Map<String, dynamic>> request(Map<String, dynamic> parameter, String endPoint) async {
+  Future<Map<String, dynamic>> request({
+    RequestType requestType = RequestType.post,
+    Map<String, dynamic>? parameter,
+    required String endPoint,
+  }) async {
     debugPrint('API REQUEST: $parameter');
     http.Response response;
     try {
       //============================================================
       response = await http
           .post(
-            Uri.http(AppConfig.host, endPoint),
-            headers: <String, String>{'Accept': 'application/json'},
+            Uri.http(AppConfig.host, AppConfig.path + endPoint),
+            headers: <String, String>{
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Referer': AppConfig.endPoint,
+            },
             body: jsonEncode(parameter),
           )
           .timeout(const Duration(seconds: 10));

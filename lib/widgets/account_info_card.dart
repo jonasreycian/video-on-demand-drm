@@ -1,4 +1,5 @@
 import 'package:aq_prime/screens/login_screen.dart';
+import 'package:aq_prime/utilities/api_request.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/utilities/hex_color.dart';
 import 'package:aq_prime/widgets/calendar_card.dart';
@@ -159,9 +160,12 @@ class AccountInfoCard extends StatelessWidget {
                 const SizedBox(height: 20),
                 PrimaryButton(
                   height: 50,
-                  action: () => Navigator.of(context).pushReplacementNamed(LoginScreen.routeName),
                   width: double.infinity,
                   label: 'Logout',
+                  action: () {
+                    API().request(requestType: RequestType.get, endPoint: '/v1/logout');
+                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                  },
                 ),
               ],
             ),
