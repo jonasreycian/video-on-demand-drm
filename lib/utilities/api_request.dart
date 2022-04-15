@@ -14,22 +14,34 @@ class API {
     Map<String, dynamic>? parameter,
     required String endPoint,
   }) async {
-    debugPrint('API REQUEST: $parameter');
+    debugPrint('token:${user_data.token} : API REQUEST: $parameter');
     http.Response response;
     try {
       //============================================================
-      response = await http
-          .post(
-            Uri.http(AppConfig.host, AppConfig.path + endPoint),
-            headers: <String, String>{
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Referer': AppConfig.endPoint,
-              'Authorization': 'Bearer ${user_data.token}',
-            },
-            body: parameter == null ? null : jsonEncode(parameter),
-          )
-          .timeout(const Duration(seconds: 10));
+      if (requestType == RequestType.post) {
+        response = await http
+            .post(
+              Uri.http(AppConfig.host, AppConfig.path + endPoint),
+              headers: <String, String>{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Referer': AppConfig.endPoint,
+                'Authorization': 'Bearer ${user_data.token}',
+              },
+              body: parameter == null ? null : jsonEncode(parameter),
+            )
+            .timeout(const Duration(seconds: 10));
+      } else {
+        response = await http.get(
+          Uri.http(AppConfig.host, AppConfig.path + endPoint, parameter),
+          headers: <String, String>{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Referer': AppConfig.endPoint,
+            'Authorization': 'Bearer ${user_data.token}',
+          },
+        ).timeout(const Duration(seconds: 10));
+      }
       //============================================================
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         debugPrint('API RESPONSE (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');

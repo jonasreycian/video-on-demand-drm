@@ -16,6 +16,8 @@ class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
   final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
   final TextEditingController password = TextEditingController(text: 'pass123\$');
+  //   final TextEditingController emailNumber = TextEditingController();
+  // final TextEditingController password = TextEditingController();
   final FocusNode passwordFocus = FocusNode();
   final FocusNode emailNumberFocus = FocusNode();
   @override
