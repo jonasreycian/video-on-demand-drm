@@ -8,6 +8,7 @@ import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:aq_prime/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:aq_prime/utilities/user_data.dart' as user_data;
 
 class AccountInfoCard extends StatelessWidget {
   AccountInfoCard({
@@ -163,7 +164,8 @@ class AccountInfoCard extends StatelessWidget {
                   width: double.infinity,
                   label: 'Logout',
                   action: () {
-                    API().request(requestType: RequestType.get, endPoint: '/v1/logout');
+                    user_data.loggedOut();
+                    API().request(requestType: RequestType.post, endPoint: '/v1/logout');
                     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                   },
                 ),

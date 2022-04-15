@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:aq_prime/utilities/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:aq_prime/utilities/user_data.dart' as user_data;
 
 enum RequestType { post, get }
 
@@ -24,8 +25,9 @@ class API {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
               'Referer': AppConfig.endPoint,
+              'Authorization': 'Bearer ${user_data.token}',
             },
-            body: jsonEncode(parameter),
+            body: parameter == null ? null : jsonEncode(parameter),
           )
           .timeout(const Duration(seconds: 10));
       //============================================================

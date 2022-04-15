@@ -1,6 +1,7 @@
 import 'package:aq_prime/utilities/api_request.dart';
 import 'package:flutter/foundation.dart';
 import 'package:device_information/device_information.dart';
+import 'package:aq_prime/utilities/user_data.dart' as user_data;
 
 class LoginProvider with ChangeNotifier {
   bool _isSuccess = false;
@@ -31,6 +32,7 @@ class LoginProvider with ChangeNotifier {
           _isSuccess = true;
           _isLoading = false;
           _message = 'Logging in...';
+          user_data.saveLoggedIn(value['data']);
           notifyListeners();
         } else {
           _isSuccess = false;
@@ -39,11 +41,6 @@ class LoginProvider with ChangeNotifier {
           notifyListeners();
         }
       });
-
-      // _message = 'Login Success\nPlease wait...';
-      // _isSuccess = true;
-      // _isLoading = false;
-      // notifyListeners();
     }
     if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)) {
       _message = 'Invalid Email Address';

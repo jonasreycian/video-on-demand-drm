@@ -14,8 +14,17 @@ import 'package:aq_prime/screens/nav_screen.dart';
 import 'package:aq_prime/screens/registration_screen.dart';
 import 'package:aq_prime/widgets/dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getBool('loggedIn') == null) prefs.setBool('loggedIn', false);
+  if (prefs.getBool('loggedIn')!) initialRoute = NavScreen.routeName;
+  runApp(MyApp());
+}
+
+String initialRoute = LoginScreen.routeName;
 
 class MyApp extends StatelessWidget {
   @override
@@ -39,7 +48,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             scaffoldBackgroundColor: Colors.black,
           ),
-          home: LoginScreen(),
+          initialRoute: initialRoute,
           routes: {
             NavScreen.routeName: (context) => NavScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
