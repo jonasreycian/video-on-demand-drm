@@ -15,6 +15,12 @@ class API {
     required String endPoint,
   }) async {
     debugPrint('token:${user_data.token} : API REQUEST: $parameter');
+    Map<String, String>? headers = <String, String>{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Referer': AppConfig.endPoint,
+      'Authorization': 'Bearer ${user_data.token}',
+    };
     http.Response response;
     try {
       //============================================================
@@ -22,25 +28,17 @@ class API {
         response = await http
             .post(
               Uri.http(AppConfig.host, AppConfig.path + endPoint),
-              headers: <String, String>{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Referer': AppConfig.endPoint,
-                'Authorization': 'Bearer ${user_data.token}',
-              },
+              headers: headers,
               body: parameter == null ? null : jsonEncode(parameter),
             )
             .timeout(const Duration(seconds: 10));
       } else {
-        response = await http.get(
-          Uri.http(AppConfig.host, AppConfig.path + endPoint, parameter),
-          headers: <String, String>{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Referer': AppConfig.endPoint,
-            'Authorization': 'Bearer ${user_data.token}',
-          },
-        ).timeout(const Duration(seconds: 10));
+        response = await http
+            .get(
+              Uri.http(AppConfig.host, AppConfig.path + endPoint, parameter),
+              headers: headers,
+            )
+            .timeout(const Duration(seconds: 10));
       }
       //============================================================
       if (response.statusCode == 200 && response.body.isNotEmpty) {
