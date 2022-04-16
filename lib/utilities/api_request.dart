@@ -5,6 +5,7 @@ import 'package:aq_prime/utilities/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:aq_prime/utilities/user_data.dart' as user_data;
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum RequestType { post, get }
 
@@ -14,6 +15,7 @@ class API {
     Map<String, dynamic>? parameter,
     required String endPoint,
   }) async {
+    await user_data.prepareUserData();
     debugPrint('token:${user_data.token} : API REQUEST: $parameter');
     Map<String, String>? headers = <String, String>{
       'Accept': 'application/json',
