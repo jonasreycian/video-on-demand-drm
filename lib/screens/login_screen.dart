@@ -63,7 +63,9 @@ class LoginScreen extends StatelessWidget {
                         value.reset();
                       }
                       if (!value.isLoading && value.isSuccess) {
-                        Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+                        Navigator.of(context)
+                          ..pop()
+                          ..pushReplacementNamed(NavScreen.routeName);
                         value.reset();
                       }
                     });

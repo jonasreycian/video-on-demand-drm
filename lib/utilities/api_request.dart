@@ -15,13 +15,14 @@ class API {
     Map<String, dynamic>? parameter,
     required String endPoint,
   }) async {
-    await user_data.prepareUserData();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
     debugPrint('token:${user_data.token} : API REQUEST: $parameter');
     Map<String, String>? headers = <String, String>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Referer': AppConfig.endPoint,
-      'Authorization': 'Bearer ${user_data.token}',
+      'Authorization': 'Bearer $token',
     };
     http.Response response;
     try {

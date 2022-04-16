@@ -164,9 +164,9 @@ class AccountInfoCard extends StatelessWidget {
                   width: double.infinity,
                   label: 'Logout',
                   action: () {
-                    user_data.loggedOut();
                     API().request(requestType: RequestType.post, endPoint: '/v1/logout');
                     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                    user_data.loggedOut();
                   },
                 ),
               ],
