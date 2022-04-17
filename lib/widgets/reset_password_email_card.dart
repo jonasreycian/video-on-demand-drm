@@ -11,27 +11,24 @@ class ResetPasswordCardEmail extends StatelessWidget {
   ResetPasswordCardEmail({
     Key? key,
   }) : super(key: key);
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
-  final TextEditingController emailNumber = TextEditingController();
-  final FocusNode emailNumberFocus = FocusNode();
+  final TextEditingController password = TextEditingController(text: 'Password1');
+  final TextEditingController confirmPassword = TextEditingController(text: 'Password1');
+  final TextEditingController emailNumber = TextEditingController(text: 'juan_delacruz1@gmail.com');
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
-      Future.delayed(const Duration(milliseconds: 100), () {
+      Future.delayed(const Duration(milliseconds: 1500), () {
         if (!value.isLoading && !value.isSuccess) {
-          generalDialog(context: context, message: value.message ?? '', isAutoClose: true, isLoading: value.isSuccess);
+          Navigator.of(context).pop();
           value.reset();
         }
+        // if (!value.isLoading && value.isSuccess) {
+        //   Navigator.of(context)
+        //     ..pop()
+        //     ..pushReplacementNamed(NavScreen.routeName);
+        //   value.reset();
+        // }
       });
-      // Future.delayed(const Duration(milliseconds: 2000), () {
-      //   if (value.isSuccess) {
-      //     // print('success');
-      //     // Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
-      //     value.reset();
-      //   }
-      // });
-      emailNumber.text = value.email ?? '';
       return Column(
         children: [
           Image.asset(
@@ -50,8 +47,6 @@ class ResetPasswordCardEmail extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setEmail(p0),
-            focusNode: emailNumberFocus,
             controller: emailNumber,
             hintText: value.hintText,
             height: 55,
@@ -65,12 +60,12 @@ class ResetPasswordCardEmail extends StatelessWidget {
             hintText: 'Password',
             height: 55,
             keyboardType: TextInputType.text,
-            obscureText: true,
+            obscureText: value.isObscure,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 8, bottom: 8),
             suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
             suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: () => value.setIsObscure(),
               icon: Icon(
                 value.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
@@ -84,12 +79,12 @@ class ResetPasswordCardEmail extends StatelessWidget {
             hintText: 'Confirm Password',
             height: 55,
             keyboardType: TextInputType.text,
-            obscureText: true,
+            obscureText: value.isObscureConfirm,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
             suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
             suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: () => value.setIsObscureConfirm(),
               icon: Icon(
                 value.isObscureConfirm ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
@@ -103,14 +98,13 @@ class ResetPasswordCardEmail extends StatelessWidget {
             width: double.infinity,
             height: 50,
             action: () {
-              if (emailNumber.text.isNotEmpty) {
-                value.sendEmailOrNumber();
-                emailNumberFocus.unfocus();
+              if (emailNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
+                value.sendEmailOrNumber(emailNumber.text, password.text, confirmPassword.text);
                 forgotPasswordDialog(context);
               } else {
                 generalDialog(
                   context: context,
-                  message: 'Please Enter Email Address',
+                  message: 'Please Fill out the information',
                   isAutoClose: true,
                   isLoading: false,
                 );
@@ -160,6 +154,8 @@ class ResetPasswordCardEmail extends StatelessWidget {
                         child: Text(
                           value.message ?? 'Please Wait...',
                           textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w400,

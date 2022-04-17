@@ -50,18 +50,18 @@ prepareUserData() async {
   language = ((prefs.getString("language") == null) ? "en" : prefs.getString("language"))!;
 }
 
-loggedOut() {
-  debugPrint('clearing system preferences values');
-  SharedPreferences.getInstance().then((prefs) {
-    prefs.setBool("loggedIn", false);
-    prefs.remove("id");
-    prefs.remove("firstName");
-    prefs.remove("lastName");
-    prefs.remove("mobile");
-    prefs.remove("email");
-    prefs.remove("status");
-    prefs.remove("createdAt");
-    prefs.remove("token");
-    prefs.remove("language");
-  });
+loggedOut() async {
+  debugPrint('logging out...deleting data');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  prefs.setBool('loggedIn', false);
+  prefs.remove('id');
+  prefs.remove('firstName');
+  prefs.remove('lastName');
+  prefs.remove('mobile');
+  prefs.remove('email');
+  prefs.remove('status');
+  prefs.remove('createdAt');
+  prefs.remove('token');
+  prefs.remove('language');
 }
