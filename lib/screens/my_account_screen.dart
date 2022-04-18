@@ -67,7 +67,7 @@ class MyAccountScreen extends StatelessWidget {
   }
 
   initState(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(milliseconds: 1), () {
       AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
       if (!accountInfoProvider.isSuccess) accountInfoProvider.loadData();
     });

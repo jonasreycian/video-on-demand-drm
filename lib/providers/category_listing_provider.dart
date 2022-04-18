@@ -29,5 +29,6 @@ class CategoryListingProvider with ChangeNotifier {
     _isLoading = true;
     _isSuccess = false;
     _data.clear();
+    notifyListeners();
   }
 }
