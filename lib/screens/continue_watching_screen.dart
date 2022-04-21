@@ -1,17 +1,22 @@
 import 'package:aq_prime/data/data.dart';
+import 'package:aq_prime/providers/continue_watching_provider.dart';
+import 'package:aq_prime/providers/refresh_limiter.dart';
 import 'package:aq_prime/screens/search_screen.dart';
 import 'package:aq_prime/screens/video_details/video_details_screen.dart';
+import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/search_button.dart';
 import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:aq_prime/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ContinueWatchingScreen extends StatelessWidget {
   const ContinueWatchingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    initState(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -26,45 +31,85 @@ class ContinueWatchingScreen extends StatelessWidget {
           SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                color: Colors.transparent,
-                child: GridView.builder(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                  itemCount: combine1().length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    mainAxisExtent: 175, // here set custom Height You Want
+      body: Consumer<ContinueWatching>(builder: (context, value, child) {
+        return value.isSuccess
+            ? SafeArea(
+                child: RefreshIndicator(
+                  color: Colors.white,
+                  backgroundColor: Colors.red,
+                  onRefresh: () => Future.delayed(const Duration(milliseconds: 1), () => onRefresh(context)),
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          child: GridView.builder(
+                            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                            itemCount: combine1().length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              mainAxisExtent: 175, // here set custom Height You Want
+                            ),
+                            itemBuilder: (context, index) {
+                              return ThumbnailCardForGrid(
+                                index: index,
+                                // title: value.myWatchList[index].name!,
+                                imageUrl: combine1()[index].imageUrl!,
+                                releaseYear: combine1()[index].releaseYear!,
+                                runTime: combine1()[index].runTime!.inMinutes.toString(),
+                                heroTag: 'continueWatch${combine1()[index].imageUrl} $index',
+                                onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                                  'data': combine1()[index],
+                                  'heroTag': 'continueWatch${combine1()[index].imageUrl} $index',
+                                }),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  itemBuilder: (context, index) {
-                    return ThumbnailCardForGrid(
-                      index: index,
-                      // title: value.myWatchList[index].name!,
-                      imageUrl: combine1()[index].imageUrl!,
-                      releaseYear: combine1()[index].releaseYear!,
-                      runTime: combine1()[index].runTime!.inMinutes.toString(),
-                      heroTag: 'continueWatch${combine1()[index].imageUrl} $index',
-                      onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                        'data': combine1()[index],
-                        'heroTag': 'continueWatch${combine1()[index].imageUrl} $index',
-                      }),
-                    );
-                  },
                 ),
               )
-            ],
-          ),
-        ),
-      ),
+            : const Center(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                    child: SizedBox(
+                        width: 25,
+                        height: 25,
+                        child: CircularProgressIndicator(
+                          color: Colors.red,
+                          strokeWidth: 2.5,
+                        )),
+                  ),
+                ),
+              );
+      }),
     );
+  }
+
+  onRefresh(context) {
+    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
+    ContinueWatching continueWatching = Provider.of<ContinueWatching>(context, listen: false);
+    if (refreshLimit.onLimit) {
+      refreshLimit.setCount();
+      continueWatching.loadData();
+    } else {
+      refreshLimitDialog(context: context);
+    }
+  }
+
+  initState(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 1), () {
+      ContinueWatching continueWatching = Provider.of<ContinueWatching>(context, listen: false);
+      if (!continueWatching.isSuccess) continueWatching.loadData();
+    });
   }
 }

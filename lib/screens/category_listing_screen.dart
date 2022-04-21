@@ -109,7 +109,7 @@ class CategoryListingScreen extends StatelessWidget {
                   ),
                 ),
               )
-            : Center(
+            : const Center(
                 child: SizedBox(
                   width: double.infinity,
                   child: Center(

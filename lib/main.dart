@@ -1,5 +1,6 @@
 import 'package:aq_prime/providers/account_info_provider.dart';
 import 'package:aq_prime/providers/category_listing_provider.dart';
+import 'package:aq_prime/providers/continue_watching_provider.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:aq_prime/providers/refresh_limiter.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<RatingProvider>(create: (context) => RatingProvider()),
           ChangeNotifierProvider<AccountInfoProvider>(create: (context) => AccountInfoProvider()),
           ChangeNotifierProvider<CategoryListingProvider>(create: (context) => CategoryListingProvider()),
-          ChangeNotifierProvider<RefreshLimit>(create: (context) => RefreshLimit())
+          ChangeNotifierProvider<RefreshLimit>(create: (context) => RefreshLimit()),
+          ChangeNotifierProvider<ContinueWatching>(create: (context) => ContinueWatching())
         ],
         child: MaterialApp(
           darkTheme: ThemeData.dark(),

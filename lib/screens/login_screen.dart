@@ -14,8 +14,10 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/login';
-  final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
-  final TextEditingController password = TextEditingController(text: 'pass123\$');
+  // final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
+  // final TextEditingController password = TextEditingController(text: 'pass123\$');
+  final TextEditingController emailNumber = TextEditingController(text: 'jes@yahoo.com');
+  final TextEditingController password = TextEditingController(text: 'hahahaha');
   //   final TextEditingController emailNumber = TextEditingController();
   // final TextEditingController password = TextEditingController();
   final FocusNode passwordFocus = FocusNode();
