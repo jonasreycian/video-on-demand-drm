@@ -5,6 +5,8 @@ import 'package:aq_prime/screens/search_screen.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/widgets/fetured_section.dart';
+import 'package:aq_prime/widgets/loading_indicator.dart';
+import 'package:aq_prime/widgets/no_data_dialog.dart';
 import 'package:aq_prime/widgets/only_aqprime_section.dart';
 import 'package:aq_prime/widgets/others_section.dart';
 import 'package:aq_prime/widgets/popular_section.dart';
@@ -38,14 +40,17 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
-        return value.isSuccess
-            ? SafeArea(
+        return Stack(
+          children: [
+            if (!value.isSuccess) ...[AQLoadingIndicator()],
+            if (value.isSuccess && value.data.isEmpty) ...[AQNoData()],
+            if (value.isSuccess && value.data.isNotEmpty) ...[
+              SafeArea(
                 child: RefreshIndicator(
                   color: Colors.white,
                   backgroundColor: Colors.red,
                   onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
                   child: SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -86,22 +91,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
-            : const Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: SizedBox(
-                      width: 25,
-                      height: 25,
-                      child: CircularProgressIndicator(
-                        color: Colors.red,
-                        strokeWidth: 2.5,
-                      ),
-                    ),
-                  ),
-                ),
-              );
+              ),
+            ]
+          ],
+        );
       }),
     );
   }
