@@ -1,6 +1,7 @@
 import 'package:aq_prime/providers/account_info_provider.dart';
 import 'package:aq_prime/providers/category_listing_provider.dart';
 import 'package:aq_prime/providers/continue_watching_provider.dart';
+import 'package:aq_prime/providers/home_provider.dart';
 import 'package:aq_prime/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/providers/rating_provider.dart';
 import 'package:aq_prime/providers/refresh_limiter.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
     return DismissKeyboard(
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider<HomeProvider>(create: (context) => HomeProvider()),
           ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
           ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
           ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
