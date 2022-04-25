@@ -1,7 +1,9 @@
-import 'package:aq_prime/utilities/dialog.dart';
-import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../screens/better_player_screen.dart';
+import '../utilities/dialog.dart';
+import 'subtext_card.dart';
 
 class TrailerCard extends StatelessWidget {
   const TrailerCard({
@@ -68,7 +70,9 @@ class TrailerCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 20),
-                          Subtext(text: netflixDurationFormat(runTime), color: Color.fromRGBO(140, 140, 140, 1)),
+                          Subtext(
+                              text: netflixDurationFormat(runTime),
+                              color: Color.fromRGBO(140, 140, 140, 1)),
                         ],
                       ),
                     ),
@@ -86,7 +90,10 @@ class TrailerCard extends StatelessWidget {
                           iconSize: 65,
                           alignment: Alignment.center,
                           tooltip: 'Play',
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(BetterPlayerScreen.routeName);
+                          },
                           icon: Icon(Icons.play_circle),
                           color: Colors.white,
                         ),

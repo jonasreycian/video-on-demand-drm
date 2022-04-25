@@ -56,8 +56,8 @@ class Content {
   const Content({
     @required this.name,
     @required this.imageUrl,
+    @required this.videoUrl,
     this.titleImageUrl,
-    this.videoUrl,
     this.color,
     this.releaseYear,
     this.cast,

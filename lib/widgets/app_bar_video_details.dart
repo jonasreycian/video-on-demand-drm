@@ -1,14 +1,17 @@
-import 'package:aq_prime/models/content_model.dart';
-import 'package:aq_prime/providers/my_watch_list_provider.dart';
-import 'package:aq_prime/providers/rating_provider.dart';
-import 'package:aq_prime/utilities/dialog.dart';
-import 'package:aq_prime/widgets/accessibility_card.dart';
-import 'package:aq_prime/widgets/icon_button_with_name.dart';
-import 'package:aq_prime/widgets/primary_button.dart';
-import 'package:aq_prime/widgets/subtext_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+
+import '../models/content_model.dart';
+import '../providers/better_player_provider.dart';
+import '../providers/my_watch_list_provider.dart';
+import '../providers/rating_provider.dart';
+import '../screens/better_player_screen.dart';
+import '../utilities/dialog.dart';
+import 'accessibility_card.dart';
+import 'icon_button_with_name.dart';
+import 'primary_button.dart';
+import 'subtext_card.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
@@ -53,9 +56,12 @@ class AppBarVideoDetails extends StatelessWidget {
                   children: [
                     Subtext(text: movieData.releaseYear ?? ''),
                     const SizedBox(width: 10),
-                    AccessibilityCard(accessibility: movieData.accessibility ?? ''),
+                    AccessibilityCard(
+                        accessibility: movieData.accessibility ?? ''),
                     const SizedBox(width: 10),
-                    Subtext(text: netflixDurationFormat(movieData.runTime ?? const Duration(milliseconds: 1))),
+                    Subtext(
+                        text: netflixDurationFormat(movieData.runTime ??
+                            const Duration(milliseconds: 1))),
                   ],
                 ),
                 const SizedBox(height: 5),
@@ -73,11 +79,14 @@ class AppBarVideoDetails extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Consumer<MyWatchListProvider>(builder: (context, value, child) {
+                    Consumer<MyWatchListProvider>(
+                        builder: (context, value, child) {
                       return AddWatchListButton(
                         title: 'My List',
                         isExisting: value.isExisting(movieData),
-                        onPressed: value.isExisting(movieData) ? () => value.removeWatchList(movieData) : () => value.addMyWatchList(movieData),
+                        onPressed: value.isExisting(movieData)
+                            ? () => value.removeWatchList(movieData)
+                            : () => value.addMyWatchList(movieData),
                       );
                     }),
                     const SizedBox(width: 10),
@@ -95,11 +104,22 @@ class AppBarVideoDetails extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                PrimaryButton(
-                  height: 50,
-                  action: () {},
-                  width: double.infinity,
-                  label: 'Play',
+                Consumer<BetterPlayerProvider>(
+                  builder: (context, value, child) {
+                    return PrimaryButton(
+                      height: 50,
+                      action: () {
+                        value.setCurrentContent(movieData);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BetterPlayerScreen(movieData),
+                          ),
+                        );
+                      },
+                      width: double.infinity,
+                      label: 'Play',
+                    );
+                  },
                 ),
               ],
             ),
@@ -126,5 +146,72 @@ class AppBarVideoDetails extends StatelessWidget {
       names.add(element.fullName);
     }
     return names.join(', ');
+  }
+}
+
+class TutorialOverlay extends ModalRoute<void> {
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 100);
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get barrierDismissible => false;
+
+  @override
+  Color get barrierColor => Colors.black.withOpacity(0.5);
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    // This makes sure that text and other content follows the material style
+    return Material(
+      type: MaterialType.transparency,
+      // make sure that the overlay content is not cut off
+      child: SafeArea(
+        child: _buildOverlayContent(context),
+      ),
+    );
+  }
+
+  Widget _buildOverlayContent(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            'This is a nice overlay',
+            style: TextStyle(color: Colors.white, fontSize: 30.0),
+          ),
+          RaisedButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Dismiss'),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    // You can add your own animations for the overlay content
+    return FadeTransition(
+      opacity: animation,
+      child: ScaleTransition(
+        scale: animation,
+        child: child,
+      ),
+    );
   }
 }
