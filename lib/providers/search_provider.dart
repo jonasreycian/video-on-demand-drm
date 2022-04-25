@@ -1,6 +1,7 @@
-import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/models/models.dart';
 import 'package:flutter/material.dart';
+
+import '../data/data.dart';
+import '../models/models.dart';
 
 class SearchProvider with ChangeNotifier {
   bool _isSearching = false;

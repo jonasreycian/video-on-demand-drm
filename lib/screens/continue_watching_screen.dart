@@ -1,11 +1,12 @@
-import 'package:aq_prime/data/data.dart';
-import 'package:aq_prime/screens/search_screen.dart';
-import 'package:aq_prime/screens/video_details/video_details_screen.dart';
-import 'package:aq_prime/widgets/aq_floating_action_button.dart';
-import 'package:aq_prime/widgets/search_button.dart';
-import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
-import 'package:aq_prime/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
+
+import '../data/data.dart';
+import '../widgets/aq_floating_action_button.dart';
+import '../widgets/search_button.dart';
+import '../widgets/thumbnail_movie_card.dart';
+import '../widgets/title_text_card.dart';
+import 'search_screen.dart';
+import 'video_details/video_details_screen.dart';
 
 class ContinueWatchingScreen extends StatelessWidget {
   const ContinueWatchingScreen({Key? key}) : super(key: key);
@@ -21,9 +22,13 @@ class ContinueWatchingScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Continue Watching'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(
@@ -52,10 +57,13 @@ class ContinueWatchingScreen extends StatelessWidget {
                       imageUrl: combine1()[index].imageUrl!,
                       releaseYear: combine1()[index].releaseYear!,
                       runTime: combine1()[index].runTime!.inMinutes.toString(),
-                      heroTag: 'continueWatch${combine1()[index].imageUrl} $index',
-                      onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                      heroTag:
+                          'continueWatch${combine1()[index].imageUrl} $index',
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(VideoDetailsPage.routeName, arguments: {
                         'data': combine1()[index],
-                        'heroTag': 'continueWatch${combine1()[index].imageUrl} $index',
+                        'heroTag':
+                            'continueWatch${combine1()[index].imageUrl} $index',
                       }),
                     );
                   },
