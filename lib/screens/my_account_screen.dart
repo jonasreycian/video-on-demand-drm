@@ -1,5 +1,6 @@
 import 'package:aq_prime/providers/account_info_provider.dart';
 import 'package:aq_prime/widgets/account_info_card.dart';
+import 'package:aq_prime/widgets/loading_indicator.dart';
 import 'package:aq_prime/widgets/plant_details.dart';
 import 'package:aq_prime/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
@@ -50,18 +51,7 @@ class MyAccountScreen extends StatelessWidget {
                   ),
                 ),
               )
-            : Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: SizedBox(
-                      width: 25,
-                      height: 25,
-                      child: CircularProgressIndicator(color: Colors.red, strokeWidth: 2.5),
-                    ),
-                  ),
-                ),
-              );
+            : AQLoadingIndicator();
       }),
     );
   }

@@ -5,6 +5,7 @@ import 'package:aq_prime/screens/search_screen.dart';
 import 'package:aq_prime/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/utilities/dialog.dart';
 import 'package:aq_prime/widgets/aq_floating_action_button.dart';
+import 'package:aq_prime/widgets/loading_indicator.dart';
 import 'package:aq_prime/widgets/search_button.dart';
 import 'package:aq_prime/widgets/thumbnail_movie_card.dart';
 import 'package:aq_prime/widgets/title_text_card.dart';
@@ -77,20 +78,7 @@ class ContinueWatchingScreen extends StatelessWidget {
                   ),
                 ),
               )
-            : const Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: SizedBox(
-                        width: 25,
-                        height: 25,
-                        child: CircularProgressIndicator(
-                          color: Colors.red,
-                          strokeWidth: 2.5,
-                        )),
-                  ),
-                ),
-              );
+            : AQLoadingIndicator();
       }),
     );
   }
