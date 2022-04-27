@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/better_player_provider.dart';
-import 'providers/forgot_password_provider.dart';
-import 'providers/login_provider.dart';
-import 'providers/my_watch_list_provider.dart';
-import 'providers/rating_provider.dart';
-import 'providers/registration_provider.dart';
-import 'providers/search_provider.dart';
-import 'screens/categories_screen.dart';
-import 'screens/forgot_password_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/nav_screen.dart';
-import 'screens/registration_screen.dart';
-import 'screens/video_details/video_details_screen.dart';
-import 'widgets/dismiss_keyboard.dart';
+import 'app/providers/better_player_provider.dart';
+import 'app/providers/forgot_password_provider.dart';
+import 'app/providers/login_provider.dart';
+import 'app/providers/my_watch_list_provider.dart';
+import 'app/providers/rating_provider.dart';
+import 'app/providers/registration_provider.dart';
+import 'app/providers/search_provider.dart';
+import 'app/screens/categories_screen.dart';
+import 'app/screens/forgot_password_screen.dart';
+import 'app/screens/login_screen.dart';
+import 'app/screens/nav_screen.dart';
+import 'app/screens/registration_screen.dart';
+import 'app/screens/video_details/video_details_screen.dart';
+import 'app/widgets/dismiss_keyboard.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,8 +53,7 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
               scaffoldBackgroundColor: Colors.black,
             ),
-            // home: LoginScreen(),
-            home: NavScreen(),
+            home: LoginScreen(),
             routes: {
               NavScreen.routeName: (context) => NavScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
@@ -63,20 +62,7 @@ class MyApp extends StatelessWidget {
                   ForgotPasswordScreen(),
               VideoDetailsPage.routeName: (context) => VideoDetailsPage(),
               CategoriesScreen.routeName: (context) => CategoriesScreen(),
-              // SearchScreen.routeName: (context) => SearchScreen(),
-              // BetterPlayerScreen.routeName: (context) => BetterPlayerScreen(
-              //       content: null,
-              //     ),
             },
-            // onGenerateRoute: (settings) {
-            //   if (settings.name == BetterPlayerScreen.routeName) {
-            //     return MaterialPageRoute(
-            //       builder: (context) => BetterPlayerScreen(
-            //         content: settings.arguments as Content,
-            //       ),
-            //     );
-            //   }
-            // },
           ),
         ),
       ),
