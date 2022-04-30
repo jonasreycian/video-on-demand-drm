@@ -19,7 +19,7 @@ class ResetPasswordCardMobile extends StatelessWidget {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 100), () {
         if (!value.isLoading && !value.isSuccess) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+          generalDialog(context: context, message: value.message ?? '', isAutoClose: true, isLoading: value.isSuccess);
           value.reset();
         }
       });
@@ -50,7 +50,7 @@ class ResetPasswordCardMobile extends StatelessWidget {
           InputTextField(
             focusNode: emailNumberFocus,
             controller: emailNumber,
-            hintText: value.hintText,
+            hintText: 'Mobile number',
             height: 55,
             keyboardType: value.textInputType,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -68,11 +68,11 @@ class ResetPasswordCardMobile extends StatelessWidget {
             height: 50,
             action: () {
               if (emailNumber.text.isNotEmpty) {
-                value.sendEmailOrNumber(emailNumber.text);
+                value.sendEmailOrNumber('d', '', '');
                 emailNumberFocus.unfocus();
                 generalDialog(
                   context: context,
-                  message: value.message,
+                  message: value.message ?? '',
                   isAutoClose: true,
                   isLoading: true,
                 );

@@ -14,8 +14,12 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/login';
-  final TextEditingController emailNumber = TextEditingController(text: 'juan_delaCruz01@yahoo.com');
-  final TextEditingController password = TextEditingController(text: 'password01233');
+  // final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
+  // final TextEditingController password = TextEditingController(text: 'pass123\$');
+  final TextEditingController emailNumber = TextEditingController(text: 'jes@yahoo.com');
+  final TextEditingController password = TextEditingController(text: 'hahahaha');
+  //   final TextEditingController emailNumber = TextEditingController();
+  // final TextEditingController password = TextEditingController();
   final FocusNode passwordFocus = FocusNode();
   final FocusNode emailNumberFocus = FocusNode();
   @override
@@ -55,16 +59,15 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   child: Consumer<LoginProvider>(builder: (context, value, child) {
-                    Future.delayed(const Duration(milliseconds: 100), () {
-                      if (!value.isLoading) {
-                        generalDialog(
-                            context: context, message: value.message, isAutoClose: true, isLoading: value.isSuccess);
+                    Future.delayed(const Duration(milliseconds: 1000), () {
+                      if (!value.isLoading && !value.isSuccess) {
+                        Navigator.of(context).pop();
                         value.reset();
                       }
-                    });
-                    Future.delayed(const Duration(milliseconds: 2000), () {
-                      if (value.isSuccess) {
-                        Navigator.of(context).pushReplacementNamed(NavScreen.routeName);
+                      if (!value.isLoading && value.isSuccess) {
+                        Navigator.of(context)
+                          ..pop()
+                          ..pushReplacementNamed(NavScreen.routeName);
                         value.reset();
                       }
                     });
@@ -121,12 +124,7 @@ class LoginScreen extends StatelessWidget {
                               value.sendAPI(emailNumber.text, password.text);
                               passwordFocus.unfocus();
                               emailNumberFocus.unfocus();
-                              generalDialog(
-                                context: context,
-                                message: value.message,
-                                isAutoClose: true,
-                                isLoading: true,
-                              );
+                              loginDialog(context);
                             } else {
                               generalDialog(
                                 context: context,
@@ -152,6 +150,82 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  loginDialog(context) {
+    showGeneralDialog(
+      barrierDismissible: false,
+      context: context,
+      pageBuilder: (context, animation1, animation2) {
+        return const SizedBox();
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
+
+        return Transform(
+          transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+          child: Opacity(
+            opacity: anim1.value,
+            child: AlertDialog(
+              actionsAlignment: MainAxisAlignment.center,
+              contentPadding: const EdgeInsets.all(15),
+              actionsPadding: const EdgeInsets.only(bottom: 10),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.0),
+                ),
+              ),
+              backgroundColor: Colors.black87,
+              content: AnimatedContainer(
+                duration: const Duration(milliseconds: 50),
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                color: Colors.transparent,
+                child: Consumer<LoginProvider>(builder: (context, value, child) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          value.message ?? 'Please Wait...',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      value.isLoading || value.isSuccess
+                          ? SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: CircularProgressIndicator(
+                                color: Colors.red,
+                                strokeWidth: 2.5,
+                              ),
+                            )
+                          : SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              ),
+                            ),
+                    ],
+                  );
+                }),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

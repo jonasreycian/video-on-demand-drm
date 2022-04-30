@@ -40,14 +40,16 @@ class RegistrationScreen extends StatelessWidget {
                 );
               },
               child: Consumer<RegistrationProvider>(builder: (context, value, child) {
-                if (value.isSuccess) {
-                  currentWidget = RegistraionEnterOtpCard();
-                  height = 400;
-                }
-                if (!value.isSuccess) {
-                  currentWidget = RegistrationCard();
-                  height = 810;
-                }
+                // if (value.isSuccess) {
+                //   currentWidget = RegistraionEnterOtpCard();
+                //   height = 400;
+                // }
+                // if (!value.isSuccess) {
+                //   currentWidget = RegistrationCard();
+                //   height = 810;
+                // }
+                currentWidget = RegistrationCard();
+                height = 810;
                 return SingleChildScrollView(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 500),
