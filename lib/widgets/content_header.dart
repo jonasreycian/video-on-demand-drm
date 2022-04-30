@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:aq_prime/models/models.dart';
-import 'package:aq_prime/widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
+
+import '../models/models.dart';
+import '../screens/better_player_screen.dart';
+import 'widgets.dart';
 
 class ContentHeader extends StatelessWidget {
   final Content featuredContent;
@@ -106,10 +107,11 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(widget.featuredContent.videoUrl!)
-      ..initialize().then((_) => setState(() {}))
-      ..setVolume(0)
-      ..play();
+    _videoController =
+        VideoPlayerController.network(widget.featuredContent.videoUrl!)
+          ..initialize().then((_) => setState(() {}))
+          ..setVolume(0)
+          ..play();
   }
 
   @override
@@ -121,12 +123,16 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _videoController.value.isPlaying ? _videoController.pause() : _videoController.play(),
+      onTap: () => _videoController.value.isPlaying
+          ? _videoController.pause()
+          : _videoController.play(),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           AspectRatio(
-            aspectRatio: _videoController.value.isInitialized ? _videoController.value.aspectRatio : 2.344,
+            aspectRatio: _videoController.value.isInitialized
+                ? _videoController.value.aspectRatio
+                : 2.344,
             child: _videoController.value.isInitialized
                 ? VideoPlayer(_videoController)
                 : Image.asset(
@@ -139,7 +145,9 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
             right: 0,
             bottom: -1.0,
             child: AspectRatio(
-              aspectRatio: _videoController.value.isInitialized ? _videoController.value.aspectRatio : 2.344,
+              aspectRatio: _videoController.value.isInitialized
+                  ? _videoController.value.aspectRatio
+                  : 2.344,
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -184,7 +192,8 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                     _PlayButton(),
                     const SizedBox(width: 16.0),
                     FlatButton.icon(
-                      padding: const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+                      padding:
+                          const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
                       onPressed: () => print('More Info'),
                       color: Colors.white,
                       icon: const Icon(Icons.info_outline, size: 30.0),
@@ -205,7 +214,9 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                         color: Colors.white,
                         iconSize: 30.0,
                         onPressed: () => setState(() {
-                          _isMuted ? _videoController.setVolume(100) : _videoController.setVolume(0);
+                          _isMuted
+                              ? _videoController.setVolume(100)
+                              : _videoController.setVolume(0);
                           _isMuted = _videoController.value.volume == 0;
                         }),
                       ),
@@ -224,8 +235,12 @@ class _PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton.icon(
-      padding: !Responsive.isDesktop(context) ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0) : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
-      onPressed: () => print('Play'),
+      padding: !Responsive.isDesktop(context)
+          ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0)
+          : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+      onPressed: () {
+        Navigator.of(context).pushNamed(BetterPlayerScreen.routeName);
+      },
       color: Colors.white,
       icon: const Icon(Icons.play_arrow, size: 30.0),
       label: const Text(

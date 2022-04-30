@@ -15,27 +15,25 @@ class ForgotPasswordScreen extends StatelessWidget {
   late double height;
   @override
   Widget build(BuildContext context) {
-    ForgotPasswordProvider forgotPasswordProvider =
-        Provider.of<ForgotPasswordProvider>(context);
-    if (forgotPasswordProvider.selectedWidgetCard ==
-        forgotPasswordProvider.choices[0]) {
-      currentWidget = ResetPasswordCardMobile();
-      height = 400;
-    }
-    if (forgotPasswordProvider.selectedWidgetCard ==
-        forgotPasswordProvider.choices[1]) {
-      currentWidget = ResetPasswordCardEmail();
-      height = 400;
-    }
-    if (forgotPasswordProvider.isSuccess &&
-        forgotPasswordProvider.isSuccessOtp) {
-      currentWidget = EnterNewPassword();
-      height = 400;
-    }
-    if (forgotPasswordProvider.isSuccess && !forgotPasswordProvider.isSuccessOtp) {
-      currentWidget = ForgotPasswordEnterOtpCard();
-      height = 400;
-    }
+    // ForgotPasswordProvider forgotPasswordProvider = Provider.of<ForgotPasswordProvider>(context);
+    // if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[0]) {
+    //   currentWidget = ResetPasswordCardMobile();
+    //   height = 400;
+    // }
+    // if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[1]) {
+    //   currentWidget = ResetPasswordCardEmail();
+    //   height = 400;
+    // }
+    // if (forgotPasswordProvider.isSuccess && forgotPasswordProvider.isSuccessOtp) {
+    //   currentWidget = EnterNewPassword();
+    //   height = 400;
+    // }
+    // if (forgotPasswordProvider.isSuccess && !forgotPasswordProvider.isSuccessOtp) {
+    //   currentWidget = ForgotPasswordEnterOtpCard();
+    //   height = 400;
+    // }
+    currentWidget = ResetPasswordCardEmail();
+    height = 550;
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

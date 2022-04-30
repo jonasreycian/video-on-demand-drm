@@ -36,8 +36,16 @@ dependencies:
   syncfusion_flutter_core: ^19.4.50
   syncfusion_flutter_datepicker: ^19.4.55
   intl: ^0.17.0
+  carousel_slider: ^4.0.0
+  transition: ^2.0.2
+  better_player: ^0.0.81
+  flutter_native_splash: ^2.1.5
+  http: ^0.13.4
+  shared_preferences: ^2.0.13
+  device_information: ^0.0.4
 
 dev_dependencies:
+  lints: ^1.0.1
   flutter_test:
     sdk: flutter
 
