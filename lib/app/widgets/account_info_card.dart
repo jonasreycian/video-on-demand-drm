@@ -6,7 +6,6 @@ import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:aq_prime/domain/entities/user.dart' as user_data;
 
 // ignore: must_be_immutable
 class AccountInfoCard extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:aq_prime/widgets/title_text_card.dart';
+import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
 
 class AQNoData extends StatelessWidget {

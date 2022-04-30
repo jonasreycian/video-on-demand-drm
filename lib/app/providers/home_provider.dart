@@ -1,4 +1,4 @@
-import 'package:aq_prime/utilities/api_request.dart';
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeProvider with ChangeNotifier {
@@ -12,9 +12,7 @@ class HomeProvider with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API()
-        .request(requestType: RequestType.get, endPoint: '/videos')
-        .then((value) {
+    API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
       if (value['error_code'] == null) {
         _data = value['data']['data'];
         _isLoading = false;

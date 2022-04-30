@@ -1,7 +1,7 @@
-import 'package:aq_prime/utilities/api_request.dart';
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 import 'package:device_information/device_information.dart';
-import 'package:aq_prime/utilities/user_data.dart' as user_data;
+import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class LoginProvider with ChangeNotifier {
   bool _isSuccess = false;
@@ -25,15 +25,8 @@ class LoginProvider with ChangeNotifier {
     _isLoading = true;
     _isSuccess = false;
     _message = null;
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-            .hasMatch(email) &&
-        password.length >= 8) {
-      Map<String, String> body = {
-        'email': email,
-        'password': password,
-        'device_name':
-            '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'
-      };
+    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
+      Map<String, String> body = {'email': email, 'password': password, 'device_name': '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'};
       API().request(parameter: body, endPoint: '/login').then((value) {
         if (value['success']) {
           _isSuccess = true;
@@ -49,9 +42,7 @@ class LoginProvider with ChangeNotifier {
         }
       });
     }
-    if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email)) {
+    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)) {
       _message = 'Invalid Email Address';
       _isSuccess = false;
       _isLoading = false;

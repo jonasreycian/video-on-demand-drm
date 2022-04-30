@@ -25,7 +25,7 @@ class API {
       'Authorization': 'Bearer $token',
     };
     http.Response response;
-    var uri;
+    Uri uri;
     try {
       //============================================================
       if (requestType == RequestType.post) {

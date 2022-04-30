@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:aq_prime/data/extra/enums.dart';
-import 'package:aq_prime/domain/entities/category.dart';
-import 'package:aq_prime/domain/entities/sub_category.dart';
 
 import 'episode.dart';
 import 'person.dart';
@@ -102,21 +100,11 @@ class Content {
         color = Color(map['color'] as int),
         type = map['type'] as FilmType,
         isThumbsUp = map['isThumbsUp'] ?? false,
-        cast = (map['oyuncuKadrosu'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        episode = (map['episode'] as List)
-            .map((e) => Episode.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        moreLikeThis = (map['moreLikeThis'] as List)
-            .map((e) => Content.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        administrator = (map['administrator'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        screenWriter = (map['senarist'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList();
+        cast = (map['oyuncuKadrosu'] as List).map((e) => Person.fromJson(e as Map<String, dynamic>)).toList(),
+        episode = (map['episode'] as List).map((e) => Episode.fromJson(e as Map<String, dynamic>)).toList(),
+        moreLikeThis = (map['moreLikeThis'] as List).map((e) => Content.fromJson(e as Map<String, dynamic>)).toList(),
+        administrator = (map['administrator'] as List).map((e) => Person.fromJson(e as Map<String, dynamic>)).toList(),
+        screenWriter = (map['senarist'] as List).map((e) => Person.fromJson(e as Map<String, dynamic>)).toList();
   // subCategory =
   //     (map['altKategoriler'] as List).map((e) => Subcategory(e)).toList(),
   // category = (map['category'] as List).map((e) => Category(e)).toList();

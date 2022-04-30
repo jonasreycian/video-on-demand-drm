@@ -1,23 +1,18 @@
-import 'package:aq_prime/utilities/api_request.dart';
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
-class ContinueWatching with ChangeNotifier {
-  bool _isSuccess = false;
+class CategoryListingProvider with ChangeNotifier {
   bool _isLoading = true;
+  bool _isSuccess = false;
   Map _data = {};
-
-  bool get isSuccess => _isSuccess;
   bool get isLoading => _isLoading;
+  bool get isSuccess => _isSuccess;
   Map get data => _data;
 
   loadData() {
     reset();
     notifyListeners();
-    API()
-        .request(
-            requestType: RequestType.get,
-            endPoint: '/users/continue-watching/1')
-        .then((value) {
+    API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
       if (value['success']) {
         _data = value['data'];
         _isLoading = false;
@@ -32,8 +27,8 @@ class ContinueWatching with ChangeNotifier {
   }
 
   reset() {
-    _isSuccess = false;
     _isLoading = true;
+    _isSuccess = false;
     _data.clear();
   }
 }

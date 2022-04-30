@@ -1,8 +1,8 @@
+import 'package:aq_prime/app/providers/account_info_provider.dart';
 import 'package:aq_prime/app/widgets/account_info_card.dart';
+import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/plant_details.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/providers/account_info_provider.dart';
-import 'package:aq_prime/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

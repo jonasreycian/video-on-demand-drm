@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/forgot_password_provider.dart';
-import '../widgets/enter_new_password.dart';
-import '../widgets/enter_otp_card.dart';
 import '../widgets/reset_password_email_card.dart';
-import '../widgets/reset_password_mobile_card.dart';
 
 // ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
