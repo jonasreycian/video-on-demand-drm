@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:aq_prime/utilities/hex_color.dart';
 
 // ignore: must_be_immutable
 class PrimaryButton extends StatelessWidget {
@@ -36,7 +35,7 @@ class PrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.red.withOpacity(0.5),
+            color: Colors.red.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 10,
             offset: Offset(0, 3),

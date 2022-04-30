@@ -31,17 +31,18 @@ class RegistrationCard extends StatelessWidget {
       mobileNumber.text = value.getField('mobileNumber');
       password.text = value.getField('password');
       confirmPassword.text = value.getField('confirmPassword');
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (!value.isLoading) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: false);
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        if (!value.isLoading && !value.isSuccess) {
+          Navigator.of(context).pop();
+          value.reset();
         }
       });
       return Column(
         children: [
           Image.asset(
-            'assets/images/SampleLogo.png',
+            'assets/images/AQ_PRIME_LOGO_2.png',
             height: 130,
-            width: 130,
+            width: double.infinity,
           ),
           const SizedBox(height: 25),
           InputTextField(
@@ -147,13 +148,8 @@ class RegistrationCard extends StatelessWidget {
             height: 50,
             action: () {
               if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty && value.birthDayString != null) {
-                value.sendAPI(firstName.text, lastName.text, email.text, mobileNumber.text, password.text, confirmPassword.text);
-                generalDialog(
-                  context: context,
-                  message: value.message,
-                  isAutoClose: true,
-                  isLoading: true,
-                );
+                value.sendAPI();
+                registrationDialog(context);
               } else {
                 generalDialog(
                   context: context,
@@ -201,6 +197,82 @@ class RegistrationCard extends StatelessWidget {
         ],
       );
     });
+  }
+
+  registrationDialog(context) {
+    showGeneralDialog(
+      barrierDismissible: false,
+      context: context,
+      pageBuilder: (context, animation1, animation2) {
+        return const SizedBox();
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
+
+        return Transform(
+          transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+          child: Opacity(
+            opacity: anim1.value,
+            child: AlertDialog(
+              actionsAlignment: MainAxisAlignment.center,
+              contentPadding: const EdgeInsets.all(15),
+              actionsPadding: const EdgeInsets.only(bottom: 10),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.0),
+                ),
+              ),
+              backgroundColor: Colors.black87,
+              content: AnimatedContainer(
+                duration: const Duration(milliseconds: 50),
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                color: Colors.transparent,
+                child: Consumer<RegistrationProvider>(builder: (context, value, child) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          value.message ?? 'Please Wait...',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      value.isLoading || value.isSuccess
+                          ? SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: CircularProgressIndicator(
+                                color: Colors.red,
+                                strokeWidth: 2.5,
+                              ),
+                            )
+                          : SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.red,
+                              ),
+                            ),
+                    ],
+                  );
+                }),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   countryCodeDialog({required BuildContext context}) {

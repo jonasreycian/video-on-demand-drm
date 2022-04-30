@@ -16,16 +16,16 @@ class ForgotPasswordEnterOtpCard extends StatelessWidget {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
+          generalDialog(context: context, message: value.message ?? '', isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
           value.reset();
         }
       });
       return Column(
         children: [
           Image.asset(
-            'assets/images/SampleLogo.png',
+            'assets/images/AQ_PRIME_LOGO_2.png',
             height: 130,
-            width: 130,
+            width: double.infinity,
           ),
           const SizedBox(height: 25),
           PinInputTextField(
@@ -100,16 +100,16 @@ class RegistraionEnterOtpCard extends StatelessWidget {
     return Consumer<RegistrationProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (value.isSuccess) {
-          generalDialog(context: context, message: value.message, isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
+          generalDialog(context: context, message: value.message ?? '', isAutoClose: true, isLoading: !value.isSuccess, icon: Icons.check);
           value.reset();
         }
       });
       return Column(
         children: [
           Image.asset(
-            'assets/images/SampleLogo.png',
+            'assets/images/AQ_PRIME_LOGO_2.png',
             height: 130,
-            width: 130,
+            width: double.infinity,
           ),
           const SizedBox(height: 25),
           PinInputTextField(

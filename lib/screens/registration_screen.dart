@@ -2,11 +2,6 @@ import 'package:aq_prime/widgets/enter_otp_card.dart';
 import 'package:aq_prime/widgets/registration_card.dart';
 import 'package:flutter/material.dart';
 import 'package:aq_prime/providers/registration_provider.dart';
-import 'package:aq_prime/screens/nav_screen.dart';
-import 'package:aq_prime/utilities/dialog.dart';
-import 'package:aq_prime/utilities/hex_color.dart';
-import 'package:aq_prime/widgets/input_textfield.dart';
-import 'package:aq_prime/widgets/primary_button.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
@@ -45,14 +40,16 @@ class RegistrationScreen extends StatelessWidget {
                 );
               },
               child: Consumer<RegistrationProvider>(builder: (context, value, child) {
-                if (value.isSuccess) {
-                  currentWidget = RegistraionEnterOtpCard();
-                  height = 400;
-                }
-                if (!value.isSuccess) {
-                  currentWidget = RegistrationCard();
-                  height = 810;
-                }
+                // if (value.isSuccess) {
+                //   currentWidget = RegistraionEnterOtpCard();
+                //   height = 400;
+                // }
+                // if (!value.isSuccess) {
+                //   currentWidget = RegistrationCard();
+                //   height = 810;
+                // }
+                currentWidget = RegistrationCard();
+                height = 810;
                 return SingleChildScrollView(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 500),

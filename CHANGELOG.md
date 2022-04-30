@@ -21,3 +21,10 @@ entry.
 - Added basic functionality and UI for Forgot Password Screen
 - Added basic functionality and UI for Navigation Screen
 - Added basic functionality and UI for Forgot Password Screen
+
+## AQP 0.1.2 (2022-04-30)
+
+### Added (5 change)
+
+- Added more functionalities
+- Added Better player with DRM support
