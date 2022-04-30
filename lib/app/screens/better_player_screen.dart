@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../device/constants.dart';
 import '../../domain/entities/content.dart';
+import '../app_constant.dart';
 
 // ignore: must_be_immutable
 class BetterPlayerScreen extends StatefulWidget {
@@ -32,8 +31,7 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       DeviceOrientation.landscapeLeft,
     ]);
 
-    BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
+    BetterPlayerConfiguration betterPlayerConfiguration = BetterPlayerConfiguration(
       fit: BoxFit.cover,
       autoPlay: true,
       fullScreenByDefault: true,
@@ -46,9 +44,8 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       BetterPlayerDataSourceType.network,
       Constants.tokenEncodedHlsUrl,
       videoFormat: BetterPlayerVideoFormat.hls,
-      drmConfiguration: BetterPlayerDrmConfiguration(
-          drmType: BetterPlayerDrmType.token,
-          token: Constants.tokenEncodedHlsToken),
+      drmConfiguration:
+          BetterPlayerDrmConfiguration(drmType: BetterPlayerDrmType.token, token: Constants.tokenEncodedHlsToken),
     );
     _tokenController = BetterPlayerController(betterPlayerConfiguration);
     _tokenController.setupDataSource(_tokenDataSource);
@@ -58,11 +55,9 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       BetterPlayerDataSourceType.network,
       widget.content.videoUrl!,
       drmConfiguration: BetterPlayerDrmConfiguration(
-        drmType: Platform.isIOS
-            ? BetterPlayerDrmType.fairplay
-            : BetterPlayerDrmType.widevine,
-        licenseUrl: Constants.widevineLicenseUrl,
-        headers: {"Test": "Test2"},
+        drmType: BetterPlayerDrmType.widevine,
+        licenseUrl: AppConstant.wideVineLicenseUrl,
+        headers: {"header": "value"},
       ),
     );
     _widevineController.setupDataSource(_widevineDataSource);
@@ -71,15 +66,14 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isAndroid
-        ? BetterPlayer(controller: _widevineController)
-        : BetterPlayer(controller: _tokenController);
+    return BetterPlayer(controller: _widevineController);
   }
 
   @override
   void dispose() {
     print(_widevineController.toString());
-    _widevineController.dispose(forceDispose: true);
+    _widevineController.dispose();
+    _tokenController.dispose();
     super.dispose();
   }
 }
