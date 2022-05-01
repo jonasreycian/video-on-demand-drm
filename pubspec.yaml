@@ -40,9 +40,10 @@ dependencies:
   transition: ^2.0.2
   better_player: ^0.0.81
   flutter_native_splash: ^2.1.5
+  device_information: ^0.0.4
   http: ^0.13.4
   shared_preferences: ^2.0.13
-  device_information: ^0.0.4
+  logging: ^1.0.2
 
 dev_dependencies:
   lints: ^1.0.1
