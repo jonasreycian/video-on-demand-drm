@@ -1,28 +1,28 @@
+import 'package:aq_prime/app/providers/continue_watching_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'providers/account_info_provider.dart';
-import 'providers/better_player_provider.dart';
-import 'providers/category_listing_provider.dart';
-import 'providers/continue_watching_provider.dart';
-import 'providers/forgot_password_provider.dart';
-import 'providers/home_provider.dart';
-import 'providers/login_provider.dart';
-import 'providers/my_watch_list_provider.dart';
-import 'providers/rating_provider.dart';
-import 'providers/refresh_limiter.dart';
-import 'providers/registration_provider.dart';
-import 'providers/search_provider.dart';
-import 'screens/categories_screen.dart';
-import 'screens/forgot_password_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/nav_screen.dart';
-import 'screens/registration_screen.dart';
-import 'screens/search_screen.dart';
-import 'screens/video_details/video_details_screen.dart';
-import 'widgets/dismiss_keyboard.dart';
+import 'app/providers/account_info_provider.dart';
+import 'app/providers/category_listing_provider.dart';
+import 'app/providers/home_provider.dart';
+import 'app/screens/search_screen.dart';
+import 'app/providers/refresh_limiter.dart';
+import 'app/providers/better_player_provider.dart';
+import 'app/providers/forgot_password_provider.dart';
+import 'app/providers/login_provider.dart';
+import 'app/providers/my_watch_list_provider.dart';
+import 'app/providers/rating_provider.dart';
+import 'app/providers/registration_provider.dart';
+import 'app/providers/search_provider.dart';
+import 'app/screens/categories_screen.dart';
+import 'app/screens/forgot_password_screen.dart';
+import 'app/screens/login_screen.dart';
+import 'app/screens/nav_screen.dart';
+import 'app/screens/registration_screen.dart';
+import 'app/screens/video_details/video_details_screen.dart';
+import 'app/widgets/dismiss_keyboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.black,
             ),
             initialRoute: initialRoute,
+            home: LoginScreen(),
             routes: {
               NavScreen.routeName: (context) => NavScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
