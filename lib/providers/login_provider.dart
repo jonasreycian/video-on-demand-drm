@@ -25,10 +25,17 @@ class LoginProvider with ChangeNotifier {
     _isLoading = true;
     _isSuccess = false;
     _message = null;
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
-      Map<String, dynamic> body = {'email': email, 'password': password, 'device_name': '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'};
-      API().request(parameter: body, endPoint: '/v1/login').then((value) {
-        if (value['success'] != null) {
+    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(email) &&
+        password.length >= 8) {
+      Map<String, String> body = {
+        'email': email,
+        'password': password,
+        'device_name':
+            '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'
+      };
+      API().request(parameter: body, endPoint: '/login').then((value) {
+        if (value['success']) {
           _isSuccess = true;
           _isLoading = false;
           _message = 'Logging in...';
@@ -42,7 +49,9 @@ class LoginProvider with ChangeNotifier {
         }
       });
     }
-    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)) {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email)) {
       _message = 'Invalid Email Address';
       _isSuccess = false;
       _isLoading = false;

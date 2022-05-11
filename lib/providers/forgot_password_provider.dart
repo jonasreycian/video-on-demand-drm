@@ -14,7 +14,8 @@ class ForgotPasswordProvider with ChangeNotifier {
 
   String _hintText = 'Email';
   String _submitName = 'Mail OTP';
-  CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
+  CountryCode _countryCode = CountryCode(
+      code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
 
   TextInputType _textInputType = TextInputType.text;
   String _selectedWidgetCard = 'Reset via Email';
@@ -71,9 +72,17 @@ class ForgotPasswordProvider with ChangeNotifier {
 
   sendEmailOrNumber(emailString, passwordString, confirmPasswordString) {
     reset();
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailString) && (passwordString.length >= 8) && (confirmPasswordString.length >= 8) && (passwordString == confirmPasswordString)) {
-      Map<String, dynamic> body = {'email': emailString, 'password': passwordString, 'password_confirmation': confirmPasswordString};
-      API().request(parameter: body, endPoint: '/v1/reset-password').then((value) {
+    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(emailString) &&
+        (passwordString.length >= 8) &&
+        (confirmPasswordString.length >= 8) &&
+        (passwordString == confirmPasswordString)) {
+      Map<String, dynamic> body = {
+        'email': emailString,
+        'password': passwordString,
+        'password_confirmation': confirmPasswordString
+      };
+      API().request(parameter: body, endPoint: '/reset-password').then((value) {
         if (value['errors'] != null) {
           _message = value['message'];
           _isSuccess = false;
@@ -87,7 +96,9 @@ class ForgotPasswordProvider with ChangeNotifier {
         }
       });
     }
-    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailString)) {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailString)) {
       _message = 'Invalid Email Address';
       _isSuccess = false;
       _isLoading = false;

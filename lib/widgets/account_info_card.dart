@@ -36,7 +36,8 @@ class AccountInfoCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -106,7 +107,11 @@ class AccountInfoCard extends StatelessWidget {
                   prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
                   prefixIcon: GestureDetector(
                     onTap: () {},
-                    child: Text('+63', style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
+                    child: Text('+63',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: HexColor('#BEBBBB'),
+                            fontWeight: FontWeight.w700)),
                   ),
                 ),
                 // const SizedBox(height: 20),
@@ -164,8 +169,10 @@ class AccountInfoCard extends StatelessWidget {
                   width: double.infinity,
                   label: 'Logout',
                   action: () {
-                    API().request(requestType: RequestType.post, endPoint: '/v1/logout');
-                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                    API().request(
+                        requestType: RequestType.post, endPoint: '/logout');
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
                     user_data.loggedOut();
                   },
                 ),

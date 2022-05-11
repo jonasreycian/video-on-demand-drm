@@ -12,7 +12,9 @@ class CategoryListingProvider with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/v1/videos/').then((value) {
+    API()
+        .request(requestType: RequestType.get, endPoint: '/videos')
+        .then((value) {
       if (value['success']) {
         _data = value['data'];
         _isLoading = false;
