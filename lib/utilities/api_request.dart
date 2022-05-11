@@ -16,36 +16,45 @@ class API {
     required String endPoint,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
-    debugPrint('token:${user_data.token} : API REQUEST: $parameter');
+    String token =
+        ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
+    print('token:${user_data.token} : API REQUEST: $parameter');
     Map<String, String>? headers = <String, String>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Referer': AppConfig.endPoint,
+      'Referer': AppConfig.referrer,
       'Authorization': 'Bearer $token',
     };
     http.Response response;
+    var uri;
     try {
       //============================================================
       if (requestType == RequestType.post) {
+        uri = Uri.http(
+            AppConfig.host, AppConfig.path + AppConfig.version + endPoint);
+        print('$requestType :: Using url ==> $uri');
         response = await http
             .post(
-              Uri.http(AppConfig.host, AppConfig.path + endPoint),
+              uri,
               headers: headers,
               body: parameter == null ? null : jsonEncode(parameter),
             )
             .timeout(const Duration(seconds: 10));
       } else {
+        uri = Uri.http(AppConfig.host,
+            AppConfig.path + AppConfig.version + endPoint, parameter);
+        print('$requestType :: Using url ==> $uri');
         response = await http
             .get(
-              Uri.http(AppConfig.host, AppConfig.path + endPoint, parameter),
+              uri,
               headers: headers,
             )
             .timeout(const Duration(seconds: 10));
       }
       //============================================================
       if (response.statusCode == 200 && response.body.isNotEmpty) {
-        debugPrint('API RESPONSE (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');
+        debugPrint(
+            'API RESPONSE (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');
         Map<String, dynamic> data = jsonDecode(response.body);
 
         data['needPopUpError'] = false;

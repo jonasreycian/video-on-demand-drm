@@ -27,7 +27,7 @@ class AccountInfoProvider with ChangeNotifier {
 
   loadData() async {
     await user_data.prepareUserData();
-    API().request(requestType: RequestType.get, endPoint: '/v1/me').then((value) {
+    API().request(requestType: RequestType.get, endPoint: '/me').then((value) {
       if (value['success'] != null) {
         _isSuccess = true;
         _isLoading = false;

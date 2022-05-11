@@ -5,7 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class RegistrationProvider with ChangeNotifier {
-  CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
+  CountryCode _countryCode = CountryCode(
+      code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   DateTime? _birthDay;
   String? _message;
   bool _isSuccess = false;
@@ -49,7 +50,8 @@ class RegistrationProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
-  String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
+  String? get birthDayString =>
+      _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
 
   //setter
   setField(String field, String value) {
@@ -83,10 +85,24 @@ class RegistrationProvider with ChangeNotifier {
 
   sendAPI() async {
     reset();
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email) && _password.length >= 8 && _password == _confirmPassword) {
-      Map<String, dynamic> body = {'first_name': _firstName, 'last_name': _lastName, 'mobile': _mobileNumber, 'email': _email, 'password': _password, 'password_confirmation': _confirmPassword, 'plan_id': 1, 'status': 1, 'device_name': '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'};
-      API().request(parameter: body, endPoint: '/v1/register').then((value) {
-        if (value['errors'] == null) {
+    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(_email) &&
+        _password.length >= 8 &&
+        _password == _confirmPassword) {
+      Map<String, dynamic> body = {
+        'first_name': _firstName,
+        'last_name': _lastName,
+        'mobile': _mobileNumber,
+        'email': _email,
+        'password': _password,
+        'password_confirmation': _confirmPassword,
+        'plan_id': 1,
+        'status': 1,
+        'device_name':
+            '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'
+      };
+      API().request(parameter: body, endPoint: '/register').then((value) {
+        if (!value['success']) {
           _isSuccess = true;
           _isLoading = false;
           _message = 'Registering, Please wait...';
@@ -112,7 +128,9 @@ class RegistrationProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email)) {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(_email)) {
       _message = 'Invalid Email address';
       _isSuccess = false;
       _isLoading = false;

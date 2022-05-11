@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 
 class Constants {
   static String widevineVideoUrl =
-      "https://d22bamm3lcnbm1.cloudfront.net/745e74be-d9f0-46d7-9547-d843554f6c13/hls/Enchanted.m3u8";
+      "https://d22bamm3lcnbm1.cloudfront.net/d2b324f2-8c05-4ce3-b101-46eda807226d/Big_Buck_Bunny_720_10s_30MB.mpd";
   static String widevineLicenseUrl =
-      "https://proxy.uat.widevine.com/proxy?provider=widevine_test";
+      "http://widevine-dash.ezdrm.com/proxy?pX=3A454C";
 }
 
 mixin PortraitModeMixin on StatelessWidget {
