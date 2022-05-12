@@ -1,6 +1,6 @@
-import 'package:aq_prime/utilities/api_request.dart';
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
-import 'package:aq_prime/utilities/user_data.dart' as user_data;
+import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class AccountInfoProvider with ChangeNotifier {
   bool _isLoading = true;
