@@ -19,6 +19,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
+import '../../data/extra/data.dart';
+import '../widgets/aq_floating_action_button.dart';
+import '../widgets/fetured_section.dart';
+import '../widgets/only_aqprime_section.dart';
+import '../widgets/others_section.dart';
+import '../widgets/popular_section.dart';
+import '../widgets/search_button.dart';
+import '../widgets/section_card.dart';
+import '../widgets/title_text_card.dart';
+import '../widgets/top_ten_section.dart';
+import '../widgets/trending_section.dart';
+import 'search_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

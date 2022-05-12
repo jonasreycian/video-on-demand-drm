@@ -148,7 +148,13 @@ class RegistrationCard extends StatelessWidget {
           PrimaryButton(
             height: 50,
             action: () {
-              if (firstName.text.isNotEmpty && lastName.text.isNotEmpty && email.text.isNotEmpty && mobileNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty && value.birthDayString != null) {
+              if (firstName.text.isNotEmpty &&
+                  lastName.text.isNotEmpty &&
+                  email.text.isNotEmpty &&
+                  mobileNumber.text.isNotEmpty &&
+                  password.text.isNotEmpty &&
+                  confirmPassword.text.isNotEmpty &&
+                  value.birthDayString != null) {
                 value.sendAPI();
                 registrationDialog(context);
               } else {

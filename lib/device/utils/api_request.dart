@@ -7,6 +7,9 @@ import 'package:http/http.dart' as http;
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_config.dart';
+import 'user_data.dart' as user_data;
+
 enum RequestType { post, get }
 
 class API {

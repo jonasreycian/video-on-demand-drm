@@ -7,7 +7,13 @@ import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-// ignore: must_be_immutable
+import '../../device/utils/api_request.dart';
+import '../../device/utils/hex_color.dart';
+import '../screens/login_screen.dart';
+import 'input_textfield.dart';
+import 'primary_button.dart';
+import 'secondary_button.dart';
+
 class AccountInfoCard extends StatelessWidget {
   AccountInfoCard({
     required this.firstName,

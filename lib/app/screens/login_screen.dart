@@ -11,6 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
+import '../../device/utils/dialog.dart';
+import '../../device/utils/hex_color.dart';
+import '../providers/login_provider.dart';
+import '../widgets/input_textfield.dart';
+import '../widgets/primary_button.dart';
+import '../widgets/text_and_link.dart';
+import 'forgot_password_screen.dart';
+import 'nav_screen.dart';
+import 'registration_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/login';

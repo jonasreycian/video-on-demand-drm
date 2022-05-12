@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/registration_provider.dart';
+import '../widgets/registration_card.dart';
+
 // ignore: must_be_immutable
 class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({Key? key}) : super(key: key);

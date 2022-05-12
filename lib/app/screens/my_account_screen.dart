@@ -6,6 +6,12 @@ import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/account_info_provider.dart';
+import '../widgets/account_info_card.dart';
+import '../widgets/loading_indicator.dart';
+import '../widgets/plant_details.dart';
+import '../widgets/title_text_card.dart';
+
 class MyAccountScreen extends StatelessWidget {
   MyAccountScreen({
     Key? key,

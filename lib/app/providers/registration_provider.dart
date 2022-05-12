@@ -4,6 +4,8 @@ import 'package:device_information/device_information.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
+import '../../device/utils/api_request.dart';
+
 class RegistrationProvider with ChangeNotifier {
   CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   DateTime? _birthDay;

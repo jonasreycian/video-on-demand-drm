@@ -1,6 +1,8 @@
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../device/utils/api_request.dart';
+
 class ContinueWatching with ChangeNotifier {
   bool _isSuccess = false;
   bool _isLoading = true;
