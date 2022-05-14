@@ -37,7 +37,7 @@ class LoginProvider with ChangeNotifier {
         } else {
           _isSuccess = false;
           _isLoading = false;
-          _message = value['message'];
+          _message = value['errors']['email'][0];
           notifyListeners();
         }
       });
