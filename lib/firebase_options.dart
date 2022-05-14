@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBpSo54u8AL3v26DdLLv4KcmJwSMbdTkHg',
-    appId: '1:193351075124:ios:16e86bd28d284388c49161',
+    appId: '1:193351075124:ios:6f433332ef10d2c8c49161',
     messagingSenderId: '193351075124',
     projectId: 'aq-prime-test',
     storageBucket: 'aq-prime-test.appspot.com',

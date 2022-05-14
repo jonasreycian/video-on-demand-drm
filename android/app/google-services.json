@@ -29,6 +29,13 @@
             {
               "client_id": "193351075124-c4vu215ck4b90o62ir5kmnessaoecd39.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "193351075124-dh2p98qjs3arv869eo64thpp4sos22ts.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.snapworxdigital.aqPrime"
+              }
             }
           ]
         }

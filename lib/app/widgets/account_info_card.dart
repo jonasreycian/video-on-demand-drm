@@ -28,7 +28,6 @@ class AccountInfoCard extends StatelessWidget {
   final TextEditingController mobileNumber;
   @override
   Widget build(BuildContext context) {
-    user_data.loggedOut();
     return AnimationConfiguration.staggeredList(
       position: 0,
       duration: const Duration(milliseconds: 500),
