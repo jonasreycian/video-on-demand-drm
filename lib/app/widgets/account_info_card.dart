@@ -6,7 +6,7 @@ import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
+import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 import '../../device/utils/api_request.dart';
 import '../../device/utils/hex_color.dart';
 import '../screens/login_screen.dart';
@@ -28,6 +28,7 @@ class AccountInfoCard extends StatelessWidget {
   final TextEditingController mobileNumber;
   @override
   Widget build(BuildContext context) {
+    user_data.loggedOut();
     return AnimationConfiguration.staggeredList(
       position: 0,
       duration: const Duration(milliseconds: 500),
@@ -171,7 +172,7 @@ class AccountInfoCard extends StatelessWidget {
                   action: () {
                     API().request(requestType: RequestType.post, endPoint: '/logout');
                     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                    // user_data.loggedOut();
+                    user_data.loggedOut();
                   },
                 ),
               ],

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "193351075124",
+    "project_id": "aq-prime-test",
+    "storage_bucket": "aq-prime-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193351075124:android:2e9a515aa4db05a0c49161",
+        "android_client_info": {
+          "package_name": "com.snapworxdigital.aq_prime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193351075124-c4vu215ck4b90o62ir5kmnessaoecd39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHltzDYxkYbcx2akPE1mVVwilaIVVi8A0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193351075124-c4vu215ck4b90o62ir5kmnessaoecd39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
