@@ -32,6 +32,11 @@ class AccountInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setFirstName(value) => _firstName = value;
+  setLastName(value) => _lastName = value;
+  setMobile(value) => _mobile = value;
+  setEmail(value) => _email = value;
+
   loadData() async {
     await user_data.prepareUserData();
     API().request(requestType: RequestType.get, endPoint: '/me').then((value) {

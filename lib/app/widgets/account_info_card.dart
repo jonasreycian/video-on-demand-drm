@@ -1,15 +1,13 @@
-import 'package:aq_prime/app/screens/login_screen.dart';
+import 'package:aq_prime/app/providers/account_info_provider.dart';
 import 'package:aq_prime/app/widgets/input_textfield.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/secondary_button.dart';
-import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
-import '../../device/utils/api_request.dart';
+import 'package:provider/provider.dart';
+
 import '../../device/utils/hex_color.dart';
-import '../screens/login_screen.dart';
 import 'input_textfield.dart';
 import 'primary_button.dart';
 import 'secondary_button.dart';
@@ -20,14 +18,19 @@ class AccountInfoCard extends StatelessWidget {
     required this.lastName,
     required this.email,
     required this.mobileNumber,
+    required this.onSaved,
+    required this.onCancel,
     Key? key,
   }) : super(key: key);
   final TextEditingController firstName;
   final TextEditingController lastName;
   final TextEditingController email;
   final TextEditingController mobileNumber;
+  final void Function() onSaved;
+  final void Function() onCancel;
   @override
   Widget build(BuildContext context) {
+    AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
     return AnimationConfiguration.staggeredList(
       position: 0,
       duration: const Duration(milliseconds: 500),
@@ -35,7 +38,7 @@ class AccountInfoCard extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            height: 510,
+            height: 515,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
@@ -59,7 +62,7 @@ class AccountInfoCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 InputTextField(
-                  onChanged: (p0) {},
+                  onChanged: (p0) => accountInfoProvider.setFirstName(p0),
                   controller: firstName,
                   hintText: 'First Name',
                   height: 55,
@@ -69,7 +72,7 @@ class AccountInfoCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 InputTextField(
-                  onChanged: (p0) {},
+                  onChanged: (p0) => accountInfoProvider.setLastName(p0),
                   controller: lastName,
                   hintText: 'Last Name',
                   height: 55,
@@ -79,7 +82,7 @@ class AccountInfoCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 InputTextField(
-                  onChanged: (p0) {},
+                  onChanged: (p0) => accountInfoProvider.setEmail(p0),
                   controller: email,
                   hintText: 'E-mail',
                   height: 55,
@@ -102,7 +105,7 @@ class AccountInfoCard extends StatelessWidget {
                 // ),
                 const SizedBox(height: 20),
                 InputTextField(
-                  onChanged: (p0) {},
+                  onChanged: (p0) => accountInfoProvider.setMobile(p0),
                   controller: mobileNumber,
                   hintText: 'Mobile Number',
                   height: 55,
@@ -161,19 +164,15 @@ class AccountInfoCard extends StatelessWidget {
                 SecondaryButton(
                   height: 50,
                   width: double.infinity,
-                  label: 'Change information',
-                  action: () {},
+                  label: 'Save',
+                  action: onSaved,
                 ),
                 const SizedBox(height: 20),
                 PrimaryButton(
                   height: 50,
                   width: double.infinity,
-                  label: 'Logout',
-                  action: () {
-                    API().request(requestType: RequestType.post, endPoint: '/logout');
-                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                    user_data.loggedOut();
-                  },
+                  label: 'Cancel',
+                  action: onCancel,
                 ),
               ],
             ),

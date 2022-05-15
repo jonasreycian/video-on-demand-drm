@@ -1,13 +1,29 @@
+import 'package:aq_prime/app/widgets/account_info_child_card.dart';
+import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
 class AccountInfoCardDisplay extends StatelessWidget {
-  const AccountInfoCardDisplay({Key? key}) : super(key: key);
-
+  const AccountInfoCardDisplay({
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.mobileNumber,
+    required this.onChangeInformation,
+    required this.onPressedLogout,
+    Key? key,
+  }) : super(key: key);
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? mobileNumber;
+  final void Function() onChangeInformation;
+  final void Function() onPressedLogout;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 510,
+      height: 515,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.2),
@@ -17,6 +33,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'Account Info',
@@ -29,44 +46,27 @@ class AccountInfoCardDisplay extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 15),
-          AccountInfoChild(title: 'First Name', value: 'YourName'),
-          AccountInfoChild(title: 'Last Name', value: 'YourName'),
-          AccountInfoChild(title: 'Email', value: 'YourName'),
-          AccountInfoChild(title: 'Mobile', value: 'YourName'),
+          const SizedBox(height: 20),
+          AccountInfoChild(title: 'First Name', value: firstName),
+          AccountInfoChild(title: 'Last Name', value: lastName),
+          AccountInfoChild(title: 'Email', value: email),
+          AccountInfoChild(title: 'Mobile', value: mobileNumber),
+          const SizedBox(height: 20),
+          SecondaryButton(
+            height: 50,
+            width: double.infinity,
+            label: 'Change information',
+            action: onChangeInformation,
+          ),
+          const SizedBox(height: 20),
+          PrimaryButton(
+            height: 50,
+            width: double.infinity,
+            label: 'Logout',
+            action: onPressedLogout,
+          ),
         ],
       ),
-    );
-  }
-}
-
-class AccountInfoChild extends StatelessWidget {
-  const AccountInfoChild({
-    this.title,
-    this.value,
-    Key? key,
-  }) : super(key: key);
-  final String? title;
-  final String? value;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 5),
-        Text(title ?? '--'),
-        Container(
-          margin: const EdgeInsets.only(top: 10, bottom: 10),
-          padding: const EdgeInsets.only(top: 0, bottom: 10, left: 0, right: 10),
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: HexColor('#F9FAFB'),
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          child: SizedBox(),
-        ),
-      ],
     );
   }
 }
