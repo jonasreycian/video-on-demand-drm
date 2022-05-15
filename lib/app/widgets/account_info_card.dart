@@ -35,6 +35,7 @@ class AccountInfoCard extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
+            height: 510,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),

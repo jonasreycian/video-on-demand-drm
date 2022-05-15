@@ -5,6 +5,7 @@ import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 class AccountInfoProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
+  bool _isEditing = false;
 
   int? _id;
   String? _firstName;
@@ -24,6 +25,12 @@ class AccountInfoProvider with ChangeNotifier {
   Map<String, dynamic> get plan => _plan;
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
+  bool get isEditing => _isEditing;
+
+  setIsEditing() {
+    _isEditing = !_isEditing;
+    notifyListeners();
+  }
 
   loadData() async {
     await user_data.prepareUserData();

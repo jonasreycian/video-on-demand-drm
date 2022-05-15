@@ -40,7 +40,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.snapworxdigital.aq_prime"
+        applicationId "com.snapworxdigital.aq.prime"
         minSdkVersion 16
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
