@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/providers/account_info_provider.dart';
+import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/screens/login_screen.dart';
 import 'package:aq_prime/app/widgets/account_info_card.dart';
 import 'package:aq_prime/app/widgets/account_info_card_display.dart';
@@ -6,6 +7,7 @@ import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/plant_details.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/device/utils/api_request.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
@@ -45,36 +47,41 @@ class MyAccountScreen extends StatelessWidget {
         mobileNumber.text = value.mobile ?? '';
         return value.isSuccess
             ? SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 500),
-                        child: value.isEditing
-                            ? AccountInfoCard(
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                mobileNumber: mobileNumber,
-                                onCancel: () => value.setIsEditing(),
-                                onSaved: () {},
-                              )
-                            : AccountInfoCardDisplay(
-                                firstName: value.firstName,
-                                lastName: value.lastName,
-                                email: value.email,
-                                mobileNumber: value.mobile,
-                                onChangeInformation: () => value.setIsEditing(),
-                                onPressedLogout: () {
-                                  API().request(requestType: RequestType.post, endPoint: '/logout');
-                                  Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                                  user_data.loggedOut();
-                                },
-                              ),
-                      ),
-                      PlanDetailsCard(plan: value.plan),
-                    ],
+                child: RefreshIndicator(
+                  color: Colors.white,
+                  backgroundColor: Colors.red,
+                  onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          child: value.isEditing
+                              ? AccountInfoCardEditing(
+                                  firstName: firstName,
+                                  lastName: lastName,
+                                  email: email,
+                                  mobileNumber: mobileNumber,
+                                  onCancel: () => value.setIsEditing(),
+                                  onSaved: () {},
+                                )
+                              : AccountInfoCardDisplay(
+                                  firstName: value.firstName,
+                                  lastName: value.lastName,
+                                  email: value.email,
+                                  mobileNumber: value.mobile,
+                                  onChangeInformation: () => value.setIsEditing(),
+                                  onPressedLogout: () {
+                                    API().request(requestType: RequestType.post, endPoint: '/logout');
+                                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                    user_data.loggedOut();
+                                  },
+                                ),
+                        ),
+                        PlanDetailsCard(plan: value.plan),
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -83,10 +90,21 @@ class MyAccountScreen extends StatelessWidget {
     );
   }
 
+  onRefresh(context) {
+    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
+    AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
+    if (refreshLimit.onLimit) {
+      refreshLimit.setCount();
+      accountInfoProvider.loadData(true);
+    } else {
+      refreshLimitDialog(context: context);
+    }
+  }
+
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
       AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
-      if (!accountInfoProvider.isSuccess) accountInfoProvider.loadData();
+      if (!accountInfoProvider.isSuccess) accountInfoProvider.loadData(false);
     });
   }
 }

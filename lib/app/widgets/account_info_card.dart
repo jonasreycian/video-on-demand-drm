@@ -12,8 +12,8 @@ import 'input_textfield.dart';
 import 'primary_button.dart';
 import 'secondary_button.dart';
 
-class AccountInfoCard extends StatelessWidget {
-  AccountInfoCard({
+class AccountInfoCardEditing extends StatelessWidget {
+  AccountInfoCardEditing({
     required this.firstName,
     required this.lastName,
     required this.email,

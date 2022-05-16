@@ -18,14 +18,23 @@ class AccountInfoChild extends StatelessWidget {
         Text(title ?? '--'),
         Container(
           margin: const EdgeInsets.only(top: 5, bottom: 3),
-          // padding: const EdgeInsets.only(top: 0, bottom: 10, left: 0, right: 10),
+          padding: const EdgeInsets.only(left: 20, top: 8, bottom: 5),
           height: 40,
           width: double.infinity,
           decoration: BoxDecoration(
             color: HexColor('#F9FAFB'),
             borderRadius: BorderRadius.circular(12.0),
           ),
-          child: SizedBox(),
+          child: Text(
+            value ?? '--',
+            style: const TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w500,
+              fontStyle: FontStyle.normal,
+              fontSize: 18,
+              color: Colors.black,
+            ),
+          ),
         ),
       ],
     );

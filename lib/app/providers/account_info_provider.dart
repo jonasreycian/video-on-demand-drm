@@ -37,7 +37,8 @@ class AccountInfoProvider with ChangeNotifier {
   setMobile(value) => _mobile = value;
   setEmail(value) => _email = value;
 
-  loadData() async {
+  loadData(bool withReset) async {
+    if (withReset) reset();
     await user_data.prepareUserData();
     API().request(requestType: RequestType.get, endPoint: '/me').then((value) {
       if (value['success'] != null) {
@@ -56,5 +57,19 @@ class AccountInfoProvider with ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+
+  reset() {
+    _isSuccess = false;
+    _isLoading = false;
+    _id = null;
+    _firstName = null;
+    _lastName = null;
+    _mobile = null;
+    _email = null;
+    _status = null;
+    _createdAt = null;
+    _plan.clear();
+    notifyListeners();
   }
 }
