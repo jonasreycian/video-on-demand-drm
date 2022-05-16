@@ -4,6 +4,7 @@ import 'package:aq_prime/app/screens/login_screen.dart';
 import 'package:aq_prime/app/widgets/account_info_card.dart';
 import 'package:aq_prime/app/widgets/account_info_card_display.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
+import 'package:aq_prime/app/widgets/password_editing_card.dart';
 import 'package:aq_prime/app/widgets/plant_details.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/device/utils/api_request.dart';
@@ -27,6 +28,7 @@ class MyAccountScreen extends StatelessWidget {
   final TextEditingController mobileNumber = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
+  final Duration duration = const Duration(milliseconds: 500);
   @override
   Widget build(BuildContext context) {
     initState(context);
@@ -56,7 +58,7 @@ class MyAccountScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 500),
+                          duration: duration,
                           child: value.isEditing
                               ? AccountInfoCardEditing(
                                   firstName: firstName,
@@ -79,6 +81,7 @@ class MyAccountScreen extends StatelessWidget {
                                   },
                                 ),
                         ),
+                        const PasswordEditingCard(),
                         PlanDetailsCard(plan: value.plan),
                       ],
                     ),

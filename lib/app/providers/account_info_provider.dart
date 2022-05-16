@@ -6,7 +6,7 @@ class AccountInfoProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
   bool _isEditing = false;
-
+  bool _isEditingPassword = false;
   int? _id;
   String? _firstName;
   String? _lastName;
@@ -26,9 +26,15 @@ class AccountInfoProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   bool get isEditing => _isEditing;
+  bool get isEditingPassword => _isEditingPassword;
 
   setIsEditing() {
     _isEditing = !_isEditing;
+    notifyListeners();
+  }
+
+  setIsEditingPassword() {
+    _isEditingPassword = !_isEditingPassword;
     notifyListeners();
   }
 
