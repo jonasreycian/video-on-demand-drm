@@ -1,24 +1,18 @@
 import 'package:aq_prime/app/widgets/catalogs_card.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 
 import 'primary_button.dart';
 
-class PlanDetailsCard extends StatefulWidget {
-  const PlanDetailsCard({
+class PlanDetailsCard extends StatelessWidget {
+  PlanDetailsCard({
     required this.plan,
     Key? key,
   }) : super(key: key);
   final Map<String, dynamic> plan;
 
-  @override
-  State<PlanDetailsCard> createState() => _PlanDetailsCardState();
-}
-
-class _PlanDetailsCardState extends State<PlanDetailsCard> {
-  bool isExpanded = false;
+  final GlobalKey expansionTileKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -37,19 +31,21 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
+                key: expansionTileKey,
                 childrenPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 0, top: 0),
                 tilePadding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                 expandedAlignment: Alignment.centerLeft,
                 onExpansionChanged: (value) {
-                  isExpanded = value;
-                  setState(() {});
+                  if (value) {
+                    _scrollToSelectedContent(expansionTileKey: expansionTileKey);
+                  }
                 },
                 trailing: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 100),
                   child: Icon(Icons.arrow_drop_down, color: Colors.white),
                 ),
                 title: Text(
-                  'Account Plan',
+                  'Account Information',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w500,
@@ -68,7 +64,7 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
                       ),
                       const SizedBox(height: 15),
                       Text(
-                        widget.plan['name'],
+                        plan['name'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Roboto',
@@ -88,7 +84,7 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.70,
                                 child: Text(
-                                  widget.plan['description'] ?? 'not_available',
+                                  plan['description'] ?? 'not_available',
                                   maxLines: 3,
                                   softWrap: false,
                                   overflow: TextOverflow.ellipsis,
@@ -106,10 +102,10 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
                             ],
                           ),
                           const SizedBox(height: 15),
-                          Catalogs(list: widget.plan['excluded_catalogs']),
+                          Catalogs(list: plan['excluded_catalogs']),
                           const SizedBox(height: 15),
                           Text(
-                            widget.plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(widget.plan['price_monthly']))} / Month' : 'not_available',
+                            plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_monthly']))} / Month' : 'not_available',
                             textAlign: TextAlign.center,
                             softWrap: true,
                             style: TextStyle(
@@ -122,7 +118,7 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            widget.plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(widget.plan['price_yearly']))} / Year' : 'not_available',
+                            plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_yearly']))} / Year' : 'not_available',
                             textAlign: TextAlign.center,
                             softWrap: true,
                             style: TextStyle(
@@ -152,5 +148,14 @@ class _PlanDetailsCardState extends State<PlanDetailsCard> {
         ),
       ),
     );
+  }
+
+  _scrollToSelectedContent({required GlobalKey expansionTileKey}) {
+    final keyContext = expansionTileKey.currentContext;
+    if (keyContext != null) {
+      Future.delayed(Duration(milliseconds: 250)).then((value) {
+        Scrollable.ensureVisible(keyContext, duration: Duration(milliseconds: 250));
+      });
+    }
   }
 }

@@ -33,17 +33,19 @@ class PrimaryButton extends StatelessWidget {
       height: height,
       width: width == null ? double.infinity : width!,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.red.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
+        boxShadow: isDisabled
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.red.withOpacity(0.3),
+                  spreadRadius: 3,
+                  blurRadius: 10,
+                  offset: Offset(0, 3),
+                ),
+              ],
       ),
       child: Opacity(
-        opacity: isDisabled ? 0.5 : 1.0,
+        opacity: isDisabled ? 0.3 : 1.0,
         child: ElevatedButton(
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -55,7 +57,7 @@ class PrimaryButton extends StatelessWidget {
               ),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 252, 5, 5),
+              isDisabled ? Color.fromARGB(255, 94, 94, 94).withOpacity(0.5) : Color.fromARGB(255, 252, 5, 5),
             ),
           ),
           child: Row(

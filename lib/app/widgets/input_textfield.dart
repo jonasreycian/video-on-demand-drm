@@ -54,71 +54,70 @@ class InputTextField extends StatelessWidget {
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ??=
-          const EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
-      height: height,
-      width: width == null ? double.infinity : width!,
-      decoration: BoxDecoration(
-        color: HexColor('#F9FAFB'),
-        borderRadius:
-            BorderRadius.circular(borderRadius == null ? 12.0 : borderRadius!),
-      ),
-      child: TextField(
-        onTap: onTap,
-        onChanged: onChanged,
-        onEditingComplete: onEditingComplete,
-        focusNode: focusNode == null ? null : focusNode!,
-        obscureText: obscureText,
-        enabled: isEnabled,
-        readOnly: readOnly,
-        maxLines: maxLine,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w400,
-          fontStyle: FontStyle.normal,
-          fontSize: 15,
-          color: isEnabled ? HexColor('#000000') : Colors.black26,
+    return Opacity(
+      opacity: isEnabled ? 1.0 : 0.1,
+      child: Container(
+        padding: padding ??= const EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
+        height: height,
+        width: width == null ? double.infinity : width!,
+        decoration: BoxDecoration(
+          color: HexColor('#F9FAFB'),
+          borderRadius: BorderRadius.circular(borderRadius == null ? 12.0 : borderRadius!),
         ),
-        textAlign: TextAlign.left,
-        controller: controller,
-        keyboardType: keyboardType == null ? TextInputType.text : keyboardType!,
-        textAlignVertical: TextAlignVertical.top,
-        decoration: InputDecoration(
-          // isDense: true,
-          prefixIcon: prefixIcon != null
-              ? Padding(
-                  padding: prefixIconPadding ??= const EdgeInsets.all(3),
-                  child: prefixIcon,
-                )
-              : null,
-          suffixIcon: suffixIcon != null
-              ? Padding(
-                  padding: suffixIconPadding ??= const EdgeInsets.all(5),
-                  child: suffixIcon,
-                )
-              : null,
-          floatingLabelBehavior: floatingLabelBehavior ??=
-              FloatingLabelBehavior.auto,
-          labelText: hintText == null ? '' : hintText!,
-          alignLabelWithHint: alignLabelWithHint ??= false,
-          labelStyle: TextStyle(
+        child: TextField(
+          onTap: onTap,
+          onChanged: onChanged,
+          onEditingComplete: onEditingComplete,
+          focusNode: focusNode == null ? null : focusNode!,
+          obscureText: obscureText,
+          enabled: isEnabled,
+          readOnly: readOnly,
+          maxLines: maxLine,
+          style: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w400,
             fontStyle: FontStyle.normal,
-            fontSize: 14,
-            color: isEnabled ? HexColor('#BEBBBB') : Colors.black26,
+            fontSize: 15,
+            color: isEnabled ? HexColor('#000000') : Colors.black26,
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-              width: 0,
-              style: BorderStyle.none,
+          textAlign: TextAlign.left,
+          controller: controller,
+          keyboardType: keyboardType == null ? TextInputType.text : keyboardType!,
+          textAlignVertical: TextAlignVertical.top,
+          decoration: InputDecoration(
+            // isDense: true,
+            prefixIcon: prefixIcon != null
+                ? Padding(
+                    padding: prefixIconPadding ??= const EdgeInsets.all(3),
+                    child: prefixIcon,
+                  )
+                : null,
+            suffixIcon: suffixIcon != null
+                ? Padding(
+                    padding: suffixIconPadding ??= const EdgeInsets.all(5),
+                    child: suffixIcon,
+                  )
+                : null,
+            floatingLabelBehavior: floatingLabelBehavior ??= FloatingLabelBehavior.auto,
+            labelText: hintText == null ? '' : hintText!,
+            alignLabelWithHint: alignLabelWithHint ??= false,
+            labelStyle: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400,
+              fontStyle: FontStyle.normal,
+              fontSize: 14,
+              color: isEnabled ? HexColor('#BEBBBB') : Colors.black26,
             ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
+            ),
+            contentPadding: contentPadding ??= const EdgeInsets.only(top: 15, left: 5),
+            // contentPadding: const EdgeInsets.all(16),
           ),
-          contentPadding: contentPadding ??=
-              const EdgeInsets.only(top: 15, left: 5),
-          // contentPadding: const EdgeInsets.all(16),
         ),
       ),
     );

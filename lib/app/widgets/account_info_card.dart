@@ -28,6 +28,7 @@ class AccountInfoCardEditing extends StatelessWidget {
   final TextEditingController mobileNumber;
   final void Function() onSaved;
   final void Function() onCancel;
+
   @override
   Widget build(BuildContext context) {
     AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);

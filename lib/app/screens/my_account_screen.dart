@@ -26,9 +26,8 @@ class MyAccountScreen extends StatelessWidget {
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
   final Duration duration = const Duration(milliseconds: 500);
+
   @override
   Widget build(BuildContext context) {
     initState(context);
@@ -81,7 +80,7 @@ class MyAccountScreen extends StatelessWidget {
                                   },
                                 ),
                         ),
-                        const PasswordEditingCard(),
+                        PasswordEditingCard(),
                         PlanDetailsCard(plan: value.plan),
                       ],
                     ),
