@@ -31,6 +31,14 @@ class PasswordEditingCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Consumer<ChangePasswordMyAccount>(builder: (context, value, child) {
+              Future.delayed(const Duration(milliseconds: 1000), () {
+                if (value.isSuccess) {
+                  Navigator.of(context).pop();
+                  value.reset();
+                  password.clear();
+                  confirmPassword.clear();
+                }
+              });
               return Theme(
                 data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                 child: ExpansionTile(
@@ -119,7 +127,10 @@ class PasswordEditingCard extends StatelessWidget {
                       height: 50,
                       width: double.infinity,
                       label: 'Save',
-                      action: () {},
+                      action: () {
+                        changePasswordDialog(context);
+                        value.resetPassword(password.text, confirmPassword.text);
+                      },
                     ),
                     const SizedBox(height: 25),
                   ],
@@ -139,5 +150,81 @@ class PasswordEditingCard extends StatelessWidget {
         Scrollable.ensureVisible(keyContext, duration: Duration(milliseconds: 250));
       });
     }
+  }
+
+  changePasswordDialog(context) {
+    showGeneralDialog(
+      barrierDismissible: false,
+      context: context,
+      pageBuilder: (context, animation1, animation2) {
+        return const SizedBox();
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
+
+        return Transform(
+          transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+          child: Opacity(
+            opacity: anim1.value,
+            child: AlertDialog(
+              actionsAlignment: MainAxisAlignment.center,
+              contentPadding: const EdgeInsets.all(15),
+              actionsPadding: const EdgeInsets.only(bottom: 10),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.0),
+                ),
+              ),
+              backgroundColor: Colors.black87,
+              content: AnimatedContainer(
+                duration: const Duration(milliseconds: 50),
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                color: Colors.transparent,
+                child: Consumer<ChangePasswordMyAccount>(builder: (context, value, child) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          value.message ?? 'Please Wait...',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      !value.isSuccess
+                          ? SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: CircularProgressIndicator(
+                                color: Colors.red,
+                                strokeWidth: 2.5,
+                              ),
+                            )
+                          : SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.red,
+                              ),
+                            ),
+                    ],
+                  );
+                }),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

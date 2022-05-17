@@ -1,14 +1,17 @@
-// ignore_for_file: unnecessary_string_escapes
-
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
+import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class ChangePasswordMyAccount with ChangeNotifier {
+  bool _isSuccess = false;
+  bool _isLoading = true;
+  String? _message;
   String _password = '';
   final numericRegex = RegExp(r'[0-9]');
   final upperCaseRegex = RegExp(r'[A-Z]');
   final lowerCaseRegex = RegExp(r'[a-z]');
   bool _passwordHidden = true;
-  bool _passwordConfirmHidden = false;
+  bool _passwordConfirmHidden = true;
 
   bool _eightChar = false;
   bool _oneNumber = false;
@@ -27,6 +30,9 @@ class ChangePasswordMyAccount with ChangeNotifier {
   bool get allSuccess => _allSuccess;
   bool get isPasswordMatch => _passwordIsMatch;
 
+  String? get message => _message;
+  bool get isLoading => _isLoading;
+  bool get isSuccess => _isSuccess;
   setPassword(value) {
     isEightChar(value);
     oneNumberValidation(value);
@@ -52,7 +58,39 @@ class ChangePasswordMyAccount with ChangeNotifier {
     notifyListeners();
   }
 
-  ///VALIDATIONSSS------------------------------------------------------------------------------------
+  resetPassword(String password, String passwordConfirm) async {
+    await user_data.prepareUserData();
+    Map<String, String> body = {'email': user_data.email, 'password': password, 'password_confirmation': passwordConfirm};
+    API().request(requestType: RequestType.post, parameter: body, endPoint: '/reset-password').then((value) {
+      if (value['success'] != null) {
+        _isSuccess = true;
+        _isLoading = false;
+        _message = value['message'];
+        notifyListeners();
+      } else {
+        _isSuccess = false;
+        _isLoading = false;
+        _message = 'Something went wrong';
+        notifyListeners();
+      }
+    });
+  }
+
+  reset() {
+    _message = null;
+    _isSuccess = false;
+    _isLoading = false;
+
+    _eightChar = false;
+    _oneNumber = false;
+    _oneLower = false;
+    _oneUpper = false;
+    _passwordIsMatch = false;
+    _allSuccess = false;
+    notifyListeners();
+  }
+
+  ///START VALIDATIONSSS------------------------------------------------------------------------------------
   isEightChar(value) {
     if (value.length >= 8) {
       _eightChar = true;
@@ -106,4 +144,6 @@ class ChangePasswordMyAccount with ChangeNotifier {
       _passwordIsMatch = false;
     }
   }
+
+  ///END VALIDATIONSSS------------------------------------------------------------------------------------
 }

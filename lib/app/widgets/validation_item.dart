@@ -29,7 +29,7 @@ class ValidationItem extends StatelessWidget {
             child: Center(
               child: Icon(
                 Icons.check,
-                color: Colors.white,
+                color: isSuccess ? Colors.white : Colors.red,
                 size: 20,
               ),
             ),
@@ -42,7 +42,7 @@ class ValidationItem extends StatelessWidget {
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w500,
               fontSize: 15,
-              color: HexColor('#ADA7A7'),
+              color: isSuccess ? Colors.red : HexColor('#ADA7A7'),
             ),
           ),
         ],
