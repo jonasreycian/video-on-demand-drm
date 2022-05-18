@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
   // final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
   // final TextEditingController password = TextEditingController(text: 'pass123\$');
   final TextEditingController emailNumber = TextEditingController(text: 'jesther2@yahoo.com');
-  final TextEditingController password = TextEditingController(text: '123Password');
+  final TextEditingController password = TextEditingController(text: 'hahaha7H');
   //   final TextEditingController emailNumber = TextEditingController();
   // final TextEditingController password = TextEditingController();
   final FocusNode passwordFocus = FocusNode();

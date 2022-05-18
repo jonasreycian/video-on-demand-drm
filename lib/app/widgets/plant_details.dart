@@ -45,7 +45,7 @@ class PlanDetailsCard extends StatelessWidget {
                   child: Icon(Icons.arrow_drop_down, color: Colors.white),
                 ),
                 title: Text(
-                  'Account Information',
+                  'Plan Information',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w500,

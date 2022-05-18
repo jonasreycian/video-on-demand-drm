@@ -39,7 +39,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Account Info',
+                  'Account Information',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontFamily: 'Roboto',
