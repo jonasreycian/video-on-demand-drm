@@ -1,6 +1,5 @@
 import 'package:aq_prime/app/widgets/account_info_child_card.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -11,7 +10,6 @@ class AccountInfoCardDisplay extends StatelessWidget {
     this.email,
     this.mobileNumber,
     required this.onChangeInformation,
-    required this.onPressedLogout,
     Key? key,
   }) : super(key: key);
   final String? firstName;
@@ -19,7 +17,6 @@ class AccountInfoCardDisplay extends StatelessWidget {
   final String? email;
   final String? mobileNumber;
   final void Function() onChangeInformation;
-  final void Function() onPressedLogout;
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -29,7 +26,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            height: 515,
+            height: 450,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
@@ -58,18 +55,11 @@ class AccountInfoCardDisplay extends StatelessWidget {
                 AccountInfoChild(title: 'Email', value: email),
                 AccountInfoChild(title: 'Mobile', value: mobileNumber),
                 const SizedBox(height: 20),
-                SecondaryButton(
+                PrimaryButton(
                   height: 50,
                   width: double.infinity,
                   label: 'Change information',
                   action: onChangeInformation,
-                ),
-                const SizedBox(height: 20),
-                PrimaryButton(
-                  height: 50,
-                  width: double.infinity,
-                  label: 'Logout',
-                  action: onPressedLogout,
                 ),
               ],
             ),

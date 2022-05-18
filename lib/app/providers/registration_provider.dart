@@ -87,7 +87,7 @@ class RegistrationProvider with ChangeNotifier {
     reset();
     if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email) && _password.length >= 8 && _password == _confirmPassword) {
       Map<String, dynamic> body = {'first_name': _firstName, 'last_name': _lastName, 'mobile': _mobileNumber, 'email': _email, 'password': _password, 'password_confirmation': _confirmPassword, 'plan_id': 1, 'status': 1, 'device_name': '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'};
-      API().request(parameter: body, endPoint: '/register').then((value) {
+      API().request(requestType: RequestType.post, parameter: body, endPoint: '/register').then((value) {
         if (!value['success']) {
           _isSuccess = true;
           _isLoading = false;

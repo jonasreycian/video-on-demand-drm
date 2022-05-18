@@ -73,7 +73,7 @@ class ForgotPasswordProvider with ChangeNotifier {
     reset();
     if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailString) && (passwordString.length >= 8) && (confirmPasswordString.length >= 8) && (passwordString == confirmPasswordString)) {
       Map<String, dynamic> body = {'email': emailString, 'password': passwordString, 'password_confirmation': confirmPasswordString};
-      API().request(parameter: body, endPoint: '/reset-password').then((value) {
+      API().request(requestType: RequestType.post, parameter: body, endPoint: '/reset-password').then((value) {
         if (value['errors'] != null) {
           _message = value['message'];
           _isSuccess = false;

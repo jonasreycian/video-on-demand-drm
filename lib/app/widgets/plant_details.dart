@@ -27,7 +27,7 @@ class PlanDetailsCard extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               borderRadius: BorderRadius.circular(20),
             ),
-            margin: const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 10),
+            margin: const EdgeInsets.only(left: 25, right: 25),
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(

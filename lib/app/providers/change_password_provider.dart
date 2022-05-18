@@ -1,15 +1,16 @@
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class ChangePasswordMyAccount with ChangeNotifier {
   bool _isSuccess = false;
   bool _isLoading = true;
   String? _message;
-  String _password = '';
-  final numericRegex = RegExp(r'[0-9]');
-  final upperCaseRegex = RegExp(r'[A-Z]');
-  final lowerCaseRegex = RegExp(r'[a-z]');
+  // String _currentPassword = '';
+  String _newPassword = '';
+  final RegExp numericRegex = RegExp(r'[0-9]');
+  final RegExp upperCaseRegex = RegExp(r'[A-Z]');
+  final RegExp lowerCaseRegex = RegExp(r'[a-z]');
+  bool _currentPasswordHidden = true;
   bool _passwordHidden = true;
   bool _passwordConfirmHidden = true;
 
@@ -18,8 +19,10 @@ class ChangePasswordMyAccount with ChangeNotifier {
   bool _oneLower = false;
   bool _oneUpper = false;
   bool _passwordIsMatch = false;
+  bool _isCurrentPasswordFilled = false;
   bool _allSuccess = false;
 
+  bool get currentPasswordHideen => _currentPasswordHidden;
   bool get passwordHidden => _passwordHidden;
   bool get passwordConfirmHidden => _passwordConfirmHidden;
 
@@ -33,6 +36,12 @@ class ChangePasswordMyAccount with ChangeNotifier {
   String? get message => _message;
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
+  bool get isCurrentPasswordFilled => _isCurrentPasswordFilled;
+  setCurrentPassword(value) {
+    checkCurrentPasswordLength(value);
+    notifyListeners();
+  }
+
   setPassword(value) {
     isEightChar(value);
     oneNumberValidation(value);
@@ -40,11 +49,16 @@ class ChangePasswordMyAccount with ChangeNotifier {
     oneUpperCaseValidation(value);
     isSuccessAll();
     notifyListeners();
-    _password = value;
+    _newPassword = value;
   }
 
   setConfirmPassword(value) {
     isPasswordMatchValidation(value);
+    notifyListeners();
+  }
+
+  setCurrentPasswordHidden() {
+    _currentPasswordHidden = !_currentPasswordHidden;
     notifyListeners();
   }
 
@@ -58,11 +72,13 @@ class ChangePasswordMyAccount with ChangeNotifier {
     notifyListeners();
   }
 
-  resetPassword(String password, String passwordConfirm) async {
-    await user_data.prepareUserData();
-    Map<String, String> body = {'email': user_data.email, 'password': password, 'password_confirmation': passwordConfirm};
-    API().request(requestType: RequestType.post, parameter: body, endPoint: '/reset-password').then((value) {
-      if (value['success'] != null) {
+  resetPassword(String currentPassword, String newPassword, String confirmNewPassword) {
+    _message = null;
+    _isSuccess = false;
+    _isLoading = true;
+    Map<String, String> body = {'current_password': currentPassword, 'password': newPassword, 'password_confirmation': confirmNewPassword};
+    API().request(requestType: RequestType.put, parameter: body, endPoint: '/users/password/change').then((value) {
+      if (value['success']) {
         _isSuccess = true;
         _isLoading = false;
         _message = value['message'];
@@ -70,7 +86,7 @@ class ChangePasswordMyAccount with ChangeNotifier {
       } else {
         _isSuccess = false;
         _isLoading = false;
-        _message = 'Something went wrong';
+        _message = 'Incorrect Current password';
         notifyListeners();
       }
     });
@@ -79,7 +95,7 @@ class ChangePasswordMyAccount with ChangeNotifier {
   reset() {
     _message = null;
     _isSuccess = false;
-    _isLoading = false;
+    _isLoading = true;
 
     _eightChar = false;
     _oneNumber = false;
@@ -87,10 +103,23 @@ class ChangePasswordMyAccount with ChangeNotifier {
     _oneUpper = false;
     _passwordIsMatch = false;
     _allSuccess = false;
+    _isCurrentPasswordFilled = false;
+
+    _currentPasswordHidden = true;
+    _passwordHidden = true;
+    _passwordConfirmHidden = true;
     notifyListeners();
   }
 
   ///START VALIDATIONSSS------------------------------------------------------------------------------------
+  checkCurrentPasswordLength(String value) {
+    if (value.length >= 8) {
+      _isCurrentPasswordFilled = true;
+    } else {
+      _isCurrentPasswordFilled = false;
+    }
+  }
+
   isEightChar(value) {
     if (value.length >= 8) {
       _eightChar = true;
@@ -138,7 +167,7 @@ class ChangePasswordMyAccount with ChangeNotifier {
   }
 
   isPasswordMatchValidation(value) {
-    if (_password == value) {
+    if (_newPassword == value) {
       _passwordIsMatch = true;
     } else {
       _passwordIsMatch = false;

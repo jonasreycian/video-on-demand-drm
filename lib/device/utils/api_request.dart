@@ -10,11 +10,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_config.dart';
 import 'user_data.dart' as user_data;
 
-enum RequestType { post, get }
+enum RequestType { post, get, put }
 
 class API {
   Future<Map<String, dynamic>> request({
-    RequestType requestType = RequestType.post,
+    required RequestType requestType,
     Map<String, dynamic>? parameter,
     required String endPoint,
   }) async {
@@ -27,7 +27,7 @@ class API {
       'Referer': AppConfig.referrer,
       'Authorization': 'Bearer $token',
     };
-    http.Response response;
+    http.Response? response;
     Uri uri;
     try {
       //============================================================
@@ -41,7 +41,8 @@ class API {
               body: parameter == null ? null : jsonEncode(parameter),
             )
             .timeout(const Duration(seconds: 10));
-      } else {
+      }
+      if (requestType == RequestType.get) {
         uri = Uri.http(AppConfig.host, AppConfig.path + AppConfig.version + endPoint, parameter);
         print('$requestType :: Using url ==> $uri');
         response = await http
@@ -51,8 +52,18 @@ class API {
             )
             .timeout(const Duration(seconds: 10));
       }
+      if (requestType == RequestType.put) {
+        uri = Uri.http(AppConfig.host, AppConfig.path + AppConfig.version + endPoint, parameter);
+        print('$requestType :: Using url ==> $uri');
+        response = await http
+            .put(
+              uri,
+              headers: headers,
+            )
+            .timeout(const Duration(seconds: 10));
+      }
       //============================================================
-      if (response.statusCode == 200 && response.body.isNotEmpty) {
+      if (response!.statusCode == 200 && response.body.isNotEmpty) {
         debugPrint('API RESPONSE (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');
         Map<String, dynamic> data = jsonDecode(response.body);
 

@@ -1,16 +1,10 @@
 import 'package:aq_prime/app/providers/account_info_provider.dart';
 import 'package:aq_prime/app/widgets/input_textfield.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-
-import '../../device/utils/hex_color.dart';
-import 'input_textfield.dart';
-import 'primary_button.dart';
-import 'secondary_button.dart';
 
 class AccountInfoCardEditing extends StatelessWidget {
   AccountInfoCardEditing({
@@ -19,7 +13,6 @@ class AccountInfoCardEditing extends StatelessWidget {
     required this.email,
     required this.mobileNumber,
     required this.onSaved,
-    required this.onCancel,
     Key? key,
   }) : super(key: key);
   final TextEditingController firstName;
@@ -27,7 +20,6 @@ class AccountInfoCardEditing extends StatelessWidget {
   final TextEditingController email;
   final TextEditingController mobileNumber;
   final void Function() onSaved;
-  final void Function() onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +31,7 @@ class AccountInfoCardEditing extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            height: 515,
+            height: 450,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
@@ -51,7 +43,7 @@ class AccountInfoCardEditing extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Account Info',
+                  'Edit Account',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontFamily: 'Roboto',
@@ -91,19 +83,6 @@ class AccountInfoCardEditing extends StatelessWidget {
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
                 ),
-                // const SizedBox(height: 20),
-                // CalendarField(
-                //   selectedDate: 'March 11, 1990',
-                //   withShadow: true,
-                //   isDateRange: false,
-                //   function: () => calendarDialog(
-                //     context,
-                //     DateTime.now(),
-                //     (p0) {
-                //       Navigator.of(context).pop();
-                //     },
-                //   ),
-                // ),
                 const SizedBox(height: 20),
                 InputTextField(
                   onChanged: (p0) => accountInfoProvider.setMobile(p0),
@@ -119,61 +98,12 @@ class AccountInfoCardEditing extends StatelessWidget {
                     child: Text('+63', style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
                   ),
                 ),
-                // const SizedBox(height: 20),
-                // InputTextField(
-                //   onChanged: (p0) {},
-                //   controller: password,
-                //   hintText: 'Password',
-                //   height: 55,
-                //   keyboardType: TextInputType.text,
-                //   obscureText: true,
-                //   floatingLabelBehavior: FloatingLabelBehavior.auto,
-                //   padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
-                //   suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-                //   suffixIcon: IconButton(
-                //     onPressed: () {},
-                //     icon: Icon(
-                //       // ignore: dead_code
-                //       false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                //       color: HexColor('#BEBBBB'),
-                //       size: 20,
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 20),
-                // InputTextField(
-                //   onChanged: (p0) {},
-                //   controller: confirmPassword,
-                //   hintText: 'Confirm Password',
-                //   height: 55,
-                //   keyboardType: TextInputType.text,
-                //   obscureText: false,
-                //   floatingLabelBehavior: FloatingLabelBehavior.auto,
-                //   padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-                //   suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-                //   suffixIcon: IconButton(
-                //     onPressed: () {},
-                //     icon: Icon(
-                //       // ignore: dead_code
-                //       false ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                //       color: HexColor('#BEBBBB'),
-                //       size: 20,
-                //     ),
-                //   ),
-                // ),
-                const SizedBox(height: 20),
-                SecondaryButton(
-                  height: 50,
-                  width: double.infinity,
-                  label: 'Save',
-                  action: onSaved,
-                ),
                 const SizedBox(height: 20),
                 PrimaryButton(
                   height: 50,
                   width: double.infinity,
-                  label: 'Cancel',
-                  action: onCancel,
+                  label: 'Save',
+                  action: onSaved,
                 ),
               ],
             ),

@@ -11,6 +11,7 @@ class PasswordEditingCard extends StatelessWidget {
   PasswordEditingCard({
     Key? key,
   }) : super(key: key);
+  final TextEditingController currentPassword = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
 
@@ -24,7 +25,7 @@ class PasswordEditingCard extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: AnimatedContainer(
-            margin: const EdgeInsets.only(top: 25, bottom: 5, left: 25, right: 25),
+            margin: const EdgeInsets.only(left: 25, right: 25),
             duration: const Duration(milliseconds: 200),
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
@@ -32,9 +33,17 @@ class PasswordEditingCard extends StatelessWidget {
             ),
             child: Consumer<ChangePasswordMyAccount>(builder: (context, value, child) {
               Future.delayed(const Duration(milliseconds: 1000), () {
-                if (value.isSuccess) {
+                if (value.isSuccess && !value.isLoading) {
                   Navigator.of(context).pop();
                   value.reset();
+                  currentPassword.clear();
+                  password.clear();
+                  confirmPassword.clear();
+                }
+                if (!value.isSuccess && !value.isLoading) {
+                  value.reset();
+                  Navigator.of(context).pop();
+                  currentPassword.clear();
                   password.clear();
                   confirmPassword.clear();
                 }
@@ -72,9 +81,30 @@ class PasswordEditingCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     InputTextField(
+                      onChanged: (p0) => value.setCurrentPassword(p0),
+                      controller: currentPassword,
+                      hintText: 'Current Password',
+                      height: 50,
+                      keyboardType: TextInputType.text,
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      padding: const EdgeInsets.only(left: 20, top: 7, bottom: 10),
+                      suffixIconPadding: const EdgeInsets.only(top: 1, bottom: 10, right: 10),
+                      obscureText: value.currentPasswordHideen,
+                      suffixIcon: IconButton(
+                        onPressed: () => value.setCurrentPasswordHidden(),
+                        icon: Icon(
+                          value.currentPasswordHideen ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          color: HexColor('#BEBBBB'),
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    InputTextField(
+                      isEnabled: value.isCurrentPasswordFilled,
                       onChanged: (p0) => value.setPassword(p0),
                       controller: password,
-                      hintText: 'Password',
+                      hintText: 'New Password',
                       height: 50,
                       keyboardType: TextInputType.text,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -91,19 +121,19 @@ class PasswordEditingCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.eightChar, name: 'Minimum eight characters'),
+                    ValidationItem(isSuccess: value.eightChar, isBlurred: !value.isCurrentPasswordFilled, name: 'Minimum eight characters'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneNumber, name: 'At least one number'),
+                    ValidationItem(isSuccess: value.oneNumber, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one number'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneLower, name: 'At least one lower case'),
+                    ValidationItem(isSuccess: value.oneLower, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one lower case'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneUpper, name: 'At least one upper case'),
+                    ValidationItem(isSuccess: value.oneUpper, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one upper case'),
                     const SizedBox(height: 15),
                     InputTextField(
                       isEnabled: value.allSuccess,
                       onChanged: (p0) => value.setConfirmPassword(p0),
                       controller: confirmPassword,
-                      hintText: 'Confirm Password',
+                      hintText: 'Confirm New Password',
                       height: 50,
                       keyboardType: TextInputType.text,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -129,7 +159,7 @@ class PasswordEditingCard extends StatelessWidget {
                       label: 'Save',
                       action: () {
                         changePasswordDialog(context);
-                        value.resetPassword(password.text, confirmPassword.text);
+                        value.resetPassword(currentPassword.text, password.text, confirmPassword.text);
                       },
                     ),
                     const SizedBox(height: 25),
@@ -161,7 +191,6 @@ class PasswordEditingCard extends StatelessWidget {
       },
       transitionBuilder: (context, anim1, anim2, child) {
         final curvedValue = Curves.easeInOutBack.transform(anim1.value) - 1.0;
-
         return Transform(
           transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
           child: Opacity(
@@ -200,7 +229,7 @@ class PasswordEditingCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      !value.isSuccess
+                      !value.isSuccess && value.isLoading
                           ? SizedBox(
                               width: 25,
                               height: 25,
@@ -213,7 +242,7 @@ class PasswordEditingCard extends StatelessWidget {
                               width: 25,
                               height: 25,
                               child: Icon(
-                                Icons.check,
+                                value.message == 'Incorrect Current password' ? Icons.close : Icons.check,
                                 color: Colors.red,
                               ),
                             ),

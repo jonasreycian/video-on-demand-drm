@@ -11,22 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
-import '../../device/utils/dialog.dart';
-import '../../device/utils/hex_color.dart';
-import '../providers/login_provider.dart';
-import '../widgets/input_textfield.dart';
-import '../widgets/primary_button.dart';
-import '../widgets/text_and_link.dart';
-import 'forgot_password_screen.dart';
-import 'nav_screen.dart';
-import 'registration_screen.dart';
-
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/login';
   // final TextEditingController emailNumber = TextEditingController(text: 'demo@test.com');
   // final TextEditingController password = TextEditingController(text: 'pass123\$');
-  final TextEditingController emailNumber = TextEditingController(text: 'jesther1112@yahoo.com');
+  final TextEditingController emailNumber = TextEditingController(text: 'jesther2@yahoo.com');
   final TextEditingController password = TextEditingController(text: '123Password');
   //   final TextEditingController emailNumber = TextEditingController();
   // final TextEditingController password = TextEditingController();

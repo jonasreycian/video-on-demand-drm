@@ -12,18 +12,6 @@ import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/extra/data.dart';
-import '../../device/utils/dialog.dart';
-import '../providers/category_listing_provider.dart';
-import '../providers/refresh_limiter.dart';
-import '../widgets/aq_floating_action_button.dart';
-import '../widgets/category_card.dart';
-import '../widgets/loading_indicator.dart';
-import '../widgets/search_button.dart';
-import '../widgets/section_card.dart';
-import '../widgets/title_text_card.dart';
-import 'search_screen.dart';
-
 class CategoryListingScreen extends StatelessWidget {
   CategoryListingScreen({Key? key}) : super(key: key);
 
