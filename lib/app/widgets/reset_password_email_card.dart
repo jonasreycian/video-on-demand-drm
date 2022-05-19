@@ -1,12 +1,11 @@
+import 'package:aq_prime/app/providers/forgot_password_provider.dart';
+import 'package:aq_prime/app/widgets/dropdown_card.dart';
+import 'package:aq_prime/app/widgets/input_textfield.dart';
+import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../device/utils/dialog.dart';
-import '../providers/forgot_password_provider.dart';
-import 'dropdown_card.dart';
-import 'input_textfield.dart';
-import 'primary_button.dart';
 
 class ResetPasswordCardEmail extends StatelessWidget {
   ResetPasswordCardEmail({

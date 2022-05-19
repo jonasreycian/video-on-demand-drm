@@ -27,7 +27,7 @@ class RegistrationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(builder: (context, value, child) {
-      Future.delayed(const Duration(milliseconds: 1000), () {
+      Future.delayed(const Duration(milliseconds: 2000), () {
         if (!value.isLoading && !value.isSuccess) {
           Navigator.of(context).pop();
           Future.delayed(const Duration(milliseconds: 100), (() => value.reset()));

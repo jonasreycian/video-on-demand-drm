@@ -1,4 +1,4 @@
-package com.snapworxdigital.aq_prime
+package com.snapworxdigital.aq.prime
 
 import android.app.*
 import android.content.Context

@@ -139,6 +139,7 @@ class RegistrationProvider with ChangeNotifier {
     _isSuccess = false;
     _isObscurePassword = true;
     _isObscureConfirmPassword = true;
+    _isAcceptedTermsAndCondition = false;
     notifyListeners();
     // _birthDay = null;
     // _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');

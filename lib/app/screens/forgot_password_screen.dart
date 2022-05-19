@@ -6,29 +6,8 @@ import '../widgets/reset_password_email_card.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
   static const routeName = '/forgotPassword';
-  late Widget currentWidget;
-  late double height;
   @override
   Widget build(BuildContext context) {
-    // ForgotPasswordProvider forgotPasswordProvider = Provider.of<ForgotPasswordProvider>(context);
-    // if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[0]) {
-    //   currentWidget = ResetPasswordCardMobile();
-    //   height = 400;
-    // }
-    // if (forgotPasswordProvider.selectedWidgetCard == forgotPasswordProvider.choices[1]) {
-    //   currentWidget = ResetPasswordCardEmail();
-    //   height = 400;
-    // }
-    // if (forgotPasswordProvider.isSuccess && forgotPasswordProvider.isSuccessOtp) {
-    //   currentWidget = EnterNewPassword();
-    //   height = 400;
-    // }
-    // if (forgotPasswordProvider.isSuccess && !forgotPasswordProvider.isSuccessOtp) {
-    //   currentWidget = ForgotPasswordEnterOtpCard();
-    //   height = 400;
-    // }
-    currentWidget = ResetPasswordCardEmail();
-    height = 550;
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -46,7 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
-                height: height,
+                height: 550,
                 width: double.infinity,
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -65,7 +44,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       delay: const Duration(milliseconds: 1000),
                     );
                   },
-                  child: currentWidget,
+                  child: ResetPasswordCardEmail(),
                 ),
               ),
             ),
