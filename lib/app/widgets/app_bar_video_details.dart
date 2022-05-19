@@ -194,7 +194,7 @@ class TutorialOverlay extends ModalRoute<void> {
             'This is a nice overlay',
             style: TextStyle(color: Colors.white, fontSize: 30.0),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () => Navigator.pop(context),
             child: Text('Dismiss'),
           )

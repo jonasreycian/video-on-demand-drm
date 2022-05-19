@@ -192,11 +192,15 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                   children: [
                     _PlayButton(),
                     const SizedBox(width: 16.0),
-                    FlatButton.icon(
-                      padding:
-                          const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+                    TextButton.icon(
                       onPressed: () => print('More Info'),
-                      color: Colors.white,
+                      style: TextButton.styleFrom(
+                        padding:
+                            const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                       icon: const Icon(Icons.info_outline, size: 30.0),
                       label: const Text(
                         'More Info',
@@ -235,14 +239,17 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
 class _PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlatButton.icon(
-      padding: !Responsive.isDesktop(context)
-          ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0)
-          : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+    return TextButton.icon(
+      style: TextButton.styleFrom(
+          padding: !Responsive.isDesktop(context)
+              ? const EdgeInsets.fromLTRB(15.0, 5.0, 20.0, 5.0)
+              : const EdgeInsets.fromLTRB(25.0, 10.0, 30.0, 10.0),
+          textStyle: TextStyle(
+            color: Colors.white,
+          )),
       onPressed: () {
         Navigator.of(context).pushNamed(BetterPlayerScreen.routeName);
       },
-      color: Colors.white,
       icon: const Icon(Icons.play_arrow, size: 30.0),
       label: const Text(
         'Play',

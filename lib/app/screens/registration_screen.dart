@@ -1,8 +1,6 @@
-import 'package:aq_prime/app/providers/registration_provider.dart';
 import 'package:aq_prime/app/widgets/registration_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class RegistrationScreen extends StatelessWidget {
@@ -41,8 +39,10 @@ class RegistrationScreen extends StatelessWidget {
                   duration: const Duration(milliseconds: 500),
                   height: 810,
                   width: double.infinity,
-                  margin: const EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+                  margin: const EdgeInsets.only(
+                      left: 20, right: 20, top: 40, bottom: 20),
+                  padding: const EdgeInsets.only(
+                      left: 20, right: 20, top: 20, bottom: 20),
                   decoration: BoxDecoration(
                     color: Colors.black54,
                     borderRadius: BorderRadius.all(
