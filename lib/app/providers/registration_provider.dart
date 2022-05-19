@@ -85,11 +85,20 @@ class RegistrationProvider with ChangeNotifier {
         };
         API().request(requestType: RequestType.post, parameter: body, endPoint: '/register').then((value) {
           if (value['success']) {
-            _isSuccess = true;
-            _isLoading = false;
             _message = value['message'];
-            user_data.saveLoggedIn(value['data']);
             notifyListeners();
+            ////LOGINGG IN
+            Future.delayed(const Duration(milliseconds: 1000), () {
+              _message = 'Logging in...';
+              notifyListeners();
+            });
+            Future.delayed(const Duration(milliseconds: 2000), () {
+              _isSuccess = true;
+              _isLoading = false;
+              user_data.saveLoggedIn(value['data']);
+              notifyListeners();
+            });
+            ////LOGINGG IN
           } else {
             _isSuccess = false;
             _isLoading = false;
@@ -106,7 +115,7 @@ class RegistrationProvider with ChangeNotifier {
         notifyListeners();
       }
       if (_password != _confirmPassword) {
-        _message = 'Password not match';
+        _message = 'Password do not match';
         _isSuccess = false;
         _isLoading = false;
         notifyListeners();
