@@ -39,19 +39,20 @@ class CheckboxLabel extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 14,
-                  color: Colors.black,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),
