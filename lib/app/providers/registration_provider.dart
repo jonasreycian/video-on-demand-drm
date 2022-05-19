@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class RegistrationProvider with ChangeNotifier {
+  bool _isAcceptedTermsAndCondition = true;
   CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   DateTime? _birthDay;
   String? _message;
@@ -35,6 +36,7 @@ class RegistrationProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
+  bool get isAcceptedTermsAndCondition => _isAcceptedTermsAndCondition;
   String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
 
   //setter
@@ -45,6 +47,10 @@ class RegistrationProvider with ChangeNotifier {
   // setMobileNumber(value) => _mobileNumber = value;
   // setPassword(value) => _password = value;
   // setConfirmPassword(value) => _confirmPassword = value;
+  setTermsAndCondition() {
+    _isAcceptedTermsAndCondition = !_isAcceptedTermsAndCondition;
+    notifyListeners();
+  }
 
   setBirthDay(DateTime? value) {
     _birthDay = value;
