@@ -6,10 +6,10 @@ import '../../device/utils/api_request.dart';
 class CategoryListingProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  Map _data = {};
+  List _data = [];
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  Map get data => _data;
+  List get data => _data;
 
   loadData() {
     reset();

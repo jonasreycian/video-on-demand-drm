@@ -1,4 +1,4 @@
-package com.snapworxdigital.aq_prime
+package com.snapworxdigital.aq.prime
 
 import android.content.Intent
 import android.os.Build

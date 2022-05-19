@@ -1,10 +1,10 @@
+import 'dart:io';
+
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../device/constants.dart';
 import '../../domain/entities/content.dart';
-import '../app_constant.dart';
 
 // ignore: must_be_immutable
 class BetterPlayerScreen extends StatefulWidget {
@@ -22,7 +22,6 @@ class BetterPlayerScreen extends StatefulWidget {
 
 class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
   late BetterPlayerController _widevineController;
-  late BetterPlayerController _tokenController;
 
   @override
   void initState() {
@@ -40,24 +39,14 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       autoDispose: true,
     );
 
-    BetterPlayerDataSource _tokenDataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      Constants.tokenEncodedHlsUrl,
-      videoFormat: BetterPlayerVideoFormat.hls,
-      drmConfiguration:
-          BetterPlayerDrmConfiguration(drmType: BetterPlayerDrmType.token, token: Constants.tokenEncodedHlsToken),
-    );
-    _tokenController = BetterPlayerController(betterPlayerConfiguration);
-    _tokenController.setupDataSource(_tokenDataSource);
-
     _widevineController = BetterPlayerController(betterPlayerConfiguration);
     BetterPlayerDataSource _widevineDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       widget.content.videoUrl!,
       drmConfiguration: BetterPlayerDrmConfiguration(
-        drmType: BetterPlayerDrmType.widevine,
-        licenseUrl: AppConstant.wideVineLicenseUrl,
-        headers: {"header": "value"},
+        drmType: Platform.isIOS ? BetterPlayerDrmType.fairplay : BetterPlayerDrmType.widevine,
+        licenseUrl: Constants.widevineLicenseUrl,
+        headers: {"Test": "Test2"},
       ),
     );
     _widevineController.setupDataSource(_widevineDataSource);
@@ -72,8 +61,7 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
   @override
   void dispose() {
     print(_widevineController.toString());
-    _widevineController.dispose();
-    _tokenController.dispose();
+    _widevineController.dispose(forceDispose: true);
     super.dispose();
   }
 }

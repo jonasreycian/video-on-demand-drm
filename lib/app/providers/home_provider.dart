@@ -1,8 +1,6 @@
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../device/utils/api_request.dart';
-
 class HomeProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
@@ -16,7 +14,7 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
     API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
       if (value['error_code'] == null) {
-        _data = value['data']['data'];
+        _data = value['data'];
         _isLoading = false;
         _isSuccess = true;
         notifyListeners();

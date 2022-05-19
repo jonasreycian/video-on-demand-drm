@@ -27,7 +27,7 @@ class LoginProvider with ChangeNotifier {
     _message = null;
     if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
       Map<String, String> body = {'email': email, 'password': password, 'device_name': '${await DeviceInformation.deviceManufacturer}:${await DeviceInformation.deviceModel}'};
-      API().request(parameter: body, endPoint: '/login').then((value) {
+      API().request(requestType: RequestType.post, parameter: body, endPoint: '/login').then((value) {
         if (value['success']) {
           _isSuccess = true;
           _isLoading = false;
@@ -37,7 +37,7 @@ class LoginProvider with ChangeNotifier {
         } else {
           _isSuccess = false;
           _isLoading = false;
-          _message = value['message'];
+          _message = value['errors']['email'][0];
           notifyListeners();
         }
       });

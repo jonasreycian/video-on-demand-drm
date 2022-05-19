@@ -58,7 +58,7 @@ class CalendarField extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontStyle: FontStyle.normal,
                   fontSize: 14,
-                  color: HexColor('#9D9D9D'),
+                  color: selectedDate == null ? HexColor('#9D9D9D') : Colors.black,
                 ),
               ),
             ],

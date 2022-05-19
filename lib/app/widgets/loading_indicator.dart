@@ -10,7 +10,7 @@ class AQLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return const AnimationConfiguration.staggeredList(
       position: 0,
-      duration: Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: 100),
       child: FadeInAnimation(
         child: Center(
           child: SizedBox(

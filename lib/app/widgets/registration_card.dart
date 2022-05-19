@@ -1,41 +1,41 @@
+import 'package:aq_prime/app/providers/registration_provider.dart';
+import 'package:aq_prime/app/screens/nav_screen.dart';
+import 'package:aq_prime/app/widgets/calendar_card.dart';
+import 'package:aq_prime/app/widgets/input_textfield.dart';
+import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
+import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../device/utils/dialog.dart';
-import '../../device/utils/hex_color.dart';
-import '../providers/registration_provider.dart';
-import 'calendar_card.dart';
-import 'input_textfield.dart';
-import 'primary_button.dart';
-
 class RegistrationCard extends StatelessWidget {
   RegistrationCard({Key? key}) : super(key: key);
-  // final TextEditingController firstName = TextEditingController(text: 'Juan');
-  // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
-  // final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
-  // final TextEditingController mobileNumber = TextEditingController(text: '91643489');
-  // final TextEditingController password = TextEditingController(text: 'passwordMatch');
-  // final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
-  final TextEditingController firstName = TextEditingController();
-  final TextEditingController lastName = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController firstName = TextEditingController(text: 'Juan');
+  final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
+  final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
+  final TextEditingController mobileNumber = TextEditingController(text: '9760223075');
+  final TextEditingController password = TextEditingController(text: 'passwordMatch');
+  final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
+  // final TextEditingController firstName = TextEditingController();
+  // final TextEditingController lastName = TextEditingController();
+  // final TextEditingController email = TextEditingController();
+  // final TextEditingController mobileNumber = TextEditingController();
+  // final TextEditingController password = TextEditingController();
+  // final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(builder: (context, value, child) {
-      firstName.text = value.getField('firstName');
-      lastName.text = value.getField('lastName');
-      email.text = value.getField('email');
-      mobileNumber.text = value.getField('mobileNumber');
-      password.text = value.getField('password');
-      confirmPassword.text = value.getField('confirmPassword');
       Future.delayed(const Duration(milliseconds: 1000), () {
         if (!value.isLoading && !value.isSuccess) {
           Navigator.of(context).pop();
-          value.reset();
+          Future.delayed(const Duration(milliseconds: 100), (() => value.reset()));
+        }
+        if (!value.isLoading && value.isSuccess) {
+          Future.delayed(const Duration(milliseconds: 100), (() => value.reset()));
+          Navigator.of(context)
+            ..pop()
+            ..pushReplacementNamed(NavScreen.routeName);
         }
       });
       return Column(
@@ -47,7 +47,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 25),
           InputTextField(
-            onChanged: (p0) => value.setField('firstName', p0),
             controller: firstName,
             hintText: 'First Name',
             height: 55,
@@ -57,7 +56,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setField('lastName', p0),
             controller: lastName,
             hintText: 'Last Name',
             height: 55,
@@ -67,7 +65,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setField('email', p0),
             controller: email,
             hintText: 'E-mail',
             height: 55,
@@ -91,7 +88,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setField('mobileNumber', p0),
             controller: mobileNumber,
             hintText: 'Mobile Number',
             height: 55,
@@ -106,7 +102,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setField('password', p0),
             controller: password,
             hintText: 'Password',
             height: 55,
@@ -126,7 +121,6 @@ class RegistrationCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           InputTextField(
-            onChanged: (p0) => value.setField('confirmPassword', p0),
             controller: confirmPassword,
             hintText: 'Confirm Password',
             height: 55,
@@ -147,27 +141,12 @@ class RegistrationCard extends StatelessWidget {
           const SizedBox(height: 20),
           PrimaryButton(
             height: 50,
-            action: () {
-              if (firstName.text.isNotEmpty &&
-                  lastName.text.isNotEmpty &&
-                  email.text.isNotEmpty &&
-                  mobileNumber.text.isNotEmpty &&
-                  password.text.isNotEmpty &&
-                  confirmPassword.text.isNotEmpty &&
-                  value.birthDayString != null) {
-                value.sendAPI();
-                registrationDialog(context);
-              } else {
-                generalDialog(
-                  context: context,
-                  message: 'Please Fill-out all fields',
-                  isAutoClose: true,
-                  isLoading: false,
-                );
-              }
-            },
             width: double.infinity,
             label: 'Register',
+            action: () {
+              value.sendAPI(firstName.text, lastName.text, mobileNumber.text, email.text, password.text, confirmPassword.text);
+              registrationDialog(context);
+            },
           ),
           const SizedBox(height: 20),
           Row(
@@ -242,7 +221,7 @@ class RegistrationCard extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          value.message ?? 'Please Wait...',
+                          value.message ?? 'Registering, Please wait...',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Roboto',
