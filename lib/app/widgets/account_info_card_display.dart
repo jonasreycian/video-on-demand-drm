@@ -26,17 +26,17 @@ class AccountInfoCardDisplay extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 100,
           child: Container(
-            height: 450,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.2),
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Account Information',
@@ -55,10 +55,21 @@ class AccountInfoCardDisplay extends StatelessWidget {
                 AccountInfoChild(title: 'Email', value: email),
                 AccountInfoChild(title: 'Mobile', value: mobileNumber),
                 const SizedBox(height: 20),
+                TextButton(
+                  onPressed: onChangeInformation,
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Change information',
+                        style: TextStyle(color: Colors.blue),
+                        textAlign: TextAlign.center,
+                      )),
+                ),
+                const SizedBox(height: 20),
                 PrimaryButton(
                   height: 50,
                   width: double.infinity,
-                  label: 'Change information',
+                  label: 'Logout',
                   action: onChangeInformation,
                 ),
               ],
