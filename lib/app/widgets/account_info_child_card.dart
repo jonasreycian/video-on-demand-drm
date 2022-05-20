@@ -6,16 +6,21 @@ class AccountInfoChild extends StatelessWidget {
     this.title,
     this.value,
     Key? key,
+    this.labelStyle = const TextStyle(color: Colors.black),
   }) : super(key: key);
   final String? title;
   final String? value;
+  final TextStyle labelStyle;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 5),
-        Text(title ?? '--'),
+        Text(
+          title ?? '--',
+          style: labelStyle,
+        ),
         Container(
           margin: const EdgeInsets.only(top: 5, bottom: 3),
           padding: const EdgeInsets.only(left: 20, top: 8, bottom: 5),

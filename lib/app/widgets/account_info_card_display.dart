@@ -50,10 +50,22 @@ class AccountInfoCardDisplay extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                AccountInfoChild(title: 'First Name', value: firstName),
-                AccountInfoChild(title: 'Last Name', value: lastName),
-                AccountInfoChild(title: 'Email', value: email),
-                AccountInfoChild(title: 'Mobile', value: mobileNumber),
+                AccountInfoChild(
+                    title: 'First Name',
+                    value: firstName,
+                    labelStyle: TextStyle(color: Colors.white)),
+                AccountInfoChild(
+                    title: 'Last Name',
+                    value: lastName,
+                    labelStyle: TextStyle(color: Colors.white)),
+                AccountInfoChild(
+                    title: 'Email',
+                    value: email,
+                    labelStyle: TextStyle(color: Colors.white)),
+                AccountInfoChild(
+                    title: 'Mobile',
+                    value: mobileNumber,
+                    labelStyle: TextStyle(color: Colors.white)),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: onChangeInformation,
