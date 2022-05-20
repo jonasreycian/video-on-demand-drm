@@ -12,18 +12,18 @@ import 'package:provider/provider.dart';
 
 class RegistrationCard extends StatelessWidget {
   RegistrationCard({Key? key}) : super(key: key);
-  final TextEditingController firstName = TextEditingController(text: 'Juan');
-  final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
-  final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
-  final TextEditingController mobileNumber = TextEditingController(text: '9760223075');
-  final TextEditingController password = TextEditingController(text: 'passwordMatch');
-  final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
-  // final TextEditingController firstName = TextEditingController();
-  // final TextEditingController lastName = TextEditingController();
-  // final TextEditingController email = TextEditingController();
-  // final TextEditingController mobileNumber = TextEditingController();
-  // final TextEditingController password = TextEditingController();
-  // final TextEditingController confirmPassword = TextEditingController();
+  // final TextEditingController firstName = TextEditingController(text: 'Juan');
+  // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
+  // final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
+  // final TextEditingController mobileNumber = TextEditingController(text: '9760223075');
+  // final TextEditingController password = TextEditingController(text: 'passwordMatch');
+  // final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController mobileNumber = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(builder: (context, value, child) {
