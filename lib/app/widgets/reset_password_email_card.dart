@@ -11,9 +11,12 @@ class ResetPasswordCardEmail extends StatelessWidget {
   ResetPasswordCardEmail({
     Key? key,
   }) : super(key: key);
-  final TextEditingController password = TextEditingController(text: 'Password1');
-  final TextEditingController confirmPassword = TextEditingController(text: 'Password1');
-  final TextEditingController emailNumber = TextEditingController(text: 'juan_delacruz1@gmail.com');
+  // final TextEditingController password = TextEditingController(text: 'Password1');
+  // final TextEditingController confirmPassword = TextEditingController(text: 'Password1');
+  // final TextEditingController emailNumber = TextEditingController(text: 'juan_delacruz1@gmail.com');
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController emailNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
