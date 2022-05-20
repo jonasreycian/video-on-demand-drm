@@ -8,6 +8,8 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
+import com.snapworxdigital.aq.prime.MainActivity
+import com.snapworxdigital.aq.prime.R
 
 class BetterPlayerService : Service() {
 
