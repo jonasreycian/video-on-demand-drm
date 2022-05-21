@@ -24,105 +24,104 @@ class AppBarVideoDetails extends StatelessWidget {
   final Duration duration = Duration(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
-    return AnimationConfiguration.staggeredList(
-      position: 0,
-      duration: const Duration(milliseconds: 500),
-      child: FadeInAnimation(
-        child: SlideAnimation(
-          verticalOffset: 100,
-          child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            width: double.infinity,
-            height: 360,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  movieData.title ?? '',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w800,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 26,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
+    return SingleChildScrollView(
+      child: AnimationConfiguration.staggeredList(
+        position: 0,
+        duration: const Duration(milliseconds: 500),
+        child: FadeInAnimation(
+          child: SlideAnimation(
+            verticalOffset: 100,
+            child: Container(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              width: double.infinity,
+              height: 700,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Subtext(text: movieData.releaseYear ?? ''),
-                    const SizedBox(width: 10),
-                    AccessibilityCard(
-                        accessibility: movieData.accessibility ?? ''),
-                    const SizedBox(width: 10),
+                    Text(
+                      movieData.title ?? '',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w800,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Subtext(text: movieData.releaseYear ?? ''),
+                        const SizedBox(width: 10),
+                        AccessibilityCard(accessibility: movieData.accessibility ?? ''),
+                        const SizedBox(width: 10),
+                        Subtext(text: netflixDurationFormat(movieData.runTime ?? const Duration(milliseconds: 1))),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Subtext(text: movieData.description ?? '', maxLines: 4),
+                    const SizedBox(height: 15),
+                    Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
                     Subtext(
-                        text: netflixDurationFormat(movieData.runTime ??
-                            const Duration(milliseconds: 1))),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Subtext(text: movieData.description ?? '', maxLines: 2),
-                const SizedBox(height: 5),
-                Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
-                const SizedBox(height: 5),
-                Subtext(text: castToString(movieData.cast ?? [])),
-                const SizedBox(height: 5),
-                Subtext(text: 'Director: ', fontWeight: FontWeight.w700),
-                const SizedBox(height: 5),
-                Subtext(text: movieData.director?.fullName ?? ''),
-                const SizedBox(height: 10),
-                Subtext(text: 'More...', fontWeight: FontWeight.w700),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Consumer<MyWatchListProvider>(
-                        builder: (context, value, child) {
-                      return AddWatchListButton(
-                        title: 'My List',
-                        isExisting: value.isExisting(movieData),
-                        onPressed: value.isExisting(movieData)
-                            ? () => value.removeWatchList(movieData)
-                            : () => value.addMyWatchList(movieData),
-                      );
-                    }),
-                    const SizedBox(width: 10),
-                    Consumer<RatingProvider>(builder: (context, value, child) {
-                      return IconButtonWithName(
-                        title: 'Rate',
-                        iconData: icon(value.isThumbsUp(movieData.title)),
-                        onPressed: () => ratingPopup(
-                          context: context,
-                          isThumbUp: value.isThumbsUp(movieData.title),
-                          movieName: movieData.title ?? '',
-                        ),
-                      );
-                    }),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Consumer<BetterPlayerProvider>(
-                  builder: (context, value, child) {
-                    return PrimaryButton(
-                      height: 50,
-                      action: () {
-                        value.setCurrentContent(movieData);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => BetterPlayerScreen(movieData),
-                          ),
+                      text: castToString(movieData.cast ?? []),
+                      maxLines: 3,
+                    ),
+                    const SizedBox(height: 15),
+                    Subtext(text: 'Director: ', fontWeight: FontWeight.w700),
+                    Subtext(text: movieData.director?.fullName ?? ''),
+                    const SizedBox(height: 15),
+                    Subtext(text: 'More...', fontWeight: FontWeight.w700),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Consumer<MyWatchListProvider>(builder: (context, value, child) {
+                          return AddWatchListButton(
+                            title: 'My List',
+                            isExisting: value.isExisting(movieData),
+                            onPressed: value.isExisting(movieData) ? () => value.removeWatchList(movieData) : () => value.addMyWatchList(movieData),
+                          );
+                        }),
+                        const SizedBox(width: 10),
+                        Consumer<RatingProvider>(builder: (context, value, child) {
+                          return IconButtonWithName(
+                            title: 'Rate',
+                            iconData: icon(value.isThumbsUp(movieData.title)),
+                            onPressed: () => ratingPopup(
+                              context: context,
+                              isThumbUp: value.isThumbsUp(movieData.title),
+                              movieName: movieData.title ?? '',
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Consumer<BetterPlayerProvider>(
+                      builder: (context, value, child) {
+                        return PrimaryButton(
+                          height: 50,
+                          action: () {
+                            value.setCurrentContent(movieData);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BetterPlayerScreen(movieData),
+                              ),
+                            );
+                          },
+                          width: double.infinity,
+                          label: 'Play',
                         );
                       },
-                      width: double.infinity,
-                      label: 'Play',
-                    );
-                  },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -204,8 +203,7 @@ class TutorialOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,
