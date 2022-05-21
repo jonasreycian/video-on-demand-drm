@@ -45,7 +45,7 @@ class PrimaryButton extends StatelessWidget {
               ],
       ),
       child: Opacity(
-        opacity: isDisabled ? 0.3 : 1.0,
+        opacity: isDisabled ? 0.9 : 1.0,
         child: ElevatedButton(
           style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -53,11 +53,11 @@ class PrimaryButton extends StatelessWidget {
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius == null ? 12.0 : borderRadius!),
+                borderRadius: BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
               ),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              isDisabled ? Color.fromARGB(255, 94, 94, 94).withOpacity(0.5) : Color.fromARGB(255, 252, 5, 5),
+              isDisabled ? Color.fromARGB(255, 124, 124, 124) : Color.fromARGB(255, 252, 5, 5),
             ),
           ),
           child: Row(

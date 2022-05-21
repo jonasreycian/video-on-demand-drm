@@ -60,7 +60,7 @@ class ForgotPasswordEnterOtpCard extends StatelessWidget {
             height: 50,
             action: () {
               if (controller.text.isNotEmpty) {
-                value.sendOTP(controller.text);
+                // value.sendOTP(controller.text);
                 focusNode.unfocus();
               } else {
                 generalDialog(

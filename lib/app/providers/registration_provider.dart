@@ -6,15 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class RegistrationProvider with ChangeNotifier {
-  CountryCode _countryCode = CountryCode(
-      code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
+  bool _isAcceptedTermsAndCondition = false;
+  CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   DateTime? _birthDay;
   String? _message;
   bool _isSuccess = false;
   bool _isLoading = true;
   bool _isObscurePassword = true;
   bool _isObscureConfirmPassword = true;
-
   // String _firstName = '';
   // String _lastName = '';
   // String _email = '';
@@ -36,8 +35,8 @@ class RegistrationProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
-  String? get birthDayString =>
-      _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
+  bool get isAcceptedTermsAndCondition => _isAcceptedTermsAndCondition;
+  String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
 
   //setter
 
@@ -47,6 +46,10 @@ class RegistrationProvider with ChangeNotifier {
   // setMobileNumber(value) => _mobileNumber = value;
   // setPassword(value) => _password = value;
   // setConfirmPassword(value) => _confirmPassword = value;
+  setTermsAndCondition() {
+    _isAcceptedTermsAndCondition = !_isAcceptedTermsAndCondition;
+    notifyListeners();
+  }
 
   setBirthDay(DateTime? value) {
     _birthDay = value;
@@ -68,40 +71,15 @@ class RegistrationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  sendAPI(String _firstName, String _lastName, String _mobileNumber,
-      String _email, String _password, String _confirmPassword) async {
+  sendAPI(String _firstName, String _lastName, String _mobileNumber, String _email, String _password, String _confirmPassword) async {
     _message = null;
     _isLoading = true;
     _isSuccess = false;
     final device = await Utils.getDeviceName();
-    if (_firstName.isNotEmpty &&
-        _lastName.isNotEmpty &&
-        _mobileNumber.isNotEmpty &&
-        _email.isNotEmpty &&
-        _password.isNotEmpty &&
-        _confirmPassword.isNotEmpty &&
-        _birthDay != null) {
-      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-              .hasMatch(_email) &&
-          (_password.length >= 8) &&
-          (_password == _confirmPassword)) {
-        Map<String, dynamic> body = {
-          'first_name': _firstName,
-          'last_name': _lastName,
-          'mobile': '${countryCode.dialCode}$_mobileNumber',
-          'email': _email,
-          'password': _password,
-          'password_confirmation': _confirmPassword,
-          'plan_id': 1,
-          'status': 1,
-          'device_name': device
-        };
-        API()
-            .request(
-                requestType: RequestType.post,
-                parameter: body,
-                endPoint: '/register')
-            .then((value) {
+    if (_firstName.isNotEmpty && _lastName.isNotEmpty && _mobileNumber.isNotEmpty && _email.isNotEmpty && _password.isNotEmpty && _confirmPassword.isNotEmpty && _birthDay != null) {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email) && (_password.length >= 8) && (_password == _confirmPassword)) {
+        Map<String, dynamic> body = {'first_name': _firstName, 'last_name': _lastName, 'mobile': '${countryCode.dialCode}$_mobileNumber', 'email': _email, 'password': _password, 'password_confirmation': _confirmPassword, 'plan_id': 1, 'status': 1, 'device_name': device};
+        API().request(requestType: RequestType.post, parameter: body, endPoint: '/register').then((value) {
           if (value['success']) {
             _message = value['message'];
             notifyListeners();
@@ -138,9 +116,7 @@ class RegistrationProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
-      if (!RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(_email)) {
+      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email)) {
         _message = 'Invalid Email address';
         _isSuccess = false;
         _isLoading = false;
@@ -164,6 +140,7 @@ class RegistrationProvider with ChangeNotifier {
     _isSuccess = false;
     _isObscurePassword = true;
     _isObscureConfirmPassword = true;
+    _isAcceptedTermsAndCondition = false;
     notifyListeners();
     // _birthDay = null;
     // _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');

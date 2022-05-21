@@ -1,34 +1,32 @@
+import 'package:aq_prime/app/providers/forgot_password_provider.dart';
+import 'package:aq_prime/app/widgets/dropdown_card.dart';
+import 'package:aq_prime/app/widgets/input_textfield.dart';
+import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../device/utils/dialog.dart';
-import '../providers/forgot_password_provider.dart';
-import 'dropdown_card.dart';
-import 'input_textfield.dart';
-import 'primary_button.dart';
 
 class ResetPasswordCardEmail extends StatelessWidget {
   ResetPasswordCardEmail({
     Key? key,
   }) : super(key: key);
-  final TextEditingController password = TextEditingController(text: 'Password1');
-  final TextEditingController confirmPassword = TextEditingController(text: 'Password1');
-  final TextEditingController emailNumber = TextEditingController(text: 'juan_delacruz1@gmail.com');
+  // final TextEditingController password = TextEditingController(text: 'Password1');
+  // final TextEditingController confirmPassword = TextEditingController(text: 'Password1');
+  // final TextEditingController emailNumber = TextEditingController(text: 'jesther11@yahoo.com');
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController emailNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 1500), () {
         if (!value.isLoading && !value.isSuccess) {
           Navigator.of(context).pop();
-          value.reset();
+          password.clear();
+          confirmPassword.clear();
+          emailNumber.clear();
+          Future.delayed(const Duration(milliseconds: 200), () => value.reset());
         }
-        // if (!value.isLoading && value.isSuccess) {
-        //   Navigator.of(context)
-        //     ..pop()
-        //     ..pushReplacementNamed(NavScreen.routeName);
-        //   value.reset();
-        // }
       });
       return Column(
         children: [
@@ -41,17 +39,17 @@ class ResetPasswordCardEmail extends StatelessWidget {
           Dropdown(
             width: double.infinity,
             height: 45,
-            hint: value.selectedWidgetCard,
+            hint: 'Reset via Email',
             choices: value.choices,
             textHintColor: Colors.black,
-            onChanged: (selectedChoice) => value.setSelectedWidgetCard(selectedChoice),
+            onChanged: (selectedChoice) {},
           ),
           const SizedBox(height: 20),
           InputTextField(
             controller: emailNumber,
-            hintText: value.hintText,
+            hintText: 'Email',
             height: 55,
-            keyboardType: value.textInputType,
+            keyboardType: TextInputType.emailAddress,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
           ),
@@ -95,21 +93,12 @@ class ResetPasswordCardEmail extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           PrimaryButton(
-            label: value.submitName,
+            label: 'Reset',
             width: double.infinity,
             height: 50,
             action: () {
-              if (emailNumber.text.isNotEmpty && password.text.isNotEmpty && confirmPassword.text.isNotEmpty) {
-                value.sendEmailOrNumber(emailNumber.text, password.text, confirmPassword.text);
-                forgotPasswordDialog(context);
-              } else {
-                generalDialog(
-                  context: context,
-                  message: 'Please Fill out the information',
-                  isAutoClose: true,
-                  isLoading: false,
-                );
-              }
+              forgotPasswordDialog(context);
+              value.sendEmailOrNumber(emailNumber.text, password.text, confirmPassword.text);
             },
           ),
         ],
@@ -167,7 +156,7 @@ class ResetPasswordCardEmail extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      value.isLoading || value.isSuccess
+                      !value.isSuccess & value.isLoading
                           ? SizedBox(
                               width: 25,
                               height: 25,
@@ -180,7 +169,7 @@ class ResetPasswordCardEmail extends StatelessWidget {
                               width: 25,
                               height: 25,
                               child: Icon(
-                                Icons.close,
+                                value.message == 'Successfully password reset.' ? Icons.check : Icons.close,
                                 color: Colors.red,
                               ),
                             ),
