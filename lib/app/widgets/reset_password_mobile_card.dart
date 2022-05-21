@@ -42,10 +42,10 @@ class ResetPasswordCardMobile extends StatelessWidget {
           Dropdown(
             width: double.infinity,
             height: 45,
-            hint: value.selectedWidgetCard,
+            hint: 'dummy hint',
             choices: value.choices,
             textHintColor: Colors.black,
-            onChanged: (selectedChoice) => value.setSelectedWidgetCard(selectedChoice),
+            onChanged: (selectedChoice) {},
           ),
           const SizedBox(height: 20),
           InputTextField(
@@ -53,7 +53,7 @@ class ResetPasswordCardMobile extends StatelessWidget {
             controller: emailNumber,
             hintText: 'Mobile number',
             height: 55,
-            keyboardType: value.textInputType,
+            keyboardType: TextInputType.emailAddress,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
             prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),

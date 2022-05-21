@@ -62,7 +62,7 @@ class InputTextField extends StatelessWidget {
         width: width == null ? double.infinity : width!,
         decoration: BoxDecoration(
           color: HexColor('#F9FAFB'),
-          borderRadius: BorderRadius.circular(borderRadius == null ? 12.0 : borderRadius!),
+          borderRadius: BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
         ),
         child: TextField(
           onTap: onTap,

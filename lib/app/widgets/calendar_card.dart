@@ -29,7 +29,7 @@ class CalendarField extends StatelessWidget {
         padding: const EdgeInsets.only(left: 25),
         decoration: BoxDecoration(
           color: HexColor('#F9FAFB'),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(5),
           boxShadow: withShadow
               ? [
                   const BoxShadow(

@@ -14,7 +14,6 @@ class RegistrationProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isObscurePassword = true;
   bool _isObscureConfirmPassword = true;
-  bool _isAcceptedTermsAndCondition = false;
   // String _firstName = '';
   // String _lastName = '';
   // String _email = '';
