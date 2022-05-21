@@ -69,7 +69,6 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.black,
             ),
             initialRoute: initialRoute,
-            home: LoginScreen(),
             routes: {
               NavScreen.routeName: (context) => NavScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
