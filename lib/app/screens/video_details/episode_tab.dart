@@ -15,6 +15,9 @@ class EpisodesTab extends StatelessWidget {
   final List<Episode> episodes;
   @override
   Widget build(BuildContext context) {
+    if (episodes.isEmpty) {
+      return AppBarVideoDetails(movieData: movieData);
+    }
     return Container(
       color: Colors.transparent,
       child: ListView.builder(
@@ -24,16 +27,12 @@ class EpisodesTab extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: episodes.length + 1,
         itemBuilder: (context, index) {
-          if (index > 0 && episodes.isNotEmpty) {
-            return EpisodeCard(
-              index: index,
-              title: episodes[index - 1].name!,
-              runTime: episodes[index - 1].runTime!,
-              imageUrl: episodes[index - 1].imageUrl!,
-            );
-          } else {
-            return AppBarVideoDetails(movieData: movieData);
-          }
+          return EpisodeCard(
+            index: index,
+            title: episodes[index - 1].name!,
+            runTime: episodes[index - 1].runTime!,
+            imageUrl: episodes[index - 1].imageUrl!,
+          );
         },
       ),
     );

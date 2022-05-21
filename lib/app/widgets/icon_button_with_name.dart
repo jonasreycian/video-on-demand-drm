@@ -25,7 +25,7 @@ class AddWatchListButton extends StatelessWidget {
           IconButton(
             padding: const EdgeInsets.all(0),
             alignment: Alignment.center,
-            iconSize: 35,
+            iconSize: 24,
             onPressed: onPressed,
             icon: AnimatedSwitcher(
               duration: const Duration(milliseconds: 1000),
@@ -61,9 +61,8 @@ class IconButtonWithName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
       height: 65,
-      width: 60,
+      width: 65,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +70,7 @@ class IconButtonWithName extends StatelessWidget {
           IconButton(
             padding: const EdgeInsets.all(0),
             alignment: Alignment.center,
-            iconSize: 35,
+            iconSize: 24,
             onPressed: onPressed,
             icon: Icon(
               iconData,
