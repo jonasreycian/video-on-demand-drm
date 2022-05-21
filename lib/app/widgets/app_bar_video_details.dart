@@ -34,7 +34,7 @@ class AppBarVideoDetails extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: 700,
+              height: 460,
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),

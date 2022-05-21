@@ -27,12 +27,16 @@ class EpisodesTab extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: episodes.length + 1,
         itemBuilder: (context, index) {
-          return EpisodeCard(
-            index: index,
-            title: episodes[index - 1].name!,
-            runTime: episodes[index - 1].runTime!,
-            imageUrl: episodes[index - 1].imageUrl!,
-          );
+          if (index > 0 && episodes.isNotEmpty) {
+            return EpisodeCard(
+              index: index,
+              title: episodes[index - 1].name!,
+              runTime: episodes[index - 1].runTime!,
+              imageUrl: episodes[index - 1].imageUrl!,
+            );
+          } else {
+            return AppBarVideoDetails(movieData: movieData);
+          }
         },
       ),
     );
