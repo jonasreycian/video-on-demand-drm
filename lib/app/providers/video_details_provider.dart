@@ -1,21 +1,21 @@
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
-class HomeProvider with ChangeNotifier {
+class VideoDetailsProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  List _data = [];
+  Map _data = {};
 
   //getter
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  List get data => _data;
+  Map get data => _data;
 
   //setter
-  loadData() {
+  loadData(int contentId) {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/categories/top-ten-categories').then((value) {
+    API().request(requestType: RequestType.get, endPoint: '/contents/$contentId').then((value) {
       if (value['success'] == true) {
         _data = value['data'];
         _isLoading = false;

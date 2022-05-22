@@ -1,23 +1,15 @@
+import 'package:aq_prime/app/widgets/app_bar_video_details.dart';
+import 'package:aq_prime/app/widgets/episode_card.dart';
 import 'package:flutter/material.dart';
-
-import '../../../domain/entities/content.dart';
-import '../../../domain/entities/episode.dart';
-import '../../widgets/app_bar_video_details.dart';
-import '../../widgets/episode_card.dart';
 
 class EpisodesTab extends StatelessWidget {
   const EpisodesTab({
-    required this.episodes,
-    required this.movieData,
+    required this.episodeData,
     Key? key,
   }) : super(key: key);
-  final Content movieData;
-  final List<Episode> episodes;
+  final Map episodeData;
   @override
   Widget build(BuildContext context) {
-    if (episodes.isEmpty) {
-      return AppBarVideoDetails(movieData: movieData);
-    }
     return Container(
       color: Colors.transparent,
       child: ListView.builder(
@@ -25,18 +17,31 @@ class EpisodesTab extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: episodes.length + 1,
+        itemCount: 1,
         itemBuilder: (context, index) {
-          if (index > 0 && episodes.isNotEmpty) {
-            return EpisodeCard(
-              index: index,
-              title: episodes[index - 1].name!,
-              runTime: episodes[index - 1].runTime!,
-              imageUrl: episodes[index - 1].imageUrl!,
-            );
-          } else {
-            return AppBarVideoDetails(movieData: movieData);
-          }
+          // if (index > 0 && episodeData.isNotEmpty) {
+          //   // return EpisodeCard(
+          //   //   index: index,
+          //   //   title: episodes[index - 1].name!,
+          //   //   runTime: episodes[index - 1].runTime!,
+          //   //   imageUrl: episodes[index - 1].imageUrl!,
+          //   // );
+          //   return const SizedBox();
+          // } else {
+          //   return AppBarVideoDetails(
+          //     title: episodeData['title'],
+          //   );
+          // }
+          return AppBarVideoDetails(
+            title: episodeData['title'],
+            description: episodeData['synopsis'],
+            cast: episodeData['cast'],
+            director: episodeData['director'],
+            releaseYear: episodeData['released_date'],
+            videoUrl: episodeData['video']['hls'],
+            runTime: episodeData['video']['runtime'],
+            seasonCount: episodeData['seasons_count'],
+          );
         },
       ),
     );

@@ -5,15 +5,9 @@ import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/app/widgets/fetured_section.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/no_data_dialog.dart';
-import 'package:aq_prime/app/widgets/only_aqprime_section.dart';
-import 'package:aq_prime/app/widgets/others_section.dart';
-import 'package:aq_prime/app/widgets/popular_section.dart';
 import 'package:aq_prime/app/widgets/search_button.dart';
 import 'package:aq_prime/app/widgets/section_card.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/app/widgets/top_ten_section.dart';
-import 'package:aq_prime/app/widgets/trending_section.dart';
-import 'package:aq_prime/data/extra/data.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -34,13 +28,9 @@ class HomeScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Home'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
@@ -53,10 +43,9 @@ class HomeScreen extends StatelessWidget {
                 child: RefreshIndicator(
                   color: Colors.white,
                   backgroundColor: Colors.red,
-                  onRefresh: () => Future.delayed(
-                      const Duration(milliseconds: 100),
-                      () => onRefresh(context)),
+                  onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -70,31 +59,22 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        PopularSection(),
-                        const SizedBox(height: 15),
-                        OnlyAQprimeSection(),
-                        const SizedBox(height: 15),
-                        TopTenSection(),
-                        const SizedBox(height: 15),
-                        SectionCard(
-                            titleSection: 'New Releases', data: combine()),
-                        const SizedBox(height: 15),
-                        SectionCard(
-                            titleSection: 'My Watch List', data: trending),
-                        const SizedBox(height: 15),
-                        SectionCard(titleSection: 'Comedy', data: trending),
-                        const SizedBox(height: 15),
-                        SectionCard(titleSection: 'Action', data: trending),
-                        const SizedBox(height: 15),
-                        SectionCard(titleSection: 'Horror', data: trending),
-                        const SizedBox(height: 15),
-                        SectionCard(titleSection: 'Drama', data: trending),
-                        const SizedBox(height: 15),
-                        SectionCard(titleSection: 'Kids', data: trending),
-                        TrendingSection(),
-                        const SizedBox(height: 15),
-                        OthersSection(),
+                        SizedBox(
+                          height: (300 * value.data.length).toDouble(),
+                          child: ListView.builder(
+                            padding: const EdgeInsets.only(top: 0, bottom: 0),
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: value.data.length,
+                            itemBuilder: (context, index) {
+                              return SectionCard(
+                                titleSection: value.data[index]['name'],
+                                contents: value.data[index]['contents'],
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -108,10 +88,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit =
-        Provider.of<RefreshLimit>(context, listen: false);
-    HomeProvider homeProvider =
-        Provider.of<HomeProvider>(context, listen: false);
+    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
+    HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       homeProvider.loadData();
@@ -122,8 +100,7 @@ class HomeScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      HomeProvider homeProvider =
-          Provider.of<HomeProvider>(context, listen: false);
+      HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
       if (!homeProvider.isSuccess) homeProvider.loadData();
     });
   }

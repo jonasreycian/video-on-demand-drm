@@ -1,26 +1,37 @@
+import 'package:aq_prime/app/providers/better_player_provider.dart';
+import 'package:aq_prime/app/screens/better_player_screen.dart';
+import 'package:aq_prime/app/widgets/accessibility_card.dart';
+import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
+import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import '../../device/utils/dialog.dart';
-import '../../domain/entities/content.dart';
-import '../../domain/entities/person.dart';
-import '../providers/better_player_provider.dart';
-import '../providers/my_watch_list_provider.dart';
-import '../providers/rating_provider.dart';
-import '../screens/better_player_screen.dart';
-import 'accessibility_card.dart';
-import 'icon_button_with_name.dart';
-import 'primary_button.dart';
-import 'subtext_card.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
     Key? key,
-    required this.movieData,
+    this.title,
+    this.releaseYear,
+    this.description,
+    this.cast,
+    this.director,
+    this.videoUrl,
+    this.runTime,
+    this.seasonCount,
   }) : super(key: key);
 
-  final Content movieData;
+  final String? title;
+  final String? releaseYear;
+  final String? description;
+  final String? cast;
+  final String? director;
+  final String? videoUrl;
+  final int? runTime;
+  final int? seasonCount;
+
   final Duration duration = Duration(milliseconds: 1000);
   @override
   Widget build(BuildContext context) {
@@ -44,12 +55,12 @@ class AppBarVideoDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      movieData.title ?? '',
+                      title ?? '--',
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w800,
                         fontStyle: FontStyle.normal,
-                        fontSize: 26,
+                        fontSize: 30,
                         color: Colors.white,
                       ),
                     ),
@@ -57,55 +68,32 @@ class AppBarVideoDetails extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Subtext(text: movieData.releaseYear ?? ''),
+                        Subtext(text: releaseYear != null ? DateFormat.yMMMMd().format(DateTime.parse(releaseYear!)) : '--'),
                         const SizedBox(width: 10),
-                        AccessibilityCard(
-                            accessibility: movieData.accessibility ?? ''),
+                        AccessibilityCard(accessibility: '$seasonCount Seasons'),
                         const SizedBox(width: 10),
-                        Subtext(
-                            text: netflixDurationFormat(movieData.runTime ??
-                                const Duration(milliseconds: 1))),
+                        Subtext(text: runTime != null ? netflixDurationFormat(Duration(seconds: runTime!)) : '--'),
                       ],
                     ),
                     const SizedBox(height: 15),
-                    Subtext(text: movieData.description ?? '', maxLines: 4),
+                    Subtext(text: description ?? '', maxLines: 4),
                     const SizedBox(height: 15),
                     Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
-                    Subtext(
-                      text: castToString(movieData.cast ?? []),
-                      maxLines: 3,
-                    ),
+                    Subtext(text: cast ?? '--', maxLines: 3),
                     const SizedBox(height: 15),
                     Subtext(text: 'Director: ', fontWeight: FontWeight.w700),
-                    Subtext(text: movieData.director?.fullName ?? ''),
+                    AccessibilityCard(accessibility: director ?? '--'),
                     const SizedBox(height: 15),
-                    Subtext(text: 'More...', fontWeight: FontWeight.w700),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Consumer<MyWatchListProvider>(
-                            builder: (context, value, child) {
-                          return AddWatchListButton(
-                            title: 'My List',
-                            isExisting: value.isExisting(movieData),
-                            onPressed: value.isExisting(movieData)
-                                ? () => value.removeWatchList(movieData)
-                                : () => value.addMyWatchList(movieData),
-                          );
-                        }),
+                        AddWatchListButton(title: 'My List', isExisting: false, onPressed: () {}),
                         const SizedBox(width: 10),
-                        Consumer<RatingProvider>(
-                            builder: (context, value, child) {
-                          return IconButtonWithName(
-                            title: 'Rate',
-                            iconData: icon(value.isThumbsUp(movieData.title)),
-                            onPressed: () => ratingPopup(
-                              context: context,
-                              isThumbUp: value.isThumbsUp(movieData.title),
-                              movieName: movieData.title ?? '',
-                            ),
-                          );
-                        }),
+                        IconButtonWithName(
+                          title: 'Rate',
+                          iconData: icon(true),
+                          onPressed: () {},
+                        )
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -114,11 +102,9 @@ class AppBarVideoDetails extends StatelessWidget {
                         return PrimaryButton(
                           height: 50,
                           action: () {
-                            value.setCurrentContent(movieData);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    BetterPlayerScreen(movieData),
+                                builder: (context) => BetterPlayerScreen(videoUrl ?? ''),
                               ),
                             );
                           },
@@ -148,15 +134,17 @@ class AppBarVideoDetails extends StatelessWidget {
     }
   }
 
-  String castToString(List<Person> castList) {
-    late List names = [];
-    for (var element in castList) {
-      names.add(element.fullName);
-    }
-    return names.join(', ');
-  }
+  // String castToString(String? cast) {
+  //   List cast1 = cast as List;
+  //   late List names = [];
+  //   for (var element in cast1) {
+  //     names.add(element.fullName);
+  //   }
+  //   return names.join(', ');
+  // }
 }
 
+///------------------------------------------------------------------------------
 class TutorialOverlay extends ModalRoute<void> {
   @override
   Duration get transitionDuration => Duration(milliseconds: 100);
@@ -211,8 +199,7 @@ class TutorialOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,

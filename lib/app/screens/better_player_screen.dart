@@ -1,10 +1,9 @@
 import 'dart:io';
 
+import 'package:aq_prime/device/constants.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../device/constants.dart';
-import '../../domain/entities/content.dart';
 
 // ignore: must_be_immutable
 class BetterPlayerScreen extends StatefulWidget {
@@ -14,7 +13,7 @@ class BetterPlayerScreen extends StatefulWidget {
   }) : super(key: key);
 
   static const String routeName = '/better_player_screen';
-  final Content content;
+  final String content;
 
   @override
   State<BetterPlayerScreen> createState() => _BetterPlayerScreenState();
@@ -43,7 +42,7 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
     _widevineController = BetterPlayerController(betterPlayerConfiguration);
     BetterPlayerDataSource _widevineDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      widget.content.videoUrl!,
+      widget.content,
       drmConfiguration: BetterPlayerDrmConfiguration(
         drmType: Platform.isIOS
             ? BetterPlayerDrmType.fairplay
