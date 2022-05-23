@@ -1,14 +1,13 @@
-import 'package:aq_prime/app/providers/better_player_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/accessibility_card.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/app/widgets/subtext_card.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
@@ -45,7 +44,7 @@ class AppBarVideoDetails extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: 460,
+              height: 360,
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),
@@ -97,21 +96,24 @@ class AppBarVideoDetails extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Consumer<BetterPlayerProvider>(
-                      builder: (context, value, child) {
-                        return PrimaryButton(
-                          height: 50,
-                          action: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BetterPlayerScreen(videoUrl ?? ''),
-                              ),
-                            );
-                          },
-                          width: double.infinity,
-                          label: 'Play',
+                    PrimaryButton(
+                      height: 50,
+                      action: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BetterPlayerScreen(videoUrl ?? ''),
+                          ),
                         );
                       },
+                      width: double.infinity,
+                      label: 'Play',
+                    ),
+                    const SizedBox(height: 20),
+                    SecondaryButton(
+                      height: 50,
+                      action: () {},
+                      width: double.infinity,
+                      label: 'Watch Trailer',
                     ),
                   ],
                 ),

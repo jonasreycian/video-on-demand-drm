@@ -12,37 +12,38 @@ class EpisodesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 10, bottom: 0),
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          // if (index > 0 && episodeData.isNotEmpty) {
-          //   // return EpisodeCard(
-          //   //   index: index,
-          //   //   title: episodes[index - 1].name!,
-          //   //   runTime: episodes[index - 1].runTime!,
-          //   //   imageUrl: episodes[index - 1].imageUrl!,
-          //   // );
-          //   return const SizedBox();
-          // } else {
-          //   return AppBarVideoDetails(
-          //     title: episodeData['title'],
-          //   );
-          // }
-          return AppBarVideoDetails(
-            title: episodeData['title'],
-            description: episodeData['synopsis'],
-            cast: episodeData['cast'],
-            director: episodeData['director'],
-            releaseYear: episodeData['released_date'],
-            videoUrl: episodeData['video']['hls'],
-            runTime: episodeData['video']['runtime'],
-            seasonCount: episodeData['seasons_count'],
-          );
-        },
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            AppBarVideoDetails(
+              title: episodeData['title'],
+              description: episodeData['synopsis'],
+              cast: episodeData['cast'],
+              director: episodeData['director'],
+              releaseYear: episodeData['released_date'],
+              videoUrl: episodeData['video']['hls'],
+              runTime: episodeData['video']['runtime'],
+              seasonCount: episodeData['seasons_count'],
+            ),
+            ListView.builder(
+              padding: const EdgeInsets.only(top: 10, bottom: 0),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: episodeData['trailers'].length,
+              itemBuilder: (context, index) {
+                return EpisodeCard(
+                  index: index,
+                  title: episodeData['trailers'][index]['title'],
+                  description: episodeData['trailers'][index]['description'],
+                  runTime: episodeData['trailers'][index]['runtime'],
+                  imageUrl: episodeData['cover_photo'],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

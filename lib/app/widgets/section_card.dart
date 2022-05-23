@@ -1,6 +1,8 @@
+import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SectionCard extends StatelessWidget {
   const SectionCard({
@@ -49,10 +51,13 @@ class SectionCard extends StatelessWidget {
                   title: contents[index]['title'],
                   imageUrl: contents[index]['cover_photo_mobile'],
                   heroTag: '$titleSection ${contents[index]['cover_photo_mobile']} $index',
-                  onTap: () => Navigator.of(context).pushNamed(
-                    VideoDetailsPage.routeName,
-                    arguments: contents[index],
-                  ),
+                  onTap: () {
+                    Provider.of<VideoDetailsProvider>(context, listen: false).reset();
+                    Navigator.of(context).pushNamed(
+                      VideoDetailsPage.routeName,
+                      arguments: contents[index],
+                    );
+                  },
                 );
               },
             ),

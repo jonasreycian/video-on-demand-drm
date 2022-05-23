@@ -1,25 +1,26 @@
+import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../../device/utils/dialog.dart';
-import 'subtext_card.dart';
 
 class EpisodeCard extends StatelessWidget {
   const EpisodeCard({
     required this.index,
-    required this.title,
-    required this.runTime,
+    this.title,
+    this.description,
+    this.runTime,
     required this.imageUrl,
     Key? key,
   }) : super(key: key);
   final int index;
-  final String title;
-  final Duration runTime;
+  final String? title;
+  final String? description;
+  final int? runTime;
   final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
-      position: index,
+      position: index + 3,
       duration: const Duration(milliseconds: 500),
       child: FadeInAnimation(
         child: SlideAnimation(
@@ -57,7 +58,7 @@ class EpisodeCard extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20),
                       Text(
-                        '${(index)}. $title',
+                        title ?? '--',
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w800,
@@ -66,9 +67,7 @@ class EpisodeCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      Subtext(
-                          text: netflixDurationFormat(runTime),
-                          color: Color.fromRGBO(140, 140, 140, 1)),
+                      Subtext(text: netflixDurationFormat(Duration(milliseconds: runTime ?? 0)), color: Color.fromRGBO(140, 140, 140, 1)),
                     ],
                   ),
                 ),

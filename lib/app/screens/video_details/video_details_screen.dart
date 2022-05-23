@@ -66,15 +66,16 @@ class VideoDetailsPage extends StatelessWidget {
             heroTag: '',
             appBarContainer: const SizedBox(),
             bottom: child!,
-            container: SizedBox(
-              height: 750,
+            container: Container(
+              height: 550,
               width: double.infinity,
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   value.isSuccess ? EpisodesTab(episodeData: value.data) : AQLoadingIndicator(),
-                  const SizedBox(), const SizedBox(),
-                  // TrailersAndMoreTab(trailers: movieData.episode ?? []),
+                  value.isSuccess ? TrailersAndMoreTab(trailers: value.data) : AQLoadingIndicator(),
+                  const SizedBox(),
+
                   // MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
                 ],
               ),
