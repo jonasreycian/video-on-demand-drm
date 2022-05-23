@@ -23,6 +23,7 @@ saveLoggedIn(Map<String, dynamic> data) async {
   prefs.setBool("status", data['status']);
   prefs.setString("createdAt", data['created_at']);
   prefs.setString("token", data['plainTextToken']);
+  prefs.setInt("planId", data['plan_id']);
 
   isLogin = ((prefs.getBool("loggedIn") == null) ? false : prefs.getBool("loggedIn"))!;
   id = ((prefs.getInt("id") == null) ? 0 : prefs.getInt("id"))!;
@@ -64,4 +65,5 @@ loggedOut() async {
   prefs.remove('createdAt');
   prefs.remove('token');
   prefs.remove('language');
+  prefs.remove('planId');
 }
