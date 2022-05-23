@@ -6,12 +6,10 @@ import 'package:aq_prime/app/widgets/account_info_card_display.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/password_editing_card.dart';
 import 'package:aq_prime/app/widgets/plant_details.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
