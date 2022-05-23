@@ -5,12 +5,12 @@ class HomeProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
   List _data = [];
-
+  List _isFeaturedData = [];
   //getter
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   List get data => _data;
-
+  List get isFeaturedData => _isFeaturedData;
   //setter
   loadData() {
     reset();
@@ -20,6 +20,15 @@ class HomeProvider with ChangeNotifier {
         _data = value['data'];
         _isLoading = false;
         _isSuccess = true;
+
+        for (int i = 0; i < value['data'].length; i++) {
+          for (int x = 0; x < value['data'][i].length; x++) {
+            if (value['data'][i]['contents'][x]['is_featured']) {
+              _isFeaturedData.add(value['data'][i]['contents'][x]);
+            }
+          }
+        }
+
         notifyListeners();
       } else {
         _isLoading = false;
@@ -30,6 +39,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   reset() {
+    _isFeaturedData = [];
     _isLoading = true;
     _isSuccess = false;
     _data.clear();

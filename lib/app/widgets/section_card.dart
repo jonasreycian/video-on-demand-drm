@@ -49,10 +49,10 @@ class SectionCard extends StatelessWidget {
                   title: contents[index]['title'],
                   imageUrl: contents[index]['cover_photo_mobile'],
                   heroTag: '$titleSection ${contents[index]['cover_photo_mobile']} $index',
-                  onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
-                    'content': contents[index],
-                    'heroTag': '$titleSection ${contents[index]['cover_photo_mobile']} $index',
-                  }),
+                  onTap: () => Navigator.of(context).pushNamed(
+                    VideoDetailsPage.routeName,
+                    arguments: contents[index],
+                  ),
                 );
               },
             ),

@@ -13,8 +13,6 @@ class VideoDetailsProvider with ChangeNotifier {
 
   //setter
   loadData(int contentId) {
-    reset();
-    notifyListeners();
     API().request(requestType: RequestType.get, endPoint: '/contents/$contentId').then((value) {
       if (value['success'] == true) {
         _data = value['data'];

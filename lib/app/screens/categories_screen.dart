@@ -33,7 +33,7 @@ class CategoriesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              FeaturedSection(),
+              FeaturedSection(featuredList: []),
               const SizedBox(height: 15),
               // OnlyAQprimeSection(),
               // const SizedBox(height: 15),

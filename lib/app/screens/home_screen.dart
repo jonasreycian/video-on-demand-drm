@@ -10,7 +10,6 @@ import 'package:aq_prime/app/widgets/section_card.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,16 +48,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AnimationConfiguration.staggeredList(
-                          position: 0,
-                          duration: const Duration(milliseconds: 500),
-                          child: FadeInAnimation(
-                            child: SlideAnimation(
-                              verticalOffset: 100,
-                              child: FeaturedSection(),
-                            ),
-                          ),
-                        ),
+                        FeaturedSection(featuredList: value.isFeaturedData),
                         SizedBox(
                           height: (300 * value.data.length).toDouble(),
                           child: ListView.builder(

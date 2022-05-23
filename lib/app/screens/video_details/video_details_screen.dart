@@ -14,8 +14,7 @@ class VideoDetailsPage extends StatelessWidget {
   static const routeName = '/videoDetailsPage';
   @override
   Widget build(BuildContext context) {
-    final Map data = ModalRoute.of(context)!.settings.arguments as Map;
-    final Map content = data['content'];
+    final Map content = ModalRoute.of(context)!.settings.arguments as Map;
     initState(context, content['id']);
     return Consumer<VideoDetailsProvider>(
         child: AnimationConfiguration.staggeredList(
@@ -64,7 +63,7 @@ class VideoDetailsPage extends StatelessWidget {
             title: content['title'],
             isImageUrl: true,
             backgroundImage: content['cover_photo'],
-            heroTag: data['heroTag'],
+            heroTag: '',
             appBarContainer: const SizedBox(),
             bottom: child!,
             container: SizedBox(
