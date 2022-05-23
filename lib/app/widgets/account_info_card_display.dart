@@ -10,6 +10,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
     this.email,
     this.mobileNumber,
     required this.onChangeInformation,
+    required this.onLogout,
     Key? key,
   }) : super(key: key);
   final String? firstName;
@@ -17,6 +18,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
   final String? email;
   final String? mobileNumber;
   final void Function() onChangeInformation;
+  final void Function() onLogout;
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
@@ -32,8 +34,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,21 +52,25 @@ class AccountInfoCardDisplay extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 AccountInfoChild(
-                    title: 'First Name',
-                    value: firstName,
-                    labelStyle: TextStyle(color: Colors.white)),
+                  title: 'First Name',
+                  value: firstName,
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
                 AccountInfoChild(
-                    title: 'Last Name',
-                    value: lastName,
-                    labelStyle: TextStyle(color: Colors.white)),
+                  title: 'Last Name',
+                  value: lastName,
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
                 AccountInfoChild(
-                    title: 'Email',
-                    value: email,
-                    labelStyle: TextStyle(color: Colors.white)),
+                  title: 'Email',
+                  value: email,
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
                 AccountInfoChild(
-                    title: 'Mobile',
-                    value: mobileNumber,
-                    labelStyle: TextStyle(color: Colors.white)),
+                  title: 'Mobile',
+                  value: mobileNumber,
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: onChangeInformation,
@@ -82,7 +87,7 @@ class AccountInfoCardDisplay extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   label: 'Logout',
-                  action: onChangeInformation,
+                  action: onLogout,
                 ),
               ],
             ),

@@ -33,26 +33,29 @@ class AccountInfoCardEditing extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(color: Colors.white)),
+        Text(
+          label,
+          style: TextStyle(color: Colors.white),
+        ),
         const SizedBox(height: 8),
         InputTextField(
-            onChanged: (value) => onChanged(value),
-            controller: controller,
-            hintText: hintText,
-            height: 55,
-            keyboardType: TextInputType.text,
-            floatingLabelBehavior: FloatingLabelBehavior.auto,
-            padding: const EdgeInsets.only(left: 8, top: 10, bottom: 10),
-            prefixIconPadding: prefixIconPadding,
-            prefixIcon: prefixIcon)
+          onChanged: (value) => onChanged(value),
+          controller: controller,
+          hintText: hintText,
+          height: 55,
+          keyboardType: TextInputType.text,
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          padding: const EdgeInsets.only(left: 8, top: 10, bottom: 10),
+          prefixIconPadding: prefixIconPadding,
+          prefixIcon: prefixIcon,
+        )
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    AccountInfoProvider accountInfoProvider =
-        Provider.of<AccountInfoProvider>(context, listen: false);
+    AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
     return AnimationConfiguration.staggeredList(
       position: 0,
       duration: const Duration(milliseconds: 500),
@@ -66,8 +69,7 @@ class AccountInfoCardEditing extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -83,8 +85,12 @@ class AccountInfoCardEditing extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                _renderInputText('First Name', '',
-                    accountInfoProvider.setFirstName, firstName),
+                _renderInputText(
+                  'First Name',
+                  '',
+                  accountInfoProvider.setFirstName,
+                  firstName,
+                ),
                 const SizedBox(height: 20),
                 _renderInputText(
                   'Last Name',
@@ -110,9 +116,10 @@ class AccountInfoCardEditing extends StatelessWidget {
                     child: Text(
                       '+63',
                       style: TextStyle(
-                          fontSize: 15,
-                          color: HexColor('#BEBBBB'),
-                          fontWeight: FontWeight.w700),
+                        fontSize: 15,
+                        color: HexColor('#BEBBBB'),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
