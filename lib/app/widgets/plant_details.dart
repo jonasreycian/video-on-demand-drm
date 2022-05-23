@@ -29,15 +29,19 @@ class PlanDetailsCard extends StatelessWidget {
             ),
             margin: const EdgeInsets.only(left: 25, right: 25),
             child: Theme(
-              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              data:
+                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 key: expansionTileKey,
-                childrenPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 0, top: 0),
-                tilePadding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                childrenPadding: const EdgeInsets.only(
+                    left: 20, right: 20, bottom: 0, top: 0),
+                tilePadding: const EdgeInsets.only(
+                    top: 10, left: 20, right: 20, bottom: 10),
                 expandedAlignment: Alignment.centerLeft,
                 onExpansionChanged: (value) {
                   if (value) {
-                    _scrollToSelectedContent(expansionTileKey: expansionTileKey);
+                    _scrollToSelectedContent(
+                        expansionTileKey: expansionTileKey);
                   }
                 },
                 trailing: AnimatedSwitcher(
@@ -98,14 +102,18 @@ class PlanDetailsCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Padding(padding: const EdgeInsets.only(left: 10), child: Icon(Icons.tv_sharp)),
+                              Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Icon(Icons.tv_sharp)),
                             ],
                           ),
                           const SizedBox(height: 15),
                           Catalogs(list: plan['excluded_catalogs']),
                           const SizedBox(height: 15),
                           Text(
-                            plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_monthly']))} / Month' : 'not_available',
+                            plan['price_monthly'] != null
+                                ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_monthly']))} / Month'
+                                : 'not_available',
                             textAlign: TextAlign.center,
                             softWrap: true,
                             style: TextStyle(
@@ -118,7 +126,9 @@ class PlanDetailsCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            plan['price_monthly'] != null ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_yearly']))} / Year' : 'not_available',
+                            plan['price_monthly'] != null
+                                ? '₱${NumberFormat("#,##0.00", "en_US").format(double.parse(plan['price_yearly']))} / Year'
+                                : 'not_available',
                             textAlign: TextAlign.center,
                             softWrap: true,
                             style: TextStyle(
@@ -154,7 +164,8 @@ class PlanDetailsCard extends StatelessWidget {
     final keyContext = expansionTileKey.currentContext;
     if (keyContext != null) {
       Future.delayed(Duration(milliseconds: 250)).then((value) {
-        Scrollable.ensureVisible(keyContext, duration: Duration(milliseconds: 250));
+        Scrollable.ensureVisible(keyContext,
+            duration: Duration(milliseconds: 250));
       });
     }
   }

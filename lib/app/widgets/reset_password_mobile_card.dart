@@ -20,7 +20,11 @@ class ResetPasswordCardMobile extends StatelessWidget {
     return Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
       Future.delayed(const Duration(milliseconds: 100), () {
         if (!value.isLoading && !value.isSuccess) {
-          generalDialog(context: context, message: value.message ?? '', isAutoClose: true, isLoading: value.isSuccess);
+          generalDialog(
+              context: context,
+              message: value.message ?? '',
+              isAutoClose: true,
+              isLoading: value.isSuccess);
           value.reset();
         }
       });
@@ -59,7 +63,8 @@ class ResetPasswordCardMobile extends StatelessWidget {
             prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
             prefixIcon: GestureDetector(
               onTap: () => countryCodeDialog(context: context),
-              child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15, color: Colors.black)),
+              child: Text(value.countryCode.dialCode.toString(),
+                  style: TextStyle(fontSize: 15, color: Colors.black)),
             ),
           ),
           const SizedBox(height: 20),
@@ -137,10 +142,16 @@ class ResetPasswordCardMobile extends StatelessWidget {
                     ),
                     CountryCodePicker(
                       onChanged: (value) {
-                        Provider.of<ForgotPasswordProvider>(context, listen: false).setCountryCode(value);
+                        Provider.of<ForgotPasswordProvider>(context,
+                                listen: false)
+                            .setCountryCode(value);
                         Navigator.of(context).pop();
                       },
-                      initialSelection: Provider.of<ForgotPasswordProvider>(context, listen: false).countryCode.code,
+                      initialSelection: Provider.of<ForgotPasswordProvider>(
+                              context,
+                              listen: false)
+                          .countryCode
+                          .code,
                       favorite: ['PH', 'US'],
                       showCountryOnly: false,
                       hideSearch: true,
@@ -169,7 +180,8 @@ class ResetPasswordCardMobile extends StatelessWidget {
                           Radius.circular(15),
                         ),
                       ),
-                      dialogSize: Size(MediaQuery.of(context).size.width - 40, 350),
+                      dialogSize:
+                          Size(MediaQuery.of(context).size.width - 40, 350),
                     ),
                   ],
                 ),

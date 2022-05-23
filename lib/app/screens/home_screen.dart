@@ -34,9 +34,13 @@ class HomeScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Home'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
@@ -49,7 +53,9 @@ class HomeScreen extends StatelessWidget {
                 child: RefreshIndicator(
                   color: Colors.white,
                   backgroundColor: Colors.red,
-                  onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
+                  onRefresh: () => Future.delayed(
+                      const Duration(milliseconds: 100),
+                      () => onRefresh(context)),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,9 +77,11 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 15),
                         TopTenSection(),
                         const SizedBox(height: 15),
-                        SectionCard(titleSection: 'New Releases', data: combine()),
+                        SectionCard(
+                            titleSection: 'New Releases', data: combine()),
                         const SizedBox(height: 15),
-                        SectionCard(titleSection: 'My Watch List', data: trending),
+                        SectionCard(
+                            titleSection: 'My Watch List', data: trending),
                         const SizedBox(height: 15),
                         SectionCard(titleSection: 'Comedy', data: trending),
                         const SizedBox(height: 15),
@@ -100,8 +108,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    HomeProvider homeProvider =
+        Provider.of<HomeProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       homeProvider.loadData();
@@ -112,7 +122,8 @@ class HomeScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
+      HomeProvider homeProvider =
+          Provider.of<HomeProvider>(context, listen: false);
       if (!homeProvider.isSuccess) homeProvider.loadData();
     });
   }

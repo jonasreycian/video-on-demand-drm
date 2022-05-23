@@ -7,7 +7,8 @@ import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class RegistrationProvider with ChangeNotifier {
   bool _isAcceptedTermsAndCondition = false;
-  CountryCode _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
+  CountryCode _countryCode = CountryCode(
+      code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   DateTime? _birthDay;
   String? _message;
   bool _isSuccess = false;
@@ -36,7 +37,8 @@ class RegistrationProvider with ChangeNotifier {
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
   bool get isAcceptedTermsAndCondition => _isAcceptedTermsAndCondition;
-  String? get birthDayString => _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
+  String? get birthDayString =>
+      _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
 
   //setter
 
@@ -71,15 +73,40 @@ class RegistrationProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  sendAPI(String _firstName, String _lastName, String _mobileNumber, String _email, String _password, String _confirmPassword) async {
+  sendAPI(String _firstName, String _lastName, String _mobileNumber,
+      String _email, String _password, String _confirmPassword) async {
     _message = null;
     _isLoading = true;
     _isSuccess = false;
     final device = await Utils.getDeviceName();
-    if (_firstName.isNotEmpty && _lastName.isNotEmpty && _mobileNumber.isNotEmpty && _email.isNotEmpty && _password.isNotEmpty && _confirmPassword.isNotEmpty && _birthDay != null) {
-      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email) && (_password.length >= 8) && (_password == _confirmPassword)) {
-        Map<String, dynamic> body = {'first_name': _firstName, 'last_name': _lastName, 'mobile': '${countryCode.dialCode}$_mobileNumber', 'email': _email, 'password': _password, 'password_confirmation': _confirmPassword, 'plan_id': 1, 'status': 1, 'device_name': device};
-        API().request(requestType: RequestType.post, parameter: body, endPoint: '/register').then((value) {
+    if (_firstName.isNotEmpty &&
+        _lastName.isNotEmpty &&
+        _mobileNumber.isNotEmpty &&
+        _email.isNotEmpty &&
+        _password.isNotEmpty &&
+        _confirmPassword.isNotEmpty &&
+        _birthDay != null) {
+      if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(_email) &&
+          (_password.length >= 8) &&
+          (_password == _confirmPassword)) {
+        Map<String, dynamic> body = {
+          'first_name': _firstName,
+          'last_name': _lastName,
+          'mobile': '${countryCode.dialCode}$_mobileNumber',
+          'email': _email,
+          'password': _password,
+          'password_confirmation': _confirmPassword,
+          'plan_id': 1,
+          'status': 1,
+          'device_name': device
+        };
+        API()
+            .request(
+                requestType: RequestType.post,
+                parameter: body,
+                endPoint: '/register')
+            .then((value) {
           if (value['success']) {
             _message = value['message'];
             notifyListeners();
@@ -116,7 +143,9 @@ class RegistrationProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
-      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_email)) {
+      if (!RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(_email)) {
         _message = 'Invalid Email address';
         _isSuccess = false;
         _isLoading = false;

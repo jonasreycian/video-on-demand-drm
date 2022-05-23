@@ -76,8 +76,12 @@ class MyAccountScreen extends StatelessWidget {
                                     email: value.email,
                                     mobileNumber: value.mobile,
                                     onLogout: () {
-                                      API().request(requestType: RequestType.post, endPoint: '/logout');
-                                      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                                      API().request(
+                                          requestType: RequestType.post,
+                                          endPoint: '/logout');
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              LoginScreen.routeName);
                                       user_data.loggedOut();
                                     },
                                     onChangeInformation: () {
@@ -102,8 +106,10 @@ class MyAccountScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    AccountInfoProvider accountInfoProvider =
+        Provider.of<AccountInfoProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       accountInfoProvider.loadData(true);
@@ -114,7 +120,8 @@ class MyAccountScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
+      AccountInfoProvider accountInfoProvider =
+          Provider.of<AccountInfoProvider>(context, listen: false);
       if (!accountInfoProvider.isSuccess) accountInfoProvider.loadData(false);
     });
   }

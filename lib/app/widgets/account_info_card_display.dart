@@ -34,7 +34,8 @@ class AccountInfoCardDisplay extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

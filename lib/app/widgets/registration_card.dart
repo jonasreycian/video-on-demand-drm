@@ -30,10 +30,12 @@ class RegistrationCard extends StatelessWidget {
       Future.delayed(const Duration(milliseconds: 2000), () {
         if (!value.isLoading && !value.isSuccess) {
           Navigator.of(context).pop();
-          Future.delayed(const Duration(milliseconds: 100), (() => value.reset()));
+          Future.delayed(
+              const Duration(milliseconds: 100), (() => value.reset()));
         }
         if (!value.isLoading && value.isSuccess) {
-          Future.delayed(const Duration(milliseconds: 100), (() => value.reset()));
+          Future.delayed(
+              const Duration(milliseconds: 100), (() => value.reset()));
           Navigator.of(context)
             ..pop()
             ..pushReplacementNamed(NavScreen.routeName);
@@ -99,7 +101,11 @@ class RegistrationCard extends StatelessWidget {
               prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
               prefixIcon: GestureDetector(
                 onTap: () => countryCodeDialog(context: context),
-                child: Text(value.countryCode.dialCode.toString(), style: TextStyle(fontSize: 15, color: HexColor('#BEBBBB'), fontWeight: FontWeight.w700)),
+                child: Text(value.countryCode.dialCode.toString(),
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: HexColor('#BEBBBB'),
+                        fontWeight: FontWeight.w700)),
               ),
             ),
             const SizedBox(height: 20),
@@ -111,11 +117,14 @@ class RegistrationCard extends StatelessWidget {
               obscureText: value.isObscurePassword,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
-              suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+              suffixIconPadding:
+                  const EdgeInsets.only(top: 3, bottom: 10, right: 10),
               suffixIcon: IconButton(
                 onPressed: () => value.setIsObscurePassword(),
                 icon: Icon(
-                  value.isObscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                  value.isObscurePassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                   color: HexColor('#BEBBBB'),
                   size: 20,
                 ),
@@ -130,11 +139,14 @@ class RegistrationCard extends StatelessWidget {
               obscureText: value.isObscureConfirmPassword,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-              suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+              suffixIconPadding:
+                  const EdgeInsets.only(top: 3, bottom: 10, right: 10),
               suffixIcon: IconButton(
                 onPressed: () => value.setIsObscureConfirmPassword(),
                 icon: Icon(
-                  value.isObscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                  value.isObscureConfirmPassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                   color: HexColor('#BEBBBB'),
                   size: 20,
                 ),
@@ -153,7 +165,8 @@ class RegistrationCard extends StatelessWidget {
               width: double.infinity,
               label: 'Register',
               action: () {
-                value.sendAPI(firstName.text, lastName.text, mobileNumber.text, email.text, password.text, confirmPassword.text);
+                value.sendAPI(firstName.text, lastName.text, mobileNumber.text,
+                    email.text, password.text, confirmPassword.text);
                 registrationDialog(context);
               },
             ),
@@ -224,7 +237,8 @@ class RegistrationCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 color: Colors.transparent,
-                child: Consumer<RegistrationProvider>(builder: (context, value, child) {
+                child: Consumer<RegistrationProvider>(
+                    builder: (context, value, child) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -316,10 +330,16 @@ class RegistrationCard extends StatelessWidget {
                     ),
                     CountryCodePicker(
                       onChanged: (value) {
-                        Provider.of<RegistrationProvider>(context, listen: false).setCountryCode(value);
+                        Provider.of<RegistrationProvider>(context,
+                                listen: false)
+                            .setCountryCode(value);
                         Navigator.of(context).pop();
                       },
-                      initialSelection: Provider.of<RegistrationProvider>(context, listen: false).countryCode.code,
+                      initialSelection: Provider.of<RegistrationProvider>(
+                              context,
+                              listen: false)
+                          .countryCode
+                          .code,
                       favorite: ['PH', 'US'],
                       showCountryOnly: false,
                       hideSearch: true,
@@ -348,7 +368,8 @@ class RegistrationCard extends StatelessWidget {
                           Radius.circular(15),
                         ),
                       ),
-                      dialogSize: Size(MediaQuery.of(context).size.width - 40, 350),
+                      dialogSize:
+                          Size(MediaQuery.of(context).size.width - 40, 350),
                     ),
                   ],
                 ),

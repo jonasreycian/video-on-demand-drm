@@ -36,7 +36,9 @@ class _DropdownState extends State<Dropdown> {
       width: widget.width ?? double.infinity,
       padding: widget.padding ?? const EdgeInsets.fromLTRB(10, 10, 10, 10),
       decoration: BoxDecoration(
-        color: widget.backgroundColor == null ? HexColor('#F9FAFB') : widget.backgroundColor!,
+        color: widget.backgroundColor == null
+            ? HexColor('#F9FAFB')
+            : widget.backgroundColor!,
         borderRadius: BorderRadius.circular(15),
       ),
       child: DropdownButton<String>(
@@ -74,7 +76,8 @@ class _DropdownState extends State<Dropdown> {
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontWeight: widget.hint == value ? FontWeight.w700 : FontWeight.w500,
+                  fontWeight:
+                      widget.hint == value ? FontWeight.w700 : FontWeight.w500,
                   fontStyle: FontStyle.normal,
                   fontSize: 14,
                   color: widget.hint != value ? Colors.black : Colors.red,

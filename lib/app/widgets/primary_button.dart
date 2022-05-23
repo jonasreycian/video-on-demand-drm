@@ -53,11 +53,14 @@ class PrimaryButton extends StatelessWidget {
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
+                borderRadius: BorderRadius.circular(
+                    borderRadius == null ? 5.0 : borderRadius!),
               ),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              isDisabled ? Color.fromARGB(255, 124, 124, 124) : Color.fromARGB(255, 252, 5, 5),
+              isDisabled
+                  ? Color.fromARGB(255, 124, 124, 124)
+                  : Color.fromARGB(255, 252, 5, 5),
             ),
           ),
           child: Row(

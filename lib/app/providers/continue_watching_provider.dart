@@ -15,7 +15,11 @@ class ContinueWatching with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/users/continue-watching/1').then((value) {
+    API()
+        .request(
+            requestType: RequestType.get,
+            endPoint: '/users/continue-watching/1')
+        .then((value) {
       if (value['success']) {
         _data = value['data'];
         _isLoading = false;

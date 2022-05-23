@@ -55,7 +55,8 @@ class AccountInfoCardEditing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AccountInfoProvider accountInfoProvider = Provider.of<AccountInfoProvider>(context, listen: false);
+    AccountInfoProvider accountInfoProvider =
+        Provider.of<AccountInfoProvider>(context, listen: false);
     return AnimationConfiguration.staggeredList(
       position: 0,
       duration: const Duration(milliseconds: 500),
@@ -69,7 +70,8 @@ class AccountInfoCardEditing extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             margin: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

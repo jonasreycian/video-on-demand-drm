@@ -25,7 +25,8 @@ class ResetPasswordCardEmail extends StatelessWidget {
           password.clear();
           confirmPassword.clear();
           emailNumber.clear();
-          Future.delayed(const Duration(milliseconds: 200), () => value.reset());
+          Future.delayed(
+              const Duration(milliseconds: 200), () => value.reset());
         }
       });
       return Column(
@@ -62,11 +63,14 @@ class ResetPasswordCardEmail extends StatelessWidget {
             obscureText: value.isObscure,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 8, bottom: 8),
-            suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+            suffixIconPadding:
+                const EdgeInsets.only(top: 3, bottom: 10, right: 10),
             suffixIcon: IconButton(
               onPressed: () => value.setIsObscure(),
               icon: Icon(
-                value.isObscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                value.isObscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,
               ),
@@ -81,11 +85,14 @@ class ResetPasswordCardEmail extends StatelessWidget {
             obscureText: value.isObscureConfirm,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            suffixIconPadding: const EdgeInsets.only(top: 3, bottom: 10, right: 10),
+            suffixIconPadding:
+                const EdgeInsets.only(top: 3, bottom: 10, right: 10),
             suffixIcon: IconButton(
               onPressed: () => value.setIsObscureConfirm(),
               icon: Icon(
-                value.isObscureConfirm ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                value.isObscureConfirm
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
                 color: HexColor('#BEBBBB'),
                 size: 20,
               ),
@@ -98,7 +105,8 @@ class ResetPasswordCardEmail extends StatelessWidget {
             height: 50,
             action: () {
               forgotPasswordDialog(context);
-              value.sendEmailOrNumber(emailNumber.text, password.text, confirmPassword.text);
+              value.sendEmailOrNumber(
+                  emailNumber.text, password.text, confirmPassword.text);
             },
           ),
         ],
@@ -135,7 +143,8 @@ class ResetPasswordCardEmail extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 color: Colors.transparent,
-                child: Consumer<ForgotPasswordProvider>(builder: (context, value, child) {
+                child: Consumer<ForgotPasswordProvider>(
+                    builder: (context, value, child) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -169,7 +178,9 @@ class ResetPasswordCardEmail extends StatelessWidget {
                               width: 25,
                               height: 25,
                               child: Icon(
-                                value.message == 'Successfully password reset.' ? Icons.check : Icons.close,
+                                value.message == 'Successfully password reset.'
+                                    ? Icons.check
+                                    : Icons.close,
                                 color: Colors.red,
                               ),
                             ),

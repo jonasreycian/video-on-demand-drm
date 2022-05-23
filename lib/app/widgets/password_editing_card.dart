@@ -31,7 +31,8 @@ class PasswordEditingCard extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Consumer<ChangePasswordMyAccount>(builder: (context, value, child) {
+            child: Consumer<ChangePasswordMyAccount>(
+                builder: (context, value, child) {
               Future.delayed(const Duration(milliseconds: 1000), () {
                 if (value.isSuccess && !value.isLoading) {
                   Navigator.of(context).pop();
@@ -49,15 +50,19 @@ class PasswordEditingCard extends StatelessWidget {
                 }
               });
               return Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
                 child: ExpansionTile(
                   key: expansionTileKey1,
-                  childrenPadding: const EdgeInsets.only(left: 20, right: 20, bottom: 0, top: 0),
-                  tilePadding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                  childrenPadding: const EdgeInsets.only(
+                      left: 20, right: 20, bottom: 0, top: 0),
+                  tilePadding: const EdgeInsets.only(
+                      top: 10, left: 20, right: 20, bottom: 10),
                   expandedAlignment: Alignment.centerLeft,
                   onExpansionChanged: (value) {
                     if (value) {
-                      _scrollToSelectedContent(expansionTileKey: expansionTileKey1);
+                      _scrollToSelectedContent(
+                          expansionTileKey: expansionTileKey1);
                     }
                   },
                   trailing: AnimatedSwitcher(
@@ -87,13 +92,17 @@ class PasswordEditingCard extends StatelessWidget {
                       height: 50,
                       keyboardType: TextInputType.text,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 20, top: 7, bottom: 10),
-                      suffixIconPadding: const EdgeInsets.only(top: 1, bottom: 10, right: 10),
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 7, bottom: 10),
+                      suffixIconPadding:
+                          const EdgeInsets.only(top: 1, bottom: 10, right: 10),
                       obscureText: value.currentPasswordHideen,
                       suffixIcon: IconButton(
                         onPressed: () => value.setCurrentPasswordHidden(),
                         icon: Icon(
-                          value.currentPasswordHideen ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          value.currentPasswordHideen
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           color: HexColor('#BEBBBB'),
                           size: 20,
                         ),
@@ -108,26 +117,42 @@ class PasswordEditingCard extends StatelessWidget {
                       height: 50,
                       keyboardType: TextInputType.text,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 20, top: 7, bottom: 10),
-                      suffixIconPadding: const EdgeInsets.only(top: 1, bottom: 10, right: 10),
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 7, bottom: 10),
+                      suffixIconPadding:
+                          const EdgeInsets.only(top: 1, bottom: 10, right: 10),
                       obscureText: value.passwordHidden,
                       suffixIcon: IconButton(
                         onPressed: () => value.setPasswordHidden(),
                         icon: Icon(
-                          value.passwordHidden ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          value.passwordHidden
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           color: HexColor('#BEBBBB'),
                           size: 20,
                         ),
                       ),
                     ),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.eightChar, isBlurred: !value.isCurrentPasswordFilled, name: 'Minimum eight characters'),
+                    ValidationItem(
+                        isSuccess: value.eightChar,
+                        isBlurred: !value.isCurrentPasswordFilled,
+                        name: 'Minimum eight characters'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneNumber, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one number'),
+                    ValidationItem(
+                        isSuccess: value.oneNumber,
+                        isBlurred: !value.isCurrentPasswordFilled,
+                        name: 'At least one number'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneLower, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one lower case'),
+                    ValidationItem(
+                        isSuccess: value.oneLower,
+                        isBlurred: !value.isCurrentPasswordFilled,
+                        name: 'At least one lower case'),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.oneUpper, isBlurred: !value.isCurrentPasswordFilled, name: 'At least one upper case'),
+                    ValidationItem(
+                        isSuccess: value.oneUpper,
+                        isBlurred: !value.isCurrentPasswordFilled,
+                        name: 'At least one upper case'),
                     const SizedBox(height: 15),
                     InputTextField(
                       isEnabled: value.allSuccess,
@@ -137,20 +162,27 @@ class PasswordEditingCard extends StatelessWidget {
                       height: 50,
                       keyboardType: TextInputType.text,
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
-                      padding: const EdgeInsets.only(left: 20, top: 7, bottom: 10),
-                      suffixIconPadding: const EdgeInsets.only(top: 1, bottom: 10, right: 10),
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 7, bottom: 10),
+                      suffixIconPadding:
+                          const EdgeInsets.only(top: 1, bottom: 10, right: 10),
                       obscureText: value.passwordConfirmHidden,
                       suffixIcon: IconButton(
                         onPressed: () => value.setPasswordConfirmHidden(),
                         icon: Icon(
-                          value.passwordConfirmHidden ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          value.passwordConfirmHidden
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           color: HexColor('#BEBBBB'),
                           size: 20,
                         ),
                       ),
                     ),
                     const SizedBox(height: 15),
-                    ValidationItem(isSuccess: value.isPasswordMatch, isBlurred: !value.allSuccess, name: 'Password Matched'),
+                    ValidationItem(
+                        isSuccess: value.isPasswordMatch,
+                        isBlurred: !value.allSuccess,
+                        name: 'Password Matched'),
                     const SizedBox(height: 15),
                     PrimaryButton(
                       isDisabled: !value.isPasswordMatch,
@@ -159,7 +191,8 @@ class PasswordEditingCard extends StatelessWidget {
                       label: 'Save',
                       action: () {
                         changePasswordDialog(context);
-                        value.resetPassword(currentPassword.text, password.text, confirmPassword.text);
+                        value.resetPassword(currentPassword.text, password.text,
+                            confirmPassword.text);
                       },
                     ),
                     const SizedBox(height: 25),
@@ -177,7 +210,8 @@ class PasswordEditingCard extends StatelessWidget {
     final keyContext = expansionTileKey.currentContext;
     if (keyContext != null) {
       Future.delayed(Duration(milliseconds: 250)).then((value) {
-        Scrollable.ensureVisible(keyContext, duration: Duration(milliseconds: 250));
+        Scrollable.ensureVisible(keyContext,
+            duration: Duration(milliseconds: 250));
       });
     }
   }
@@ -210,7 +244,8 @@ class PasswordEditingCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 color: Colors.transparent,
-                child: Consumer<ChangePasswordMyAccount>(builder: (context, value, child) {
+                child: Consumer<ChangePasswordMyAccount>(
+                    builder: (context, value, child) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -242,7 +277,9 @@ class PasswordEditingCard extends StatelessWidget {
                               width: 25,
                               height: 25,
                               child: Icon(
-                                value.message == 'Incorrect Current password' ? Icons.close : Icons.check,
+                                value.message == 'Incorrect Current password'
+                                    ? Icons.close
+                                    : Icons.check,
                                 color: Colors.red,
                               ),
                             ),

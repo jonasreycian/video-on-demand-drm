@@ -12,7 +12,9 @@ class HomeProvider with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
+    API()
+        .request(requestType: RequestType.get, endPoint: '/videos')
+        .then((value) {
       if (value['error_code'] == null) {
         _data = value['data'];
         _isLoading = false;

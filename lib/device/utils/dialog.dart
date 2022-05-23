@@ -227,7 +227,8 @@ ratingPopup({
 }
 
 refreshLimitDialog({required BuildContext context}) {
-  Future.delayed(const Duration(milliseconds: 1600), () => Navigator.of(context).pop());
+  Future.delayed(
+      const Duration(milliseconds: 1600), () => Navigator.of(context).pop());
   showGeneralDialog(
     barrierDismissible: false,
     context: context,
@@ -243,7 +244,8 @@ refreshLimitDialog({required BuildContext context}) {
           opacity: anim1.value,
           child: AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
-            contentPadding: const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
+            contentPadding:
+                const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
             actionsPadding: const EdgeInsets.only(bottom: 10),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(

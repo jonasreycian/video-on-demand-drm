@@ -59,9 +59,12 @@ class AppBarVideoDetails extends StatelessWidget {
                       children: [
                         Subtext(text: movieData.releaseYear ?? ''),
                         const SizedBox(width: 10),
-                        AccessibilityCard(accessibility: movieData.accessibility ?? ''),
+                        AccessibilityCard(
+                            accessibility: movieData.accessibility ?? ''),
                         const SizedBox(width: 10),
-                        Subtext(text: netflixDurationFormat(movieData.runTime ?? const Duration(milliseconds: 1))),
+                        Subtext(
+                            text: netflixDurationFormat(movieData.runTime ??
+                                const Duration(milliseconds: 1))),
                       ],
                     ),
                     const SizedBox(height: 15),
@@ -80,15 +83,19 @@ class AppBarVideoDetails extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Consumer<MyWatchListProvider>(builder: (context, value, child) {
+                        Consumer<MyWatchListProvider>(
+                            builder: (context, value, child) {
                           return AddWatchListButton(
                             title: 'My List',
                             isExisting: value.isExisting(movieData),
-                            onPressed: value.isExisting(movieData) ? () => value.removeWatchList(movieData) : () => value.addMyWatchList(movieData),
+                            onPressed: value.isExisting(movieData)
+                                ? () => value.removeWatchList(movieData)
+                                : () => value.addMyWatchList(movieData),
                           );
                         }),
                         const SizedBox(width: 10),
-                        Consumer<RatingProvider>(builder: (context, value, child) {
+                        Consumer<RatingProvider>(
+                            builder: (context, value, child) {
                           return IconButtonWithName(
                             title: 'Rate',
                             iconData: icon(value.isThumbsUp(movieData.title)),
@@ -110,7 +117,8 @@ class AppBarVideoDetails extends StatelessWidget {
                             value.setCurrentContent(movieData);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => BetterPlayerScreen(movieData),
+                                builder: (context) =>
+                                    BetterPlayerScreen(movieData),
                               ),
                             );
                           },
@@ -203,7 +211,8 @@ class TutorialOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,

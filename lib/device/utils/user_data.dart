@@ -25,30 +25,54 @@ saveLoggedIn(Map<String, dynamic> data) async {
   prefs.setString("token", data['plainTextToken']);
   prefs.setInt("planId", data['plan_id']);
 
-  isLogin = ((prefs.getBool("loggedIn") == null) ? false : prefs.getBool("loggedIn"))!;
+  isLogin = ((prefs.getBool("loggedIn") == null)
+      ? false
+      : prefs.getBool("loggedIn"))!;
   id = ((prefs.getInt("id") == null) ? 0 : prefs.getInt("id"))!;
-  firstName = ((prefs.getString("firstName") == null) ? "" : prefs.getString("firstName"))!;
-  lastName = ((prefs.getString("lastName") == null) ? "" : prefs.getString("lastName"))!;
-  mobile = ((prefs.getString("mobile") == null) ? '' : prefs.getString("mobile"))!;
+  firstName = ((prefs.getString("firstName") == null)
+      ? ""
+      : prefs.getString("firstName"))!;
+  lastName = ((prefs.getString("lastName") == null)
+      ? ""
+      : prefs.getString("lastName"))!;
+  mobile =
+      ((prefs.getString("mobile") == null) ? '' : prefs.getString("mobile"))!;
   email = ((prefs.getString("email") == null) ? "" : prefs.getString("email"))!;
-  status = ((prefs.getBool("status") == null) ? false : prefs.getBool("status"))!;
-  createdAt = ((prefs.getString("createdAt") == null) ? '' : prefs.getString("createdAt"))!;
+  status =
+      ((prefs.getBool("status") == null) ? false : prefs.getBool("status"))!;
+  createdAt = ((prefs.getString("createdAt") == null)
+      ? ''
+      : prefs.getString("createdAt"))!;
   token = ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
-  language = ((prefs.getString("language") == null) ? "en" : prefs.getString("language"))!;
+  language = ((prefs.getString("language") == null)
+      ? "en"
+      : prefs.getString("language"))!;
 }
 
 prepareUserData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  isLogin = ((prefs.getBool("loggedIn") == null) ? false : prefs.getBool("loggedIn"))!;
+  isLogin = ((prefs.getBool("loggedIn") == null)
+      ? false
+      : prefs.getBool("loggedIn"))!;
   id = ((prefs.getInt("id") == null) ? 0 : prefs.getInt("id"))!;
-  firstName = ((prefs.getString("firstName") == null) ? "" : prefs.getString("firstName"))!;
-  lastName = ((prefs.getString("lastName") == null) ? "" : prefs.getString("lastName"))!;
-  mobile = ((prefs.getString("mobile") == null) ? '' : prefs.getString("mobile"))!;
+  firstName = ((prefs.getString("firstName") == null)
+      ? ""
+      : prefs.getString("firstName"))!;
+  lastName = ((prefs.getString("lastName") == null)
+      ? ""
+      : prefs.getString("lastName"))!;
+  mobile =
+      ((prefs.getString("mobile") == null) ? '' : prefs.getString("mobile"))!;
   email = ((prefs.getString("email") == null) ? "" : prefs.getString("email"))!;
-  status = ((prefs.getBool("status") == null) ? false : prefs.getBool("status"))!;
-  createdAt = ((prefs.getString("createdAt") == null) ? '' : prefs.getString("createdAt"))!;
+  status =
+      ((prefs.getBool("status") == null) ? false : prefs.getBool("status"))!;
+  createdAt = ((prefs.getString("createdAt") == null)
+      ? ''
+      : prefs.getString("createdAt"))!;
   token = ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
-  language = ((prefs.getString("language") == null) ? "en" : prefs.getString("language"))!;
+  language = ((prefs.getString("language") == null)
+      ? "en"
+      : prefs.getString("language"))!;
 }
 
 loggedOut() async {

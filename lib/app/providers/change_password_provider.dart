@@ -72,12 +72,22 @@ class ChangePasswordMyAccount with ChangeNotifier {
     notifyListeners();
   }
 
-  resetPassword(String currentPassword, String newPassword, String confirmNewPassword) {
+  resetPassword(
+      String currentPassword, String newPassword, String confirmNewPassword) {
     _message = null;
     _isSuccess = false;
     _isLoading = true;
-    Map<String, String> body = {'current_password': currentPassword, 'password': newPassword, 'password_confirmation': confirmNewPassword};
-    API().request(requestType: RequestType.put, parameter: body, endPoint: '/users/password/change').then((value) {
+    Map<String, String> body = {
+      'current_password': currentPassword,
+      'password': newPassword,
+      'password_confirmation': confirmNewPassword
+    };
+    API()
+        .request(
+            requestType: RequestType.put,
+            parameter: body,
+            endPoint: '/users/password/change')
+        .then((value) {
       if (value['success']) {
         _isSuccess = true;
         _isLoading = false;

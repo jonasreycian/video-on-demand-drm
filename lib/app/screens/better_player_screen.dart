@@ -30,7 +30,8 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       DeviceOrientation.landscapeLeft,
     ]);
 
-    BetterPlayerConfiguration betterPlayerConfiguration = BetterPlayerConfiguration(
+    BetterPlayerConfiguration betterPlayerConfiguration =
+        BetterPlayerConfiguration(
       fit: BoxFit.cover,
       autoPlay: true,
       fullScreenByDefault: true,
@@ -44,7 +45,9 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       BetterPlayerDataSourceType.network,
       widget.content.videoUrl!,
       drmConfiguration: BetterPlayerDrmConfiguration(
-        drmType: Platform.isIOS ? BetterPlayerDrmType.fairplay : BetterPlayerDrmType.widevine,
+        drmType: Platform.isIOS
+            ? BetterPlayerDrmType.fairplay
+            : BetterPlayerDrmType.widevine,
         licenseUrl: Constants.widevineLicenseUrl,
         headers: {"Test": "Test2"},
       ),

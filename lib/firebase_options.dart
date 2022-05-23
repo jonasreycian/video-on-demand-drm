@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '193351075124',
     projectId: 'aq-prime-test',
     storageBucket: 'aq-prime-test.appspot.com',
-    iosClientId: '193351075124-mjffpbphi52n4qkomtihd9cfr7n19i0r.apps.googleusercontent.com',
+    iosClientId:
+        '193351075124-mjffpbphi52n4qkomtihd9cfr7n19i0r.apps.googleusercontent.com',
     iosBundleId: 'com.snapworxdigital.aq.prime',
   );
 }

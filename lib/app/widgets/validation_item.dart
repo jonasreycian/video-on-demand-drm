@@ -23,7 +23,9 @@ class ValidationItem extends StatelessWidget {
             height: 25,
             decoration: BoxDecoration(
               color: isSuccess ? Colors.red : Colors.transparent,
-              border: isSuccess ? Border.all(color: Colors.transparent) : Border.all(color: Colors.grey.shade400),
+              border: isSuccess
+                  ? Border.all(color: Colors.transparent)
+                  : Border.all(color: Colors.grey.shade400),
               borderRadius: BorderRadius.circular(50),
             ),
             child: Center(

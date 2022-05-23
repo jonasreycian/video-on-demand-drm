@@ -50,16 +50,20 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                 length: tabNumber,
                 initialIndex: 0,
                 child: NestedScrollView(
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                         expandedHeight: expandedHeight,
                         elevation: 0,
                         floating: false,
                         pinned: true,
-                        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back, color: Colors.white)),
+                        leading: IconButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            icon: Icon(Icons.arrow_back, color: Colors.white)),
                         flexibleSpace: LayoutBuilder(
-                          builder: (BuildContext context, BoxConstraints constraints) {
+                          builder: (BuildContext context,
+                              BoxConstraints constraints) {
                             top = constraints.biggest.height;
                             return FlexibleSpaceBar(
                               title: Text(
@@ -139,7 +143,8 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                           color: Colors.red, //change your color here
                         ),
                         bottom: PreferredSize(
-                          preferredSize: Size.fromHeight((bottom != null) ? 40.0 : 0.0),
+                          preferredSize:
+                              Size.fromHeight((bottom != null) ? 40.0 : 0.0),
                           child: (bottom != null)
                               ? Container(
                                   color: Colors.black,

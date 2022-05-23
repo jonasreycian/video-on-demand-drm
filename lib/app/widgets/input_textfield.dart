@@ -57,12 +57,14 @@ class InputTextField extends StatelessWidget {
     return Opacity(
       opacity: isEnabled ? 1.0 : 0.1,
       child: Container(
-        padding: padding ??= const EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
+        padding: padding ??=
+            const EdgeInsets.only(top: 0, bottom: 0, left: 0, right: 0),
         height: height,
         width: width == null ? double.infinity : width!,
         decoration: BoxDecoration(
           color: HexColor('#F9FAFB'),
-          borderRadius: BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
+          borderRadius:
+              BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
         ),
         child: TextField(
           onTap: onTap,
@@ -82,7 +84,8 @@ class InputTextField extends StatelessWidget {
           ),
           textAlign: TextAlign.left,
           controller: controller,
-          keyboardType: keyboardType == null ? TextInputType.text : keyboardType!,
+          keyboardType:
+              keyboardType == null ? TextInputType.text : keyboardType!,
           textAlignVertical: TextAlignVertical.top,
           decoration: InputDecoration(
             // isDense: true,
@@ -98,7 +101,8 @@ class InputTextField extends StatelessWidget {
                     child: suffixIcon,
                   )
                 : null,
-            floatingLabelBehavior: floatingLabelBehavior ??= FloatingLabelBehavior.auto,
+            floatingLabelBehavior: floatingLabelBehavior ??=
+                FloatingLabelBehavior.auto,
             labelText: hintText == null ? '' : hintText!,
             alignLabelWithHint: alignLabelWithHint ??= false,
             labelStyle: TextStyle(
@@ -115,7 +119,8 @@ class InputTextField extends StatelessWidget {
                 style: BorderStyle.none,
               ),
             ),
-            contentPadding: contentPadding ??= const EdgeInsets.only(top: 15, left: 5),
+            contentPadding: contentPadding ??=
+                const EdgeInsets.only(top: 15, left: 5),
             // contentPadding: const EdgeInsets.all(16),
           ),
         ),

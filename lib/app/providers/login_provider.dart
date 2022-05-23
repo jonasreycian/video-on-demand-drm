@@ -28,9 +28,20 @@ class LoginProvider with ChangeNotifier {
     _isSuccess = false;
     _message = null;
     final String device = await Utils.getDeviceName();
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email) && password.length >= 8) {
-      Map<String, String> body = {'email': email, 'password': password, 'device_name': device};
-      API().request(requestType: RequestType.post, parameter: body, endPoint: '/login').then((value) {
+    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(email) &&
+        password.length >= 8) {
+      Map<String, String> body = {
+        'email': email,
+        'password': password,
+        'device_name': device
+      };
+      API()
+          .request(
+              requestType: RequestType.post,
+              parameter: body,
+              endPoint: '/login')
+          .then((value) {
         if (value['success']) {
           _isSuccess = true;
           _isLoading = false;
@@ -45,7 +56,9 @@ class LoginProvider with ChangeNotifier {
         }
       });
     }
-    if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)) {
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email)) {
       _message = 'Invalid Email Address';
       _isSuccess = false;
       _isLoading = false;
