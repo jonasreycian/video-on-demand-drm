@@ -1,11 +1,9 @@
 import 'package:aq_prime/app/providers/continue_watching_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/screens/search_screen.dart';
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/data/extra/data.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
@@ -27,9 +25,13 @@ class ContinueWatchingScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Continue Watching'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: Consumer<ContinueWatching>(builder: (context, value, child) {
@@ -38,7 +40,9 @@ class ContinueWatchingScreen extends StatelessWidget {
                 child: RefreshIndicator(
                   color: Colors.white,
                   backgroundColor: Colors.red,
-                  onRefresh: () => Future.delayed(const Duration(milliseconds: 1), () => onRefresh(context)),
+                  onRefresh: () => Future.delayed(
+                      const Duration(milliseconds: 1),
+                      () => onRefresh(context)),
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
@@ -47,15 +51,18 @@ class ContinueWatchingScreen extends StatelessWidget {
                         Container(
                           color: Colors.transparent,
                           child: GridView.builder(
-                            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
                             itemCount: combine1().length,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
-                              mainAxisExtent: 175, // here set custom Height You Want
+                              mainAxisExtent:
+                                  175, // here set custom Height You Want
                             ),
                             itemBuilder: (context, index) {
                               // return ThumbnailCardForGrid(
@@ -85,8 +92,10 @@ class ContinueWatchingScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    ContinueWatching continueWatching = Provider.of<ContinueWatching>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    ContinueWatching continueWatching =
+        Provider.of<ContinueWatching>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       continueWatching.loadData();
@@ -97,7 +106,8 @@ class ContinueWatchingScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      ContinueWatching continueWatching = Provider.of<ContinueWatching>(context, listen: false);
+      ContinueWatching continueWatching =
+          Provider.of<ContinueWatching>(context, listen: false);
       if (!continueWatching.isSuccess) continueWatching.loadData();
     });
   }

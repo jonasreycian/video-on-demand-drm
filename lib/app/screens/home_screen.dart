@@ -3,8 +3,6 @@ import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/screens/search_screen.dart';
 import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/app/widgets/fetured_section.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/no_data_dialog.dart';
 import 'package:aq_prime/app/widgets/search_button.dart';
 import 'package:aq_prime/app/widgets/section_card.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';

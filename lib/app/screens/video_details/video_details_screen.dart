@@ -1,6 +1,5 @@
 import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/video_details/episode_tab.dart';
-import 'package:aq_prime/app/screens/video_details/more_like_this_tab.dart';
 import 'package:aq_prime/app/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/sliver_appbar.dart';
