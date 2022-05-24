@@ -67,7 +67,10 @@ class EpisodeCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      Subtext(text: netflixDurationFormat(Duration(milliseconds: runTime ?? 0)), color: Color.fromRGBO(140, 140, 140, 1)),
+                      Subtext(
+                        text: netflixDurationFormat(runTime ?? 0),
+                        color: Color.fromRGBO(140, 140, 140, 1),
+                      ),
                     ],
                   ),
                 ),

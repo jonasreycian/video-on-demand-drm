@@ -67,11 +67,20 @@ class AppBarVideoDetails extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Subtext(text: releaseYear != null ? DateFormat.yMMMMd().format(DateTime.parse(releaseYear!)) : '--'),
+                        Subtext(
+                            text: releaseYear != null
+                                ? DateFormat.yMMMMd()
+                                    .format(DateTime.parse(releaseYear!))
+                                : '--'),
                         const SizedBox(width: 10),
-                        AccessibilityCard(accessibility: '$seasonCount Seasons'),
+                        AccessibilityCard(
+                            accessibility: '$seasonCount Seasons'),
                         const SizedBox(width: 10),
-                        Subtext(text: runTime != null ? netflixDurationFormat(Duration(seconds: runTime!)) : '--'),
+                        Subtext(
+                          text: runTime != null
+                              ? netflixDurationFormat(runTime ?? 0)
+                              : '--',
+                        ),
                       ],
                     ),
                     const SizedBox(height: 15),
@@ -86,7 +95,10 @@ class AppBarVideoDetails extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        AddWatchListButton(title: 'My List', isExisting: false, onPressed: () {}),
+                        AddWatchListButton(
+                            title: 'My List',
+                            isExisting: false,
+                            onPressed: () {}),
                         const SizedBox(width: 10),
                         IconButtonWithName(
                           title: 'Rate',
@@ -101,7 +113,8 @@ class AppBarVideoDetails extends StatelessWidget {
                       action: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => BetterPlayerScreen(videoUrl ?? ''),
+                            builder: (context) =>
+                                BetterPlayerScreen(videoUrl ?? ''),
                           ),
                         );
                       },
@@ -201,7 +214,8 @@ class TutorialOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,

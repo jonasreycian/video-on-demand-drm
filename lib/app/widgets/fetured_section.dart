@@ -1,5 +1,6 @@
 import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/featured_banner_card.dart';
+import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -26,25 +27,28 @@ class FeaturedSection extends StatelessWidget {
               Container(
                 height: 380,
                 color: Colors.transparent,
-                child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                    height: 450,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: const Duration(seconds: 5),
-                    pageSnapping: true,
-                  ),
-                  itemCount: featuredList.length,
-                  itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-                    return FeaturedBannerCard(
-                      imageUrl: featuredList[index]['cover_photo_mobile'],
-                      onTap: () => Navigator.of(context).pushNamed(
-                        VideoDetailsPage.routeName,
-                        arguments: featuredList[index],
-                      ),
-                    );
-                  },
-                ),
-              ),
+                child: featuredList.isNotEmpty
+                    ? CarouselSlider.builder(
+                        options: CarouselOptions(
+                          height: 450,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: const Duration(seconds: 5),
+                          pageSnapping: true,
+                        ),
+                        itemCount: featuredList.length,
+                        itemBuilder: (BuildContext context, int index,
+                            int pageViewIndex) {
+                          return FeaturedBannerCard(
+                            imageUrl: featuredList[index]['cover_photo_mobile'],
+                            onTap: () => Navigator.of(context).pushNamed(
+                              VideoDetailsPage.routeName,
+                              arguments: featuredList[index],
+                            ),
+                          );
+                        },
+                      )
+                    : Center(child: AQLoadingIndicator()),
+              )
             ],
           ),
         ),

@@ -7,14 +7,14 @@ class ThumbnailCard extends StatelessWidget {
     this.imageUrl,
     this.title,
     this.onTap,
-    this.heroTag,
+    this.isOnlyAqprime = false,
     Key? key,
   }) : super(key: key);
   final int? index;
   final String? imageUrl;
   final String? title;
   final Function()? onTap;
-  final String? heroTag;
+  final bool isOnlyAqprime;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,17 +27,18 @@ class ThumbnailCard extends StatelessWidget {
             horizontalOffset: 100,
             child: Container(
               color: Colors.transparent,
-              width: 150,
-              margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+              width: isOnlyAqprime ? 200 : 150,
+              margin:
+                  const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 160,
+                    width: isOnlyAqprime ? 175 : 160,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: FadeInImage.assetNetwork(
-                        height: 200,
+                        height: isOnlyAqprime ? 270 : 200,
                         fadeInCurve: Curves.easeInQuart,
                         fadeOutCurve: Curves.easeInQuart,
                         fadeOutDuration: const Duration(milliseconds: 1000),
@@ -115,7 +116,8 @@ class ThumbnailCardForGrid extends StatelessWidget {
                 color: Colors.transparent,
                 // height: 200,
                 width: width ?? 150,
-                margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+                margin: const EdgeInsets.only(
+                    left: 10, right: 0, top: 0, bottom: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

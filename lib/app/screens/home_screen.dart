@@ -27,62 +27,76 @@ class HomeScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Home'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
-        return Stack(
-          children: [
-            if (!value.isSuccess) ...[AQLoadingIndicator()],
-            if (value.isSuccess && value.data.isEmpty) ...[AQNoData()],
-            if (value.isSuccess && value.data.isNotEmpty) ...[
-              SafeArea(
-                child: RefreshIndicator(
-                  color: Colors.white,
-                  backgroundColor: Colors.red,
-                  onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FeaturedSection(featuredList: value.isFeaturedData),
-                        SizedBox(
-                          height: (300 * value.data.length).toDouble(),
-                          child: ListView.builder(
-                            padding: const EdgeInsets.only(top: 0, bottom: 0),
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: value.data.length,
-                            itemBuilder: (context, index) {
-                              return SectionCard(
-                                titleSection: value.data[index]['name'],
-                                contents: value.data[index]['contents'],
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+        return SafeArea(
+          child: RefreshIndicator(
+            color: Colors.white,
+            backgroundColor: Colors.red,
+            onRefresh: () => Future.delayed(
+                const Duration(milliseconds: 100), () => onRefresh(context)),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FeaturedSection(featuredList: value.featured),
+                  SectionCard(
+                    titleSection: 'Popular',
+                    contents: value.popularOnAqPrime,
                   ),
-                ),
+                  SectionCard(
+                    isOnlyAqPrime: true,
+                    titleSection: 'Only on AQ Prime',
+                    contents: value.onlyOnAqPrime,
+                  ),
+                  SectionCard(
+                    titleSection: 'Top 10',
+                    contents: value.top10Films,
+                  ),
+                  SectionCard(
+                    titleSection: 'Trending Now',
+                    contents: value.trendingNow,
+                  ),
+                  SectionCard(
+                    titleSection: 'New Releases',
+                    contents: value.newReleases,
+                  ),
+                  SectionCard(
+                    titleSection: 'My Watch List',
+                    contents: value.continueWatching,
+                  ),
+                ],
               ),
-            ]
-          ],
+            ),
+          ),
         );
       }),
     );
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    HomeProvider homeProvider =
+        Provider.of<HomeProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
-      homeProvider.loadData();
+      homeProvider.loadData(CategoryType.featured);
+      homeProvider.loadData(CategoryType.popularOnAqPrime);
+      homeProvider.loadData(CategoryType.onlyOnAqPrime);
+      homeProvider.loadData(CategoryType.top10);
+      homeProvider.loadData(CategoryType.trendingNow);
+      homeProvider.loadData(CategoryType.newReleases);
+      homeProvider.loadData(CategoryType.myWatchList);
     } else {
       refreshLimitDialog(context: context);
     }
@@ -90,8 +104,17 @@ class HomeScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
-      if (!homeProvider.isSuccess) homeProvider.loadData();
+      HomeProvider homeProvider =
+          Provider.of<HomeProvider>(context, listen: false);
+      if (!homeProvider.isSuccess) {
+        homeProvider.loadData(CategoryType.featured);
+        homeProvider.loadData(CategoryType.popularOnAqPrime);
+        homeProvider.loadData(CategoryType.onlyOnAqPrime);
+        homeProvider.loadData(CategoryType.top10);
+        homeProvider.loadData(CategoryType.trendingNow);
+        homeProvider.loadData(CategoryType.newReleases);
+        homeProvider.loadData(CategoryType.continueWatching);
+      }
     });
   }
 }

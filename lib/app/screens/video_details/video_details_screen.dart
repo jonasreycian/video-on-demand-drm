@@ -27,8 +27,10 @@ class VideoDetailsPage extends StatelessWidget {
               child: TabBar(
                 indicatorWeight: 5,
                 onTap: (value) {},
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 10),
-                labelPadding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, top: 5, bottom: 10),
+                labelPadding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 10, bottom: 10),
                 labelColor: Colors.white,
                 unselectedLabelStyle: TextStyle(
                   fontFamily: 'Roboto',
@@ -72,8 +74,12 @@ class VideoDetailsPage extends StatelessWidget {
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  value.isSuccess ? EpisodesTab(episodeData: value.data) : AQLoadingIndicator(),
-                  value.isSuccess ? TrailersAndMoreTab(trailers: value.data) : AQLoadingIndicator(),
+                  value.isSuccess
+                      ? EpisodesTab(episodeData: value.data)
+                      : AQLoadingIndicator(),
+                  value.isSuccess
+                      ? TrailersAndMoreTab(trailers: value.data)
+                      : AQLoadingIndicator(),
                   const SizedBox(),
 
                   // MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
@@ -86,7 +92,8 @@ class VideoDetailsPage extends StatelessWidget {
 
   initState(BuildContext context, int contentId) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      VideoDetailsProvider videoDetailsProvider = Provider.of<VideoDetailsProvider>(context, listen: false);
+      VideoDetailsProvider videoDetailsProvider =
+          Provider.of<VideoDetailsProvider>(context, listen: false);
       videoDetailsProvider.loadData(contentId);
     });
   }
