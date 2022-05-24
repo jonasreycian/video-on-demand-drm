@@ -37,8 +37,6 @@ class AqPrimeSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    var navBarHeight = MediaQuery.of(context).padding.top + kToolbarHeight;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
@@ -61,13 +59,14 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         floating: false,
                         pinned: true,
                         leading: IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Provider.of<VideoDetailsProvider>(context,
-                                      listen: false)
-                                  .reset();
-                            },
-                            icon: Icon(Icons.arrow_back, color: Colors.white)),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Provider.of<VideoDetailsProvider>(context,
+                                    listen: false)
+                                .reset();
+                          },
+                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                        ),
                         flexibleSpace: LayoutBuilder(
                           builder: (BuildContext context,
                               BoxConstraints constraints) {
@@ -99,7 +98,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                           const Duration(milliseconds: 1000),
                                       fadeInDuration:
                                           const Duration(milliseconds: 200),
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       placeholderFit: BoxFit.contain,
                                       placeholderScale: 15,
                                       placeholder:
