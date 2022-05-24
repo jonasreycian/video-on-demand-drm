@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name="${applicationName}"
-        android:label="aq_prime"
+        android:label="AQ Prime"
         android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
