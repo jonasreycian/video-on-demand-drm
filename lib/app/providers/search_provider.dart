@@ -1,11 +1,10 @@
-import 'package:aq_prime/data/extra/data.dart';
 import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 
 class SearchProvider with ChangeNotifier {
   bool _isSearching = false;
   bool _isLoading = true;
-  final List<Content> _data = [...combine(), ...trending];
+  final List<Content> _data = [];
   final List<Content> _searchData = [];
 
   bool get isSearching => _isSearching;

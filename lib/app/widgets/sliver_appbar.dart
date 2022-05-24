@@ -52,7 +52,8 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                 length: tabNumber,
                 initialIndex: 0,
                 child: NestedScrollView(
-                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                         expandedHeight: expandedHeight,
@@ -62,11 +63,14 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         leading: IconButton(
                             onPressed: () {
                               Navigator.of(context).pop();
-                              Provider.of<VideoDetailsProvider>(context, listen: false).reset();
+                              Provider.of<VideoDetailsProvider>(context,
+                                      listen: false)
+                                  .reset();
                             },
                             icon: Icon(Icons.arrow_back, color: Colors.white)),
                         flexibleSpace: LayoutBuilder(
-                          builder: (BuildContext context, BoxConstraints constraints) {
+                          builder: (BuildContext context,
+                              BoxConstraints constraints) {
                             top = constraints.biggest.height;
                             return FlexibleSpaceBar(
                               title: Text(
@@ -91,12 +95,15 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                                       width: double.infinity,
                                       fadeInCurve: Curves.easeInQuart,
                                       fadeOutCurve: Curves.easeInQuart,
-                                      fadeOutDuration: const Duration(milliseconds: 1000),
-                                      fadeInDuration: const Duration(milliseconds: 200),
+                                      fadeOutDuration:
+                                          const Duration(milliseconds: 1000),
+                                      fadeInDuration:
+                                          const Duration(milliseconds: 200),
                                       fit: BoxFit.fill,
                                       placeholderFit: BoxFit.contain,
                                       placeholderScale: 15,
-                                      placeholder: 'assets/images/loadingSmall.gif',
+                                      placeholder:
+                                          'assets/images/loadingSmall.gif',
                                       image: backgroundImage!,
                                     ),
                                     Positioned(
@@ -113,7 +120,8 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                           color: Colors.red, //change your color here
                         ),
                         bottom: PreferredSize(
-                          preferredSize: Size.fromHeight((bottom != null) ? 40.0 : 0.0),
+                          preferredSize:
+                              Size.fromHeight((bottom != null) ? 40.0 : 0.0),
                           child: (bottom != null)
                               ? Container(
                                   color: Colors.black,

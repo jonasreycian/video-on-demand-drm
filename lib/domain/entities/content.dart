@@ -1,121 +1,172 @@
-import 'dart:ui';
+import 'dart:convert';
 
-import 'package:aq_prime/data/extra/enums.dart';
+import 'package:collection/collection.dart';
 
-import 'episode.dart';
-import 'person.dart';
-
-// Represents a single content.
 class Content {
-  // The content's id as `int`.
-  final int id;
+  int? id;
+  String? title;
+  String? titleModifier;
+  String? releasedDate;
+  String? mtrcbRating;
+  int? age;
+  int? seasonsCount;
+  String? synopsis;
+  String? logo;
+  String? type;
+  String? coverPreview;
+  String? coverPhoto;
+  String? coverPhotoMobile;
+  String? coverPhotoTablet;
+  String? coverPhotoDesktop;
+  int? thumbsUpRatingCount;
+  int? thumbsDownRatingCount;
+  String? cast;
+  String? director;
+  String? writers;
+  String? tags;
+  bool? isFeatured;
+  bool? status;
+  int? createdByUserId;
+  int? updatedByUserId;
+  int? videoId;
 
-  // The content's name as `String`.
-  final String? title;
-
-  final String? imageUrl;
-  final String? titleImageUrl;
-  final String? videoUrl;
-  final String? releaseYear;
-  final Person? director;
-  final String? rate;
-  final Duration? runTime;
-  final String? description;
-  final String? accessibility;
-  final Color? color;
-  final FilmType? type;
-  final bool? isThumbsUp;
-
-  final List<String>? genre;
-  final List<Person>? cast;
-  final List<Episode>? episode;
-  final List<Content>? moreLikeThis;
-  final List<Person>? administrator;
-  final List<Person>? screenWriter;
-  // final List<Subcategory>? subCategory;
-  // final List<Category>? category;
-
-  const Content(
-    this.id, {
-    required this.title,
-    required this.imageUrl,
-    required this.videoUrl,
-    this.titleImageUrl,
-    this.color,
-    this.releaseYear,
+  Content({
+    this.id,
+    this.title,
+    this.titleModifier,
+    this.releasedDate,
+    this.mtrcbRating,
+    this.age,
+    this.seasonsCount,
+    this.synopsis,
+    this.logo,
+    this.type,
+    this.coverPreview,
+    this.coverPhoto,
+    this.coverPhotoMobile,
+    this.coverPhotoTablet,
+    this.coverPhotoDesktop,
+    this.thumbsUpRatingCount,
+    this.thumbsDownRatingCount,
     this.cast,
     this.director,
-    this.rate,
-    this.runTime,
-    this.description,
-    this.genre,
-    this.accessibility,
-    this.type,
-    this.episode,
-    this.moreLikeThis,
-    this.isThumbsUp,
-    this.administrator,
-    this.screenWriter,
-    // this.subCategory,
-    // this.category,
+    this.writers,
+    this.tags,
+    this.isFeatured,
+    this.status,
+    this.createdByUserId,
+    this.updatedByUserId,
+    this.videoId,
   });
 
-  Content.from(Content content)
-      : id = content.id,
-        title = content.title,
-        imageUrl = content.imageUrl,
-        titleImageUrl = content.titleImageUrl,
-        videoUrl = content.videoUrl,
-        releaseYear = content.releaseYear,
-        cast = content.cast,
-        director = content.director,
-        rate = content.rate,
-        runTime = content.runTime,
-        description = content.description,
-        genre = content.genre,
-        accessibility = content.accessibility,
-        color = content.color,
-        type = content.type,
-        episode = content.episode,
-        moreLikeThis = content.moreLikeThis,
-        isThumbsUp = content.isThumbsUp,
-        administrator = content.administrator,
-        screenWriter = content.screenWriter;
-  // subCategory = content.subCategory,
-  // category = content.category;
+  factory Content.fromMap(Map<String, dynamic> data) {
+    return Content(
+      id: data['id'] as int?,
+      title: data['title'] as String?,
+      titleModifier: data['title_modifier'] as String?,
+      releasedDate: data['released_date'] as String?,
+      mtrcbRating: data['mtrcb_rating'] as String?,
+      age: data['age'] as int?,
+      seasonsCount: data['seasons_count'] as int?,
+      synopsis: data['synopsis'] as String?,
+      logo: data['logo'] as String?,
+      type: data['type'] as String?,
+      coverPreview: data['cover_preview'] as String?,
+      coverPhoto: data['cover_photo'] as String?,
+      coverPhotoMobile: data['cover_photo_mobile'] as String?,
+      coverPhotoTablet: data['cover_photo_tablet'] as String?,
+      coverPhotoDesktop: data['cover_photo_desktop'] as String?,
+      thumbsUpRatingCount: data['thumbs_up_rating_count'] as int?,
+      thumbsDownRatingCount: data['thumbs_down_rating_count'] as int?,
+      cast: data['cast'] as String?,
+      director: data['director'] as String?,
+      writers: data['writers'] as String?,
+      tags: data['tags'] as String?,
+      isFeatured: data['is_featured'] as bool?,
+      status: data['status'] as bool?,
+      createdByUserId: data['created_by_user_id'] as int?,
+      updatedByUserId: data['updated_by_user_id'] as int?,
+      videoId: data['video_id'] as int?,
+    );
+  }
 
-  Content.fromJson(Map<String, dynamic> map)
-      : id = map['id'] as int,
-        title = map['title'] as String,
-        imageUrl = map['img'] as String,
-        titleImageUrl = map['titleImageUrl'] as String,
-        videoUrl = map['videoUrl'] as String,
-        releaseYear = map['year'] as String,
-        director = Person.fromJson(map['director'] as Map<String, dynamic>),
-        rate = map['rate'] as String,
-        runTime = Duration(seconds: map['runTime'] as int),
-        description = map['videoDescription'] as String,
-        genre = (map['genre'] as List).map((e) => e as String).toList(),
-        accessibility = map['accessibility'] as String,
-        color = Color(map['color'] as int),
-        type = map['type'] as FilmType,
-        isThumbsUp = map['isThumbsUp'] ?? false,
-        cast = (map['oyuncuKadrosu'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        episode = (map['episode'] as List)
-            .map((e) => Episode.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        moreLikeThis = (map['moreLikeThis'] as List)
-            .map((e) => Content.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        administrator = (map['administrator'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        screenWriter = (map['senarist'] as List)
-            .map((e) => Person.fromJson(e as Map<String, dynamic>))
-            .toList();
-  // subCategory =
-  //     (map['altKategoriler'] as List).map((e) => Subcategory(e)).toList(),
-  // category = (map['category'] as List).map((e) => Category(e)).toList();
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'title_modifier': titleModifier,
+      'released_date': releasedDate,
+      'mtrcb_rating': mtrcbRating,
+      'age': age,
+      'seasons_count': seasonsCount,
+      'synopsis': synopsis,
+      'logo': logo,
+      'type': type,
+      'cover_preview': coverPreview,
+      'cover_photo': coverPhoto,
+      'cover_photo_mobile': coverPhotoMobile,
+      'cover_photo_tablet': coverPhotoTablet,
+      'cover_photo_desktop': coverPhotoDesktop,
+      'thumbs_up_rating_count': thumbsUpRatingCount,
+      'thumbs_down_rating_count': thumbsDownRatingCount,
+      'cast': cast,
+      'director': director,
+      'writers': writers,
+      'tags': tags,
+      'is_featured': isFeatured,
+      'status': status,
+      'created_by_user_id': createdByUserId,
+      'updated_by_user_id': updatedByUserId,
+      'video_id': videoId,
+    };
+  }
+
+  /// `dart:convert`
+  ///
+  /// Parses the string and returns the resulting Json object as [Content].
+  factory Content.fromJson(String data) {
+    return Content.fromMap(json.decode(data) as Map<String, dynamic>);
+  }
+
+  /// `dart:convert`
+  ///
+  /// Converts [Content] to a JSON string.
+  String toJson() => json.encode(toMap());
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    if (other is! Content) return false;
+    final mapEquals = const DeepCollectionEquality().equals;
+    return mapEquals(other.toMap(), toMap());
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      title.hashCode ^
+      titleModifier.hashCode ^
+      releasedDate.hashCode ^
+      mtrcbRating.hashCode ^
+      age.hashCode ^
+      seasonsCount.hashCode ^
+      synopsis.hashCode ^
+      logo.hashCode ^
+      type.hashCode ^
+      coverPreview.hashCode ^
+      coverPhoto.hashCode ^
+      coverPhotoMobile.hashCode ^
+      coverPhotoTablet.hashCode ^
+      coverPhotoDesktop.hashCode ^
+      thumbsUpRatingCount.hashCode ^
+      thumbsDownRatingCount.hashCode ^
+      cast.hashCode ^
+      director.hashCode ^
+      writers.hashCode ^
+      tags.hashCode ^
+      isFeatured.hashCode ^
+      status.hashCode ^
+      createdByUserId.hashCode ^
+      updatedByUserId.hashCode ^
+      videoId.hashCode;
 }

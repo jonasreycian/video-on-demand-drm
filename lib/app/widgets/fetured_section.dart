@@ -1,6 +1,7 @@
 import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/featured_banner_card.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -10,7 +11,7 @@ class FeaturedSection extends StatelessWidget {
     required this.featuredList,
     Key? key,
   }) : super(key: key);
-  final List featuredList;
+  final List<Content> featuredList;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +37,9 @@ class FeaturedSection extends StatelessWidget {
                           pageSnapping: true,
                         ),
                         itemCount: featuredList.length,
-                        itemBuilder: (BuildContext context, int index,
-                            int pageViewIndex) {
+                        itemBuilder: (BuildContext context, int index, int pageViewIndex) {
                           return FeaturedBannerCard(
-                            imageUrl: featuredList[index]['cover_photo_mobile'],
+                            imageUrl: featuredList[index].coverPhotoMobile!,
                             onTap: () => Navigator.of(context).pushNamed(
                               VideoDetailsPage.routeName,
                               arguments: featuredList[index],

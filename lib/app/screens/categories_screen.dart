@@ -12,7 +12,8 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
+    final String? categoryName =
+        ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -21,9 +22,13 @@ class CategoriesScreen extends StatelessWidget {
         title: TitleTextCard(name: categoryName ?? ''),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back)),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(

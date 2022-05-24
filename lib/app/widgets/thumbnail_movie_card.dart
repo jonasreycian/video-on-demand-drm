@@ -3,9 +3,9 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ThumbnailCard extends StatelessWidget {
   const ThumbnailCard({
-    this.index,
-    this.imageUrl,
-    this.title,
+    this.index = 0,
+    required this.imageUrl,
+    required this.title,
     this.onTap,
     this.isOnlyAqprime = false,
     Key? key,

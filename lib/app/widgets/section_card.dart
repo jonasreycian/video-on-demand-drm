@@ -2,6 +2,7 @@ import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class SectionCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final String titleSection;
-  final List contents;
+  final List<Content> contents;
   final bool isOnlyAqPrime; //malaki raw pag Only Aq Prime Section
   @override
   Widget build(BuildContext context) {
@@ -53,12 +54,10 @@ class SectionCard extends StatelessWidget {
                       return ThumbnailCard(
                         isOnlyAqprime: isOnlyAqPrime,
                         index: 0,
-                        title: contents[index]['title'],
-                        imageUrl: contents[index]['cover_photo_mobile'],
+                        title: contents[index].title,
+                        imageUrl: contents[index].coverPhotoMobile,
                         onTap: () {
-                          Provider.of<VideoDetailsProvider>(context,
-                                  listen: false)
-                              .reset();
+                          Provider.of<VideoDetailsProvider>(context, listen: false).reset();
                           Navigator.of(context).pushNamed(
                             VideoDetailsPage.routeName,
                             arguments: contents[index],

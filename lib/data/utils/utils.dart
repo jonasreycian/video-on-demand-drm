@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'dart:math';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class Utils {
   static Future<String> getDeviceName() async {
@@ -16,4 +17,7 @@ class Utils {
     if (Platform.isMacOS) return Future.value('MacOS');
     return Future.value('Unknown');
   }
+
+  static Color generateRandomColor() =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
 }

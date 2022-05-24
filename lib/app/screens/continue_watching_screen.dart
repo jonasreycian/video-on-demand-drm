@@ -5,7 +5,6 @@ import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/search_button.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/data/extra/data.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +52,7 @@ class ContinueWatchingScreen extends StatelessWidget {
                           child: GridView.builder(
                             padding: const EdgeInsets.only(
                                 left: 20, right: 20, top: 10),
-                            itemCount: combine1().length,
+                            itemCount: 0,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             gridDelegate:
