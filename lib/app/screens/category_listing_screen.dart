@@ -42,10 +42,13 @@ class CategoryListingScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Categories'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
         actions: [
           SearchButton(
-            onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SearchScreen.routeName),
           ),
         ],
       ),
@@ -97,7 +100,8 @@ class CategoryListingScreen extends StatelessWidget {
                             builder: (context, value, child) {
                               return value.data.isEmpty
                                   ? Center(
-                                      child: CircularProgressIndicator.adaptive(),
+                                      child:
+                                          CircularProgressIndicator.adaptive(),
                                     )
                                   : SectionCard(
                                       titleSection: 'Featured',
@@ -139,8 +143,10 @@ class CategoryListingScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    CategoryListingProvider categoryListingProvider = Provider.of<CategoryListingProvider>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    CategoryListingProvider categoryListingProvider =
+        Provider.of<CategoryListingProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       categoryListingProvider.loadData();
@@ -151,10 +157,14 @@ class CategoryListingScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      CategoryListingProvider categoryListingProvider = Provider.of<CategoryListingProvider>(context, listen: false);
-      if (!categoryListingProvider.isSuccess) categoryListingProvider.loadData();
+      CategoryListingProvider categoryListingProvider =
+          Provider.of<CategoryListingProvider>(context, listen: false);
+      if (!categoryListingProvider.isSuccess) {
+        categoryListingProvider.loadData();
+      }
 
-      FeaturedProvider featuredProvider = Provider.of<FeaturedProvider>(context, listen: false);
+      FeaturedProvider featuredProvider =
+          Provider.of<FeaturedProvider>(context, listen: false);
       if (!featuredProvider.isSuccess) featuredProvider.loadData();
     });
   }

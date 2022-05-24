@@ -28,7 +28,9 @@ class CategoryCard extends StatelessWidget {
             duration: duration,
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed(CategoryContentsScreen.routeName, arguments: category.slug);
+                Navigator.of(context).pushNamed(
+                    CategoryContentsScreen.routeName,
+                    arguments: category);
               },
               child: Center(
                 child: Container(

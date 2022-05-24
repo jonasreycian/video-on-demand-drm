@@ -25,9 +25,15 @@ class HomeScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Home'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: Padding(padding: const EdgeInsets.only(left: 10), child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png')),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png'),
+        ),
         actions: [
-          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SearchScreen.routeName),
+          ),
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
@@ -35,7 +41,10 @@ class HomeScreen extends StatelessWidget {
           child: RefreshIndicator(
             color: Colors.white,
             backgroundColor: Colors.red,
-            onRefresh: () => Future.delayed(const Duration(milliseconds: 100), () => onRefresh(context)),
+            onRefresh: () => Future.delayed(
+              const Duration(milliseconds: 100),
+              () => onRefresh(context),
+            ),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
@@ -77,8 +86,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   onRefresh(context) {
-    RefreshLimit refreshLimit = Provider.of<RefreshLimit>(context, listen: false);
-    HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    RefreshLimit refreshLimit =
+        Provider.of<RefreshLimit>(context, listen: false);
+    HomeProvider homeProvider =
+        Provider.of<HomeProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
       homeProvider.loadData(CategoryType.featured);
@@ -95,7 +106,8 @@ class HomeScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      HomeProvider homeProvider = Provider.of<HomeProvider>(context, listen: false);
+      HomeProvider homeProvider =
+          Provider.of<HomeProvider>(context, listen: false);
       if (!homeProvider.isSuccess) {
         homeProvider.loadData(CategoryType.featured);
         homeProvider.loadData(CategoryType.popularOnAqPrime);

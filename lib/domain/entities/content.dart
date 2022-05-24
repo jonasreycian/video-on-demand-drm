@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:collection/collection.dart';
+import 'package:aq_prime/domain/entities/video.dart';
 
 class Content {
   int? id;
@@ -29,144 +27,109 @@ class Content {
   int? createdByUserId;
   int? updatedByUserId;
   int? videoId;
+  Video? video;
+  List<Video>? trailers;
 
-  Content({
-    this.id,
-    this.title,
-    this.titleModifier,
-    this.releasedDate,
-    this.mtrcbRating,
-    this.age,
-    this.seasonsCount,
-    this.synopsis,
-    this.logo,
-    this.type,
-    this.coverPreview,
-    this.coverPhoto,
-    this.coverPhotoMobile,
-    this.coverPhotoTablet,
-    this.coverPhotoDesktop,
-    this.thumbsUpRatingCount,
-    this.thumbsDownRatingCount,
-    this.cast,
-    this.director,
-    this.writers,
-    this.tags,
-    this.isFeatured,
-    this.status,
-    this.createdByUserId,
-    this.updatedByUserId,
-    this.videoId,
-  });
+  Content(
+      {this.id,
+      this.title,
+      this.titleModifier,
+      this.releasedDate,
+      this.mtrcbRating,
+      this.age,
+      this.seasonsCount,
+      this.synopsis,
+      this.logo,
+      this.type,
+      this.coverPreview,
+      this.coverPhoto,
+      this.coverPhotoMobile,
+      this.coverPhotoTablet,
+      this.coverPhotoDesktop,
+      this.thumbsUpRatingCount,
+      this.thumbsDownRatingCount,
+      this.cast,
+      this.director,
+      this.writers,
+      this.tags,
+      this.isFeatured,
+      this.status,
+      this.createdByUserId,
+      this.updatedByUserId,
+      this.videoId,
+      this.video,
+      this.trailers});
 
-  factory Content.fromMap(Map<String, dynamic> data) {
-    return Content(
-      id: data['id'] as int?,
-      title: data['title'] as String?,
-      titleModifier: data['title_modifier'] as String?,
-      releasedDate: data['released_date'] as String?,
-      mtrcbRating: data['mtrcb_rating'] as String?,
-      age: data['age'] as int?,
-      seasonsCount: data['seasons_count'] as int?,
-      synopsis: data['synopsis'] as String?,
-      logo: data['logo'] as String?,
-      type: data['type'] as String?,
-      coverPreview: data['cover_preview'] as String?,
-      coverPhoto: data['cover_photo'] as String?,
-      coverPhotoMobile: data['cover_photo_mobile'] as String?,
-      coverPhotoTablet: data['cover_photo_tablet'] as String?,
-      coverPhotoDesktop: data['cover_photo_desktop'] as String?,
-      thumbsUpRatingCount: data['thumbs_up_rating_count'] as int?,
-      thumbsDownRatingCount: data['thumbs_down_rating_count'] as int?,
-      cast: data['cast'] as String?,
-      director: data['director'] as String?,
-      writers: data['writers'] as String?,
-      tags: data['tags'] as String?,
-      isFeatured: data['is_featured'] as bool?,
-      status: data['status'] as bool?,
-      createdByUserId: data['created_by_user_id'] as int?,
-      updatedByUserId: data['updated_by_user_id'] as int?,
-      videoId: data['video_id'] as int?,
-    );
+  Content.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    titleModifier = json['title_modifier'];
+    releasedDate = json['released_date'];
+    mtrcbRating = json['mtrcb_rating'];
+    age = json['age'];
+    seasonsCount = json['seasons_count'];
+    synopsis = json['synopsis'];
+    logo = json['logo'];
+    type = json['type'];
+    coverPreview = json['cover_preview'];
+    coverPhoto = json['cover_photo'];
+    coverPhotoMobile = json['cover_photo_mobile'];
+    coverPhotoTablet = json['cover_photo_tablet'];
+    coverPhotoDesktop = json['cover_photo_desktop'];
+    thumbsUpRatingCount = json['thumbs_up_rating_count'];
+    thumbsDownRatingCount = json['thumbs_down_rating_count'];
+    cast = json['cast'];
+    director = json['director'];
+    writers = json['writers'];
+    tags = json['tags'];
+    isFeatured = json['is_featured'];
+    status = json['status'];
+    createdByUserId = json['created_by_user_id'];
+    updatedByUserId = json['updated_by_user_id'];
+    videoId = json['video_id'];
+    video = json['video'] != null ? Video.fromJson(json['video']) : null;
+    if (json['trailers'] != null) {
+      trailers = <Video>[];
+      json['trailers'].forEach((v) {
+        trailers!.add(Video.fromJson(v));
+      });
+    }
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'title_modifier': titleModifier,
-      'released_date': releasedDate,
-      'mtrcb_rating': mtrcbRating,
-      'age': age,
-      'seasons_count': seasonsCount,
-      'synopsis': synopsis,
-      'logo': logo,
-      'type': type,
-      'cover_preview': coverPreview,
-      'cover_photo': coverPhoto,
-      'cover_photo_mobile': coverPhotoMobile,
-      'cover_photo_tablet': coverPhotoTablet,
-      'cover_photo_desktop': coverPhotoDesktop,
-      'thumbs_up_rating_count': thumbsUpRatingCount,
-      'thumbs_down_rating_count': thumbsDownRatingCount,
-      'cast': cast,
-      'director': director,
-      'writers': writers,
-      'tags': tags,
-      'is_featured': isFeatured,
-      'status': status,
-      'created_by_user_id': createdByUserId,
-      'updated_by_user_id': updatedByUserId,
-      'video_id': videoId,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['title_modifier'] = titleModifier;
+    data['released_date'] = releasedDate;
+    data['mtrcb_rating'] = mtrcbRating;
+    data['age'] = age;
+    data['seasons_count'] = seasonsCount;
+    data['synopsis'] = synopsis;
+    data['logo'] = logo;
+    data['type'] = type;
+    data['cover_preview'] = coverPreview;
+    data['cover_photo'] = coverPhoto;
+    data['cover_photo_mobile'] = coverPhotoMobile;
+    data['cover_photo_tablet'] = coverPhotoTablet;
+    data['cover_photo_desktop'] = coverPhotoDesktop;
+    data['thumbs_up_rating_count'] = thumbsUpRatingCount;
+    data['thumbs_down_rating_count'] = thumbsDownRatingCount;
+    data['cast'] = cast;
+    data['director'] = director;
+    data['writers'] = writers;
+    data['tags'] = tags;
+    data['is_featured'] = isFeatured;
+    data['status'] = status;
+    data['created_by_user_id'] = createdByUserId;
+    data['updated_by_user_id'] = updatedByUserId;
+    data['video_id'] = videoId;
+    if (video != null) {
+      data['video'] = video!.toJson();
+    }
+    if (trailers != null) {
+      data['trailers'] = trailers!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Content].
-  factory Content.fromJson(String data) {
-    return Content.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [Content] to a JSON string.
-  String toJson() => json.encode(toMap());
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! Content) return false;
-    final mapEquals = const DeepCollectionEquality().equals;
-    return mapEquals(other.toMap(), toMap());
-  }
-
-  @override
-  int get hashCode =>
-      id.hashCode ^
-      title.hashCode ^
-      titleModifier.hashCode ^
-      releasedDate.hashCode ^
-      mtrcbRating.hashCode ^
-      age.hashCode ^
-      seasonsCount.hashCode ^
-      synopsis.hashCode ^
-      logo.hashCode ^
-      type.hashCode ^
-      coverPreview.hashCode ^
-      coverPhoto.hashCode ^
-      coverPhotoMobile.hashCode ^
-      coverPhotoTablet.hashCode ^
-      coverPhotoDesktop.hashCode ^
-      thumbsUpRatingCount.hashCode ^
-      thumbsDownRatingCount.hashCode ^
-      cast.hashCode ^
-      director.hashCode ^
-      writers.hashCode ^
-      tags.hashCode ^
-      isFeatured.hashCode ^
-      status.hashCode ^
-      createdByUserId.hashCode ^
-      updatedByUserId.hashCode ^
-      videoId.hashCode;
 }

@@ -32,10 +32,13 @@ class MoreLikeThisTab extends StatelessWidget {
                   imageUrl: moreLikeThis[index].coverPhotoMobile!,
                   releaseYear: '2022',
                   runTime: 0.toString(),
-                  heroTag: 'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
-                  onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                  heroTag:
+                      'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(VideoDetailsPage.routeName, arguments: {
                     'data': moreLikeThis[index],
-                    'heroTag': 'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
+                    'heroTag':
+                        'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
                   }),
                 );
               },

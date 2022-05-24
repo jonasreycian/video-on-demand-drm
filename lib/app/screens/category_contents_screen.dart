@@ -1,10 +1,11 @@
 import 'package:aq_prime/app/providers/category_contents_provider.dart';
+import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
+import 'package:aq_prime/app/widgets/search_button.dart';
 import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
+import 'package:aq_prime/app/widgets/title_text_card.dart';
+import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/search_button.dart';
-import '../widgets/title_text_card.dart';
 import 'search_screen.dart';
 
 class CategoryContentsScreen extends StatelessWidget {
@@ -14,10 +15,16 @@ class CategoryContentsScreen extends StatelessWidget {
   static const routeName = '/categoryContentScreen';
 
   void initState(BuildContext context, String slug) {
-    Future.delayed(const Duration(milliseconds: 1), () {
-      CategoryContentsProvider categoryListingProvider = Provider.of<CategoryContentsProvider>(context, listen: false);
-      if (!categoryListingProvider.isSuccess) categoryListingProvider.loadData(slug);
-    });
+    Future.delayed(
+      const Duration(milliseconds: 1),
+      () {
+        CategoryContentsProvider categoryListingProvider =
+            Provider.of<CategoryContentsProvider>(context, listen: false);
+        if (!categoryListingProvider.isSuccess) {
+          categoryListingProvider.loadData(slug);
+        }
+      },
+    );
   }
 
   Widget _buildError() {
@@ -28,17 +35,18 @@ class CategoryContentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
+    final Category? category =
+        ModalRoute.of(context)!.settings.arguments as Category?;
 
-    if (categoryName == null || categoryName.isEmpty) return _buildError();
+    if (category == null) return _buildError();
 
-    initState(context, categoryName);
+    initState(context, category.slug!);
 
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        title: TitleTextCard(name: categoryName),
+        title: TitleTextCard(name: category.name!),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
         leading: IconButton(
@@ -47,12 +55,18 @@ class CategoryContentsScreen extends StatelessWidget {
         ),
         actions: [
           SearchButton(
-            onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(SearchScreen.routeName),
           ),
         ],
       ),
       body: Consumer<CategoryContentsProvider>(
         builder: (context, value, child) {
+          if (value.data == null) {
+            return Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
           return Container(
             height: double.infinity,
             width: double.infinity,
@@ -61,17 +75,21 @@ class CategoryContentsScreen extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                // childAspectRatio: 1.2,
                 mainAxisExtent: 180,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: value.data.contents.length,
+              itemCount: value.data!.contents?.length,
               itemBuilder: (context, index) => ThumbnailCard(
                 index: index,
-                imageUrl: value.data.contents[index].coverPhotoMobile,
-                // title: value.data.contents[index].title,
+                imageUrl: value.data!.contents![index].coverPhotoMobile,
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    VideoDetailsPage.routeName,
+                    arguments: value.data!.contents![index].videoId,
+                  );
+                },
               ),
             ),
           );

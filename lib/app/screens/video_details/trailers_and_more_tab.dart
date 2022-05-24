@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/widgets/trailers_card.dart';
+import 'package:aq_prime/domain/entities/video.dart';
 import 'package:flutter/material.dart';
 
 class TrailersAndMoreTab extends StatelessWidget {
@@ -6,7 +7,7 @@ class TrailersAndMoreTab extends StatelessWidget {
     required this.trailers,
     Key? key,
   }) : super(key: key);
-  final Map trailers;
+  final List<Video> trailers;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,14 +18,14 @@ class TrailersAndMoreTab extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: trailers['trailers'].length,
+              itemCount: trailers.length,
               itemBuilder: (context, index) {
                 return TrailerCard(
                   index: index,
-                  title: trailers['trailers'][index]['title'],
-                  description: trailers['trailers'][index]['description'],
-                  runTime: trailers['trailers'][index]['runtime'],
-                  imageUrl: trailers['cover_photo'],
+                  title: trailers[index].title,
+                  description: trailers[index].description,
+                  runTime: trailers[index].runtime,
+                  imageUrl: '',
                 );
               },
             )

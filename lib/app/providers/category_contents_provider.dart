@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
@@ -10,7 +8,7 @@ class CategoryContentsProvider with ChangeNotifier {
   Category _data = Category();
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  Category get data => _data;
+  Category? get data => _data;
 
   loadData(String slug) {
     reset();
@@ -21,7 +19,7 @@ class CategoryContentsProvider with ChangeNotifier {
     ).then((value) {
       _isSuccess = value['success'];
       if (_isSuccess) {
-        _data = Category.fromJson(jsonEncode(value['data']));
+        _data = Category.fromJson(value['data']);
         print('SHIT ==> $_data');
         _isLoading = false;
         notifyListeners();
