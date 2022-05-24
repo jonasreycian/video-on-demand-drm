@@ -5,16 +5,18 @@ class ThumbnailCard extends StatelessWidget {
   const ThumbnailCard({
     this.index = 0,
     required this.imageUrl,
-    required this.title,
+    this.title,
     this.onTap,
-    this.isOnlyAqprime = false,
+    this.height = 160,
+    this.width = 120,
     Key? key,
   }) : super(key: key);
   final int? index;
   final String? imageUrl;
   final String? title;
   final Function()? onTap;
-  final bool isOnlyAqprime;
+  final double height;
+  final double width;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -26,19 +28,16 @@ class ThumbnailCard extends StatelessWidget {
           child: SlideAnimation(
             horizontalOffset: 100,
             child: Container(
-              color: Colors.transparent,
-              width: isOnlyAqprime ? 200 : 150,
-              margin:
-                  const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+              margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: isOnlyAqprime ? 175 : 160,
+                    width: width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: FadeInImage.assetNetwork(
-                        height: isOnlyAqprime ? 270 : 200,
+                        height: height,
                         fadeInCurve: Curves.easeInQuart,
                         fadeOutCurve: Curves.easeInQuart,
                         fadeOutDuration: const Duration(milliseconds: 1000),
@@ -52,20 +51,22 @@ class ThumbnailCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 3),
-                  Text(
-                    title ?? '--',
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    softWrap: true,
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 15,
-                      color: Colors.white,
-                    ),
-                  ),
+                  (title == null || title!.isEmpty)
+                      ? const SizedBox()
+                      : Text(
+                          title!,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: const TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -116,8 +117,7 @@ class ThumbnailCardForGrid extends StatelessWidget {
                 color: Colors.transparent,
                 // height: 200,
                 width: width ?? 150,
-                margin: const EdgeInsets.only(
-                    left: 10, right: 0, top: 0, bottom: 0),
+                margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

@@ -19,8 +19,7 @@ class SectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
-      height: isOnlyAqPrime ? 350 : 285,
+      height: isOnlyAqPrime ? 320 : 240,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -42,7 +41,7 @@ class SectionCard extends StatelessWidget {
           const SizedBox(height: 10),
           contents.isNotEmpty
               ? Container(
-                  height: isOnlyAqPrime ? 300 : 235,
+                  height: isOnlyAqPrime ? 260 : 190,
                   color: Colors.transparent,
                   child: ListView.builder(
                     padding: const EdgeInsets.only(top: 0, bottom: 0),
@@ -52,8 +51,8 @@ class SectionCard extends StatelessWidget {
                     itemCount: contents.length,
                     itemBuilder: (context, index) {
                       return ThumbnailCard(
-                        isOnlyAqprime: isOnlyAqPrime,
                         index: 0,
+                        height: isOnlyAqPrime ? 235 : 160,
                         title: contents[index].title,
                         imageUrl: contents[index].coverPhotoMobile,
                         onTap: () {
@@ -67,7 +66,11 @@ class SectionCard extends StatelessWidget {
                     },
                   ),
                 )
-              : Expanded(child: Center(child: AQLoadingIndicator())),
+              : Expanded(
+                  child: Center(
+                    child: AQLoadingIndicator(),
+                  ),
+                ),
         ],
       ),
     );

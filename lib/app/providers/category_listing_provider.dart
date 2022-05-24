@@ -14,7 +14,6 @@ class CategoryListingProvider with ChangeNotifier {
     reset();
     notifyListeners();
     API().request(requestType: RequestType.get, endPoint: '/categories').then((value) {
-      print('CATEGORY RESPONSE ==> ${value['data']}');
       if (value['success']) {
         List temp = value['data'];
         List<Category> serialized = temp.map((e) => Category.fromMap(e)).toList();
