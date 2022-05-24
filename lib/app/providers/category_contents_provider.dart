@@ -4,26 +4,25 @@ import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-class CategoryListingProvider with ChangeNotifier {
+class CategoryContentsProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  final List<Category> _data = [];
+  Category _data = Category();
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  List<Category> get data => _data;
+  Category get data => _data;
 
-  loadData(int videoId) {
+  loadData(String slug) {
     reset();
-    API()
-        .request(
-            requestType: RequestType.get, endPoint: '/api/v1/contents/$videoId')
-        .then((value) {
+    API().request(
+      requestType: RequestType.get,
+      endPoint: '/categories/$slug',
+      parameter: {'include': 'featuredContent,contents'},
+    ).then((value) {
       _isSuccess = value['success'];
       if (_isSuccess) {
-        List temp = value['data'];
-        List<Category> serialized =
-            temp.map((e) => Category.fromJson(jsonEncode(e))).toList();
-        _data.addAll(serialized);
+        _data = Category.fromJson(jsonEncode(value['data']));
+        print('SHIT ==> $_data');
         _isLoading = false;
         notifyListeners();
       } else {
@@ -36,6 +35,5 @@ class CategoryListingProvider with ChangeNotifier {
   reset() {
     _isLoading = true;
     _isSuccess = false;
-    _data.clear();
   }
 }

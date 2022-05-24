@@ -86,7 +86,7 @@ class CategoryListingScreen extends StatelessWidget {
                                   return CategoryCard(
                                     index: index,
                                     color: Utils.generateRandomColor(),
-                                    genre: category_1[index].name!,
+                                    category: category_1[index],
                                   );
                                 },
                               ),
@@ -121,7 +121,7 @@ class CategoryListingScreen extends StatelessWidget {
                                   return CategoryCard(
                                     index: index,
                                     color: Utils.generateRandomColor(),
-                                    genre: category_2[index].name!,
+                                    category: category_2[index],
                                   );
                                 },
                               ),

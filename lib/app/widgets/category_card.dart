@@ -1,17 +1,17 @@
+import 'package:aq_prime/app/screens/category_contents_screen.dart';
+import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../screens/categories_screen.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
     Key? key,
     required this.index,
-    required this.genre,
+    required this.category,
     required this.color,
   }) : super(key: key);
   final int index;
-  final String genre;
+  final Category category;
   final Color color;
   final Duration duration = const Duration(milliseconds: 500);
   @override
@@ -27,8 +27,9 @@ class CategoryCard extends StatelessWidget {
           child: FlipAnimation(
             duration: duration,
             child: GestureDetector(
-              onTap: () => Navigator.of(context)
-                  .pushNamed(CategoriesScreen.routeName, arguments: genre),
+              onTap: () {
+                Navigator.of(context).pushNamed(CategoryContentsScreen.routeName, arguments: category.slug);
+              },
               child: Center(
                 child: Container(
                   margin: EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0),
@@ -46,7 +47,7 @@ class CategoryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          genre,
+                          category.name ?? '',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w600,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:collection/collection.dart';
 
 class Category {
@@ -13,6 +14,7 @@ class Category {
   int? createdByUserId;
   int? updatedByUserId;
   int? featuredContentId;
+  List<Content> contents;
 
   Category({
     this.id,
@@ -25,6 +27,7 @@ class Category {
     this.createdByUserId,
     this.updatedByUserId,
     this.featuredContentId,
+    this.contents = const [],
   });
 
   factory Category.fromMap(Map<String, dynamic> data) {
@@ -39,6 +42,7 @@ class Category {
       createdByUserId: data['created_by_user_id'] as int?,
       updatedByUserId: data['updated_by_user_id'] as int?,
       featuredContentId: data['featured_content_id'] as int?,
+      contents: data.containsKey('contents') ? (data['contents'] as List).map((e) => Content.fromMap(e)).toList() : [],
     );
   }
 
@@ -54,6 +58,7 @@ class Category {
       'created_by_user_id': createdByUserId,
       'updated_by_user_id': updatedByUserId,
       'featured_content_id': featuredContentId,
+      'contents': contents,
     };
   }
 
@@ -78,5 +83,5 @@ class Category {
   }
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ slug.hashCode ^ description.hashCode ^ isFeatured.hashCode ^ tags.hashCode ^ status.hashCode ^ createdByUserId.hashCode ^ updatedByUserId.hashCode ^ featuredContentId.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ slug.hashCode ^ description.hashCode ^ isFeatured.hashCode ^ tags.hashCode ^ status.hashCode ^ createdByUserId.hashCode ^ updatedByUserId.hashCode ^ featuredContentId.hashCode ^ contents.hashCode;
 }
