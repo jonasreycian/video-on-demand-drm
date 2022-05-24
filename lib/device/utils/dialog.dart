@@ -2,7 +2,8 @@ import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-String netflixDurationFormat(Duration duration) {
+String netflixDurationFormat(int runTime) {
+  Duration duration = Duration(milliseconds: runTime);
   var components = <String>[];
   var days = duration.inDays;
   if (days != 0) {

@@ -21,7 +21,7 @@ class API {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token =
         ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
-    print('token:${user_data.token} : API REQUEST: $parameter');
+    debugPrint('token:${user_data.token} : API REQUEST: $parameter');
     Map<String, String>? headers = <String, String>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',

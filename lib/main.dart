@@ -10,6 +10,7 @@ import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/providers/search_provider.dart';
+import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/categories_screen.dart';
 import 'package:aq_prime/app/screens/forgot_password_screen.dart';
 import 'package:aq_prime/app/screens/login_screen.dart';
@@ -70,7 +71,9 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<ContinueWatching>(
                 create: (context) => ContinueWatching()),
             ChangeNotifierProvider<ChangePasswordMyAccount>(
-                create: (context) => ChangePasswordMyAccount())
+                create: (context) => ChangePasswordMyAccount()),
+            ChangeNotifierProvider<VideoDetailsProvider>(
+                create: (context) => VideoDetailsProvider())
           ],
           child: MaterialApp(
             darkTheme: ThemeData.dark(),

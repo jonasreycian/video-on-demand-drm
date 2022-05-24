@@ -3,18 +3,10 @@ import 'package:flutter/material.dart';
 class FeaturedBannerCard extends StatelessWidget {
   const FeaturedBannerCard({
     required this.imageUrl,
-    required this.title,
-    required this.runTime,
-    required this.releaseYear,
-    required this.heroTag,
     required this.onTap,
     Key? key,
   }) : super(key: key);
   final String imageUrl;
-  final String title;
-  final String runTime;
-  final String releaseYear;
-  final String heroTag;
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -24,19 +16,26 @@ class FeaturedBannerCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Hero(
-            tag: heroTag,
-            transitionOnUserGestures: true,
-            child: Container(
-              height: 380,
-              width: 280,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: AssetImage(imageUrl),
-                  fit: BoxFit.cover,
-                ),
+          Container(
+            height: 380,
+            width: 280,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage.assetNetwork(
+                height: 200,
+                fadeInCurve: Curves.easeInQuart,
+                fadeOutCurve: Curves.easeInQuart,
+                fadeOutDuration: const Duration(milliseconds: 1000),
+                fadeInDuration: const Duration(milliseconds: 200),
+                fit: BoxFit.cover,
+                placeholderFit: BoxFit.contain,
+                placeholderScale: 15,
+                placeholder: 'assets/images/loading1.gif',
+                image: imageUrl,
               ),
             ),
           ),

@@ -1,14 +1,12 @@
+import 'package:aq_prime/app/widgets/trailers_card.dart';
 import 'package:flutter/material.dart';
-
-import '../../../domain/entities/episode.dart';
-import '../../widgets/trailers_card.dart';
 
 class TrailersAndMoreTab extends StatelessWidget {
   const TrailersAndMoreTab({
     required this.trailers,
     Key? key,
   }) : super(key: key);
-  final List<Episode> trailers;
+  final Map trailers;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,13 +17,14 @@ class TrailersAndMoreTab extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: trailers.length,
+              itemCount: trailers['trailers'].length,
               itemBuilder: (context, index) {
                 return TrailerCard(
                   index: index,
-                  title: trailers[index].name!,
-                  runTime: trailers[index].runTime!,
-                  imageUrl: trailers[index].imageUrl!,
+                  title: trailers['trailers'][index]['title'],
+                  description: trailers['trailers'][index]['description'],
+                  runTime: trailers['trailers'][index]['runtime'],
+                  imageUrl: trailers['cover_photo'],
                 );
               },
             )

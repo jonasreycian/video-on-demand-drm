@@ -1,14 +1,8 @@
+import 'package:aq_prime/app/screens/search_screen.dart';
+import 'package:aq_prime/app/widgets/fetured_section.dart';
+import 'package:aq_prime/app/widgets/search_button.dart';
+import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/fetured_section.dart';
-import '../widgets/only_aqprime_section.dart';
-import '../widgets/others_section.dart';
-import '../widgets/popular_section.dart';
-import '../widgets/search_button.dart';
-import '../widgets/title_text_card.dart';
-import '../widgets/top_ten_section.dart';
-import '../widgets/trending_section.dart';
-import 'search_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
@@ -18,8 +12,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String? categoryName =
-        ModalRoute.of(context)!.settings.arguments as String?;
+    final String? categoryName = ModalRoute.of(context)!.settings.arguments as String?;
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -28,13 +21,9 @@ class CategoriesScreen extends StatelessWidget {
         title: TitleTextCard(name: categoryName ?? ''),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back)),
+        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back)),
         actions: [
-          SearchButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(SearchScreen.routeName)),
+          SearchButton(onPressed: () => Navigator.of(context).pushNamed(SearchScreen.routeName)),
         ],
       ),
       body: SafeArea(
@@ -44,17 +33,17 @@ class CategoriesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              FeaturedSection(),
+              FeaturedSection(featuredList: []),
               const SizedBox(height: 15),
-              OnlyAQprimeSection(),
-              const SizedBox(height: 15),
-              PopularSection(),
-              const SizedBox(height: 15),
-              TrendingSection(),
-              const SizedBox(height: 15),
-              TopTenSection(),
-              const SizedBox(height: 15),
-              OthersSection(),
+              // OnlyAQprimeSection(),
+              // const SizedBox(height: 15),
+              // PopularSection(),
+              // const SizedBox(height: 15),
+              // TrendingSection(),
+              // const SizedBox(height: 15),
+              // TopTenSection(),
+              // const SizedBox(height: 15),
+              // OthersSection(),
             ],
           ),
         ),

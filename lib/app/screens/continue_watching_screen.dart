@@ -1,11 +1,9 @@
 import 'package:aq_prime/app/providers/continue_watching_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/screens/search_screen.dart';
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
 import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:aq_prime/data/extra/data.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
@@ -67,25 +65,19 @@ class ContinueWatchingScreen extends StatelessWidget {
                                   175, // here set custom Height You Want
                             ),
                             itemBuilder: (context, index) {
-                              return ThumbnailCardForGrid(
-                                index: index,
-                                // title: value.myWatchList[index].name!,
-                                imageUrl: combine1()[index].imageUrl!,
-                                releaseYear: combine1()[index].releaseYear!,
-                                runTime: combine1()[index]
-                                    .runTime!
-                                    .inMinutes
-                                    .toString(),
-                                heroTag:
-                                    'continueWatch${combine1()[index].imageUrl} $index',
-                                onTap: () => Navigator.of(context).pushNamed(
-                                    VideoDetailsPage.routeName,
-                                    arguments: {
-                                      'data': combine1()[index],
-                                      'heroTag':
-                                          'continueWatch${combine1()[index].imageUrl} $index',
-                                    }),
-                              );
+                              // return ThumbnailCardForGrid(
+                              //   index: index,
+                              //   // title: value.myWatchList[index].name!,
+                              //   imageUrl: combine1()[index].imageUrl!,
+                              //   releaseYear: combine1()[index].releaseYear!,
+                              //   runTime: combine1()[index].runTime!.inMinutes.toString(),
+                              //   heroTag: 'continueWatch${combine1()[index].imageUrl} $index',
+                              //   onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
+                              //     'data': combine1()[index],
+                              //     'heroTag': 'continueWatch${combine1()[index].imageUrl} $index',
+                              //   }),
+                              // );
+                              return const SizedBox();
                             },
                           ),
                         )

@@ -1,4 +1,6 @@
+import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AqPrimeSliverAppBar extends StatelessWidget {
@@ -50,8 +52,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                 length: tabNumber,
                 initialIndex: 0,
                 child: NestedScrollView(
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverAppBar(
                         expandedHeight: expandedHeight,
@@ -59,11 +60,13 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                         floating: false,
                         pinned: true,
                         leading: IconButton(
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Provider.of<VideoDetailsProvider>(context, listen: false).reset();
+                            },
                             icon: Icon(Icons.arrow_back, color: Colors.white)),
                         flexibleSpace: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints constraints) {
+                          builder: (BuildContext context, BoxConstraints constraints) {
                             top = constraints.biggest.height;
                             return FlexibleSpaceBar(
                               title: Text(
@@ -82,53 +85,20 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                               background: AnimatedContainer(
                                 duration: const Duration(milliseconds: 50),
                                 child: Stack(
-                                  alignment: Alignment.bottomCenter,
+                                  alignment: Alignment.center,
                                   children: [
-                                    !isImageUrl
-                                        ? SizedBox(
-                                            height: 750,
-                                            width: double.infinity,
-                                            child: Hero(
-                                              tag: heroTag,
-                                              transitionOnUserGestures: true,
-                                              child: Image.asset(
-                                                backgroundImage!,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          )
-                                        : Hero(
-                                            tag: heroTag,
-                                            transitionOnUserGestures: true,
-                                            child: Image.network(
-                                              backgroundImage!,
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                            ),
-                                          ),
-                                    // Positioned(
-                                    //   top: 130,
-                                    //   child: AnimationConfiguration.staggeredList(
-                                    //     position: 0,
-                                    //     duration: const Duration(milliseconds: 1500),
-                                    //     child: FadeInAnimation(
-                                    //       delay: const Duration(milliseconds: 1000),
-                                    //       child: Container(
-                                    //         child: top != 144.0
-                                    //             ? IconButton(
-                                    //                 iconSize: 65,
-                                    //                 alignment: Alignment.center,
-                                    //                 tooltip: 'Play',
-                                    //                 onPressed: () {},
-                                    //                 icon: Icon(Icons.play_circle),
-                                    //                 color: Colors.white,
-                                    //               )
-                                    //             : const SizedBox(),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    FadeInImage.assetNetwork(
+                                      width: double.infinity,
+                                      fadeInCurve: Curves.easeInQuart,
+                                      fadeOutCurve: Curves.easeInQuart,
+                                      fadeOutDuration: const Duration(milliseconds: 1000),
+                                      fadeInDuration: const Duration(milliseconds: 200),
+                                      fit: BoxFit.fill,
+                                      placeholderFit: BoxFit.contain,
+                                      placeholderScale: 15,
+                                      placeholder: 'assets/images/loadingSmall.gif',
+                                      image: backgroundImage!,
+                                    ),
                                     Positioned(
                                       child: appBarContainer!,
                                     ),
@@ -143,8 +113,7 @@ class AqPrimeSliverAppBar extends StatelessWidget {
                           color: Colors.red, //change your color here
                         ),
                         bottom: PreferredSize(
-                          preferredSize:
-                              Size.fromHeight((bottom != null) ? 40.0 : 0.0),
+                          preferredSize: Size.fromHeight((bottom != null) ? 40.0 : 0.0),
                           child: (bottom != null)
                               ? Container(
                                   color: Colors.black,

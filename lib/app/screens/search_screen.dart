@@ -186,7 +186,7 @@ class SearchCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Subtext(
-                            text: netflixDurationFormat(runTime),
+                            text: netflixDurationFormat(runTime.inMinutes),
                             color: Color.fromRGBO(140, 140, 140, 1)),
                       ],
                     ),
