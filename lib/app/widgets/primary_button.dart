@@ -32,18 +32,18 @@ class PrimaryButton extends StatelessWidget {
       margin: margin ??= const EdgeInsets.all(0),
       height: height,
       width: width == null ? double.infinity : width!,
-      decoration: BoxDecoration(
-        boxShadow: isDisabled
-            ? []
-            : [
-                BoxShadow(
-                  color: Colors.red.withOpacity(0.3),
-                  spreadRadius: 3,
-                  blurRadius: 10,
-                  offset: Offset(0, 3),
-                ),
-              ],
-      ),
+      // decoration: BoxDecoration(
+      //   boxShadow: isDisabled
+      //       ? []
+      //       : [
+      //           BoxShadow(
+      //             color: Colors.red.withOpacity(0.3),
+      //             spreadRadius: 3,
+      //             blurRadius: 10,
+      //             offset: Offset(0, 3),
+      //           ),
+      //         ],
+      // ),
       child: Opacity(
         opacity: isDisabled ? 0.9 : 1.0,
         child: ElevatedButton(
@@ -53,14 +53,11 @@ class PrimaryButton extends StatelessWidget {
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    borderRadius == null ? 5.0 : borderRadius!),
+                borderRadius: BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),
               ),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              isDisabled
-                  ? Color.fromARGB(255, 124, 124, 124)
-                  : Color.fromARGB(255, 252, 5, 5),
+              isDisabled ? Color.fromARGB(255, 124, 124, 124) : Color.fromARGB(255, 252, 5, 5),
             ),
           ),
           child: Row(
