@@ -1,26 +1,32 @@
 import 'package:aq_prime/device/utils/api_request.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  List _featured = [];
-  List _top10Films = [];
-  List _continueWatching = [];
-  List _popularOnAqPrime = [];
-  List _trendingNow = [];
-  List _onlyOnAqPrime = [];
-  List _newReleases = [];
+  List<Content> _featured = [];
+  List<Content> _top10Films = [];
+  List<Content> _continueWatching = [];
+  List<Content> _popularOnAqPrime = [];
+  List<Content> _trendingNow = [];
+  List<Content> _onlyOnAqPrime = [];
+  List<Content> _newReleases = [];
   //getter
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  List get top10Films => _top10Films;
-  List get continueWatching => _continueWatching;
-  List get popularOnAqPrime => _popularOnAqPrime;
-  List get trendingNow => _trendingNow;
-  List get onlyOnAqPrime => _onlyOnAqPrime;
-  List get newReleases => _newReleases;
-  List get featured => _featured;
+  List<Content> get top10Films => _top10Films;
+  List<Content> get continueWatching => _continueWatching;
+  List<Content> get popularOnAqPrime => _popularOnAqPrime;
+  List<Content> get trendingNow => _trendingNow;
+  List<Content> get onlyOnAqPrime => _onlyOnAqPrime;
+  List<Content> get newReleases => _newReleases;
+  List<Content> get featured => _featured;
+
+  List<Content> serialized<T>(List source) {
+    return source.map((e) => Content.fromMap(e)).toList();
+  }
+
   //setter
   loadData(CategoryType categoryType) {
     reset();
@@ -34,25 +40,25 @@ class HomeProvider with ChangeNotifier {
         .then((value) {
       if (value['success'] == true) {
         if (categoryType == CategoryType.featured) {
-          _featured = value['data'];
+          _featured = serialized(value['data']);
         }
         if (categoryType == CategoryType.popularOnAqPrime) {
-          _popularOnAqPrime = value['data'];
+          _popularOnAqPrime = serialized(value['data']);
         }
         if (categoryType == CategoryType.onlyOnAqPrime) {
-          _onlyOnAqPrime = value['data'];
+          _onlyOnAqPrime = serialized(value['data']);
         }
         if (categoryType == CategoryType.top10) {
-          _top10Films = value['data'];
+          _top10Films = serialized(value['data']);
         }
         if (categoryType == CategoryType.trendingNow) {
-          _trendingNow = value['data'];
+          _trendingNow = serialized(value['data']);
         }
         if (categoryType == CategoryType.newReleases) {
-          _newReleases = value['data'];
+          _newReleases = serialized(value['data']);
         }
         if (categoryType == CategoryType.continueWatching) {
-          _continueWatching = value['data'];
+          _continueWatching = serialized(value['data']);
         }
 
         _isLoading = false;
@@ -115,5 +121,5 @@ enum CategoryType {
   trendingNow,
   onlyOnAqPrime,
   newReleases,
-  myWatchList
+  myWatchList,
 }

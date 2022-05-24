@@ -2,8 +2,6 @@ import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-import '../../device/utils/api_request.dart';
-
 class CategoryListingProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
@@ -15,7 +13,8 @@ class CategoryListingProvider with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
+    API().request(requestType: RequestType.get, endPoint: '/categories').then((value) {
+      print('CATEGORY RESPONSE ==> ${value['data']}');
       if (value['success']) {
         List temp = value['data'];
         List<Category> serialized = temp.map((e) => Category.fromMap(e)).toList();

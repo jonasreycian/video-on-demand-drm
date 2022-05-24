@@ -20,6 +20,7 @@ class CategoryListingScreen extends StatelessWidget {
   final List<Category> category_2 = [];
 
   void splitArray(Iterable<Category> source) {
+    if (source.isEmpty) return;
     category_1.clear();
     category_2.clear();
     double firstHalf = 6;
@@ -100,7 +101,7 @@ class CategoryListingScreen extends StatelessWidget {
                                     )
                                   : SectionCard(
                                       titleSection: 'Featured',
-                                      contents: [],
+                                      contents: value.data,
                                     );
                             },
                           ),
