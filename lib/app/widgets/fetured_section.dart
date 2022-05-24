@@ -43,7 +43,7 @@ class FeaturedSection extends StatelessWidget {
                             imageUrl: featuredList[index].coverPhotoMobile!,
                             onTap: () => Navigator.of(context).pushNamed(
                               VideoDetailsPage.routeName,
-                              arguments: featuredList[index],
+                              arguments: featuredList[index].videoId,
                             ),
                           );
                         },
