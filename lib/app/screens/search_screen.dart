@@ -7,7 +7,6 @@ import '../providers/search_provider.dart';
 import '../widgets/input_textfield.dart';
 import '../widgets/subtext_card.dart';
 import '../widgets/title_text_card.dart';
-import 'video_details/video_details_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
@@ -25,9 +24,7 @@ class SearchScreen extends StatelessWidget {
         title: TitleTextCard(name: 'Search'),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
-        leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back)),
+        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -44,10 +41,8 @@ class SearchScreen extends StatelessWidget {
                     height: 45,
                     keyboardType: TextInputType.text,
                     floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    padding:
-                        const EdgeInsets.only(left: 20, top: 5, bottom: 10),
-                    suffixIconPadding:
-                        const EdgeInsets.only(bottom: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 20, top: 5, bottom: 10),
+                    suffixIconPadding: const EdgeInsets.only(bottom: 15, right: 5),
                     suffixIcon: IconButton(
                       onPressed: () {},
                       iconSize: 25,
@@ -61,37 +56,36 @@ class SearchScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemCount: value.searchData.isNotEmpty
-                      ? value.searchData.length
-                      : value.data.length,
+                  itemCount: value.searchData.isNotEmpty ? value.searchData.length : value.data.length,
                   itemBuilder: (context, index) {
-                    return SearchCard(
-                      index: index,
-                      title: value.searchData.isNotEmpty
-                          ? value.searchData[index].title!
-                          : value.data[index].title!,
-                      imageUrl: value.searchData.isNotEmpty
-                          ? value.searchData[index].imageUrl!
-                          : value.data[index].imageUrl!,
-                      runTime: value.searchData.isNotEmpty
-                          ? value.searchData[index].runTime!
-                          : value.data[index].runTime!,
-                      heroTag: value.searchData.isNotEmpty
-                          ? 'searchTag${value.searchData[index].imageUrl} $index'
-                          : 'searchTag${value.data[index].imageUrl} $index',
-                      onTap: () {
-                        focusSearch.unfocus();
-                        Navigator.of(context)
-                            .pushNamed(VideoDetailsPage.routeName, arguments: {
-                          'data': value.searchData.isNotEmpty
-                              ? value.searchData[index]
-                              : value.data[index],
-                          'heroTag': value.searchData.isNotEmpty
-                              ? 'searchTag${value.searchData[index].imageUrl} $index'
-                              : 'searchTag${value.data[index].imageUrl} $index',
-                        });
-                      },
-                    );
+                    return const SizedBox();
+                    // return SearchCard(
+                    //   index: index,
+                    //   title: value.searchData.isNotEmpty
+                    //       ? value.searchData[index].title!
+                    //       : value.data[index].title!,
+                    //   imageUrl: value.searchData.isNotEmpty
+                    //       ? value.searchData[index].imageUrl!
+                    //       : value.data[index].imageUrl!,
+                    //   runTime: value.searchData.isNotEmpty
+                    //       ? value.searchData[index].runTime!
+                    //       : value.data[index].runTime!,
+                    //   heroTag: value.searchData.isNotEmpty
+                    //       ? 'searchTag${value.searchData[index].imageUrl} $index'
+                    //       : 'searchTag${value.data[index].imageUrl} $index',
+                    //   onTap: () {
+                    //     focusSearch.unfocus();
+                    //     Navigator.of(context)
+                    //         .pushNamed(VideoDetailsPage.routeName, arguments: {
+                    //       'data': value.searchData.isNotEmpty
+                    //           ? value.searchData[index]
+                    //           : value.data[index],
+                    //       'heroTag': value.searchData.isNotEmpty
+                    //           ? 'searchTag${value.searchData[index].imageUrl} $index'
+                    //           : 'searchTag${value.data[index].imageUrl} $index',
+                    //     });
+                    //   },
+                    // );
                   },
                 )
               ],
@@ -104,8 +98,7 @@ class SearchScreen extends StatelessWidget {
 
   initState(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 1000), () {
-      SearchProvider getFeedback =
-          Provider.of<SearchProvider>(context, listen: false);
+      SearchProvider getFeedback = Provider.of<SearchProvider>(context, listen: false);
       getFeedback.reset();
     });
   }
@@ -158,8 +151,7 @@ class SearchCard extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Hero(
-                            child: Image.asset(imageUrl,
-                                fit: BoxFit.fitHeight, height: 80),
+                            child: Image.asset(imageUrl, fit: BoxFit.fitHeight, height: 80),
                             tag: heroTag,
                             transitionOnUserGestures: true,
                           ),
@@ -185,9 +177,7 @@ class SearchCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 5),
-                        Subtext(
-                            text: netflixDurationFormat(runTime.inMinutes),
-                            color: Color.fromRGBO(140, 140, 140, 1)),
+                        Subtext(text: netflixDurationFormat(runTime.inMinutes), color: Color.fromRGBO(140, 140, 140, 1)),
                       ],
                     ),
                   ),

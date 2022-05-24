@@ -3,6 +3,7 @@ import 'package:aq_prime/app/providers/better_player_provider.dart';
 import 'package:aq_prime/app/providers/category_listing_provider.dart';
 import 'package:aq_prime/app/providers/change_password_provider.dart';
 import 'package:aq_prime/app/providers/continue_watching_provider.dart';
+import 'package:aq_prime/app/providers/featured_provider.dart';
 import 'package:aq_prime/app/providers/forgot_password_provider.dart';
 import 'package:aq_prime/app/providers/home_provider.dart';
 import 'package:aq_prime/app/providers/login_provider.dart';
@@ -66,6 +67,8 @@ class MyApp extends StatelessWidget {
                 create: (context) => AccountInfoProvider()),
             ChangeNotifierProvider<CategoryListingProvider>(
                 create: (context) => CategoryListingProvider()),
+            ChangeNotifierProvider<FeaturedProvider>(
+                create: (context) => FeaturedProvider()),
             ChangeNotifierProvider<RefreshLimit>(
                 create: (context) => RefreshLimit()),
             ChangeNotifierProvider<ContinueWatching>(

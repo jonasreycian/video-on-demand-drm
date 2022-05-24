@@ -29,15 +29,13 @@ class MoreLikeThisTab extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ThumbnailCardForGrid(
                   index: index,
-                  imageUrl: moreLikeThis[index].imageUrl!,
-                  releaseYear: moreLikeThis[index].releaseYear!,
-                  runTime: moreLikeThis[index].runTime!.inMinutes.toString(),
-                  heroTag: 'moreLikeThis${moreLikeThis[index].imageUrl} $index',
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(VideoDetailsPage.routeName, arguments: {
+                  imageUrl: moreLikeThis[index].coverPhotoMobile!,
+                  releaseYear: '2022',
+                  runTime: 0.toString(),
+                  heroTag: 'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
+                  onTap: () => Navigator.of(context).pushNamed(VideoDetailsPage.routeName, arguments: {
                     'data': moreLikeThis[index],
-                    'heroTag':
-                        'moreLikeThis${moreLikeThis[index].imageUrl} $index',
+                    'heroTag': 'moreLikeThis${moreLikeThis[index].coverPhotoMobile} $index',
                   }),
                 );
               },

@@ -93,5 +93,13 @@ class Video {
   }
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ slug.hashCode ^ description.hashCode ^ isFeatured.hashCode ^ tags.hashCode ^ status.hashCode ^ featuredContentId.hashCode;
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      slug.hashCode ^
+      description.hashCode ^
+      isFeatured.hashCode ^
+      tags.hashCode ^
+      status.hashCode ^
+      featuredContentId.hashCode;
 }

@@ -1,31 +1,29 @@
+import 'dart:convert';
+
 import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:aq_prime/domain/entities/category.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-import '../../device/utils/api_request.dart';
-
-class CategoryListingProvider with ChangeNotifier {
+class FeaturedProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  List<Category> _data = [];
+  final List<Content> _data = [];
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  List<Category> get data => _data;
+  List<Content> get data => _data;
 
   loadData() {
     reset();
-    notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/videos').then((value) {
-      if (value['success']) {
+    API().request(requestType: RequestType.get, endPoint: '/categories/featured/contents').then((value) {
+      _isSuccess = value['success'];
+      if (_isSuccess) {
         List temp = value['data'];
-        List<Category> serialized = temp.map((e) => Category.fromMap(e)).toList();
-        _data = serialized;
+        List<Content> serialized = temp.map((e) => Content.fromJson(jsonEncode(e))).toList();
+        _data.addAll(serialized);
         _isLoading = false;
-        _isSuccess = true;
         notifyListeners();
       } else {
         _isLoading = false;
-        _isSuccess = false;
         notifyListeners();
       }
     });

@@ -61,20 +61,19 @@ class MyWatchListScreen extends StatelessWidget {
                               return ThumbnailCardForGrid(
                                 index: index,
                                 // title: value.myWatchList[index].name!,
-                                imageUrl: value.myWatchList[index].imageUrl!,
+                                imageUrl:
+                                    value.myWatchList[index].coverPhotoMobile!,
                                 releaseYear:
-                                    value.myWatchList[index].releaseYear!,
-                                runTime: value
-                                    .myWatchList[index].runTime!.inMinutes
-                                    .toString(),
+                                    value.myWatchList[index].releasedDate!,
+                                runTime: 0.toString(),
                                 heroTag:
-                                    'myWatchList${value.myWatchList[index].imageUrl} $index',
+                                    'myWatchList${value.myWatchList[index].coverPhotoMobile} $index',
                                 onTap: () => Navigator.of(context).pushNamed(
                                     VideoDetailsPage.routeName,
                                     arguments: {
                                       'data': value.myWatchList[index],
                                       'heroTag':
-                                          'myWatchList${value.myWatchList[index].imageUrl} $index',
+                                          'myWatchList${value.myWatchList[index].coverPhotoMobile} $index',
                                     }),
                               );
                             },
