@@ -13,10 +13,13 @@ class CategoryListingProvider with ChangeNotifier {
   loadData() {
     reset();
     notifyListeners();
-    API().request(requestType: RequestType.get, endPoint: '/categories').then((value) {
+    API()
+        .request(requestType: RequestType.get, endPoint: '/categories')
+        .then((value) {
       if (value['success']) {
         List temp = value['data'];
-        List<Category> serialized = temp.map((e) => Category.fromMap(e)).toList();
+        List<Category> serialized =
+            temp.map((e) => Category.fromJson(e)).toList();
         _data = serialized;
         _isLoading = false;
         _isSuccess = true;

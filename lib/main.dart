@@ -49,22 +49,38 @@ class MyApp extends StatelessWidget {
       child: DismissKeyboard(
         child: MultiProvider(
           providers: [
-            ChangeNotifierProvider<BetterPlayerProvider>(create: (context) => BetterPlayerProvider()),
-            ChangeNotifierProvider<HomeProvider>(create: (context) => HomeProvider()),
-            ChangeNotifierProvider<RegistrationProvider>(create: (context) => RegistrationProvider()),
-            ChangeNotifierProvider<LoginProvider>(create: (context) => LoginProvider()),
-            ChangeNotifierProvider<ForgotPasswordProvider>(create: (context) => ForgotPasswordProvider()),
-            ChangeNotifierProvider<MyWatchListProvider>(create: (context) => MyWatchListProvider()),
-            ChangeNotifierProvider<SearchProvider>(create: (context) => SearchProvider()),
-            ChangeNotifierProvider<RatingProvider>(create: (context) => RatingProvider()),
-            ChangeNotifierProvider<AccountInfoProvider>(create: (context) => AccountInfoProvider()),
-            ChangeNotifierProvider<CategoryListingProvider>(create: (context) => CategoryListingProvider()),
-            ChangeNotifierProvider<CategoryContentsProvider>(create: (context) => CategoryContentsProvider()),
-            ChangeNotifierProvider<FeaturedProvider>(create: (context) => FeaturedProvider()),
-            ChangeNotifierProvider<RefreshLimit>(create: (context) => RefreshLimit()),
-            ChangeNotifierProvider<ContinueWatching>(create: (context) => ContinueWatching()),
-            ChangeNotifierProvider<ChangePasswordMyAccount>(create: (context) => ChangePasswordMyAccount()),
-            ChangeNotifierProvider<VideoDetailsProvider>(create: (context) => VideoDetailsProvider())
+            ChangeNotifierProvider<BetterPlayerProvider>(
+                create: (context) => BetterPlayerProvider()),
+            ChangeNotifierProvider<HomeProvider>(
+                create: (context) => HomeProvider()),
+            ChangeNotifierProvider<RegistrationProvider>(
+                create: (context) => RegistrationProvider()),
+            ChangeNotifierProvider<LoginProvider>(
+                create: (context) => LoginProvider()),
+            ChangeNotifierProvider<ForgotPasswordProvider>(
+                create: (context) => ForgotPasswordProvider()),
+            ChangeNotifierProvider<MyWatchListProvider>(
+                create: (context) => MyWatchListProvider()),
+            ChangeNotifierProvider<SearchProvider>(
+                create: (context) => SearchProvider()),
+            ChangeNotifierProvider<RatingProvider>(
+                create: (context) => RatingProvider()),
+            ChangeNotifierProvider<AccountInfoProvider>(
+                create: (context) => AccountInfoProvider()),
+            ChangeNotifierProvider<CategoryListingProvider>(
+                create: (context) => CategoryListingProvider()),
+            ChangeNotifierProvider<CategoryContentsProvider>(
+                create: (context) => CategoryContentsProvider()),
+            ChangeNotifierProvider<FeaturedProvider>(
+                create: (context) => FeaturedProvider()),
+            ChangeNotifierProvider<RefreshLimit>(
+                create: (context) => RefreshLimit()),
+            ChangeNotifierProvider<ContinueWatching>(
+                create: (context) => ContinueWatching()),
+            ChangeNotifierProvider<ChangePasswordMyAccount>(
+                create: (context) => ChangePasswordMyAccount()),
+            ChangeNotifierProvider<VideoDetailsProvider>(
+                create: (context) => VideoDetailsProvider())
           ],
           child: MaterialApp(
             darkTheme: ThemeData.dark(),
@@ -80,10 +96,12 @@ class MyApp extends StatelessWidget {
               NavScreen.routeName: (context) => NavScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),
               RegistrationScreen.routeName: (context) => RegistrationScreen(),
-              ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+              ForgotPasswordScreen.routeName: (context) =>
+                  ForgotPasswordScreen(),
               VideoDetailsPage.routeName: (context) => VideoDetailsPage(),
               CategoriesScreen.routeName: (context) => CategoriesScreen(),
-              CategoryContentsScreen.routeName: (context) => CategoryContentsScreen(),
+              CategoryContentsScreen.routeName: (context) =>
+                  CategoryContentsScreen(),
               SearchScreen.routeName: (context) => SearchScreen(),
             },
           ),

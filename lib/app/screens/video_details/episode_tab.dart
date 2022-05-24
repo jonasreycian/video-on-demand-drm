@@ -1,13 +1,14 @@
 import 'package:aq_prime/app/widgets/app_bar_video_details.dart';
 import 'package:aq_prime/app/widgets/episode_card.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 
 class EpisodesTab extends StatelessWidget {
   const EpisodesTab({
-    required this.episodeData,
+    required this.content,
     Key? key,
   }) : super(key: key);
-  final Map episodeData;
+  final Content content;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,28 +18,28 @@ class EpisodesTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AppBarVideoDetails(
-              title: episodeData['title'],
-              description: episodeData['synopsis'],
-              cast: episodeData['cast'],
-              director: episodeData['director'],
-              releaseYear: episodeData['released_date'],
-              videoUrl: episodeData['video']['hls'],
-              runTime: episodeData['video']['runtime'],
-              seasonCount: episodeData['seasons_count'],
+              title: content.title,
+              description: content.synopsis,
+              cast: content.cast,
+              director: content.director,
+              releaseYear: content.releasedDate,
+              videoUrl: content.video?.hls,
+              runTime: content.video?.runtime,
+              seasonCount: content.seasonsCount,
             ),
             ListView.builder(
               padding: const EdgeInsets.only(top: 10, bottom: 0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: episodeData['trailers'].length,
+              itemCount: content.trailers?.length,
               itemBuilder: (context, index) {
                 return EpisodeCard(
                   index: index,
-                  title: episodeData['trailers'][index]['title'],
-                  description: episodeData['trailers'][index]['description'],
-                  runTime: episodeData['trailers'][index]['runtime'],
-                  imageUrl: episodeData['cover_photo'],
+                  title: content.trailers?[index].title,
+                  description: content.trailers?[index].description,
+                  runTime: content.trailers?[index].runtime,
+                  imageUrl: content.coverPhoto!,
                 );
               },
             ),

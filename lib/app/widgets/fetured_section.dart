@@ -37,12 +37,13 @@ class FeaturedSection extends StatelessWidget {
                           pageSnapping: true,
                         ),
                         itemCount: featuredList.length,
-                        itemBuilder: (BuildContext context, int index, int pageViewIndex) {
+                        itemBuilder: (BuildContext context, int index,
+                            int pageViewIndex) {
                           return FeaturedBannerCard(
                             imageUrl: featuredList[index].coverPhotoMobile!,
                             onTap: () => Navigator.of(context).pushNamed(
                               VideoDetailsPage.routeName,
-                              arguments: featuredList[index],
+                              arguments: featuredList[index].videoId,
                             ),
                           );
                         },

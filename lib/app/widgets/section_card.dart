@@ -56,10 +56,13 @@ class SectionCard extends StatelessWidget {
                         title: contents[index].title,
                         imageUrl: contents[index].coverPhotoMobile,
                         onTap: () {
-                          Provider.of<VideoDetailsProvider>(context, listen: false).reset();
+                          Provider.of<VideoDetailsProvider>(
+                            context,
+                            listen: false,
+                          ).reset();
                           Navigator.of(context).pushNamed(
                             VideoDetailsPage.routeName,
-                            arguments: contents[index],
+                            arguments: contents[index].videoId,
                           );
                         },
                       );

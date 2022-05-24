@@ -24,7 +24,7 @@ class HomeProvider with ChangeNotifier {
   List<Content> get featured => _featured;
 
   List<Content> serialized<T>(List source) {
-    return source.map((e) => Content.fromMap(e)).toList();
+    return source.map((e) => Content.fromJson(e)).toList();
   }
 
   //setter

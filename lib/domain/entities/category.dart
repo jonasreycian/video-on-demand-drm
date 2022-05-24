@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:aq_prime/domain/entities/content.dart';
-import 'package:collection/collection.dart';
 
 class Category {
   int? id;
@@ -14,74 +11,66 @@ class Category {
   int? createdByUserId;
   int? updatedByUserId;
   int? featuredContentId;
-  List<Content> contents;
+  List<Content>? featureContent;
+  List<Content>? contents;
 
-  Category({
-    this.id,
-    this.name,
-    this.slug,
-    this.description,
-    this.isFeatured,
-    this.tags,
-    this.status,
-    this.createdByUserId,
-    this.updatedByUserId,
-    this.featuredContentId,
-    this.contents = const [],
-  });
+  Category(
+      {this.id,
+      this.name,
+      this.slug,
+      this.description,
+      this.isFeatured,
+      this.tags,
+      this.status,
+      this.createdByUserId,
+      this.updatedByUserId,
+      this.featuredContentId,
+      // this.featureContent,
+      this.contents});
 
-  factory Category.fromMap(Map<String, dynamic> data) {
-    return Category(
-      id: data['id'] as int?,
-      name: data['name'] as String?,
-      slug: data['slug'] as String?,
-      description: data['description'] as String?,
-      isFeatured: data['is_featured'] as bool?,
-      tags: data['tags'] as String?,
-      status: data['status'] as bool?,
-      createdByUserId: data['created_by_user_id'] as int?,
-      updatedByUserId: data['updated_by_user_id'] as int?,
-      featuredContentId: data['featured_content_id'] as int?,
-      contents: data.containsKey('contents') ? (data['contents'] as List).map((e) => Content.fromMap(e)).toList() : [],
-    );
+  Category.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    slug = json['slug'];
+    description = json['description'];
+    isFeatured = json['is_featured'];
+    tags = json['tags'];
+    status = json['status'];
+    createdByUserId = json['created_by_user_id'];
+    updatedByUserId = json['updated_by_user_id'];
+    featuredContentId = json['featured_content_id'];
+    // if (json['feature_content'] != null) {
+    //   featureContent = <Content>[];
+    //   json['feature_content'].forEach((v) {
+    //     contents!.add(Content.fromJson(v));
+    //   });
+    // }
+    if (json['contents'] != null) {
+      contents = <Content>[];
+      json['contents'].forEach((v) {
+        contents!.add(Content.fromJson(v));
+      });
+    }
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'slug': slug,
-      'description': description,
-      'is_featured': isFeatured,
-      'tags': tags,
-      'status': status,
-      'created_by_user_id': createdByUserId,
-      'updated_by_user_id': updatedByUserId,
-      'featured_content_id': featuredContentId,
-      'contents': contents,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['slug'] = slug;
+    data['description'] = description;
+    data['is_featured'] = isFeatured;
+    data['tags'] = tags;
+    data['status'] = status;
+    data['created_by_user_id'] = createdByUserId;
+    data['updated_by_user_id'] = updatedByUserId;
+    data['featured_content_id'] = featuredContentId;
+    // if (featureContent != null) {
+    //   data['feature_content'] = featureContent!.map((v) => v.toJson()).toList();
+    // }
+    if (contents != null) {
+      data['contents'] = contents!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Category].
-  factory Category.fromJson(String data) {
-    return Category.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [Category] to a JSON string.
-  String toJson() => json.encode(toMap());
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! Category) return false;
-    final mapEquals = const DeepCollectionEquality().equals;
-    return mapEquals(other.toMap(), toMap());
-  }
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ slug.hashCode ^ description.hashCode ^ isFeatured.hashCode ^ tags.hashCode ^ status.hashCode ^ createdByUserId.hashCode ^ updatedByUserId.hashCode ^ featuredContentId.hashCode ^ contents.hashCode;
 }

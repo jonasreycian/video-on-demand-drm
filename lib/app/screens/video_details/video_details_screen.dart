@@ -11,10 +11,11 @@ import 'package:provider/provider.dart';
 class VideoDetailsPage extends StatelessWidget {
   const VideoDetailsPage({Key? key}) : super(key: key);
   static const routeName = '/videoDetailsPage';
+
   @override
   Widget build(BuildContext context) {
-    final Map content = ModalRoute.of(context)!.settings.arguments as Map;
-    initState(context, content['id']);
+    final int videoId = ModalRoute.of(context)!.settings.arguments as int;
+    initState(context, videoId);
     return Consumer<VideoDetailsProvider>(
         child: AnimationConfiguration.staggeredList(
           position: 0,
@@ -27,9 +28,17 @@ class VideoDetailsPage extends StatelessWidget {
                 indicatorWeight: 5,
                 onTap: (value) {},
                 padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 5, bottom: 10),
+                  left: 20,
+                  right: 20,
+                  top: 5,
+                  bottom: 10,
+                ),
                 labelPadding: const EdgeInsets.only(
-                    left: 10, right: 10, top: 10, bottom: 10),
+                  left: 10,
+                  right: 10,
+                  top: 10,
+                  bottom: 10,
+                ),
                 labelColor: Colors.white,
                 unselectedLabelStyle: TextStyle(
                   fontFamily: 'Roboto',
@@ -58,12 +67,15 @@ class VideoDetailsPage extends StatelessWidget {
           ),
         ),
         builder: (context, value, child) {
+          if (value.data == null) {
+            return Center(child: CircularProgressIndicator.adaptive());
+          }
           return AqPrimeSliverAppBar(
             tabNumber: 3,
             expandedHeight: 250,
-            title: content['title'],
+            title: value.data!.title!,
             isImageUrl: true,
-            backgroundImage: content['cover_photo'],
+            backgroundImage: value.data!.coverPhotoMobile,
             heroTag: '',
             appBarContainer: const SizedBox(),
             bottom: child!,
@@ -74,10 +86,10 @@ class VideoDetailsPage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   value.isSuccess
-                      ? EpisodesTab(episodeData: value.data)
+                      ? EpisodesTab(content: value.data!)
                       : AQLoadingIndicator(),
                   value.isSuccess
-                      ? TrailersAndMoreTab(trailers: value.data)
+                      ? TrailersAndMoreTab(trailers: value.data!.trailers ?? [])
                       : AQLoadingIndicator(),
                   const SizedBox(),
 

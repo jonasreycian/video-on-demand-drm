@@ -28,7 +28,8 @@ class ThumbnailCard extends StatelessWidget {
           child: SlideAnimation(
             horizontalOffset: 100,
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+              margin:
+                  const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -117,7 +118,8 @@ class ThumbnailCardForGrid extends StatelessWidget {
                 color: Colors.transparent,
                 // height: 200,
                 width: width ?? 150,
-                margin: const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+                margin: const EdgeInsets.only(
+                    left: 10, right: 0, top: 0, bottom: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
