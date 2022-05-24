@@ -15,18 +15,16 @@ class Subtext extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Text(
-        text,
-        maxLines: maxLines ?? 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontWeight: fontWeight ?? FontWeight.w300,
-          fontStyle: FontStyle.normal,
-          fontSize: 15,
-          color: color ?? Colors.white,
-        ),
+    return Text(
+      text,
+      maxLines: maxLines ?? 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        fontWeight: fontWeight ?? FontWeight.w300,
+        fontStyle: FontStyle.normal,
+        fontSize: 15,
+        color: color ?? Colors.white,
       ),
     );
   }

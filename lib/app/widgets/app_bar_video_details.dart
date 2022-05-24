@@ -44,10 +44,7 @@ class AppBarVideoDetails extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: 360,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
+              height: 470,
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +71,8 @@ class AppBarVideoDetails extends StatelessWidget {
                                 : '--'),
                         const SizedBox(width: 10),
                         AccessibilityCard(
-                            accessibility: '$seasonCount Seasons'),
+                          accessibility: '$seasonCount Seasons',
+                        ),
                         const SizedBox(width: 10),
                         Subtext(
                           text: runTime != null
@@ -84,13 +82,25 @@ class AppBarVideoDetails extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 15),
-                    Subtext(text: description ?? '', maxLines: 4),
+                    Subtext(
+                      text: description ?? '',
+                      maxLines: 4,
+                    ),
                     const SizedBox(height: 15),
-                    Subtext(text: 'Starring: ', fontWeight: FontWeight.w700),
+                    Subtext(
+                      text: 'Starring: ',
+                      fontWeight: FontWeight.w700,
+                      maxLines: 2,
+                    ),
                     Subtext(text: cast ?? '--', maxLines: 3),
                     const SizedBox(height: 15),
-                    Subtext(text: 'Director: ', fontWeight: FontWeight.w700),
-                    AccessibilityCard(accessibility: director ?? '--'),
+                    Subtext(
+                      text: 'Director: ',
+                      fontWeight: FontWeight.w700,
+                    ),
+                    AccessibilityCard(
+                      accessibility: director ?? '--',
+                    ),
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
