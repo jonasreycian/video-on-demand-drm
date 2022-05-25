@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/trailers_card.dart';
 import 'package:aq_prime/domain/entities/video.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,22 @@ class TrailersAndMoreTab extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: trailers.length,
               itemBuilder: (context, index) {
-                return TrailerCard(
-                  index: index,
-                  title: trailers[index].title ?? '',
-                  description: trailers[index].description ?? '',
-                  runTime: trailers[index].runtime,
-                  imageUrl: '',
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            BetterPlayerScreen(trailers[index].hls!),
+                      ),
+                    );
+                  },
+                  child: TrailerCard(
+                    index: index,
+                    title: trailers[index].title ?? '',
+                    description: trailers[index].description ?? '',
+                    runTime: trailers[index].runtime,
+                    imageUrl: '',
+                  ),
                 );
               },
             )

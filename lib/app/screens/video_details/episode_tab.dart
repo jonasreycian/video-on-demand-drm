@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/app_bar_video_details.dart';
 import 'package:aq_prime/app/widgets/episode_card.dart';
 import 'package:aq_prime/domain/entities/content.dart';
@@ -34,12 +35,22 @@ class EpisodesTab extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: content.seasons?.length,
               itemBuilder: (context, index) {
-                return EpisodeCard(
-                  index: index,
-                  title: content.seasons?[index].title,
-                  description: content.seasons?[index].description,
-                  runTime: content.seasons?[index].runtime,
-                  imageUrl: content.coverPhoto!,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            BetterPlayerScreen(content.video?.hls! ?? ''),
+                      ),
+                    );
+                  },
+                  child: EpisodeCard(
+                    index: index,
+                    title: content.seasons?[index].title,
+                    description: content.seasons?[index].description,
+                    runTime: content.seasons?[index].runtime,
+                    imageUrl: content.coverPhoto!,
+                  ),
                 );
               },
             ),
