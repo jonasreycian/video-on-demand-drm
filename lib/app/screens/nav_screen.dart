@@ -1,5 +1,7 @@
+import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import '../cubits/app_bar/app_bar_cubit.dart';
 import '../widgets/responsive.dart';
@@ -34,8 +36,15 @@ class _NavScreenState extends State<NavScreen> {
 
   int _currentIndex = 0;
 
+  void initializeAPI(BuildContext context) {
+    MyWatchListProvider myWatchListProvider =
+        Provider.of<MyWatchListProvider>(context, listen: false);
+    myWatchListProvider.loadWatchList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    initializeAPI(context);
     return Scaffold(
       body: BlocProvider<AppBarCubit>(
         create: (_) => AppBarCubit(),

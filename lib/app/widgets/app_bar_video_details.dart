@@ -1,11 +1,12 @@
 import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
-import 'package:aq_prime/app/widgets/accessibility_card.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
+import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/app/widgets/subtext_card.dart';
-import 'package:aq_prime/data/utils/utils.dart';
+import 'package:aq_prime/device/utils/hex_color.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
@@ -15,25 +16,11 @@ class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
     Key? key,
     required this.contentId,
-    this.title,
-    this.releaseYear,
-    this.description,
-    this.cast,
-    this.director,
-    this.videoUrl,
-    this.runTime,
-    this.seasonCount,
+    required this.content,
   }) : super(key: key);
 
   final int contentId;
-  final String? title;
-  final String? releaseYear;
-  final String? description;
-  final String? cast;
-  final String? director;
-  final String? videoUrl;
-  final int? runTime;
-  final int? seasonCount;
+  final Content content;
 
   final Duration duration = Duration(milliseconds: 1000);
   @override
@@ -55,7 +42,7 @@ class AppBarVideoDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      title ?? '--',
+                      content.title ?? '--',
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w800,
@@ -69,49 +56,62 @@ class AppBarVideoDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Subtext(
-                            text: releaseYear != null
-                                ? DateFormat.yMMMMd()
-                                    .format(DateTime.parse(releaseYear!))
-                                : '--'),
-                        const SizedBox(width: 10),
-                        AccessibilityCard(
-                          accessibility: '$seasonCount Seasons',
-                        ),
-                        const SizedBox(width: 10),
-                        Subtext(
-                          text: runTime != null
-                              ? Utils.netflixDurationFormat(runTime ?? 0)
+                          text: content.releasedDate != null
+                              ? DateFormat.y()
+                                  .format(DateTime.parse(content.releasedDate!))
                               : '--',
                         ),
+                        const SizedBox(width: 10),
+                        MTRCBRating(rating: content.mtrcbRating),
+                        const SizedBox(width: 10),
+                        Text(
+                          '${content.seasonsCount} ${content.seasonsCount! > 1 ? 'Seasons' : 'Season'}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        // Subtext(
+                        //   text: content.video?.runtime != null
+                        //       ? Utils.netflixDurationFormat(
+                        //           content.video!.runtime!)
+                        //       : '--',
+                        // ),
                       ],
                     ),
                     const SizedBox(height: 15),
                     Subtext(
-                      text: description ?? '',
+                      text: content.synopsis ?? '',
                       maxLines: 4,
+                      textStyle: TextStyle(color: HexColor('#747474')),
                     ),
                     const SizedBox(height: 15),
-                    Subtext(
-                      text: 'Starring: ',
-                      fontWeight: FontWeight.w700,
-                      maxLines: 2,
-                    ),
-                    Subtext(text: cast ?? '--', maxLines: 3),
+                    // Subtext(
+                    //   text: 'Starring: ',
+                    //   fontWeight: FontWeight.w700,
+                    //   maxLines: 2,
+                    // ),
+                    // Subtext(
+                    //   text: content.cast!.join(', '),
+                    //   maxLines: 3,
+                    // ),
                     const SizedBox(height: 15),
-                    Subtext(
-                      text: 'Director: ',
-                      fontWeight: FontWeight.w700,
-                    ),
-                    AccessibilityCard(
-                      accessibility: director ?? '--',
-                    ),
+                    // Subtext(
+                    //   text: 'Director: ',
+                    //   fontWeight: FontWeight.w700,
+                    // ),
+                    // AccessibilityCard(
+                    //   accessibility: content.director ?? '--',
+                    // ),
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         AddWatchListButton(
                           title: 'My List',
-                          isExisting: false,
+                          contentId: content.id,
                           onPressed: () async {
                             MyWatchListProvider myWatchListProvider =
                                 Provider.of<MyWatchListProvider>(context,
@@ -128,10 +128,26 @@ class AppBarVideoDetails extends StatelessWidget {
                           },
                         ),
                         const SizedBox(width: 10),
-                        IconButtonWithName(
-                          title: 'Rate',
-                          iconData: icon(true),
-                          onPressed: () {},
+                        Row(
+                          children: [
+                            IconButtonWithName(
+                              title: 'Rate',
+                              iconData: icon(null),
+                              onPressed: () {
+                                print('RATE BUTTON ACTION FOR IMPLEMENTATION');
+                              },
+                            ),
+                            Text(
+                              content.thumbsUpRatingCount != null &&
+                                      content.thumbsUpRatingCount! > 0
+                                  ? content.thumbsUpRatingCount.toString()
+                                  : '',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: HexColor('#747474'),
+                              ),
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -139,10 +155,15 @@ class AppBarVideoDetails extends StatelessWidget {
                     PrimaryButton(
                       height: 50,
                       action: () {
+                        if (content.video == null ||
+                            content.video!.hls == null) {
+                          print('No hls url found');
+                          return;
+                        }
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                BetterPlayerScreen(videoUrl ?? ''),
+                                BetterPlayerScreen(content.video!.hls!),
                           ),
                         );
                       },

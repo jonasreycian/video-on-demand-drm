@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_config.dart';
 import 'user_data.dart' as user_data;
 
-enum RequestType { post, get, put }
+enum RequestType { post, get, put, delete, patch }
 
 class API {
   Future<Map<String, dynamic>> request({
@@ -29,13 +29,14 @@ class API {
       'Authorization': 'Bearer $token',
     };
     http.Response? response;
-    Uri uri;
+    Uri uri = Uri.http(
+      AppConfig.host,
+      AppConfig.path + AppConfig.version + endPoint,
+      parameter,
+    );
     try {
       //============================================================
       if (requestType == RequestType.post) {
-        uri = Uri.http(
-            AppConfig.host, AppConfig.path + AppConfig.version + endPoint);
-        print('$requestType :: Using url ==> $uri');
         response = await http
             .post(
               uri,
@@ -45,9 +46,6 @@ class API {
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.get) {
-        uri = Uri.http(AppConfig.host,
-            AppConfig.path + AppConfig.version + endPoint, parameter);
-        print('$requestType :: Using url ==> $uri');
         response = await http
             .get(
               uri,
@@ -56,9 +54,6 @@ class API {
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.put) {
-        uri = Uri.http(AppConfig.host,
-            AppConfig.path + AppConfig.version + endPoint, parameter);
-        print('$requestType :: Using url ==> $uri');
         response = await http
             .put(
               uri,
@@ -66,18 +61,39 @@ class API {
             )
             .timeout(const Duration(seconds: 10));
       }
-      //============================================================
-      if (response!.statusCode == 200 && response.body.isNotEmpty) {
-        debugPrint(
-            'RESPONSE --> (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');
-        Map<String, dynamic> data = jsonDecode(response.body);
-
-        data['needPopUpError'] = false;
-        return data;
-      } else {
-        debugPrint(response.body);
-        return jsonDecode(response.body);
+      if (requestType == RequestType.delete) {
+        response = await http
+            .delete(
+              uri,
+              headers: headers,
+            )
+            .timeout(const Duration(seconds: 10));
       }
+      if (requestType == RequestType.patch) {
+        response = await http
+            .patch(
+              uri,
+              headers: headers,
+            )
+            .timeout(const Duration(seconds: 10));
+      }
+      debugPrint('|===============================');
+      if (response != null) {
+        debugPrint('| URL ==> $uri');
+        debugPrint('| STATUS ==> ${response.statusCode}');
+        if (response.statusCode == 200 && response.body.isNotEmpty) {
+          debugPrint('| SIZE ==> ${(response.contentLength.toString())} Bytes');
+          debugPrint('| RESPONSE ==> ${(response.body.toString())}');
+          return jsonDecode(response.body);
+        } else {
+          debugPrint('| ERROR ==> ${response.body}');
+          return jsonDecode(response.body);
+        }
+      } else {
+        debugPrint('RESPONSE OBJECT IS NULL');
+      }
+      debugPrint('|===============================');
+      return <String, dynamic>{};
     } on TimeoutException catch (e) {
       debugPrint('Timeout Error: ${e.toString()}');
       return {
