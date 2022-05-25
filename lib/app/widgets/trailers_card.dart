@@ -1,6 +1,5 @@
 import 'package:aq_prime/app/widgets/subtext_card.dart';
 import 'package:aq_prime/data/utils/utils.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

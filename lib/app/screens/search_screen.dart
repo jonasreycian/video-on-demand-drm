@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
-import '../../device/utils/dialog.dart';
 import '../providers/search_provider.dart';
 import '../widgets/input_textfield.dart';
 import '../widgets/subtext_card.dart';
