@@ -21,7 +21,7 @@ class EpisodesTab extends StatelessWidget {
             AppBarVideoDetails(
               title: content.title,
               description: content.synopsis,
-              cast: content.cast,
+              cast: content.cast == null ? '' : content.cast!.join(', '),
               director: content.director,
               releaseYear: content.releasedDate,
               videoUrl: content.video?.hls,
