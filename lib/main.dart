@@ -11,6 +11,7 @@ import 'package:aq_prime/app/providers/login_provider.dart';
 import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
+import 'package:aq_prime/app/providers/releted_content_provider.dart';
 import 'package:aq_prime/app/providers/search_provider.dart';
 import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/categories_screen.dart';
@@ -77,6 +78,8 @@ class MyApp extends StatelessWidget {
                 create: (context) => RefreshLimit()),
             ChangeNotifierProvider<ContinueWatching>(
                 create: (context) => ContinueWatching()),
+            ChangeNotifierProvider<RelatedContentProvider>(
+                create: (context) => RelatedContentProvider()),
             ChangeNotifierProvider<ChangePasswordMyAccount>(
                 create: (context) => ChangePasswordMyAccount()),
             ChangeNotifierProvider<VideoDetailsProvider>(

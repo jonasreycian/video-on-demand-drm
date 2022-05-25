@@ -29,6 +29,7 @@ class Content {
   int? videoId;
   Video? video;
   List<Video>? trailers;
+  List<Video>? seasons;
 
   Content(
       {this.id,
@@ -58,7 +59,8 @@ class Content {
       this.updatedByUserId,
       this.videoId,
       this.video,
-      this.trailers});
+      this.trailers,
+      this.seasons});
 
   Content.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -92,6 +94,12 @@ class Content {
       trailers = <Video>[];
       json['trailers'].forEach((v) {
         trailers!.add(Video.fromJson(v));
+      });
+    }
+    if (json['seasons'] != null) {
+      seasons = <Video>[];
+      json['seasons'].forEach((v) {
+        seasons!.add(Video.fromJson(v));
       });
     }
   }
@@ -129,6 +137,9 @@ class Content {
     }
     if (trailers != null) {
       data['trailers'] = trailers!.map((v) => v.toJson()).toList();
+    }
+    if (seasons != null) {
+      data['seasons'] = seasons!.map((v) => v.toJson()).toList();
     }
     return data;
   }

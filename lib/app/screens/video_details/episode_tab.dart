@@ -32,13 +32,13 @@ class EpisodesTab extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: content.trailers?.length,
+              itemCount: content.seasons?.length,
               itemBuilder: (context, index) {
                 return EpisodeCard(
                   index: index,
-                  title: content.trailers?[index].title,
-                  description: content.trailers?[index].description,
-                  runTime: content.trailers?[index].runtime,
+                  title: content.seasons?[index].title,
+                  description: content.seasons?[index].description,
+                  runTime: content.seasons?[index].runtime,
                   imageUrl: content.coverPhoto!,
                 );
               },

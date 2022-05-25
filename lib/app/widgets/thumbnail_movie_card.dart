@@ -133,7 +133,7 @@ class ThumbnailCardForGrid extends StatelessWidget {
                           color: Colors.transparent,
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
-                            image: AssetImage(imageUrl),
+                            image: NetworkImage(imageUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
