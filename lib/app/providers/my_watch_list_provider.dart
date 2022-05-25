@@ -13,7 +13,7 @@ class MyWatchListProvider with ChangeNotifier {
   Future<bool> addToWatchList(int contentId) async {
     var response = await API().request(
       requestType: RequestType.post,
-      endPoint: '/users/watch-lists/',
+      endPoint: '/users/watch-lists',
       parameter: {'content_id': contentId.toString()},
     );
     loadWatchList();
