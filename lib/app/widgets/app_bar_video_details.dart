@@ -69,14 +69,16 @@ class AppBarVideoDetails extends StatelessWidget {
                         const SizedBox(width: 10),
                         MTRCBRating(rating: content.mtrcbRating),
                         const SizedBox(width: 10),
-                        Text(
-                          '${content.seasonsCount} ${content.seasonsCount! > 1 ? 'Seasons' : 'Season'}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        content.type == 'series'
+                            ? Text(
+                                '${content.seasonsCount} ${content.seasonsCount! > 1 ? 'Seasons' : 'Season'}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            : const SizedBox(),
                         const SizedBox(width: 10),
                         content.type != 'series'
                             ? Subtext(
@@ -190,6 +192,23 @@ class AppBarVideoDetails extends StatelessWidget {
                       width: double.infinity,
                       label: 'Watch Trailer',
                     ),
+                    content.type == 'series'
+                        ? DropdownButton<String>(
+                            style: TextStyle(color: Colors.red),
+                            items: content.seasons!.map((value) {
+                              return DropdownMenuItem<String>(
+                                value: value.title,
+                                onTap: () {},
+                                child: Text(
+                                  'Season ${content.seasons!.indexOf(value) + 1}',
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (Object? value) {
+                              print('SELECTED SEASON ==> $value');
+                            },
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),
