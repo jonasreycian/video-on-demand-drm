@@ -4,6 +4,7 @@ import 'package:aq_prime/app/providers/category_contents_provider.dart';
 import 'package:aq_prime/app/providers/category_listing_provider.dart';
 import 'package:aq_prime/app/providers/change_password_provider.dart';
 import 'package:aq_prime/app/providers/continue_watching_provider.dart';
+import 'package:aq_prime/app/providers/episodes_provider.dart';
 import 'package:aq_prime/app/providers/featured_provider.dart';
 import 'package:aq_prime/app/providers/forgot_password_provider.dart';
 import 'package:aq_prime/app/providers/home_provider.dart';
@@ -13,6 +14,7 @@ import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/providers/releted_content_provider.dart';
 import 'package:aq_prime/app/providers/search_provider.dart';
+import 'package:aq_prime/app/providers/seasons_provider.dart';
 import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/categories_screen.dart';
 import 'package:aq_prime/app/screens/category_contents_screen.dart';
@@ -83,7 +85,11 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<ChangePasswordMyAccount>(
                 create: (context) => ChangePasswordMyAccount()),
             ChangeNotifierProvider<VideoDetailsProvider>(
-                create: (context) => VideoDetailsProvider())
+                create: (context) => VideoDetailsProvider()),
+            ChangeNotifierProvider<EpisodesProvider>(
+                create: (context) => EpisodesProvider()),
+            ChangeNotifierProvider<SeasonProvider>(
+                create: (context) => SeasonProvider())
           ],
           child: MaterialApp(
             darkTheme: ThemeData.dark(),

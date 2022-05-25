@@ -21,12 +21,14 @@ class AppBarVideoDetails extends StatelessWidget {
     required this.contentId,
     required this.content,
     required this.videoDetailsProvider,
+    this.seasonSelectorCallback,
   }) : super(key: key);
 
   final int contentId;
   final Content content;
   final VideoDetailsProvider videoDetailsProvider;
   final Duration duration = Duration(milliseconds: 1000);
+  final Function(int seasonId)? seasonSelectorCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -193,20 +195,39 @@ class AppBarVideoDetails extends StatelessWidget {
                       label: 'Watch Trailer',
                     ),
                     content.type == 'series'
-                        ? DropdownButton<String>(
-                            style: TextStyle(color: Colors.red),
-                            items: content.seasons!.map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value.title,
-                                onTap: () {},
-                                child: Text(
-                                  'Season ${content.seasons!.indexOf(value) + 1}',
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (Object? value) {
-                              print('SELECTED SEASON ==> $value');
-                            },
+                        ? Container(
+                            alignment: Alignment.center,
+                            height: 41,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: HexColor('#747474'),
+                              ),
+                            ),
+                            margin: const EdgeInsets.only(top: 32),
+                            padding: const EdgeInsets.all(8),
+                            child: DropdownButton<int>(
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              isDense: true,
+                              value: content.seasons?.first.id,
+                              style: TextStyle(color: Colors.white),
+                              items: content.seasons!.map((value) {
+                                return DropdownMenuItem<int>(
+                                  value: value.id,
+                                  onTap: () {},
+                                  child: Text(
+                                    'Season ${content.seasons!.indexOf(value) + 1}',
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: Colors.black,
+                              onChanged: (int? seasonId) {
+                                if (seasonSelectorCallback != null) {
+                                  seasonSelectorCallback!(seasonId!);
+                                }
+                              },
+                            ),
                           )
                         : const SizedBox(),
                   ],
