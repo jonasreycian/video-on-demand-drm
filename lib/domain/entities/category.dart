@@ -65,7 +65,6 @@ class Category {
     data['slug'] = slug;
     data['description'] = description;
     data['is_featured'] = isFeatured;
-    data['tags'] = tags;
     data['status'] = status;
     data['created_by_user_id'] = createdByUserId;
     data['updated_by_user_id'] = updatedByUserId;
@@ -73,7 +72,7 @@ class Category {
     // if (featureContent != null) {
     //   data['feature_content'] = featureContent!.map((v) => v.toJson()).toList();
     // }
-    data['contents'] = tags.map((v) => v).toList();
+    data['tags'] = tags.map((v) => v).toList();
     data['contents'] = contents.map((v) => v.toJson()).toList();
     return data;
   }
