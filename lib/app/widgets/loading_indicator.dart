@@ -31,3 +31,19 @@ class AQLoadingIndicator extends StatelessWidget {
     );
   }
 }
+
+class AQLoadingIndicatorScaffold extends StatelessWidget {
+  const AQLoadingIndicatorScaffold({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: CircularProgressIndicator.adaptive(backgroundColor: Colors.red),
+      ),
+    );
+  }
+}
