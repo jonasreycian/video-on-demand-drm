@@ -18,10 +18,10 @@ class Content {
   String? coverPhotoDesktop;
   int? thumbsUpRatingCount;
   int? thumbsDownRatingCount;
-  String? cast;
+  List<String>? cast;
   String? director;
-  String? writers;
-  String? tags;
+  List<String>? writers;
+  List<String>? tags;
   bool? isFeatured;
   bool? status;
   int? createdByUserId;
@@ -80,10 +80,19 @@ class Content {
     coverPhotoDesktop = json['cover_photo_desktop'];
     thumbsUpRatingCount = json['thumbs_up_rating_count'];
     thumbsDownRatingCount = json['thumbs_down_rating_count'];
-    cast = json['cast'];
+    if (json['cast'] != null) {
+      cast = <String>[];
+      json['cast'].forEach((v) {
+        cast!.add(v);
+      });
+    }
     director = json['director'];
-    writers = json['writers'];
-    tags = json['tags'];
+    if (json['tags'] != null) {
+      tags = <String>[];
+      json['tags'].forEach((v) {
+        tags!.add(v);
+      });
+    }
     isFeatured = json['is_featured'];
     status = json['status'];
     createdByUserId = json['created_by_user_id'];

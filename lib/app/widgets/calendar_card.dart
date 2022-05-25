@@ -1,6 +1,5 @@
+import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
-
-import '../../device/utils/hex_color.dart';
 
 // ignore: must_be_immutable
 class CalendarField extends StatelessWidget {
@@ -10,6 +9,7 @@ class CalendarField extends StatelessWidget {
     this.withShadow = false,
     this.function,
     this.selectedDate,
+    this.border,
     Key? key,
   }) : super(key: key);
   final bool isDateRange;
@@ -17,7 +17,7 @@ class CalendarField extends StatelessWidget {
   EdgeInsets? margin;
   bool withShadow;
   void Function()? function;
-
+  final BoxBorder? border;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,6 +28,7 @@ class CalendarField extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.only(left: 25),
         decoration: BoxDecoration(
+          border: border,
           color: HexColor('#F9FAFB'),
           borderRadius: BorderRadius.circular(5),
           boxShadow: withShadow
