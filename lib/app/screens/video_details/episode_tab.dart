@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/app_bar_video_details.dart';
 import 'package:aq_prime/app/widgets/episode_card.dart';
@@ -7,9 +8,11 @@ import 'package:flutter/material.dart';
 class EpisodesTab extends StatelessWidget {
   const EpisodesTab({
     required this.content,
+    required this.vieoDetailsProvider,
     Key? key,
   }) : super(key: key);
   final Content content;
+  final VideoDetailsProvider vieoDetailsProvider;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,14 +24,7 @@ class EpisodesTab extends StatelessWidget {
             AppBarVideoDetails(
               contentId: content.id!,
               content: content,
-              // title: content.title,
-              // description: content.synopsis,
-              // cast: content.cast == null ? '' : content.cast!.join(', '),
-              // director: content.director,
-              // releaseYear: content.releasedDate,
-              // videoUrl: content.video?.hls,
-              // runTime: content.video?.runtime,
-              // seasonCount: content.seasonsCount,
+              videoDetailsProvider: vieoDetailsProvider,
             ),
             ListView.builder(
               padding: const EdgeInsets.only(top: 10, bottom: 0),

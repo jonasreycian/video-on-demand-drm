@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/providers/rating_provider.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -125,8 +126,15 @@ calendarDialog(
 ratingPopup({
   required BuildContext context,
   required bool? isThumbUp,
-  required String movieName,
+  required Content content,
+  required RatingProvider provider,
+  Function(Rate rate)? didRate,
 }) {
+  void handleCallback(Rate rate) {
+    if (didRate == null) return;
+    didRate(rate);
+  }
+
   showGeneralDialog(
     barrierDismissible: false,
     context: context,
@@ -142,7 +150,6 @@ ratingPopup({
           opacity: anim1.value,
           child: AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
-            // contentPadding: const EdgeInsets.all(15),
             actionsPadding: const EdgeInsets.only(bottom: 10),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -162,8 +169,11 @@ ratingPopup({
                       padding: const EdgeInsets.all(0),
                       alignment: Alignment.center,
                       iconSize: 35,
-                      onPressed: () {
-                        value.setThumbsUp(movieName, true);
+                      onPressed: () async {
+                        bool result = await provider.setThumbsUp(content.id!);
+                        if (result) {
+                          handleCallback(Rate.up);
+                        }
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
@@ -177,8 +187,11 @@ ratingPopup({
                       padding: const EdgeInsets.all(0),
                       alignment: Alignment.center,
                       iconSize: 35,
-                      onPressed: () {
-                        value.setThumbsUp(movieName, false);
+                      onPressed: () async {
+                        bool result = await provider.setThumbsDown(content.id!);
+                        if (result) {
+                          handleCallback(Rate.down);
+                        }
                         Navigator.of(context).pop();
                       },
                       icon: Icon(

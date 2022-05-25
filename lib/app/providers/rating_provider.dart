@@ -1,45 +1,26 @@
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-class Rating {
-  final String? movieName;
-  bool? isThumbsUp;
-  Rating({this.movieName, this.isThumbsUp});
-}
+enum Rate { up, down }
 
 class RatingProvider with ChangeNotifier {
-  final List<Rating> _data = [];
-
-  List<Rating> get data => _data;
-
-  bool? isThumbsUp(String? movieName) {
-    bool? returnVal;
-    for (var i = 0; i < _data.length; i++) {
-      if (movieName == _data[i].movieName) {
-        returnVal = _data[i].isThumbsUp;
-        break;
-      } else {
-        continue;
-      }
-    }
-    return returnVal;
+  Future<bool> _process(int contentId, Rate rate) async {
+    Map response = await API().request(
+        requestType: RequestType.post,
+        endPoint: '/contents/$contentId/reaction',
+        parameter: {'value': rate == Rate.up ? 'thumbs-up' : 'thumbs-down'});
+    return response.containsKey('success') ? response['success'] : false;
   }
 
-  setThumbsUp(String movieName, bool value) {
-    int removeLocation = -1;
-    bool _isExist = false;
-    for (var i = 0; i < _data.length; i++) {
-      if (movieName == _data[i].movieName) {
-        _isExist = true;
-        if (_data[i].isThumbsUp == value) {
-          removeLocation = i;
-        } else {
-          _data[i].isThumbsUp = value;
-          break;
-        }
-      }
-    }
-    if (removeLocation != -1) _data.removeAt(removeLocation);
-    if (!_isExist) _data.add(Rating(movieName: movieName, isThumbsUp: value));
+  Future<bool> setThumbsUp(int contentId) async {
+    bool result = await _process(contentId, Rate.up);
     notifyListeners();
+    return result;
+  }
+
+  Future<bool> setThumbsDown(int contentId) async {
+    bool result = await _process(contentId, Rate.down);
+    notifyListeners();
+    return result;
   }
 }
