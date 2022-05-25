@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -71,7 +72,7 @@ class EpisodeCard extends StatelessWidget {
                         ),
                       ),
                       Subtext(
-                        text: netflixDurationFormat(runTime ?? 0),
+                        text: Utils.netflixDurationFormat(runTime ?? 0),
                         color: Color.fromRGBO(140, 140, 140, 1),
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
@@ -186,7 +187,8 @@ class SearchCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Subtext(
-                            text: netflixDurationFormat(runTime.inMinutes),
+                            text:
+                                Utils.netflixDurationFormat(runTime.inMinutes),
                             color: Color.fromRGBO(140, 140, 140, 1)),
                       ],
                     ),

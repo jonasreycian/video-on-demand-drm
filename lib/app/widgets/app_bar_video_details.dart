@@ -4,6 +4,7 @@ import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -76,7 +77,7 @@ class AppBarVideoDetails extends StatelessWidget {
                         const SizedBox(width: 10),
                         Subtext(
                           text: runTime != null
-                              ? netflixDurationFormat(runTime ?? 0)
+                              ? Utils.netflixDurationFormat(runTime ?? 0)
                               : '--',
                         ),
                       ],

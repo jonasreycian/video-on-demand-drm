@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -6,15 +7,15 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 class TrailerCard extends StatelessWidget {
   const TrailerCard({
     required this.index,
-    this.title,
-    this.description,
-    this.runTime,
     required this.imageUrl,
+    this.title = '',
+    this.description = '',
+    this.runTime,
     Key? key,
   }) : super(key: key);
   final int index;
-  final String? title;
-  final String? description;
+  final String title;
+  final String description;
   final int? runTime;
   final String imageUrl;
   @override
@@ -61,7 +62,7 @@ class TrailerCard extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20),
                       Text(
-                        title ?? '--',
+                        title,
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w800,
@@ -71,7 +72,7 @@ class TrailerCard extends StatelessWidget {
                         ),
                       ),
                       Subtext(
-                          text: netflixDurationFormat(runTime ?? 0),
+                          text: Utils.netflixDurationFormat(runTime ?? 0),
                           color: Color.fromRGBO(140, 140, 140, 1)),
                     ],
                   ),

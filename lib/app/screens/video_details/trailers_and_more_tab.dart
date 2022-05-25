@@ -22,8 +22,8 @@ class TrailersAndMoreTab extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TrailerCard(
                   index: index,
-                  title: trailers[index].title,
-                  description: trailers[index].description,
+                  title: trailers[index].title ?? '',
+                  description: trailers[index].description ?? '',
                   runTime: trailers[index].runtime,
                   imageUrl: '',
                 );
