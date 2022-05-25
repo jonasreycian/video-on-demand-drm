@@ -6,13 +6,13 @@ class Category {
   String? slug;
   String? description;
   bool? isFeatured;
-  String? tags;
+  late List<String> tags;
   bool? status;
   int? createdByUserId;
   int? updatedByUserId;
   int? featuredContentId;
-  List<Content>? featureContent;
-  List<Content>? contents;
+  // List<Content> featureContent;
+  late List<Content> contents;
 
   Category(
       {this.id,
@@ -20,13 +20,13 @@ class Category {
       this.slug,
       this.description,
       this.isFeatured,
-      this.tags,
+      this.tags = const <String>[],
       this.status,
       this.createdByUserId,
       this.updatedByUserId,
       this.featuredContentId,
       // this.featureContent,
-      this.contents});
+      this.contents = const <Content>[]});
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -34,7 +34,6 @@ class Category {
     slug = json['slug'];
     description = json['description'];
     isFeatured = json['is_featured'];
-    tags = json['tags'];
     status = json['status'];
     createdByUserId = json['created_by_user_id'];
     updatedByUserId = json['updated_by_user_id'];
@@ -45,10 +44,16 @@ class Category {
     //     contents!.add(Content.fromJson(v));
     //   });
     // }
+    if (json['tags'] != null) {
+      tags = <String>[];
+      json['tags'].forEach((v) {
+        tags.add(v);
+      });
+    }
     if (json['contents'] != null) {
       contents = <Content>[];
       json['contents'].forEach((v) {
-        contents!.add(Content.fromJson(v));
+        contents.add(Content.fromJson(v));
       });
     }
   }
@@ -68,9 +73,8 @@ class Category {
     // if (featureContent != null) {
     //   data['feature_content'] = featureContent!.map((v) => v.toJson()).toList();
     // }
-    if (contents != null) {
-      data['contents'] = contents!.map((v) => v.toJson()).toList();
-    }
+    data['contents'] = tags.map((v) => v).toList();
+    data['contents'] = contents.map((v) => v.toJson()).toList();
     return data;
   }
 }

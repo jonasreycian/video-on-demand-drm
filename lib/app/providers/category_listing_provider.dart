@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart' show ChangeNotifier;
 class CategoryListingProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  List<Category> _data = [];
+  List<Category> _data = <Category>[];
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   List<Category> get data => _data;
