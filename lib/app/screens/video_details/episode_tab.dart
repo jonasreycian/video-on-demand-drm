@@ -19,6 +19,7 @@ class EpisodesTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AppBarVideoDetails(
+              contentId: content.id!,
               title: content.title,
               description: content.synopsis,
               cast: content.cast == null ? '' : content.cast!.join(', '),

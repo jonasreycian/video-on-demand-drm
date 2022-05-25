@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/accessibility_card.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
@@ -8,10 +9,12 @@ import 'package:aq_prime/data/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
     Key? key,
+    required this.contentId,
     this.title,
     this.releaseYear,
     this.description,
@@ -22,6 +25,7 @@ class AppBarVideoDetails extends StatelessWidget {
     this.seasonCount,
   }) : super(key: key);
 
+  final int contentId;
   final String? title;
   final String? releaseYear;
   final String? description;
@@ -106,9 +110,23 @@ class AppBarVideoDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         AddWatchListButton(
-                            title: 'My List',
-                            isExisting: false,
-                            onPressed: () {}),
+                          title: 'My List',
+                          isExisting: false,
+                          onPressed: () async {
+                            MyWatchListProvider myWatchListProvider =
+                                Provider.of<MyWatchListProvider>(context,
+                                    listen: false);
+                            bool success = await myWatchListProvider
+                                .addToWatchList(contentId);
+                            if (success) {
+                              print(
+                                  'Content ID ==> $contentId added to Watch List');
+                            } else {
+                              print(
+                                  'Content ID ==> $contentId Failed to add on Watch List');
+                            }
+                          },
+                        ),
                         const SizedBox(width: 10),
                         IconButtonWithName(
                           title: 'Rate',
