@@ -1,4 +1,3 @@
-import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
@@ -10,7 +9,6 @@ import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
@@ -111,21 +109,7 @@ class AppBarVideoDetails extends StatelessWidget {
                       children: [
                         AddWatchListButton(
                           title: 'My List',
-                          contentId: content.id,
-                          onPressed: () async {
-                            MyWatchListProvider myWatchListProvider =
-                                Provider.of<MyWatchListProvider>(context,
-                                    listen: false);
-                            bool success = await myWatchListProvider
-                                .addToWatchList(contentId);
-                            if (success) {
-                              print(
-                                  'Content ID ==> $contentId added to Watch List');
-                            } else {
-                              print(
-                                  'Content ID ==> $contentId Failed to add on Watch List');
-                            }
-                          },
+                          contentId: content.id!,
                         ),
                         const SizedBox(width: 10),
                         Row(

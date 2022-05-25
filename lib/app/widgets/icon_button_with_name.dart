@@ -9,13 +9,11 @@ import 'subtext_card.dart';
 class AddWatchListButton extends StatelessWidget {
   const AddWatchListButton({
     required this.title,
-    required this.onPressed,
-    this.contentId,
+    required this.contentId,
     Key? key,
   }) : super(key: key);
   final String title;
-  final int? contentId;
-  final void Function()? onPressed;
+  final int contentId;
 
   bool isInWatchList(List<Content> src, int? contentId) {
     if (contentId == null) return false;
@@ -26,6 +24,9 @@ class AddWatchListButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyWatchListProvider provider =
+        Provider.of<MyWatchListProvider>(context, listen: false);
+
     return Consumer<MyWatchListProvider>(
       builder: (context, value, child) {
         return Container(
@@ -40,7 +41,28 @@ class AddWatchListButton extends StatelessWidget {
                 padding: const EdgeInsets.all(0),
                 alignment: Alignment.center,
                 iconSize: 24,
-                onPressed: onPressed,
+                onPressed: () async {
+                  if (!isInWatchList(value.data, contentId)) {
+                    bool success = await provider.addToWatchList(contentId);
+                    if (success) {
+                      print('Content ID ==> $contentId added to Watch List');
+                    } else {
+                      print(
+                          'Content ID ==> $contentId Failed to add on Watch List');
+                    }
+                  } else {
+                    print('SHIT ==> $contentId');
+                    bool success =
+                        await provider.removeFromWatchList(contentId);
+                    if (success) {
+                      print(
+                          'Content ID ==> $contentId removed from Watch List');
+                    } else {
+                      print(
+                          'Content ID ==> $contentId Failed to remove from Watch List');
+                    }
+                  }
+                },
                 icon: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 1000),
                   child: isInWatchList(value.data, contentId)
