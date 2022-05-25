@@ -1,8 +1,8 @@
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
-import '../../device/utils/dialog.dart';
 import '../providers/search_provider.dart';
 import '../widgets/input_textfield.dart';
 import '../widgets/subtext_card.dart';
@@ -186,7 +186,8 @@ class SearchCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Subtext(
-                            text: netflixDurationFormat(runTime.inMinutes),
+                            text:
+                                Utils.netflixDurationFormat(runTime.inMinutes),
                             color: Color.fromRGBO(140, 140, 140, 1)),
                       ],
                     ),
