@@ -32,18 +32,6 @@ class PrimaryButton extends StatelessWidget {
       margin: margin ??= const EdgeInsets.all(0),
       height: height,
       width: width == null ? double.infinity : width!,
-      // decoration: BoxDecoration(
-      //   boxShadow: isDisabled
-      //       ? []
-      //       : [
-      //           BoxShadow(
-      //             color: Colors.red.withOpacity(0.3),
-      //             spreadRadius: 3,
-      //             blurRadius: 10,
-      //             offset: Offset(0, 3),
-      //           ),
-      //         ],
-      // ),
       child: Opacity(
         opacity: isDisabled ? 0.9 : 1.0,
         child: ElevatedButton(
@@ -81,9 +69,9 @@ class PrimaryButton extends StatelessWidget {
                   label,
                   style: TextStyle(
                     fontFamily: 'Rubik',
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,
-                    fontSize: 16,
+                    fontSize: 18,
                     color: fontColor,
                   ),
                 ),
