@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/providers/releted_content_provider.dart';
 import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/video_details/episode_tab.dart';
 import 'package:aq_prime/app/screens/video_details/more_like_this_tab.dart';
@@ -116,9 +117,9 @@ class VideoDetailsPage extends StatelessWidget {
 
   initState(BuildContext context, int contentId) {
     Future.delayed(const Duration(milliseconds: 1), () {
-      VideoDetailsProvider videoDetailsProvider =
-          Provider.of<VideoDetailsProvider>(context, listen: false);
-      videoDetailsProvider.loadData(contentId);
+      Provider.of<VideoDetailsProvider>(context, listen: false)
+          .loadData(contentId);
+      Provider.of<RelatedContentProvider>(context, listen: false).reset();
     });
   }
 }

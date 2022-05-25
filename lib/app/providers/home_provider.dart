@@ -73,6 +73,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   reset() {
+    _featured.clear();
     _top10Films.clear();
     _continueWatching.clear();
     _popularOnAqPrime.clear();
