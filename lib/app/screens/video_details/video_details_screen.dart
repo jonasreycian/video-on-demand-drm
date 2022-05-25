@@ -17,88 +17,90 @@ class VideoDetailsPage extends StatelessWidget {
     final int videoId = ModalRoute.of(context)!.settings.arguments as int;
     initState(context, videoId);
     return Consumer<VideoDetailsProvider>(
-        child: AnimationConfiguration.staggeredList(
-          position: 0,
+      child: AnimationConfiguration.staggeredList(
+        position: 0,
+        duration: const Duration(milliseconds: 1500),
+        child: FadeInAnimation(
           duration: const Duration(milliseconds: 1500),
-          child: FadeInAnimation(
-            duration: const Duration(milliseconds: 1500),
-            child: SlideAnimation(
-              verticalOffset: 10,
-              child: TabBar(
-                indicatorWeight: 5,
-                onTap: (value) {},
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: 5,
-                  bottom: 10,
-                ),
-                labelPadding: const EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                  top: 10,
-                  bottom: 10,
-                ),
-                labelColor: Colors.white,
-                unselectedLabelStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 18,
-                  color: HexColor('#7D9297'),
-                ),
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: Colors.red,
-                labelStyle: TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 20,
-                  color: HexColor('#006B83'),
-                ),
-                isScrollable: true,
-                tabs: [
-                  Text('EPISODES'),
-                  Text('TRAILERS & MORE'),
-                  Text('MORE LIKE THIS'),
-                ],
+          child: SlideAnimation(
+            verticalOffset: 10,
+            child: TabBar(
+              indicatorWeight: 5,
+              onTap: (value) {},
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 5,
+                bottom: 10,
               ),
+              labelPadding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+              ),
+              labelColor: Colors.white,
+              unselectedLabelStyle: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+                fontSize: 18,
+                color: HexColor('#7D9297'),
+              ),
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: Colors.red,
+              labelStyle: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.normal,
+                fontSize: 20,
+                color: HexColor('#006B83'),
+              ),
+              isScrollable: true,
+              tabs: [
+                Text('EPISODES'),
+                Text('TRAILERS & MORE'),
+                Text('MORE LIKE THIS'),
+              ],
             ),
           ),
         ),
-        builder: (context, value, child) {
-          if (value.data == null) {
-            return Center(child: CircularProgressIndicator.adaptive());
-          }
-          return AqPrimeSliverAppBar(
-            tabNumber: 3,
-            expandedHeight: 250,
-            title: value.data!.title!,
-            isImageUrl: true,
-            backgroundImage: value.data!.coverPhotoMobile,
-            heroTag: '',
-            appBarContainer: const SizedBox(),
-            bottom: child!,
-            container: Container(
-              height: 550,
-              width: double.infinity,
-              child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  value.isSuccess
-                      ? EpisodesTab(content: value.data!)
-                      : AQLoadingIndicator(),
-                  value.isSuccess
-                      ? TrailersAndMoreTab(trailers: value.data!.trailers ?? [])
-                      : AQLoadingIndicator(),
-                  const SizedBox(),
-
-                  // MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
-                ],
-              ),
-            ),
-          );
-        });
+      ),
+      builder: (context, value, child) {
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 1000),
+          child: value.data == null
+              ? AQLoadingIndicatorScaffold()
+              : AqPrimeSliverAppBar(
+                  tabNumber: 3,
+                  expandedHeight: 250,
+                  title: value.data!.title!,
+                  isImageUrl: true,
+                  backgroundImage: value.data!.coverPhotoMobile,
+                  heroTag: '',
+                  appBarContainer: const SizedBox(),
+                  bottom: child!,
+                  container: Container(
+                    height: 550,
+                    width: double.infinity,
+                    child: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        EpisodesTab(
+                          content: value.data!,
+                        ),
+                        TrailersAndMoreTab(
+                          trailers: value.data!.trailers ?? [],
+                        ),
+                        const SizedBox(),
+                        // MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
+                      ],
+                    ),
+                  ),
+                ),
+        );
+      },
+    );
   }
 
   initState(BuildContext context, int contentId) {
