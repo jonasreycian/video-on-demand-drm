@@ -192,18 +192,8 @@ class AppBarVideoDetails extends StatelessWidget {
       return Icons.thumb_down_alt;
     }
   }
-
-  // String castToString(String? cast) {
-  //   List cast1 = cast as List;
-  //   late List names = [];
-  //   for (var element in cast1) {
-  //     names.add(element.fullName);
-  //   }
-  //   return names.join(', ');
-  // }
 }
 
-///------------------------------------------------------------------------------
 class TutorialOverlay extends ModalRoute<void> {
   @override
   Duration get transitionDuration => Duration(milliseconds: 100);

@@ -21,14 +21,6 @@ class EpisodesTab extends StatelessWidget {
             AppBarVideoDetails(
               contentId: content.id!,
               content: content,
-              // title: content.title,
-              // description: content.synopsis,
-              // cast: content.cast == null ? '' : content.cast!.join(', '),
-              // director: content.director,
-              // releaseYear: content.releasedDate,
-              // videoUrl: content.video?.hls,
-              // runTime: content.video?.runtime,
-              // seasonCount: content.seasonsCount,
             ),
             ListView.builder(
               padding: const EdgeInsets.only(top: 10, bottom: 0),

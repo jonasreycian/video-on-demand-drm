@@ -179,7 +179,8 @@ ratingPopup({
                       alignment: Alignment.center,
                       iconSize: 35,
                       onPressed: () {
-                        // value.setThumbsUp(movieName, false);
+                        print('FOR IMPLEMENTATION');
+                        // provider.setThumbsDown(content.id!);
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
