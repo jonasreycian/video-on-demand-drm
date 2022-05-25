@@ -5,7 +5,6 @@ class Subtext extends StatelessWidget {
     Key? key,
     required this.text,
     this.maxLines,
-    this.fontWeight,
     this.color,
     this.textStyle = const TextStyle(
       color: Colors.white,
@@ -17,7 +16,6 @@ class Subtext extends StatelessWidget {
 
   final String text;
   final int? maxLines;
-  final FontWeight? fontWeight;
   final Color? color;
   final TextStyle? textStyle;
   @override
