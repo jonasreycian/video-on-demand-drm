@@ -11,11 +11,19 @@ class MyWatchListProvider with ChangeNotifier {
   List<Content> get data => _data;
 
   Future<bool> addToWatchList(int contentId) async {
-    var x = await API().request(
+    var response = await API().request(
         requestType: RequestType.post,
         endPoint: '/users/watch-lists',
         parameter: {'content_id': contentId});
-    return Future.value(x['success']);
+    return Future.value(response['success']);
+  }
+
+  Future<bool> removeFromWatchList(int contentId) async {
+    var response = await API().request(
+        requestType: RequestType.delete,
+        endPoint: '/users/watch-lists',
+        parameter: {'content_id': contentId});
+    return Future.value(response['success']);
   }
 
   loadWatchList() {

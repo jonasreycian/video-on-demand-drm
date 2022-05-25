@@ -7,25 +7,26 @@ class Subtext extends StatelessWidget {
     this.maxLines,
     this.fontWeight,
     this.color,
+    this.textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 14,
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+    ),
   }) : super(key: key);
 
   final String text;
   final int? maxLines;
   final FontWeight? fontWeight;
   final Color? color;
+  final TextStyle? textStyle;
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       maxLines: maxLines ?? 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        fontFamily: 'Roboto',
-        fontWeight: fontWeight ?? FontWeight.w300,
-        fontStyle: FontStyle.normal,
-        fontSize: 15,
-        color: color ?? Colors.white,
-      ),
+      style: textStyle,
     );
   }
 }
