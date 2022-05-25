@@ -80,16 +80,16 @@ class CategoryContentsScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: value.data!.contents?.length,
+              itemCount: value.data!.contents.length,
               itemBuilder: (context, index) => ThumbnailCard(
                 index: index,
-                imageUrl: value.data!.contents![index].coverPhotoMobile,
+                imageUrl: value.data!.contents[index].coverPhotoMobile,
                 onTap: () {
                   Navigator.of(context).pushNamed(
                     VideoDetailsPage.routeName,
                     arguments: {
-                      'videoId': value.data!.contents![index].videoId,
-                      'heroTag': value.data!.contents![index].title,
+                      'videoId': value.data!.contents[index].videoId,
+                      'heroTag': value.data!.contents[index].title,
                     },
                   );
                 },

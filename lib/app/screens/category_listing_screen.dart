@@ -25,12 +25,18 @@ class CategoryListingScreen extends StatelessWidget {
     category_2.clear();
     double firstHalf = 6;
     double secondHalf = source.length - firstHalf;
-    List.generate(6.toInt(), ((index) {
-      category_1.add(source.elementAt(index));
-    }));
-    List.generate(secondHalf.toInt(), ((index) {
-      category_2.add(source.elementAt(index + firstHalf.toInt()));
-    }));
+    List.generate(
+      6.toInt(),
+      ((index) {
+        category_1.add(source.elementAt(index));
+      }),
+    );
+    List.generate(
+      secondHalf.toInt(),
+      ((index) {
+        category_2.add(source.elementAt(index + firstHalf.toInt()));
+      }),
+    );
   }
 
   @override
