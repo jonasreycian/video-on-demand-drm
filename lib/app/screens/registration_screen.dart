@@ -44,7 +44,7 @@ class RegistrationScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 20, right: 20, top: 20, bottom: 20),
                   decoration: BoxDecoration(
-                    color: Colors.black54,
+                    color: Colors.black,
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
                     ),
