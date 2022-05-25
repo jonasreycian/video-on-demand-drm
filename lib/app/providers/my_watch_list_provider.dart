@@ -1,33 +1,51 @@
+import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/foundation.dart';
 
 class MyWatchListProvider with ChangeNotifier {
-  final List<Content> _myWatchList = [];
+  bool _isLoading = true;
+  bool _isSuccess = false;
+  List<Content> _data = <Content>[];
+  bool get isLoading => _isLoading;
+  bool get isSuccess => _isSuccess;
+  List<Content> get data => _data;
 
-  List<Content> get myWatchList => _myWatchList;
-
-  addMyWatchList(Content data) {
-    _myWatchList.add(data);
-    notifyListeners();
+  Future<bool> addToWatchList(int contentId) async {
+    var x = await API().request(
+        requestType: RequestType.post,
+        endPoint: '/users/watch-lists',
+        parameter: {'content_id': contentId});
+    return Future.value(x['success']);
   }
 
-  removeWatchList(Content data) {
-    int location =
-        _myWatchList.indexWhere((element) => element.title == data.title);
-    _myWatchList.removeAt(location);
-    notifyListeners();
+  loadWatchList() {
+    reset();
+    API()
+        .request(
+      requestType: RequestType.get,
+      endPoint: '/users/watch-lists',
+    )
+        .then(
+      (value) {
+        _isSuccess = value['success'];
+        if (_isSuccess) {
+          _data = (value['data'] as List)
+              .map(
+                (e) => Content.fromJson(e),
+              )
+              .toList();
+          _isLoading = false;
+          notifyListeners();
+        } else {
+          _isLoading = false;
+          notifyListeners();
+        }
+      },
+    );
   }
 
-  bool isExisting(Content data) {
-    bool returnVal = false;
-    for (var i = 0; i < _myWatchList.length; i++) {
-      if (data.title == _myWatchList[i].title) {
-        returnVal = true;
-        break;
-      } else {
-        continue;
-      }
-    }
-    return returnVal;
+  reset() {
+    _isLoading = true;
+    _isSuccess = false;
   }
 }

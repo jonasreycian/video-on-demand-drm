@@ -107,7 +107,7 @@ class HomeProvider with ChangeNotifier {
       return {'endPoint': '/categories/new-releases/contents'};
     }
     if (type == CategoryType.continueWatching) {
-      return {'endPoint': '/users/continue-watching'};
+      return {'endPoint': '/users/watch-lists'};
     } else {
       return {};
     }

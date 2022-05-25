@@ -12,8 +12,15 @@ import 'video_details/video_details_screen.dart';
 class MyWatchListScreen extends StatelessWidget {
   const MyWatchListScreen({Key? key}) : super(key: key);
 
+  init(BuildContext context) {
+    MyWatchListProvider homeProvider =
+        Provider.of<MyWatchListProvider>(context, listen: false);
+    homeProvider.loadWatchList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -42,11 +49,11 @@ class MyWatchListScreen extends StatelessWidget {
                 builder: (context, value, child) {
                   return Container(
                     color: Colors.transparent,
-                    child: value.myWatchList.isNotEmpty
+                    child: value.data.isNotEmpty
                         ? GridView.builder(
                             padding: const EdgeInsets.only(
                                 left: 20, right: 20, top: 10),
-                            itemCount: value.myWatchList.length,
+                            itemCount: value.data.length,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             gridDelegate:
@@ -61,18 +68,16 @@ class MyWatchListScreen extends StatelessWidget {
                               return ThumbnailCardForGrid(
                                 index: index,
                                 // title: value.myWatchList[index].name!,
-                                imageUrl:
-                                    value.myWatchList[index].coverPhotoMobile!,
-                                releaseYear:
-                                    value.myWatchList[index].releasedDate!,
+                                imageUrl: value.data[index].coverPhotoMobile!,
+                                releaseYear: value.data[index].releasedDate!,
                                 runTime: 0.toString(),
                                 heroTag:
-                                    'myWatchList${value.myWatchList[index].coverPhotoMobile} $index',
+                                    'myWatchList${value.data[index].coverPhotoMobile} $index',
                                 onTap: () => Navigator.of(context).pushNamed(
                                   VideoDetailsPage.routeName,
                                   arguments: VideoDetailsPageArguments(
-                                    videoId: value.myWatchList[index].videoId!,
-                                    heroTag: value.myWatchList[index].title!,
+                                    videoId: value.data[index].videoId!,
+                                    heroTag: value.data[index].title!,
                                   ),
                                 ),
                               );
