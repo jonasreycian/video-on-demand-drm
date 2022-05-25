@@ -1,5 +1,6 @@
 import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/video_details/episode_tab.dart';
+import 'package:aq_prime/app/screens/video_details/more_like_this_tab.dart';
 import 'package:aq_prime/app/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/sliver_appbar.dart';
@@ -92,8 +93,7 @@ class VideoDetailsPage extends StatelessWidget {
                         TrailersAndMoreTab(
                           trailers: value.data!.trailers ?? [],
                         ),
-                        const SizedBox(),
-                        // MoreLikeThisTab(moreLikeThis: movieData.moreLikeThis ?? []),
+                        MoreLikeThisTab(contentId: value.data!.id!),
                       ],
                     ),
                   ),
