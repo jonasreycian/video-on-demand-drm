@@ -1,14 +1,17 @@
+import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AppBarVideoDetails extends StatelessWidget {
   AppBarVideoDetails({
@@ -118,7 +121,15 @@ class AppBarVideoDetails extends StatelessWidget {
                               title: 'Rate',
                               iconData: icon(null),
                               onPressed: () {
-                                print('RATE BUTTON ACTION FOR IMPLEMENTATION');
+                                ratingPopup(
+                                  context: context,
+                                  isThumbUp: true,
+                                  content: content,
+                                  provider: Provider.of<RatingProvider>(
+                                    context,
+                                    listen: false,
+                                  ),
+                                );
                               },
                             ),
                             Text(

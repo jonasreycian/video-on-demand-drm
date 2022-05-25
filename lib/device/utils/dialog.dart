@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/providers/rating_provider.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -125,7 +126,8 @@ calendarDialog(
 ratingPopup({
   required BuildContext context,
   required bool? isThumbUp,
-  required String movieName,
+  required Content content,
+  required RatingProvider provider,
 }) {
   showGeneralDialog(
     barrierDismissible: false,
@@ -142,7 +144,6 @@ ratingPopup({
           opacity: anim1.value,
           child: AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
-            // contentPadding: const EdgeInsets.all(15),
             actionsPadding: const EdgeInsets.only(bottom: 10),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -163,7 +164,7 @@ ratingPopup({
                       alignment: Alignment.center,
                       iconSize: 35,
                       onPressed: () {
-                        value.setThumbsUp(movieName, true);
+                        provider.setThumbsUp(content.id!);
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
@@ -178,7 +179,7 @@ ratingPopup({
                       alignment: Alignment.center,
                       iconSize: 35,
                       onPressed: () {
-                        value.setThumbsUp(movieName, false);
+                        // value.setThumbsUp(movieName, false);
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
