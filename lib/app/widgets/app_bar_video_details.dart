@@ -6,6 +6,7 @@ import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/secondary_button.dart';
 import 'package:aq_prime/app/widgets/subtext_card.dart';
+import 'package:aq_prime/data/utils/utils.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:aq_prime/domain/entities/content.dart';
@@ -77,12 +78,14 @@ class AppBarVideoDetails extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        // Subtext(
-                        //   text: content.video?.runtime != null
-                        //       ? Utils.netflixDurationFormat(
-                        //           content.video!.runtime!)
-                        //       : '--',
-                        // ),
+                        content.type != 'series'
+                            ? Subtext(
+                                text: content.video?.runtime != null
+                                    ? Utils.netflixDurationFormat(
+                                        content.video!.runtime!)
+                                    : '--',
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                     const SizedBox(height: 15),
@@ -92,23 +95,31 @@ class AppBarVideoDetails extends StatelessWidget {
                       textStyle: TextStyle(color: HexColor('#747474')),
                     ),
                     const SizedBox(height: 15),
-                    // Subtext(
-                    //   text: 'Starring: ',
-                    //   fontWeight: FontWeight.w700,
-                    //   maxLines: 2,
-                    // ),
-                    // Subtext(
-                    //   text: content.cast!.join(', '),
-                    //   maxLines: 3,
-                    // ),
-                    const SizedBox(height: 15),
-                    // Subtext(
-                    //   text: 'Director: ',
-                    //   fontWeight: FontWeight.w700,
-                    // ),
-                    // AccessibilityCard(
-                    //   accessibility: content.director ?? '--',
-                    // ),
+                    ...content.type != 'series'
+                        ? [
+                            Subtext(
+                              text: 'Starring:',
+                              maxLines: 2,
+                            ),
+                            const SizedBox(height: 4),
+                            Subtext(
+                              text: content.cast!.join(', '),
+                              maxLines: 3,
+                              textStyle: TextStyle(
+                                color: HexColor('#747474'),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            Subtext(text: 'Director:'),
+                            const SizedBox(height: 4),
+                            Subtext(
+                              text: content.director ?? '--',
+                              textStyle: TextStyle(
+                                color: HexColor('#747474'),
+                              ),
+                            ),
+                          ]
+                        : [const SizedBox()],
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
