@@ -94,6 +94,7 @@ class VideoDetailsPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         EpisodesTab(
+                          vieoDetailsProvider: value,
                           content: value.data!,
                         ),
                         TrailersAndMoreTab(

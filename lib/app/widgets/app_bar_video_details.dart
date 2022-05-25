@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/providers/rating_provider.dart';
+import 'package:aq_prime/app/providers/video_details_provider.dart';
 import 'package:aq_prime/app/screens/better_player_screen.dart';
 import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
 import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
@@ -18,12 +19,14 @@ class AppBarVideoDetails extends StatelessWidget {
     Key? key,
     required this.contentId,
     required this.content,
+    required this.videoDetailsProvider,
   }) : super(key: key);
 
   final int contentId;
   final Content content;
-
+  final VideoDetailsProvider videoDetailsProvider;
   final Duration duration = Duration(milliseconds: 1000);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -117,18 +120,22 @@ class AppBarVideoDetails extends StatelessWidget {
                         const SizedBox(width: 10),
                         Row(
                           children: [
-                            IconButtonWithName(
-                              title: 'Rate',
-                              iconData: icon(null),
-                              onPressed: () {
-                                ratingPopup(
-                                  context: context,
-                                  isThumbUp: true,
-                                  content: content,
-                                  provider: Provider.of<RatingProvider>(
-                                    context,
-                                    listen: false,
-                                  ),
+                            Consumer<RatingProvider>(
+                              builder: (_context, value, child) {
+                                return IconButtonWithName(
+                                  title: 'Rate',
+                                  iconData: icon(null),
+                                  onPressed: () {
+                                    ratingPopup(
+                                        context: context,
+                                        isThumbUp: true,
+                                        content: content,
+                                        provider: value,
+                                        didRate: (rate) {
+                                          videoDetailsProvider
+                                              .loadData(contentId);
+                                        });
+                                  },
                                 );
                               },
                             ),

@@ -128,7 +128,13 @@ ratingPopup({
   required bool? isThumbUp,
   required Content content,
   required RatingProvider provider,
+  Function(Rate rate)? didRate,
 }) {
+  void handleCallback(Rate rate) {
+    if (didRate == null) return;
+    didRate(rate);
+  }
+
   showGeneralDialog(
     barrierDismissible: false,
     context: context,
@@ -163,8 +169,11 @@ ratingPopup({
                       padding: const EdgeInsets.all(0),
                       alignment: Alignment.center,
                       iconSize: 35,
-                      onPressed: () {
-                        provider.setThumbsUp(content.id!);
+                      onPressed: () async {
+                        bool result = await provider.setThumbsUp(content.id!);
+                        if (result) {
+                          handleCallback(Rate.up);
+                        }
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
@@ -178,9 +187,11 @@ ratingPopup({
                       padding: const EdgeInsets.all(0),
                       alignment: Alignment.center,
                       iconSize: 35,
-                      onPressed: () {
-                        print('FOR IMPLEMENTATION');
-                        // provider.setThumbsDown(content.id!);
+                      onPressed: () async {
+                        bool result = await provider.setThumbsDown(content.id!);
+                        if (result) {
+                          handleCallback(Rate.down);
+                        }
                         Navigator.of(context).pop();
                       },
                       icon: Icon(
