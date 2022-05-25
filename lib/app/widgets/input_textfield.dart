@@ -27,6 +27,7 @@ class InputTextField extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.onTap,
+    this.border,
     Key? key,
   }) : super(key: key);
 
@@ -52,6 +53,7 @@ class InputTextField extends StatelessWidget {
   void Function()? onEditingComplete;
   void Function()? onTap;
   final bool obscureText;
+  final BoxBorder? border;
   @override
   Widget build(BuildContext context) {
     return Opacity(
@@ -62,6 +64,7 @@ class InputTextField extends StatelessWidget {
         height: height,
         width: width == null ? double.infinity : width!,
         decoration: BoxDecoration(
+          border: border,
           color: HexColor('#F9FAFB'),
           borderRadius:
               BorderRadius.circular(borderRadius == null ? 5.0 : borderRadius!),

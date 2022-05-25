@@ -1,211 +1,192 @@
 import 'package:aq_prime/app/providers/registration_provider.dart';
 import 'package:aq_prime/app/screens/nav_screen.dart';
-import 'package:aq_prime/app/widgets/calendar_card.dart';
 import 'package:aq_prime/app/widgets/check_box.dart';
-import 'package:aq_prime/app/widgets/input_textfield.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
+import 'package:aq_prime/app/widgets/registration_input_field.dart';
 import 'package:aq_prime/device/utils/dialog.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationCard extends StatelessWidget {
   RegistrationCard({Key? key}) : super(key: key);
-  // final TextEditingController firstName = TextEditingController(text: 'Juan');
-  // final TextEditingController lastName = TextEditingController(text: 'Dela Cruz');
-  // final TextEditingController email = TextEditingController(text: 'juanDela_crus@gmail.com');
-  // final TextEditingController mobileNumber = TextEditingController(text: '9760223075');
-  // final TextEditingController password = TextEditingController(text: 'passwordMatch');
-  // final TextEditingController confirmPassword = TextEditingController(text: 'passwordMatch');
-  final TextEditingController firstName = TextEditingController();
-  final TextEditingController lastName = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController firstName = TextEditingController(text: 'Juan');
+  final TextEditingController lastName =
+      TextEditingController(text: 'Dela Cruz');
+  final TextEditingController email =
+      TextEditingController(text: 'juanDela_crus@gmail.com');
+  final TextEditingController mobileNumber =
+      TextEditingController(text: '9760223075');
+  final TextEditingController password =
+      TextEditingController(text: 'passwordMatch');
+  final TextEditingController confirmPassword =
+      TextEditingController(text: 'passwordMatch');
+  // final TextEditingController firstName = TextEditingController();
+  // final TextEditingController lastName = TextEditingController();
+  // final TextEditingController email = TextEditingController();
+  // final TextEditingController mobileNumber = TextEditingController();
+  // final TextEditingController password = TextEditingController();
+  // final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Consumer<RegistrationProvider>(builder: (context, value, child) {
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        if (!value.isLoading && !value.isSuccess) {
-          Navigator.of(context).pop();
-          Future.delayed(
-              const Duration(milliseconds: 100), (() => value.reset()));
-        }
-        if (!value.isLoading && value.isSuccess) {
-          Future.delayed(
-              const Duration(milliseconds: 100), (() => value.reset()));
-          Navigator.of(context)
-            ..pop()
-            ..pushReplacementNamed(NavScreen.routeName);
-        }
-      });
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/AQ_PRIME_LOGO_2.png',
-              height: 130,
-              width: double.infinity,
-            ),
-            const SizedBox(height: 25),
-            InputTextField(
-              controller: firstName,
-              hintText: 'First Name',
-              height: 55,
-              keyboardType: TextInputType.text,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-            ),
-            const SizedBox(height: 20),
-            InputTextField(
-              controller: lastName,
-              hintText: 'Last Name',
-              height: 55,
-              keyboardType: TextInputType.text,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-            ),
-            const SizedBox(height: 20),
-            InputTextField(
-              controller: email,
-              hintText: 'E-mail',
-              height: 55,
-              keyboardType: TextInputType.text,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-            ),
-            const SizedBox(height: 20),
-            CalendarField(
-              selectedDate: value.birthDayString,
-              withShadow: true,
-              isDateRange: false,
-              function: () => calendarDialog(
-                context,
-                DateTime.now(),
-                (p0) {
-                  Navigator.of(context).pop();
-                  value.setBirthDay(p0);
+    return Consumer<RegistrationProvider>(
+      builder: (context, value, child) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (!value.isLoading && !value.isSuccess) {
+            // Navigator.of(context).pop();
+            Future.delayed(const Duration(seconds: 2), (() => value.reset()));
+          }
+          if (value.isValidationComplete) {
+            registrationDialog(context);
+            Future.delayed(const Duration(seconds: 2), (() {
+              Navigator.of(context).pop();
+              Future.delayed(
+                  const Duration(milliseconds: 100), () => value.reset());
+            }));
+          }
+          if (!value.isLoading && value.isSuccess) {
+            registrationDialog(context);
+            Future.delayed(
+                const Duration(milliseconds: 100), (() => value.reset()));
+            Navigator.of(context)
+              ..pop()
+              ..pushReplacementNamed(NavScreen.routeName);
+          }
+        });
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 15),
+              Image.asset(
+                'assets/images/AQ_PRIME_LOGO_2.png',
+                height: 130,
+                width: double.infinity,
+              ),
+              const SizedBox(height: 20),
+              RegistraionInputField(
+                isError: value.firstNameError,
+                errorMessage: value.message ?? '',
+                name: 'First Name',
+                controller: firstName,
+              ),
+              const SizedBox(height: 5),
+              RegistraionInputField(
+                isError: value.lastNameError,
+                errorMessage: value.message ?? '',
+                name: 'Last Name',
+                controller: lastName,
+              ),
+              const SizedBox(height: 5),
+              RegistraionInputField(
+                isError: value.emailError,
+                errorMessage: value.message ?? '',
+                name: 'Email address',
+                controller: email,
+              ),
+              const SizedBox(height: 5),
+              BirthDate(
+                isError: value.birthDayError,
+                errorMessage: value.message ?? '',
+                selectedDate: value.birthDayString,
+                function: () => calendarDialog(
+                  context,
+                  DateTime.now(),
+                  (p0) {
+                    Navigator.of(context).pop();
+                    value.setBirthDay(p0);
+                  },
+                ),
+              ),
+              const SizedBox(height: 5),
+              RegistraionInputFieldMobileNumber(
+                countryCode: value.countryCode.toString(),
+                isObscureText: value.isObscurePassword,
+                onPressed: () => countryCodeDialog(context: context),
+                isError: value.mobileError,
+                errorMessage: value.message ?? '',
+                name: 'Mobile Number',
+                controller: mobileNumber,
+              ),
+              const SizedBox(height: 10),
+              RegistraionInputFieldPassword(
+                isObscureText: value.isObscurePassword,
+                onPressed: () => value.setIsObscurePassword(),
+                isError: value.passwordError,
+                errorMessage: value.message ?? '',
+                name: 'Password',
+                controller: password,
+              ),
+              const SizedBox(height: 10),
+              RegistraionInputFieldPassword(
+                isObscureText: value.isObscureConfirmPassword,
+                onPressed: () => value.setIsObscureConfirmPassword(),
+                isError: value.confirmPasswordError,
+                errorMessage: value.message ?? '',
+                name: 'Confirm Password',
+                controller: confirmPassword,
+              ),
+              const SizedBox(height: 20),
+              CheckboxLabel(
+                label: 'Accept Terms and Condition',
+                value: value.isAcceptedTermsAndCondition,
+                onChanged: () => value.setTermsAndCondition(),
+              ),
+              const SizedBox(height: 20),
+              PrimaryButton(
+                isDisabled: !value.isAcceptedTermsAndCondition,
+                height: 50,
+                width: double.infinity,
+                label: 'Register',
+                action: () {
+                  value.sendAPI(
+                      firstName.text,
+                      lastName.text,
+                      mobileNumber.text,
+                      email.text,
+                      password.text,
+                      confirmPassword.text);
+                  // registrationDialog(context);
                 },
               ),
-            ),
-            const SizedBox(height: 20),
-            InputTextField(
-              controller: mobileNumber,
-              hintText: 'Mobile Number',
-              height: 55,
-              keyboardType: TextInputType.number,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-              prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
-              prefixIcon: GestureDetector(
-                onTap: () => countryCodeDialog(context: context),
-                child: Text(value.countryCode.dialCode.toString(),
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: HexColor('#BEBBBB'),
-                        fontWeight: FontWeight.w700)),
-              ),
-            ),
-            const SizedBox(height: 20),
-            InputTextField(
-              controller: password,
-              hintText: 'Password',
-              height: 55,
-              keyboardType: TextInputType.text,
-              obscureText: value.isObscurePassword,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 60, top: 8, bottom: 8),
-              suffixIconPadding:
-                  const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-              suffixIcon: IconButton(
-                onPressed: () => value.setIsObscurePassword(),
-                icon: Icon(
-                  value.isObscurePassword
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: HexColor('#BEBBBB'),
-                  size: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            InputTextField(
-              controller: confirmPassword,
-              hintText: 'Confirm Password',
-              height: 55,
-              keyboardType: TextInputType.text,
-              obscureText: value.isObscureConfirmPassword,
-              floatingLabelBehavior: FloatingLabelBehavior.auto,
-              padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
-              suffixIconPadding:
-                  const EdgeInsets.only(top: 3, bottom: 10, right: 10),
-              suffixIcon: IconButton(
-                onPressed: () => value.setIsObscureConfirmPassword(),
-                icon: Icon(
-                  value.isObscureConfirmPassword
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: HexColor('#BEBBBB'),
-                  size: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            CheckboxLabel(
-              label: 'Accept Terms and Condition',
-              value: value.isAcceptedTermsAndCondition,
-              onChanged: () => value.setTermsAndCondition(),
-            ),
-            const SizedBox(height: 20),
-            PrimaryButton(
-              isDisabled: !value.isAcceptedTermsAndCondition,
-              height: 50,
-              width: double.infinity,
-              label: 'Register',
-              action: () {
-                value.sendAPI(firstName.text, lastName.text, mobileNumber.text,
-                    email.text, password.text, confirmPassword.text);
-                registrationDialog(context);
-              },
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Already on AQ-Prime?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 13,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(width: 5),
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: const Text(
-                    'Sign-in',
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already on AQ-Prime?',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                       fontSize: 13,
-                      color: Colors.red,
+                      color: Colors.white,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    });
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: const Text(
+                      'Sign-in',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Rubik',
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 16,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   registrationDialog(context) {

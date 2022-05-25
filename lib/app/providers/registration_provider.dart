@@ -13,41 +13,42 @@ class RegistrationProvider with ChangeNotifier {
   String? _message;
   bool _isSuccess = false;
   bool _isLoading = true;
+  bool _isValidationComplete = false;
+  //---------------------------
   bool _isObscurePassword = true;
   bool _isObscureConfirmPassword = true;
-  // String _firstName = '';
-  // String _lastName = '';
-  // String _email = '';
-  // String _mobileNumber = '';
-  // String _password = '';
-  // String _confirmPassword = '';
-  //getter
+  //---------------------------
+  bool _firstNameError = false;
+  bool _lastNameError = false;
+  bool _emailError = false;
+  bool _birthDayError = false;
+  bool _mobileError = false;
+  bool _passwordError = false;
+  bool _confirmPasswordError = false;
+  //---------------------------
 
-  // String get firstName => _firstName;
-  // String get lastName => _lastName;
-  // String get email => _email;
-  // String get mobileNumber => _mobileNumber;
-  // String get password => _password;
-  // String get confirmPassword => _confirmPassword;
-
+//getter
   CountryCode get countryCode => _countryCode;
   String? get message => _message;
   bool get isSuccess => _isSuccess;
   bool get isLoading => _isLoading;
+  bool get isValidationComplete => _isValidationComplete;
   bool get isObscurePassword => _isObscurePassword;
   bool get isObscureConfirmPassword => _isObscureConfirmPassword;
   bool get isAcceptedTermsAndCondition => _isAcceptedTermsAndCondition;
   String? get birthDayString =>
       _birthDay != null ? DateFormat.yMMMMd().format(_birthDay!) : null;
-
+  //------------------------
+  bool get firstNameError => _firstNameError;
+  bool get lastNameError => _lastNameError;
+  bool get emailError => _emailError;
+  bool get birthDayError => _birthDayError;
+  bool get mobileError => _mobileError;
+  bool get passwordError => _passwordError;
+  bool get confirmPasswordError => _confirmPasswordError;
+  //------------------------
   //setter
 
-  // setFirstName(value) => _firstName = value;
-  // setLastName(value) => _lastName = value;
-  // setEmail(value) => _email = value;
-  // setMobileNumber(value) => _mobileNumber = value;
-  // setPassword(value) => _password = value;
-  // setConfirmPassword(value) => _confirmPassword = value;
   setTermsAndCondition() {
     _isAcceptedTermsAndCondition = !_isAcceptedTermsAndCondition;
     notifyListeners();
@@ -78,6 +79,15 @@ class RegistrationProvider with ChangeNotifier {
     _message = null;
     _isLoading = true;
     _isSuccess = false;
+    fieldsValidations(
+      _firstName,
+      _lastName,
+      _email,
+      _birthDay,
+      _mobileNumber,
+      _password,
+      _confirmPassword,
+    );
     final device = await Utils.getDeviceName();
     if (_firstName.isNotEmpty &&
         _lastName.isNotEmpty &&
@@ -90,6 +100,8 @@ class RegistrationProvider with ChangeNotifier {
               .hasMatch(_email) &&
           (_password.length >= 8) &&
           (_password == _confirmPassword)) {
+        _isValidationComplete = true;
+        notifyListeners();
         Map<String, dynamic> body = {
           'first_name': _firstName,
           'last_name': _lastName,
@@ -123,6 +135,7 @@ class RegistrationProvider with ChangeNotifier {
             });
             ////LOGINGG IN
           } else {
+            _isValidationComplete = false;
             _isSuccess = false;
             _isLoading = false;
             _message = 'Email Already Registered.';
@@ -159,19 +172,60 @@ class RegistrationProvider with ChangeNotifier {
     }
   }
 
-  sendOTP(value) {
-    print(value);
+  fieldsValidations(
+    _firstName,
+    _lastName,
+    _email,
+    _birthDay,
+    _mobileNumber,
+    _password,
+    _confirmPassword,
+  ) {
+    if (_firstName == '') {
+      _firstNameError = true;
+    }
+    if (_lastName == '') {
+      _lastNameError = true;
+    }
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(_email)) {
+      _emailError = true;
+    }
+    if (_birthDay == null) {
+      _birthDayError = true;
+    }
+    if (_mobileNumber == '') {
+      _mobileError = true;
+    }
+    if (_password.length < 8) {
+      _passwordError = true;
+    }
+    if (_confirmPassword.length < 8) {
+      _confirmPasswordError = true;
+    }
+    if (_password != _confirmPassword) {
+      _passwordError = true;
+      _confirmPasswordError = true;
+    }
   }
 
   reset() {
+    _firstNameError = false;
+    _lastNameError = false;
+    _emailError = false;
+    _birthDayError = false;
+    _mobileError = false;
+    _passwordError = false;
+    _confirmPasswordError = false;
+
     _message = null;
     _isLoading = true;
     _isSuccess = false;
+    _isValidationComplete = false;
     _isObscurePassword = true;
     _isObscureConfirmPassword = true;
     _isAcceptedTermsAndCondition = false;
     notifyListeners();
-    // _birthDay = null;
-    // _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
   }
 }
