@@ -32,6 +32,7 @@ class RelatedContentProvider with ChangeNotifier {
   }
 
   reset() {
+    _data.clear();
     _isLoading = true;
     _isSuccess = false;
   }
