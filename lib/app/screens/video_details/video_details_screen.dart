@@ -9,13 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
+class VideoDetailsPageArguments {
+  final int videoId;
+  final String heroTag;
+  VideoDetailsPageArguments({required this.videoId, required this.heroTag});
+}
+
 class VideoDetailsPage extends StatelessWidget {
   const VideoDetailsPage({Key? key}) : super(key: key);
   static const routeName = '/videoDetailsPage';
 
   @override
   Widget build(BuildContext context) {
-    final int videoId = ModalRoute.of(context)!.settings.arguments as int;
+    final VideoDetailsPageArguments arguments =
+        ModalRoute.of(context)!.settings.arguments as VideoDetailsPageArguments;
+    final int videoId = arguments.videoId;
+    final String heroTag = arguments.heroTag;
     initState(context, videoId);
     return Consumer<VideoDetailsProvider>(
       child: AnimationConfiguration.staggeredList(
@@ -78,7 +87,7 @@ class VideoDetailsPage extends StatelessWidget {
                   title: value.data!.title!,
                   isImageUrl: true,
                   backgroundImage: value.data!.coverPhotoMobile,
-                  heroTag: '',
+                  heroTag: heroTag,
                   appBarContainer: const SizedBox(),
                   bottom: child!,
                   container: Container(
@@ -93,7 +102,9 @@ class VideoDetailsPage extends StatelessWidget {
                         TrailersAndMoreTab(
                           trailers: value.data!.trailers ?? [],
                         ),
-                        MoreLikeThisTab(contentId: value.data!.id!),
+                        MoreLikeThisTab(
+                          contentId: value.data!.id!,
+                        ),
                       ],
                     ),
                   ),

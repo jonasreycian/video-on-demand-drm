@@ -69,12 +69,12 @@ class MyWatchListScreen extends StatelessWidget {
                                 heroTag:
                                     'myWatchList${value.myWatchList[index].coverPhotoMobile} $index',
                                 onTap: () => Navigator.of(context).pushNamed(
-                                    VideoDetailsPage.routeName,
-                                    arguments: {
-                                      'data': value.myWatchList[index],
-                                      'heroTag':
-                                          'myWatchList${value.myWatchList[index].coverPhotoMobile} $index',
-                                    }),
+                                  VideoDetailsPage.routeName,
+                                  arguments: VideoDetailsPageArguments(
+                                    videoId: value.myWatchList[index].videoId!,
+                                    heroTag: value.myWatchList[index].title!,
+                                  ),
+                                ),
                               );
                             },
                           )
