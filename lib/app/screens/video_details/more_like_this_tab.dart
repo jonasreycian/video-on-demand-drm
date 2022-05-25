@@ -51,11 +51,10 @@ class MoreLikeThisTab extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pushNamed(
                           VideoDetailsPage.routeName,
-                          arguments: {
-                            'data': value.data![index],
-                            'heroTag':
-                                'moreLikeThis${value.data![index].coverPhotoMobile} $index',
-                          },
+                          arguments: VideoDetailsPageArguments(
+                            videoId: value.data![index].videoId!,
+                            heroTag: value.data![index].title!,
+                          ),
                         );
                       },
                     );

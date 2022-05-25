@@ -87,7 +87,10 @@ class CategoryContentsScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pushNamed(
                     VideoDetailsPage.routeName,
-                    arguments: value.data!.contents![index].videoId,
+                    arguments: {
+                      'videoId': value.data!.contents![index].videoId,
+                      'heroTag': value.data!.contents![index].title,
+                    },
                   );
                 },
               ),

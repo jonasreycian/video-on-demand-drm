@@ -62,7 +62,10 @@ class SectionCard extends StatelessWidget {
                           ).reset();
                           Navigator.of(context).pushNamed(
                             VideoDetailsPage.routeName,
-                            arguments: contents[index].videoId,
+                            arguments: VideoDetailsPageArguments(
+                              videoId: contents[index].videoId!,
+                              heroTag: contents[index].title!,
+                            ),
                           );
                         },
                       );
