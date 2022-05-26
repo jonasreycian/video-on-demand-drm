@@ -81,22 +81,15 @@ class ThumbnailCard extends StatelessWidget {
 class ThumbnailCardForGrid extends StatelessWidget {
   const ThumbnailCardForGrid({
     required this.index,
-    // required this.title,
-    required this.releaseYear,
-    required this.runTime,
     required this.imageUrl,
     required this.onTap,
-    required this.heroTag,
     this.height,
     this.width,
     Key? key,
   }) : super(key: key);
   final int index;
   final String imageUrl;
-  final String runTime;
-  final String releaseYear;
   final Function()? onTap;
-  final String heroTag;
   final double? height;
   final double? width;
   final Duration duration = const Duration(milliseconds: 500);
@@ -123,19 +116,15 @@ class ThumbnailCardForGrid extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Hero(
-                      tag: heroTag,
-                      transitionOnUserGestures: true,
-                      child: Container(
-                        height: height ?? 160,
-                        width: width != null ? (width! - 20) : 130,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                            image: NetworkImage(imageUrl),
-                            fit: BoxFit.cover,
-                          ),
+                    Container(
+                      height: height ?? 160,
+                      width: width != null ? (width! - 20) : 130,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: NetworkImage(imageUrl),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),

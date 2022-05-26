@@ -46,10 +46,6 @@ class MoreLikeThisTab extends StatelessWidget {
                     return ThumbnailCardForGrid(
                       index: index,
                       imageUrl: value.data![index].coverPhotoMobile!,
-                      releaseYear: '2022',
-                      runTime: 0.toString(),
-                      heroTag:
-                          'moreLikeThis${value.data![index].coverPhotoMobile} $index',
                       onTap: () {
                         Navigator.of(context).pushNamed(
                           VideoDetailsPage.routeName,
