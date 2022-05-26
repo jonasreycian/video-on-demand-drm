@@ -61,18 +61,12 @@ class MyWatchListScreen extends StatelessWidget {
                               crossAxisCount: 3,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
-                              mainAxisExtent:
-                                  175, // here set custom Height You Want
+                              mainAxisExtent: 175,
                             ),
                             itemBuilder: (context, index) {
                               return ThumbnailCardForGrid(
                                 index: index,
-                                // title: value.myWatchList[index].name!,
                                 imageUrl: value.data[index].coverPhotoMobile!,
-                                releaseYear: value.data[index].releasedDate!,
-                                runTime: 0.toString(),
-                                heroTag:
-                                    'myWatchList${value.data[index].coverPhotoMobile} $index',
                                 onTap: () => Navigator.of(context).pushNamed(
                                   VideoDetailsPage.routeName,
                                   arguments: VideoDetailsPageArguments(

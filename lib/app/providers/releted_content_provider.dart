@@ -6,10 +6,13 @@ class RelatedContentProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
   List<Content> _data = <Content>[];
+
+  //getter
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   List<Content>? get data => _data;
 
+  //setter
   loadData(int contentId) {
     reset();
     API()
@@ -18,13 +21,14 @@ class RelatedContentProvider with ChangeNotifier {
       endPoint: '/contents/$contentId/content-related',
     )
         .then((value) {
-      _isSuccess = value['success'];
-      if (_isSuccess) {
+      if (value['success']) {
         _data =
             (value['data'] as List).map((e) => Content.fromJson(e)).toList();
+        _isSuccess = true;
         _isLoading = false;
         notifyListeners();
       } else {
+        _isSuccess = false;
         _isLoading = false;
         notifyListeners();
       }
