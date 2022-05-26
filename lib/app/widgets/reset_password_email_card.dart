@@ -13,13 +13,14 @@ class ResetPasswordCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final TextEditingController emailNumber =
-      TextEditingController(text: 'jesther1111@yahoo.com');
-  // final TextEditingController emailNumber = TextEditingController();
+  // final TextEditingController emailNumber =
+  // TextEditingController(text: 'jesther1111@yahoo.com');
+  final TextEditingController emailNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     print('Parent Rebuild');
     return Consumer<ForgotPasswordProvider>(
+      child: OtpView(),
       builder: (context, value, child) {
         print('child Rebuild');
         Future.delayed(const Duration(milliseconds: 1), () {
@@ -59,7 +60,7 @@ class ResetPasswordCard extends StatelessWidget {
             );
           },
           child: value.otpView
-              ? OtpView()
+              ? child!
               : Column(
                   children: [
                     const SizedBox(height: 5),
@@ -90,7 +91,6 @@ class ResetPasswordCard extends StatelessWidget {
                     const SizedBox(height: 25),
                     PrimaryButton(
                       label: 'Submit OTP',
-                      // isDisabled: true,
                       width: double.infinity,
                       height: 50,
                       action: () {

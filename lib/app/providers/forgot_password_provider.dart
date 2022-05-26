@@ -8,7 +8,7 @@ class ForgotPasswordProvider with ChangeNotifier {
   bool _isEmailMobileError = false;
   bool _isSuccess = false;
   bool _isLoading = true;
-
+  String _successEmailMobile = '';
   String? _message;
   //getter
   String? get message => _message;
@@ -16,7 +16,7 @@ class ForgotPasswordProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isEmailMobileError => _isEmailMobileError;
   bool get isSuccessValidation => _successValidation;
-
+  String get successEmailMobile => _successEmailMobile;
   bool get otpView => _otpView;
   //setter
   setOtpView() {
@@ -47,6 +47,7 @@ class ForgotPasswordProvider with ChangeNotifier {
             _isSuccess = true;
             _isLoading = false;
             _successValidation = false;
+            _successEmailMobile = _emailorMobile;
             notifyListeners();
           } else {
             _message = value['message'];
