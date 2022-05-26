@@ -1,5 +1,4 @@
 import 'package:aq_prime/app/providers/registration_provider.dart';
-import 'package:aq_prime/app/screens/nav_screen.dart';
 import 'package:aq_prime/app/widgets/check_box.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/registration_input_field.dart';
@@ -10,23 +9,23 @@ import 'package:provider/provider.dart';
 
 class RegistrationCard extends StatelessWidget {
   RegistrationCard({Key? key}) : super(key: key);
-  final TextEditingController firstName = TextEditingController(text: 'Juan');
-  final TextEditingController lastName =
-      TextEditingController(text: 'Dela Cruz');
-  final TextEditingController email =
-      TextEditingController(text: 'juanDela_crus@gmail.com');
-  final TextEditingController mobileNumber =
-      TextEditingController(text: '9760223075');
-  final TextEditingController password =
-      TextEditingController(text: 'passwordMatch');
-  final TextEditingController confirmPassword =
-      TextEditingController(text: 'passwordMatch');
-  // final TextEditingController firstName = TextEditingController();
-  // final TextEditingController lastName = TextEditingController();
-  // final TextEditingController email = TextEditingController();
-  // final TextEditingController mobileNumber = TextEditingController();
-  // final TextEditingController password = TextEditingController();
-  // final TextEditingController confirmPassword = TextEditingController();
+  // final TextEditingController firstName = TextEditingController(text: 'Juan');
+  // final TextEditingController lastName =
+  //     TextEditingController(text: 'Dela Cruz');
+  // final TextEditingController email =
+  //     TextEditingController(text: 'juanDela_crus@gmail.com');
+  // final TextEditingController mobileNumber =
+  //     TextEditingController(text: '9760223075');
+  // final TextEditingController password =
+  //     TextEditingController(text: 'passwordMatch');
+  // final TextEditingController confirmPassword =
+  //     TextEditingController(text: 'passwordMatch');
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController mobileNumber = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(
