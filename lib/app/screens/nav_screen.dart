@@ -34,12 +34,13 @@ class _NavScreenState extends State<NavScreen> {
     'My Account': Icons.account_circle_rounded,
   };
 
-  int _currentIndex = 0;
+  int _currentIndex = 0; //currentTab
 
   void initializeAPI(BuildContext context) {
-    MyWatchListProvider myWatchListProvider =
-        Provider.of<MyWatchListProvider>(context, listen: false);
-    myWatchListProvider.loadWatchList();
+    if (_currentIndex == 0) {
+      Provider.of<MyWatchListProvider>(context, listen: false)
+          .loadWatchList(); //sa home tab lang sir
+    }
   }
 
   @override

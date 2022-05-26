@@ -50,7 +50,7 @@ class RegistrationCard extends StatelessWidget {
                 const Duration(milliseconds: 100), (() => value.reset()));
             Navigator.of(context)
               ..pop()
-              ..pushReplacementNamed(NavScreen.routeName);
+              ..pop();
           }
         });
         return SingleChildScrollView(
@@ -146,7 +146,6 @@ class RegistrationCard extends StatelessWidget {
                       email.text,
                       password.text,
                       confirmPassword.text);
-                  // registrationDialog(context);
                 },
               ),
               const SizedBox(height: 20),

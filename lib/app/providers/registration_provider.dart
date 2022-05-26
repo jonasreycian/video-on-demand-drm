@@ -3,9 +3,11 @@ import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 
 class RegistrationProvider with ChangeNotifier {
+  String _successEmail = '';
+  String _successPassword = '';
+  //---------------------------
   bool _isAcceptedTermsAndCondition = false;
   CountryCode _countryCode = CountryCode(
       code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
@@ -28,6 +30,9 @@ class RegistrationProvider with ChangeNotifier {
   //---------------------------
 
 //getter
+  String get successEmail => _successEmail;
+  String get successPassword => _successPassword;
+
   CountryCode get countryCode => _countryCode;
   String? get message => _message;
   bool get isSuccess => _isSuccess;
@@ -109,8 +114,8 @@ class RegistrationProvider with ChangeNotifier {
           'email': _email,
           'password': _password,
           'password_confirmation': _confirmPassword,
-          'plan_id': 1,
-          'status': 1,
+          'plan_id': '1',
+          'status': '1',
           'device_name': device
         };
         API()
@@ -121,19 +126,11 @@ class RegistrationProvider with ChangeNotifier {
             .then((value) {
           if (value['success']) {
             _message = value['message'];
+            _isSuccess = true;
+            _isLoading = false;
+            _successEmail = _email;
+            _successPassword = _password;
             notifyListeners();
-            ////LOGINGG IN
-            Future.delayed(const Duration(milliseconds: 1000), () {
-              _message = 'Logging in...';
-              notifyListeners();
-            });
-            Future.delayed(const Duration(milliseconds: 2000), () {
-              _isSuccess = true;
-              _isLoading = false;
-              user_data.saveLoggedIn(value['data']);
-              notifyListeners();
-            });
-            ////LOGINGG IN
           } else {
             _isValidationComplete = false;
             _isSuccess = false;
