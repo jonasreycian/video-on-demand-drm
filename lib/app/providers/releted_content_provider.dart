@@ -6,10 +6,13 @@ class RelatedContentProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
   List<Content> _data = <Content>[];
+
+  //getter
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   List<Content>? get data => _data;
 
+  //setter
   loadData(int contentId) {
     reset();
     API()

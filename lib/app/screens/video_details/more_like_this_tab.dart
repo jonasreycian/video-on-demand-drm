@@ -17,7 +17,9 @@ class MoreLikeThisTab extends StatelessWidget {
     Future.delayed(const Duration(milliseconds: 1), () {
       RelatedContentProvider relatedContentProvider =
           Provider.of<RelatedContentProvider>(context, listen: false);
-      relatedContentProvider.loadData(contentId);
+      if (!relatedContentProvider.isSuccess) {
+        relatedContentProvider.loadData(contentId);
+      }
     });
   }
 
