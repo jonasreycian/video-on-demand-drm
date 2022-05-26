@@ -10,12 +10,13 @@ class RegistraionInputField extends StatelessWidget {
     required this.name,
     required this.errorMessage,
     required this.controller,
+    this.padding,
   }) : super(key: key);
   final String name;
   final String errorMessage;
   final bool isError;
   final TextEditingController controller;
-
+  final EdgeInsets? padding;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +46,8 @@ class RegistraionInputField extends StatelessWidget {
           height: 55,
           keyboardType: TextInputType.text,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+          padding:
+              padding ?? const EdgeInsets.only(left: 60, top: 10, bottom: 10),
         ),
         const SizedBox(height: 5),
         isError
