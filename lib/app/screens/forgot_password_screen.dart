@@ -34,10 +34,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 500),
-                  height: 480,
+                  height: 530,
                   width: double.infinity,
                   margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.80),
                     border: Border.all(
