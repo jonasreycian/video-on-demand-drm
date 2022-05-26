@@ -32,5 +32,6 @@ class VideoDetailsProvider with ChangeNotifier {
   reset() {
     _isLoading = true;
     _isSuccess = false;
+    _content = null;
   }
 }

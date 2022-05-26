@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
       homeProvider.loadData(CategoryType.top10);
       homeProvider.loadData(CategoryType.trendingNow);
       homeProvider.loadData(CategoryType.newReleases);
-      homeProvider.loadData(CategoryType.myWatchList);
+      homeProvider.loadData(CategoryType.continueWatching);
     } else {
       refreshLimitDialog(context: context);
     }

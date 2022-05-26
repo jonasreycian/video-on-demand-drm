@@ -1,4 +1,5 @@
 import 'package:aq_prime/app/providers/login_provider.dart';
+import 'package:aq_prime/app/providers/registration_provider.dart';
 import 'package:aq_prime/app/screens/forgot_password_screen.dart';
 import 'package:aq_prime/app/screens/nav_screen.dart';
 import 'package:aq_prime/app/screens/registration_screen.dart';
@@ -59,8 +60,12 @@ class LoginScreen extends StatelessWidget {
                       Radius.circular(15),
                     ),
                   ),
-                  child:
-                      Consumer<LoginProvider>(builder: (context, value, child) {
+                  child: Consumer2<LoginProvider, RegistrationProvider>(
+                      builder: (context, value, value1, child) {
+                    if (value1.isSuccess) {
+                      emailNumber.text = value1.successEmail;
+                      password.text = value1.successPassword;
+                    }
                     Future.delayed(const Duration(milliseconds: 1000), () {
                       if (!value.isLoading && !value.isSuccess) {
                         Navigator.of(context).pop();
