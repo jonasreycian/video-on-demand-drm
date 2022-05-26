@@ -5,6 +5,7 @@ import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class OtpView extends StatelessWidget {
   OtpView({Key? key}) : super(key: key);
@@ -118,37 +119,82 @@ class ErrorMessage extends StatelessWidget {
   }
 }
 
-class SendItAgainCard extends StatelessWidget {
+class SendItAgainCard extends StatefulWidget {
   const SendItAgainCard({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<SendItAgainCard> createState() => _SendItAgainCardState();
+}
+
+class _SendItAgainCardState extends State<SendItAgainCard> {
+  final stopWatchTimer = StopWatchTimer(
+    mode: StopWatchMode.countDown,
+    presetMillisecond:
+        StopWatchTimer.getMilliSecFromMinute(1), // millisecond => minute.
+    // StopWatchTimer.getMilliSecFromSecond(5), // millisecond => minute.
+  );
+  @override
+  void initState() {
+    super.initState();
+    stopWatchTimer.onExecute.add(StopWatchExecute.start);
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await stopWatchTimer.dispose(); // Need to call dispose function.
+  }
+
+  @override
   Widget build(BuildContext context) {
+    ForgotPasswordProvider forgotPasswordProvider =
+        Provider.of<ForgotPasswordProvider>(context, listen: false);
+
     return Expanded(
-      child: Column(
-        children: [
-          Text(
-            'Didn\'t receive an OTP?',
-            style: TextStyle(
-              fontFamily: 'Rubik',
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 30),
-          Text(
-            'Send it Again',
-            style: TextStyle(
-              fontFamily: 'Rubik',
-              fontWeight: FontWeight.w400,
-              color: Colors.red,
-              fontSize: 16,
-            ),
-          ),
-        ],
-      ),
+      child: StreamBuilder<int>(
+          stream: stopWatchTimer.rawTime,
+          initialData: 0,
+          builder: (context, snap) {
+            final int value = snap.data as int;
+            final displayTime = StopWatchTimer.getRawSecond(value);
+            return Column(
+              children: [
+                Text(
+                  'Didn\'t receive an OTP?',
+                  style: TextStyle(
+                    fontFamily: 'Rubik',
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                GestureDetector(
+                  onTap: displayTime == 0
+                      ? () {
+                          forgotPasswordProvider.forgotPasswordAPI(
+                              forgotPasswordProvider.successEmailMobile);
+                          stopWatchTimer.onExecute.add(StopWatchExecute.reset);
+                          stopWatchTimer.onExecute.add(StopWatchExecute.start);
+                        }
+                      : null,
+                  child: Text(
+                    displayTime != 0
+                        ? 'OTP sent. Send again in ${displayTime.toString()}s...'
+                        : 'Send it again',
+                    style: TextStyle(
+                      fontFamily: 'Rubik',
+                      fontWeight: FontWeight.w400,
+                      color: displayTime != 0 ? Colors.white54 : Colors.red,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
     );
   }
 }

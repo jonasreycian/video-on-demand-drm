@@ -48,6 +48,7 @@ class ForgotPasswordProvider with ChangeNotifier {
             _isLoading = false;
             _successValidation = false;
             _successEmailMobile = _emailorMobile;
+            _otpView = true;
             notifyListeners();
           } else {
             _message = value['message'];

@@ -49,6 +49,7 @@ dependencies:
   device_info_plus: ^3.2.3
   collection: ^1.16.0
   states_rebuilder: ^6.1.0+1
+  stop_watch_timer: ^1.4.0
 
 dev_dependencies:
   lints: ^1.0.1

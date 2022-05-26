@@ -14,7 +14,7 @@ class ResetPasswordCard extends StatelessWidget {
   }) : super(key: key);
 
   // final TextEditingController emailNumber =
-  // TextEditingController(text: 'jesther1111@yahoo.com');
+  // TextEditingController(text: 'jesther11@yahoo.com');
   final TextEditingController emailNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,6 @@ class ResetPasswordCard extends StatelessWidget {
             Future.delayed(const Duration(milliseconds: 1000), () {
               Navigator.of(context).pop();
               value.reset();
-              value.setOtpView();
             });
           }
           if (value.isSuccessValidation) {
