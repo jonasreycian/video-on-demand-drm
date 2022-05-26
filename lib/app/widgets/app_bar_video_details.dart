@@ -15,18 +15,27 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AppBarVideoDetails extends StatelessWidget {
+class AppBarVideoDetails extends StatefulWidget {
   AppBarVideoDetails({
     Key? key,
     required this.contentId,
     required this.content,
     required this.videoDetailsProvider,
+    this.seasonSelectorCallback,
   }) : super(key: key);
 
   final int contentId;
   final Content content;
   final VideoDetailsProvider videoDetailsProvider;
+  final Function(int seasonId)? seasonSelectorCallback;
+
+  @override
+  State<AppBarVideoDetails> createState() => _AppBarVideoDetailsState();
+}
+
+class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
   final Duration duration = Duration(milliseconds: 1000);
+  int selectedSeasonIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +49,14 @@ class AppBarVideoDetails extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: 470,
+              height: widget.content.type == 'series' ? 420 : 470,
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      content.title ?? '--',
+                      widget.content.title ?? '--',
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w800,
@@ -61,28 +70,30 @@ class AppBarVideoDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Subtext(
-                          text: content.releasedDate != null
-                              ? DateFormat.y()
-                                  .format(DateTime.parse(content.releasedDate!))
+                          text: widget.content.releasedDate != null
+                              ? DateFormat.y().format(
+                                  DateTime.parse(widget.content.releasedDate!))
                               : '--',
                         ),
                         const SizedBox(width: 10),
-                        MTRCBRating(rating: content.mtrcbRating),
+                        MTRCBRating(rating: widget.content.mtrcbRating),
                         const SizedBox(width: 10),
-                        Text(
-                          '${content.seasonsCount} ${content.seasonsCount! > 1 ? 'Seasons' : 'Season'}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        widget.content.type == 'series'
+                            ? Text(
+                                '${widget.content.seasonsCount} ${widget.content.seasonsCount! > 1 ? 'Seasons' : 'Season'}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            : const SizedBox(),
                         const SizedBox(width: 10),
-                        content.type != 'series'
+                        widget.content.type != 'series'
                             ? Subtext(
-                                text: content.video?.runtime != null
+                                text: widget.content.video?.runtime != null
                                     ? Utils.netflixDurationFormat(
-                                        content.video!.runtime!)
+                                        widget.content.video!.runtime!)
                                     : '--',
                               )
                             : const SizedBox(),
@@ -90,12 +101,12 @@ class AppBarVideoDetails extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     Subtext(
-                      text: content.synopsis ?? '',
+                      text: widget.content.synopsis ?? '',
                       maxLines: 4,
                       textStyle: TextStyle(color: HexColor('#747474')),
                     ),
                     const SizedBox(height: 15),
-                    ...content.type != 'series'
+                    ...widget.content.type != 'series'
                         ? [
                             Subtext(
                               text: 'Starring:',
@@ -103,7 +114,7 @@ class AppBarVideoDetails extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Subtext(
-                              text: content.cast!.join(', '),
+                              text: widget.content.cast!.join(', '),
                               maxLines: 3,
                               textStyle: TextStyle(
                                 color: HexColor('#747474'),
@@ -113,7 +124,7 @@ class AppBarVideoDetails extends StatelessWidget {
                             Subtext(text: 'Director:'),
                             const SizedBox(height: 4),
                             Subtext(
-                              text: content.director ?? '--',
+                              text: widget.content.director ?? '--',
                               textStyle: TextStyle(
                                 color: HexColor('#747474'),
                               ),
@@ -126,7 +137,7 @@ class AppBarVideoDetails extends StatelessWidget {
                       children: [
                         AddWatchListButton(
                           title: 'My List',
-                          contentId: content.id!,
+                          contentId: widget.content.id!,
                         ),
                         const SizedBox(width: 10),
                         Row(
@@ -140,20 +151,21 @@ class AppBarVideoDetails extends StatelessWidget {
                                     ratingPopup(
                                         context: context,
                                         isThumbUp: true,
-                                        content: content,
+                                        content: widget.content,
                                         provider: value,
                                         didRate: (rate) {
-                                          videoDetailsProvider
-                                              .loadData(contentId);
+                                          widget.videoDetailsProvider
+                                              .loadData(widget.contentId);
                                         });
                                   },
                                 );
                               },
                             ),
                             Text(
-                              content.thumbsUpRatingCount != null &&
-                                      content.thumbsUpRatingCount! > 0
-                                  ? content.thumbsUpRatingCount.toString()
+                              widget.content.thumbsUpRatingCount != null &&
+                                      widget.content.thumbsUpRatingCount! > 0
+                                  ? widget.content.thumbsUpRatingCount
+                                      .toString()
                                   : '',
                               style: TextStyle(
                                 fontSize: 12,
@@ -168,15 +180,15 @@ class AppBarVideoDetails extends StatelessWidget {
                     PrimaryButton(
                       height: 50,
                       action: () {
-                        if (content.video == null ||
-                            content.video!.hls == null) {
+                        if (widget.content.video == null ||
+                            widget.content.video!.hls == null) {
                           print('No hls url found');
                           return;
                         }
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                BetterPlayerScreen(content.video!.hls!),
+                                BetterPlayerScreen(widget.content.video!.hls!),
                           ),
                         );
                       },
@@ -190,6 +202,50 @@ class AppBarVideoDetails extends StatelessWidget {
                       width: double.infinity,
                       label: 'Watch Trailer',
                     ),
+                    widget.content.type == 'series'
+                        ? Container(
+                            alignment: Alignment.center,
+                            height: 41,
+                            width: MediaQuery.of(context).size.width / 3,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: HexColor('#747474'),
+                              ),
+                            ),
+                            margin: const EdgeInsets.only(top: 32),
+                            padding: const EdgeInsets.all(8),
+                            child: DropdownButton<int>(
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              isDense: true,
+                              value: selectedSeasonIndex + 1,
+                              style: TextStyle(color: Colors.white),
+                              items: widget.content.seasons!.map((season) {
+                                return DropdownMenuItem<int>(
+                                  value: season.id,
+                                  onTap: () {},
+                                  child: Text(
+                                    'Season ${widget.content.seasons!.indexOf(season) + 1}',
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: Colors.black,
+                              onChanged: (int? seasonId) {
+                                if (widget.seasonSelectorCallback != null) {
+                                  widget.seasonSelectorCallback!(seasonId!);
+                                }
+                                setState(() {
+                                  var temp =
+                                      widget.content.seasons!.singleWhere(
+                                    (element) => element.id == seasonId,
+                                  );
+                                  selectedSeasonIndex =
+                                      widget.content.seasons!.indexOf(temp);
+                                });
+                              },
+                            ),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

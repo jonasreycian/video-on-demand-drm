@@ -20,7 +20,6 @@ class CategoryContentsProvider with ChangeNotifier {
       _isSuccess = value['success'];
       if (_isSuccess) {
         _data = Category.fromJson(value['data']);
-        print('SHIT ==> $_data');
         _isLoading = false;
         notifyListeners();
       } else {

@@ -1,23 +1,25 @@
 import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:aq_prime/domain/entities/content.dart';
+import 'package:aq_prime/domain/entities/video.dart';
 import 'package:flutter/foundation.dart';
 
-class VideoDetailsProvider with ChangeNotifier {
+class EpisodesProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  Content? _content;
+  List<Video>? _episodes;
 
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  Content? get content => _content;
+  List<Video> get episodes => _episodes ?? [];
 
-  //setter
-  loadData(int contentId) {
+  getEpisodes(int contentId, int seasonId) {
     API()
-        .request(requestType: RequestType.get, endPoint: '/contents/$contentId')
+        .request(
+            requestType: RequestType.get,
+            endPoint: '/contents/$contentId/seasons/$seasonId/videos')
         .then((value) {
       if (value['success'] == true) {
-        _content = Content.fromJson(value['data']);
+        _episodes =
+            (value['data'] as List).map((e) => Video.fromJson(e)).toList();
         _isLoading = false;
         _isSuccess = true;
         notifyListeners();
@@ -32,5 +34,6 @@ class VideoDetailsProvider with ChangeNotifier {
   reset() {
     _isLoading = true;
     _isSuccess = false;
+    _episodes = [];
   }
 }

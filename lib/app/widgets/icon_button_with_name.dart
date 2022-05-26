@@ -51,7 +51,6 @@ class AddWatchListButton extends StatelessWidget {
                           'Content ID ==> $contentId Failed to add on Watch List');
                     }
                   } else {
-                    print('SHIT ==> $contentId');
                     bool success =
                         await provider.removeFromWatchList(contentId);
                     if (success) {

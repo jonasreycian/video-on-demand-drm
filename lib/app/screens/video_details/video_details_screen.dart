@@ -76,14 +76,14 @@ class VideoDetailsPage extends StatelessWidget {
       builder: (context, value, child) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 1000),
-          child: value.data == null
+          child: value.content == null
               ? AQLoadingIndicatorScaffold()
               : AqPrimeSliverAppBar(
                   tabNumber: 3,
                   expandedHeight: 250,
-                  title: value.data!.title!,
+                  title: value.content!.title!,
                   isImageUrl: true,
-                  backgroundImage: value.data!.coverPhotoMobile,
+                  backgroundImage: value.content!.coverPhotoMobile,
                   heroTag: heroTag,
                   appBarContainer: const SizedBox(),
                   bottom: child!,
@@ -94,14 +94,14 @@ class VideoDetailsPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         EpisodesTab(
-                          vieoDetailsProvider: value,
-                          content: value.data!,
+                          videoDetailsProvider: value,
+                          content: value.content!,
                         ),
                         TrailersAndMoreTab(
-                          trailers: value.data!.trailers ?? [],
+                          trailers: value.content!.trailers ?? [],
                         ),
                         MoreLikeThisTab(
-                          contentId: value.data!.id!,
+                          contentId: value.content!.id!,
                         ),
                       ],
                     ),
