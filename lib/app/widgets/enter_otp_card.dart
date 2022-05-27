@@ -44,7 +44,7 @@ class OtpView extends StatelessWidget {
                   ? PinListenColorBuilder(Colors.red.shade100, Colors.white)
                   : PinListenColorBuilder(Colors.white, Colors.white),
               textStyle: TextStyle(
-                fontFamily: 'Roboto',
+                fontFamily: 'Rubik',
                 fontWeight: value.isError ? FontWeight.w700 : FontWeight.w400,
                 fontStyle: FontStyle.normal,
                 fontSize: 20,
