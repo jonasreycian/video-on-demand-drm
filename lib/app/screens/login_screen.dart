@@ -49,7 +49,6 @@ class LoginScreen extends StatelessWidget {
               },
               child: SingleChildScrollView(
                 child: Container(
-                  height: 450,
                   width: double.infinity,
                   margin: const EdgeInsets.only(
                       left: 20, right: 20, top: 20, bottom: 20),
@@ -120,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15),
                         TextAndLink(
                           text: 'Forgot Password?',
                           link: 'Tap here',
@@ -156,6 +155,7 @@ class LoginScreen extends StatelessWidget {
                           onTap: () => Navigator.of(context)
                               .pushNamed(RegistrationScreen.routeName),
                         ),
+                        const SizedBox(height: 15),
                       ],
                     );
                   }),

@@ -10,6 +10,7 @@ import 'package:aq_prime/app/providers/forgot_password_provider.dart';
 import 'package:aq_prime/app/providers/home_provider.dart';
 import 'package:aq_prime/app/providers/login_provider.dart';
 import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
+import 'package:aq_prime/app/providers/otp_provider.dart';
 import 'package:aq_prime/app/providers/rating_provider.dart';
 import 'package:aq_prime/app/providers/refresh_limiter.dart';
 import 'package:aq_prime/app/providers/releted_content_provider.dart';
@@ -89,7 +90,9 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<EpisodesProvider>(
                 create: (context) => EpisodesProvider()),
             ChangeNotifierProvider<SeasonProvider>(
-                create: (context) => SeasonProvider())
+                create: (context) => SeasonProvider()),
+            ChangeNotifierProvider<OtpProvider>(
+                create: (context) => OtpProvider())
           ],
           child: MaterialApp(
             darkTheme: ThemeData.dark(),

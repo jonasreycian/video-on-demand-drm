@@ -1,103 +1,76 @@
 import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/foundation.dart';
 
 class ForgotPasswordProvider with ChangeNotifier {
-  bool _isObscure = true;
-  bool _isObscureConfirm = true;
+  bool _otpView = false;
 
-  bool _isSuccessOtp = false;
+  bool _successValidation = false;
+  bool _isEmailMobileError = false;
   bool _isSuccess = false;
   bool _isLoading = true;
-
-  CountryCode _countryCode = CountryCode(
-      code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
-
-  final List<String> _choices = ['Reset via Mobile Number', 'Reset via Email'];
+  String _successEmailMobile = '';
   String? _message;
   //getter
-  bool get isObscure => _isObscure;
-  bool get isObscureConfirm => _isObscureConfirm;
-  CountryCode get countryCode => _countryCode;
   String? get message => _message;
   bool get isSuccess => _isSuccess;
-  bool get isSuccessOtp => _isSuccessOtp;
   bool get isLoading => _isLoading;
-  List<String> get choices => [..._choices];
+  bool get isEmailMobileError => _isEmailMobileError;
+  bool get isSuccessValidation => _successValidation;
+  String get successEmailMobile => _successEmailMobile;
+  bool get otpView => _otpView;
   //setter
-  setIsObscure() {
-    _isObscure = !_isObscure;
+  setOtpView() {
+    _otpView = !_otpView;
     notifyListeners();
   }
 
-  setIsObscureConfirm() {
-    _isObscureConfirm = !_isObscureConfirm;
-    notifyListeners();
-  }
-
-  setCountryCode(CountryCode value) {
-    _countryCode = value;
-    notifyListeners();
-  }
-
-  sendEmailOrNumber(String _email, String _password, String _confirmPassword) {
+  forgotPasswordAPI(String _emailorMobile) {
+    _isEmailMobileError = false;
     _isSuccess = false;
     _message = null;
     _isLoading = true;
-    if (_email.isNotEmpty &&
-        _password.isNotEmpty &&
-        _confirmPassword.isNotEmpty) {
+    if (_emailorMobile.isNotEmpty) {
       if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-              .hasMatch(_email) &&
-          (_password.length >= 8) &&
-          (_confirmPassword.length >= 8) &&
-          (_password == _confirmPassword)) {
-        Map<String, dynamic> body = {
-          'email': _email,
-          'password': _password,
-          'password_confirmation': _confirmPassword
-        };
+              .hasMatch(_emailorMobile) ||
+          RegExp(r"^(09|\+639)\d{9}$").hasMatch(_emailorMobile)) {
+        _successValidation = true;
+        notifyListeners();
+        Map<String, dynamic> body = {'value': _emailorMobile};
         API()
             .request(
                 requestType: RequestType.post,
                 parameter: body,
-                endPoint: '/reset-password')
+                endPoint: '/generate-otp')
             .then((value) {
           if (value['success']) {
             _message = value['message'];
-            _isSuccess = false;
+            _isSuccess = true;
             _isLoading = false;
+            _successValidation = false;
+            _successEmailMobile = _emailorMobile;
+            _otpView = true;
             notifyListeners();
           } else {
             _message = value['message'];
             _isSuccess = false;
             _isLoading = false;
+            _successValidation = false;
             notifyListeners();
           }
         });
       }
-      if (!RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(_email)) {
-        _message = 'Invalid Email Address';
-        _isSuccess = false;
-        _isLoading = false;
-        notifyListeners();
-      }
-      if (_password.length < 8 || _confirmPassword.length < 8) {
-        _message = 'Password must be\n8 characters above';
-        _isSuccess = false;
-        _isLoading = false;
-        notifyListeners();
-      }
-      if (_password != _confirmPassword) {
-        _message = 'Passwords did not matched';
+      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              .hasMatch(_emailorMobile) &&
+          !RegExp(r"^(09|\+639)\d{9}$").hasMatch(_emailorMobile)) {
+        _message = 'Invalid Email Address | Mobile Phone';
+        _isEmailMobileError = true;
         _isSuccess = false;
         _isLoading = false;
         notifyListeners();
       }
     } else {
       _message = 'Please Fill-out all fields';
+      _isEmailMobileError = true;
       _isSuccess = false;
       _isLoading = false;
       notifyListeners();
@@ -105,16 +78,11 @@ class ForgotPasswordProvider with ChangeNotifier {
   }
 
   reset() {
+    _successValidation = false;
     _isSuccess = false;
-    _isSuccessOtp = false;
     _isLoading = true;
-    _isObscure = true;
-    _isObscureConfirm = true;
-    notifyListeners();
-    // _countryCode = CountryCode(code: 'PH', dialCode: '+63', flagUri: 'flags/ph.png', name: 'Pilipinas');
-    // _email = 'Email';
-    // _textInputType = TextInputType.text;
-    // _selectedWidgetCard = 'Reset via Email';
     _message = null;
+    _isEmailMobileError = false;
+    notifyListeners();
   }
 }

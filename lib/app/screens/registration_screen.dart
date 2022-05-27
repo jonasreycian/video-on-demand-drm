@@ -49,17 +49,7 @@ class RegistrationScreen extends StatelessWidget {
                       Radius.circular(15),
                     ),
                   ),
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 800),
-                    layoutBuilder: (widget, animation) {
-                      return FadeInAnimation(
-                        duration: const Duration(milliseconds: 800),
-                        child: widget!,
-                        delay: const Duration(milliseconds: 1000),
-                      );
-                    },
-                    child: RegistrationCard(),
-                  ),
+                  child: RegistrationCard(),
                 ),
               ),
             ),

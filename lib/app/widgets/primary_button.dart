@@ -13,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.image = '',
     this.margin,
     this.borderRadius,
+    this.trailing,
     Key? key,
   }) : super(key: key);
 
@@ -26,6 +27,7 @@ class PrimaryButton extends StatelessWidget {
   final String image;
   EdgeInsets? margin;
   double? borderRadius;
+  Widget? trailing;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,6 +78,10 @@ class PrimaryButton extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 10),
+              trailing != null
+                  ? SizedBox(height: 20, width: 20, child: trailing!)
+                  : const SizedBox(),
             ],
           ),
           onPressed: isDisabled ? null : () => action(),
