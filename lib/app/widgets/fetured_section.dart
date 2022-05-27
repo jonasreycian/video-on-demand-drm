@@ -44,8 +44,7 @@ class FeaturedSection extends StatelessWidget {
                             onTap: () => Navigator.of(context).pushNamed(
                               VideoDetailsPage.routeName,
                               arguments: VideoDetailsPageArguments(
-                                videoId: featuredList[index].videoId!,
-                                heroTag: featuredList[index].title!,
+                                content: featuredList[index],
                               ),
                             ),
                           );
