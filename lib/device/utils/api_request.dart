@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:aq_prime/device/utils/app_config.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +15,7 @@ enum RequestType { post, get, put, delete, patch }
 class API {
   Future<Map<String, dynamic>> request({
     required RequestType requestType,
-    Map<String, dynamic>? parameter,
+    Object? parameter,
     required String endPoint,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,57 +28,40 @@ class API {
       'Referer': AppConfig.referrer,
       'Authorization': 'Bearer $token',
     };
-    http.Response? response;
+    Response? response;
     Uri uri = Uri.http(
       AppConfig.host,
       AppConfig.path + AppConfig.version + endPoint,
-      parameter,
+      // parameter,
     );
     try {
       //============================================================
       if (requestType == RequestType.post) {
-        response = await http
-            .post(
-              uri,
-              headers: headers,
-              body: parameter == null ? null : jsonEncode(parameter),
-            )
-            .timeout(const Duration(seconds: 10));
+        response = await post(
+          uri,
+          headers: headers,
+          body: parameter == null ? null : jsonEncode(parameter),
+        ).timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.get) {
-        response = await http
-            .get(
-              uri,
-              headers: headers,
-            )
+        response = await get(uri, headers: headers)
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.put) {
-        response = await http
-            .put(
-              uri,
-              headers: headers,
-            )
+        response = await put(uri, headers: headers)
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.delete) {
-        response = await http
-            .delete(
-              uri,
-              headers: headers,
-            )
+        response = await delete(uri, headers: headers)
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.patch) {
-        response = await http
-            .patch(
-              uri,
-              headers: headers,
-            )
+        response = await patch(uri, headers: headers)
             .timeout(const Duration(seconds: 10));
       }
       debugPrint('|===============================');
       if (response != null) {
+        debugPrint('| METHOD ==> $requestType');
         debugPrint('| URL ==> $uri');
         debugPrint('| STATUS ==> ${response.statusCode}');
         if (response.statusCode == 200 && response.body.isNotEmpty) {
