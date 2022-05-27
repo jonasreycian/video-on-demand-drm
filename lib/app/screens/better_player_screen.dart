@@ -5,7 +5,6 @@ import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// ignore: must_be_immutable
 class BetterPlayerScreen extends StatefulWidget {
   BetterPlayerScreen(
     this.content, {
@@ -37,6 +36,8 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       autoDetectFullscreenDeviceOrientation: true,
       autoDetectFullscreenAspectRatio: true,
       autoDispose: true,
+      allowedScreenSleep: false,
+      useRootNavigator: true,
     );
 
     _widevineController = BetterPlayerController(betterPlayerConfiguration);
@@ -52,12 +53,27 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       ),
     );
     _widevineController.setupDataSource(_widevineDataSource);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BetterPlayer(controller: _widevineController);
+    return Material(
+      child: Stack(
+        children: [
+          Positioned(
+            top: MediaQuery.of(context).viewPadding.top,
+            left: 0,
+            child: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(Icons.arrow_back),
+            ),
+          ),
+          BetterPlayer(controller: _widevineController),
+        ],
+      ),
+    );
   }
 
   @override
