@@ -45,10 +45,10 @@ class OtpView extends StatelessWidget {
                   : PinListenColorBuilder(Colors.white, Colors.white),
               textStyle: TextStyle(
                 fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
+                fontWeight: value.isError ? FontWeight.w700 : FontWeight.w400,
                 fontStyle: FontStyle.normal,
                 fontSize: 20,
-                color: Colors.black,
+                color: value.isError ? Colors.red : Colors.black,
               ),
             ),
             controller: controller,
