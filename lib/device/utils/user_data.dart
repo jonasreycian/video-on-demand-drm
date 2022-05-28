@@ -22,7 +22,9 @@ saveLoggedIn(Map<String, dynamic> data) async {
   prefs.setString("email", data['email']);
   prefs.setBool("status", data['status']);
   prefs.setString("createdAt", data['created_at']);
-  prefs.setString("token", data['plainTextToken']);
+  if (data.containsKey('plainTextToken') && data['plainTextToken'] != null) {
+    prefs.setString("token", data['plainTextToken']);
+  }
   prefs.setInt("planId", data['plan_id']);
 
   isLogin = ((prefs.getBool("loggedIn") == null)

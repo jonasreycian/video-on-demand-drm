@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:aq_prime/domain/entities/user.dart';
 import 'package:flutter/foundation.dart';
@@ -34,7 +32,6 @@ class AccountInfoProvider with ChangeNotifier {
 
   loadData(bool withReset) async {
     if (withReset) reset();
-    // await user_data.prepareUserData();
     API().request(requestType: RequestType.get, endPoint: '/me').then((value) {
       if (value['success'] != null) {
         _isSuccess = true;
@@ -51,24 +48,21 @@ class AccountInfoProvider with ChangeNotifier {
   }
 
   update() {
-    Object json = {
-      'first_name': user!.firstName,
-      'last_name': user!.lastName,
-      'mobile': user!.mobile,
-      'email': user!.email,
-      'birthdate': user!.birthdate,
-      'status': true.toString(),
-    };
-    API()
-        .request(
+    API().request(
       requestType: RequestType.put,
       endPoint: '/users/update',
-      parameter: '$json',
-    )
-        .then((value) {
+      parameter: {
+        'first_name': user!.firstName,
+        'last_name': user!.lastName,
+        'mobile': user!.mobile,
+        'email': user!.email,
+        'birthdate': user!.birthdate,
+        'status': true,
+      },
+    ).then((value) {
       if (value['success'] != null) {
-        // _user = User.fromJson(value['data']);
-        // user_data.saveLoggedIn(value['data']);
+        _user = User.fromJson(value['data']);
+        user_data.saveLoggedIn(value['data']);
         // notifyListeners();
         // loadData(false);
       } else {

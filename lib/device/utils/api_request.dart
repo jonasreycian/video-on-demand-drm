@@ -48,16 +48,22 @@ class API {
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.put) {
-        response = await put(uri, headers: headers)
-            .timeout(const Duration(seconds: 10));
+        response = await put(
+          uri,
+          headers: headers,
+          body: parameter == null ? null : jsonEncode(parameter),
+        ).timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.delete) {
         response = await delete(uri, headers: headers)
             .timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.patch) {
-        response = await patch(uri, headers: headers)
-            .timeout(const Duration(seconds: 10));
+        response = await patch(
+          uri,
+          headers: headers,
+          body: parameter == null ? null : jsonEncode(parameter),
+        ).timeout(const Duration(seconds: 10));
       }
       debugPrint('|===============================');
       if (response != null) {
