@@ -3,6 +3,8 @@ import 'package:aq_prime/app/widgets/input_textfield.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
+const double defaultInputHeight = 38;
+
 class RegistraionInputField extends StatelessWidget {
   const RegistraionInputField({
     Key? key,
@@ -10,13 +12,25 @@ class RegistraionInputField extends StatelessWidget {
     required this.name,
     required this.errorMessage,
     required this.controller,
-    this.padding,
+    this.keyboardType = TextInputType.text,
+    this.padding = const EdgeInsets.all(0),
+    this.hintText = '',
+    this.textStyle = const TextStyle(
+      fontFamily: 'Rubik',
+      fontStyle: FontStyle.normal,
+      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      color: Color(0xFF8A00),
+    ),
   }) : super(key: key);
   final String name;
   final String errorMessage;
   final bool isError;
   final TextEditingController controller;
   final EdgeInsets? padding;
+  final TextInputType keyboardType;
+  final String hintText;
+  final TextStyle textStyle;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,24 +56,17 @@ class RegistraionInputField extends StatelessWidget {
                 )
               : null,
           controller: controller,
-          hintText: '',
-          height: 55,
-          keyboardType: TextInputType.text,
+          hintText: hintText,
+          height: defaultInputHeight,
+          keyboardType: keyboardType,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          padding:
-              padding ?? const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+          padding: padding,
         ),
         const SizedBox(height: 5),
         isError
             ? Text(
                 errorMessage,
-                style: TextStyle(
-                  fontFamily: 'Rubik',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: HexColor('#FF8A00'),
-                ),
+                style: textStyle,
               )
             : const SizedBox(),
       ],
@@ -104,7 +111,7 @@ class RegistraionInputFieldPassword extends StatelessWidget {
         InputTextField(
           controller: controller,
           hintText: '',
-          height: 55,
+          height: 38,
           keyboardType: TextInputType.text,
           obscureText: isObscureText,
           border: isError
@@ -113,8 +120,7 @@ class RegistraionInputFieldPassword extends StatelessWidget {
                   width: 1,
                 )
               : null,
-          floatingLabelBehavior: FloatingLabelBehavior.auto,
-          padding: const EdgeInsets.only(left: 60, top: 10, bottom: 10),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
           suffixIconPadding:
               const EdgeInsets.only(top: 3, bottom: 10, right: 10),
           suffixIcon: IconButton(
@@ -173,6 +179,7 @@ class BirthDate extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+        const SizedBox(height: 5),
         CalendarField(
           selectedDate: selectedDate,
           withShadow: true,
@@ -242,7 +249,7 @@ class RegistraionInputFieldMobileNumber extends StatelessWidget {
         InputTextField(
           controller: controller,
           hintText: '',
-          height: 55,
+          height: defaultInputHeight,
           border: isError
               ? Border.all(
                   color: Colors.red,

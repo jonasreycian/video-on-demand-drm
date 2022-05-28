@@ -32,21 +32,30 @@ class RegistrationCard extends StatelessWidget {
       builder: (context, value, child) {
         Future.delayed(const Duration(milliseconds: 100), () {
           if (!value.isLoading && !value.isSuccess) {
-            // Navigator.of(context).pop();
-            Future.delayed(const Duration(seconds: 2), (() => value.reset()));
+            Future.delayed(
+              const Duration(seconds: 2),
+              (() => value.reset()),
+            );
           }
           if (value.isValidationComplete) {
             registrationDialog(context);
-            Future.delayed(const Duration(seconds: 2), (() {
-              Navigator.of(context).pop();
-              Future.delayed(
-                  const Duration(milliseconds: 100), () => value.reset());
-            }));
+            Future.delayed(
+              const Duration(seconds: 2),
+              (() {
+                Navigator.of(context).pop();
+                Future.delayed(
+                  const Duration(milliseconds: 100),
+                  () => value.reset(),
+                );
+              }),
+            );
           }
           if (!value.isLoading && value.isSuccess) {
             registrationDialog(context);
             Future.delayed(
-                const Duration(milliseconds: 100), (() => value.reset()));
+              const Duration(milliseconds: 100),
+              (() => value.reset()),
+            );
             Navigator.of(context)
               ..pop()
               ..pop();
@@ -56,34 +65,34 @@ class RegistrationCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
               Image.asset(
                 'assets/images/AQ_PRIME_LOGO_2.png',
                 height: 130,
                 width: double.infinity,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               RegistraionInputField(
                 isError: value.firstNameError,
                 errorMessage: value.message ?? '',
                 name: 'First Name',
                 controller: firstName,
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 16),
               RegistraionInputField(
                 isError: value.lastNameError,
                 errorMessage: value.message ?? '',
                 name: 'Last Name',
                 controller: lastName,
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 16),
               RegistraionInputField(
                 isError: value.emailError,
                 errorMessage: value.message ?? '',
                 name: 'Email address',
                 controller: email,
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 16),
               BirthDate(
                 isError: value.birthDayError,
                 errorMessage: value.message ?? '',
@@ -97,7 +106,7 @@ class RegistrationCard extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 16),
               RegistraionInputFieldMobileNumber(
                 countryCode: value.countryCode.toString(),
                 isObscureText: value.isObscurePassword,
@@ -107,7 +116,7 @@ class RegistrationCard extends StatelessWidget {
                 name: 'Mobile Number',
                 controller: mobileNumber,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               RegistraionInputFieldPassword(
                 isObscureText: value.isObscurePassword,
                 onPressed: () => value.setIsObscurePassword(),
@@ -116,7 +125,7 @@ class RegistrationCard extends StatelessWidget {
                 name: 'Password',
                 controller: password,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               RegistraionInputFieldPassword(
                 isObscureText: value.isObscureConfirmPassword,
                 onPressed: () => value.setIsObscureConfirmPassword(),
@@ -139,12 +148,13 @@ class RegistrationCard extends StatelessWidget {
                 label: 'Register',
                 action: () {
                   value.sendAPI(
-                      firstName.text,
-                      lastName.text,
-                      mobileNumber.text,
-                      email.text,
-                      password.text,
-                      confirmPassword.text);
+                    firstName.text,
+                    lastName.text,
+                    mobileNumber.text,
+                    email.text,
+                    password.text,
+                    confirmPassword.text,
+                  );
                 },
               ),
               const SizedBox(height: 20),

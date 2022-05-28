@@ -180,9 +180,10 @@ class PasswordEditingCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     ValidationItem(
-                        isSuccess: value.isPasswordMatch,
-                        isBlurred: !value.allSuccess,
-                        name: 'Password Matched'),
+                      isSuccess: value.isPasswordMatch,
+                      isBlurred: !value.allSuccess,
+                      name: 'Password Matched',
+                    ),
                     const SizedBox(height: 15),
                     PrimaryButton(
                       isDisabled: !value.isPasswordMatch,
@@ -191,8 +192,11 @@ class PasswordEditingCard extends StatelessWidget {
                       label: 'Save',
                       action: () {
                         changePasswordDialog(context);
-                        value.resetPassword(currentPassword.text, password.text,
-                            confirmPassword.text);
+                        value.resetPassword(
+                          currentPassword.text,
+                          password.text,
+                          confirmPassword.text,
+                        );
                       },
                     ),
                     const SizedBox(height: 25),
