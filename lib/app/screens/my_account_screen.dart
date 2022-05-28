@@ -41,10 +41,10 @@ class MyAccountScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Consumer<AccountInfoProvider>(
         builder: (context, value, _child) {
-          firstName.text = value.firstName ?? '';
-          lastName.text = value.lastName ?? '';
-          email.text = value.email ?? '';
-          mobileNumber.text = value.mobile ?? '';
+          firstName.text = value.user?.firstName ?? '';
+          lastName.text = value.user?.lastName ?? '';
+          email.text = value.user?.email ?? '';
+          mobileNumber.text = value.user?.mobile ?? '';
           return value.isSuccess
               ? SafeArea(
                   child: RefreshIndicator(
@@ -67,14 +67,15 @@ class MyAccountScreen extends StatelessWidget {
                                     email: email,
                                     mobileNumber: mobileNumber,
                                     onSaved: () {
+                                      value.update();
                                       value.setIsEditing();
                                     },
                                   )
                                 : AccountInfoCardDisplay(
-                                    firstName: value.firstName,
-                                    lastName: value.lastName,
-                                    email: value.email,
-                                    mobileNumber: value.mobile,
+                                    firstName: value.user?.firstName,
+                                    lastName: value.user?.lastName,
+                                    email: value.user?.email,
+                                    mobileNumber: value.user?.mobile,
                                     onLogout: () {
                                       API().request(
                                           requestType: RequestType.post,
@@ -90,7 +91,13 @@ class MyAccountScreen extends StatelessWidget {
                                   ),
                           ),
                           const SizedBox(height: 20),
-                          PlanDetailsCard(plan: value.plan),
+                          value.user != null
+                              ? value.user!.plan != null
+                                  ? PlanDetailsCard(
+                                      plan: value.user!.plan!.toJson(),
+                                    )
+                                  : const SizedBox()
+                              : const SizedBox(),
                           const SizedBox(height: 20),
                           PasswordEditingCard(),
                           const SizedBox(height: 20),
@@ -122,7 +129,7 @@ class MyAccountScreen extends StatelessWidget {
     Future.delayed(const Duration(milliseconds: 1), () {
       AccountInfoProvider accountInfoProvider =
           Provider.of<AccountInfoProvider>(context, listen: false);
-      if (!accountInfoProvider.isSuccess) accountInfoProvider.loadData(false);
+      accountInfoProvider.loadData(true);
     });
   }
 }
