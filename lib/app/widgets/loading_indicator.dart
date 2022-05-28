@@ -19,10 +19,7 @@ class AQLoadingIndicator extends StatelessWidget {
               child: SizedBox(
                 width: 25,
                 height: 25,
-                child: CircularProgressIndicator(
-                  color: Colors.red,
-                  strokeWidth: 2.5,
-                ),
+                child: CircularProgressIndicator.adaptive(),
               ),
             ),
           ),
@@ -42,7 +39,9 @@ class AQLoadingIndicatorScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: CircularProgressIndicator.adaptive(backgroundColor: Colors.red),
+        child: CircularProgressIndicator.adaptive(
+          backgroundColor: Colors.red,
+        ),
       ),
     );
   }
