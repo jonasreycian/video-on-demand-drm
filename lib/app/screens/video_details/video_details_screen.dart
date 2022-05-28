@@ -6,14 +6,14 @@ import 'package:aq_prime/app/screens/video_details/trailers_and_more_tab.dart';
 import 'package:aq_prime/app/widgets/loading_indicator.dart';
 import 'package:aq_prime/app/widgets/sliver_appbar.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
+import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class VideoDetailsPageArguments {
-  final int videoId;
-  final String heroTag;
-  VideoDetailsPageArguments({required this.videoId, required this.heroTag});
+  final Content content;
+  VideoDetailsPageArguments({required this.content});
 }
 
 class VideoDetailsPage extends StatelessWidget {
@@ -24,8 +24,10 @@ class VideoDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final VideoDetailsPageArguments arguments =
         ModalRoute.of(context)!.settings.arguments as VideoDetailsPageArguments;
-    final int videoId = arguments.videoId;
-    final String heroTag = arguments.heroTag;
+    final Content content = arguments.content;
+    final int videoId = content.videoId!;
+    final String heroTag = content.title!;
+    final String type = content.type!;
     initState(context, videoId);
     return Consumer<VideoDetailsProvider>(
       child: AnimationConfiguration.staggeredList(
@@ -65,7 +67,7 @@ class VideoDetailsPage extends StatelessWidget {
               ),
               isScrollable: true,
               tabs: [
-                Text('EPISODES'),
+                Text(type == 'series' ? 'EPISODES' : 'OVERVIEW'),
                 Text('TRAILERS & MORE'),
                 Text('MORE LIKE THIS'),
               ],

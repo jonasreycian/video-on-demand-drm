@@ -70,8 +70,7 @@ class MyWatchListScreen extends StatelessWidget {
                                 onTap: () => Navigator.of(context).pushNamed(
                                   VideoDetailsPage.routeName,
                                   arguments: VideoDetailsPageArguments(
-                                    videoId: value.data[index].videoId!,
-                                    heroTag: value.data[index].title!,
+                                    content: value.data[index],
                                   ),
                                 ),
                               );
