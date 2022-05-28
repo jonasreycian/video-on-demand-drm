@@ -11,8 +11,8 @@ class ThumbnailCard extends StatelessWidget {
     this.width = 120,
     Key? key,
   }) : super(key: key);
-  final int? index;
-  final String? imageUrl;
+  final int index;
+  final String imageUrl;
   final String? title;
   final Function()? onTap;
   final double height;
@@ -22,32 +22,33 @@ class ThumbnailCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimationConfiguration.staggeredList(
-        position: index ?? 0,
+        position: index,
         duration: const Duration(milliseconds: 500),
         child: FadeInAnimation(
           child: SlideAnimation(
             horizontalOffset: 100,
             child: Container(
-              margin:
-                  const EdgeInsets.only(left: 10, right: 0, top: 0, bottom: 0),
+              margin: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: width,
+                  SizedBox.fromSize(
+                    size: Size(width, height),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: FadeInImage.assetNetwork(
-                        height: height,
-                        fadeInCurve: Curves.easeInQuart,
-                        fadeOutCurve: Curves.easeInQuart,
-                        fadeOutDuration: const Duration(milliseconds: 1000),
-                        fadeInDuration: const Duration(milliseconds: 200),
+                      child: Image.network(
+                        imageUrl,
                         fit: BoxFit.cover,
-                        placeholderFit: BoxFit.contain,
-                        placeholderScale: 15,
-                        placeholder: 'assets/images/loading1.gif',
-                        image: imageUrl!,
+                        // height: height,
+                        // fadeInCurve: Curves.easeInQuart,
+                        // fadeOutCurve: Curves.easeInQuart,
+                        // fadeOutDuration: const Duration(milliseconds: 1000),
+                        // fadeInDuration: const Duration(milliseconds: 200),
+                        // fit: BoxFit.cover,
+                        // placeholderFit: BoxFit.contain,
+                        // placeholderScale: 1,
+                        // placeholder: 'assets/images/APP.png',
+                        // image: imageUrl,
                       ),
                     ),
                   ),
@@ -83,8 +84,8 @@ class ThumbnailCardForGrid extends StatelessWidget {
     required this.index,
     required this.imageUrl,
     required this.onTap,
-    this.height,
-    this.width,
+    this.height = 150,
+    this.width = 160,
     Key? key,
   }) : super(key: key);
   final int index;
@@ -110,14 +111,14 @@ class ThumbnailCardForGrid extends StatelessWidget {
               child: Container(
                 color: Colors.transparent,
                 // height: 200,
-                width: width ?? 150,
+                width: width,
                 margin: const EdgeInsets.only(
                     left: 10, right: 0, top: 0, bottom: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: height ?? 160,
+                      height: height,
                       width: width != null ? (width! - 20) : 130,
                       decoration: BoxDecoration(
                         color: Colors.transparent,

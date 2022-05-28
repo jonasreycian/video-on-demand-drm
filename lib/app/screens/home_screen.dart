@@ -30,10 +30,9 @@ class HomeScreen extends StatelessWidget {
           child: Image.asset('assets/images/AQ_PRIME_LOGO_2.png'),
         ),
         actions: [
-          SearchButton(
-            onPressed: () =>
-                Navigator.of(context).pushNamed(SearchScreen.routeName),
-          ),
+          SearchButton(onPressed: () {
+            Navigator.of(context).pushNamed(SearchScreen.routeName);
+          }),
         ],
       ),
       body: Consumer<HomeProvider>(builder: (context, value, child) {
@@ -51,29 +50,41 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FeaturedSection(featuredList: value.featured),
+                  const SizedBox(height: 50),
                   SectionCard(
                     titleSection: 'Popular',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.popularOnAqPrime,
                   ),
+                  const SizedBox(height: 16),
                   SectionCard(
                     isOnlyAqPrime: true,
                     titleSection: 'Only on AQ Prime',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.onlyOnAqPrime,
                   ),
+                  const SizedBox(height: 16),
                   SectionCard(
                     titleSection: 'Top 10',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.top10Films,
                   ),
+                  const SizedBox(height: 16),
                   SectionCard(
                     titleSection: 'Trending Now',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.trendingNow,
                   ),
+                  const SizedBox(height: 16),
                   SectionCard(
                     titleSection: 'New Releases',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.newReleases,
                   ),
+                  const SizedBox(height: 16),
                   SectionCard(
                     titleSection: 'My Watch List',
+                    textPadding: const EdgeInsets.only(left: 16),
                     contents: value.continueWatching,
                   ),
                 ],
