@@ -1,5 +1,6 @@
 import 'package:aq_prime/app/providers/forgot_password_provider.dart';
 import 'package:aq_prime/app/widgets/enter_otp_card.dart';
+import 'package:aq_prime/app/widgets/new_password_view.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/app/widgets/registration_input_field.dart';
 import 'package:aq_prime/app/widgets/text_and_link.dart';
@@ -20,8 +21,7 @@ class ResetPasswordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     print('Parent Rebuild');
     return Consumer<ForgotPasswordProvider>(
-      child: OtpView(),
-      builder: (context, value, child) {
+      builder: (context, value, _) {
         print('child Rebuild');
         Future.delayed(const Duration(milliseconds: 1), () {
           if (!value.isLoading &&
@@ -58,9 +58,14 @@ class ResetPasswordCard extends StatelessWidget {
               delay: const Duration(milliseconds: 1000),
             );
           },
-          child: value.otpView
-              ? child!
-              : Column(
+          child: Stack(
+            children: [
+              if (value.view == CurrentView.newPasswordInput) ...[
+                NewPasswordView()
+              ],
+              if (value.view == CurrentView.otpInput) ...[OtpView()],
+              if (value.view == CurrentView.emailInput) ...[
+                Column(
                   children: [
                     const SizedBox(height: 5),
                     Image.asset(
@@ -105,6 +110,9 @@ class ResetPasswordCard extends StatelessWidget {
                     const SizedBox(height: 30),
                   ],
                 ),
+              ]
+            ],
+          ),
         );
       },
     );
