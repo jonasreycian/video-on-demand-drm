@@ -3,6 +3,7 @@ import 'package:aq_prime/app/providers/otp_provider.dart';
 import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -20,78 +21,93 @@ class OtpView extends StatelessWidget {
           Future.delayed(const Duration(milliseconds: 1), () {
             if (!value.isLoading && value.isSuccess) {
               Future.delayed(
-                  const Duration(milliseconds: 1000),
-                  () => Provider.of<ForgotPasswordProvider>(context,
-                          listen: false)
-                      .setOtpView());
+                const Duration(milliseconds: 1000),
+                () =>
+                    Provider.of<ForgotPasswordProvider>(context, listen: false)
+                        .setOtpView(CurrentView.newPasswordInput),
+              );
             }
           });
-          return Column(
-            children: [
-              const SizedBox(height: 5),
-              Image.asset(
-                'assets/images/AQ_PRIME_LOGO_2.png',
-                height: 130,
-                width: double.infinity,
-              ),
-              const SizedBox(height: 40),
-              PinInputTextField(
-                pinLength: 4,
-                decoration: BoxLooseDecoration(
-                  radius: Radius.zero,
-                  strokeColorBuilder: value.isError
-                      ? PinListenColorBuilder(
-                          HexColor('#D4030B'), HexColor('#D4030B'))
-                      : PinListenColorBuilder(Colors.blue, Colors.white),
-                  bgColorBuilder: value.isError
-                      ? PinListenColorBuilder(Colors.red.shade100, Colors.white)
-                      : PinListenColorBuilder(Colors.white, Colors.white),
-                  textStyle: TextStyle(
-                    fontFamily: 'Rubik',
-                    fontWeight:
-                        value.isError ? FontWeight.w700 : FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 20,
-                    color: value.isError ? Colors.red : Colors.black,
+          return AnimationConfiguration.staggeredList(
+            position: 0,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 800),
+              layoutBuilder: (widget, animation) {
+                return FadeInAnimation(
+                  duration: const Duration(milliseconds: 800),
+                  child: widget!,
+                  delay: const Duration(milliseconds: 1000),
+                );
+              },
+              child: Column(
+                children: [
+                  const SizedBox(height: 5),
+                  Image.asset(
+                    'assets/images/AQ_PRIME_LOGO_2.png',
+                    height: 130,
+                    width: double.infinity,
                   ),
-                ),
-                controller: controller,
-                focusNode: focusNode,
-                textInputAction: TextInputAction.go,
-                enabled: true,
-                keyboardType: TextInputType.number,
-                textCapitalization: TextCapitalization.characters,
-                onChanged: (pin) => value.onChange(pin),
-                enableInteractiveSelection: false,
+                  const SizedBox(height: 40),
+                  PinInputTextField(
+                    pinLength: 4,
+                    decoration: BoxLooseDecoration(
+                      radius: Radius.zero,
+                      strokeColorBuilder: value.isError
+                          ? PinListenColorBuilder(
+                              HexColor('#D4030B'), HexColor('#D4030B'))
+                          : PinListenColorBuilder(Colors.blue, Colors.white),
+                      bgColorBuilder: value.isError
+                          ? PinListenColorBuilder(
+                              Colors.red.shade100, Colors.white)
+                          : PinListenColorBuilder(Colors.white, Colors.white),
+                      textStyle: TextStyle(
+                        fontFamily: 'Rubik',
+                        fontWeight:
+                            value.isError ? FontWeight.w700 : FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20,
+                        color: value.isError ? Colors.red : Colors.black,
+                      ),
+                    ),
+                    controller: controller,
+                    focusNode: focusNode,
+                    textInputAction: TextInputAction.go,
+                    enabled: true,
+                    keyboardType: TextInputType.number,
+                    textCapitalization: TextCapitalization.characters,
+                    onChanged: (pin) => value.onChange(pin),
+                    enableInteractiveSelection: false,
+                  ),
+                  const SizedBox(height: 40),
+                  PrimaryButton(
+                    isDisabled: !value.isPinComplete,
+                    trailing: value.isLoading
+                        ? CircularProgressIndicator(
+                            backgroundColor: Colors.red,
+                            color: Colors.white,
+                          )
+                        : const SizedBox(),
+                    label: 'Submit OTP',
+                    width: double.infinity,
+                    height: 50,
+                    action: () {
+                      value.onSubmit(
+                          Provider.of<ForgotPasswordProvider>(context,
+                                  listen: false)
+                              .successEmailMobile,
+                          controller.text);
+                      focusNode.unfocus();
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  ErrorMessage(
+                    message: value.message,
+                  ),
+                  const SizedBox(height: 50),
+                  child!,
+                ],
               ),
-              const SizedBox(height: 40),
-              PrimaryButton(
-                isDisabled: !value.isPinComplete,
-                trailing: value.isLoading
-                    ? CircularProgressIndicator(
-                        backgroundColor: Colors.red,
-                        color: Colors.white,
-                      )
-                    : const SizedBox(),
-                label: 'Submit OTP',
-                width: double.infinity,
-                height: 50,
-                action: () {
-                  value.onSubmit(
-                      Provider.of<ForgotPasswordProvider>(context,
-                              listen: false)
-                          .successEmailMobile,
-                      controller.text);
-                  focusNode.unfocus();
-                },
-              ),
-              const SizedBox(height: 15),
-              ErrorMessage(
-                message: value.message,
-              ),
-              const SizedBox(height: 50),
-              child!,
-            ],
+            ),
           );
         });
   }

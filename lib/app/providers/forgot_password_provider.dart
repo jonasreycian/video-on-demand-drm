@@ -1,8 +1,10 @@
 import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
 
+enum CurrentView { emailInput, otpInput, newPasswordInput }
+
 class ForgotPasswordProvider with ChangeNotifier {
-  bool _otpView = false;
+  CurrentView _view = CurrentView.emailInput;
 
   bool _successValidation = false;
   bool _isEmailMobileError = false;
@@ -17,10 +19,10 @@ class ForgotPasswordProvider with ChangeNotifier {
   bool get isEmailMobileError => _isEmailMobileError;
   bool get isSuccessValidation => _successValidation;
   String get successEmailMobile => _successEmailMobile;
-  bool get otpView => _otpView;
+  CurrentView get view => _view;
   //setter
-  setOtpView() {
-    _otpView = !_otpView;
+  setOtpView(CurrentView value) {
+    _view = value;
     notifyListeners();
   }
 
@@ -48,7 +50,7 @@ class ForgotPasswordProvider with ChangeNotifier {
             _isLoading = false;
             _successValidation = false;
             _successEmailMobile = _emailorMobile;
-            _otpView = true;
+            _view = CurrentView.otpInput;
             notifyListeners();
           } else {
             _message = value['message'];
