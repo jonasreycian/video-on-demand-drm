@@ -6,6 +6,12 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({Key? key}) : super(key: key);
   static const routeName = '/registrationScreen';
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController mobileNumber = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,26 +39,31 @@ class RegistrationScreen extends StatelessWidget {
                 delay: const Duration(milliseconds: 1000),
               );
             },
-            child: SingleChildScrollView(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                height: MediaQuery.of(context).size.height -
-                    (MediaQuery.of(context).padding.top + 52 + 32),
-                width: double.infinity,
-                margin: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  top: MediaQuery.of(context).padding.top + 52,
-                  // bottom: 16,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              height: MediaQuery.of(context).size.height -
+                  (MediaQuery.of(context).padding.top + 52 + 32),
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                left: 16,
+                right: 16,
+                top: MediaQuery.of(context).padding.top + 52,
+                // bottom: 16,
+              ),
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
                 ),
-                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: RegistrationCard(),
+              ),
+              child: RegistrationCard(
+                firstName: firstName,
+                lastName: lastName,
+                confirmPassword: confirmPassword,
+                email: email,
+                mobileNumber: mobileNumber,
+                password: password,
               ),
             ),
           ),

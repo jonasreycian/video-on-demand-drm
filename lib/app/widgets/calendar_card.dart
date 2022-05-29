@@ -23,7 +23,7 @@ class CalendarField extends StatelessWidget {
     return GestureDetector(
       onTap: function,
       child: Container(
-        height: 38,
+        height: 50,
         margin: margin,
         width: double.infinity,
         padding: const EdgeInsets.only(left: 8),

@@ -8,24 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationCard extends StatelessWidget {
-  RegistrationCard({Key? key}) : super(key: key);
-  // final TextEditingController firstName = TextEditingController(text: 'Juan');
-  // final TextEditingController lastName =
-  //     TextEditingController(text: 'Dela Cruz');
-  // final TextEditingController email =
-  //     TextEditingController(text: 'juanDela_crus@gmail.com');
-  // final TextEditingController mobileNumber =
-  //     TextEditingController(text: '9760223075');
-  // final TextEditingController password =
-  //     TextEditingController(text: 'passwordMatch');
-  // final TextEditingController confirmPassword =
-  //     TextEditingController(text: 'passwordMatch');
-  final TextEditingController firstName = TextEditingController();
-  final TextEditingController lastName = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController mobileNumber = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
+  RegistrationCard({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.mobileNumber,
+    required this.password,
+    required this.confirmPassword,
+    Key? key,
+  }) : super(key: key);
+  final TextEditingController firstName;
+  final TextEditingController lastName;
+  final TextEditingController email;
+  final TextEditingController mobileNumber;
+  final TextEditingController password;
+  final TextEditingController confirmPassword;
   @override
   Widget build(BuildContext context) {
     return Consumer<RegistrationProvider>(
@@ -77,6 +74,7 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'First Name',
                 controller: firstName,
+                // focusNode: firstNameFocus,
               ),
               const SizedBox(height: 16),
               RegistraionInputField(
@@ -84,6 +82,7 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'Last Name',
                 controller: lastName,
+                // focusNode: lastNameFocus,
               ),
               const SizedBox(height: 16),
               RegistraionInputField(
@@ -91,20 +90,24 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'Email address',
                 controller: email,
+                // focusNode: emailFocus,
               ),
               const SizedBox(height: 16),
               BirthDate(
                 isError: value.birthDayError,
                 errorMessage: value.message ?? '',
                 selectedDate: value.birthDayString,
-                function: () => calendarDialog(
-                  context,
-                  DateTime.now(),
-                  (p0) {
-                    Navigator.of(context).pop();
-                    value.setBirthDay(p0);
-                  },
-                ),
+                function: () {
+                  FocusScope.of(context).unfocus();
+                  calendarDialog(
+                    context,
+                    DateTime.now(),
+                    (p0) {
+                      Navigator.of(context).pop();
+                      value.setBirthDay(p0);
+                    },
+                  );
+                },
               ),
               const SizedBox(height: 16),
               RegistraionInputFieldMobileNumber(
@@ -115,6 +118,7 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'Mobile Number',
                 controller: mobileNumber,
+                // focusNode: mobileNumberFocus,
               ),
               const SizedBox(height: 16),
               RegistraionInputFieldPassword(
@@ -124,6 +128,7 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'Password',
                 controller: password,
+                // focusNode: passwordFocus,
               ),
               const SizedBox(height: 16),
               RegistraionInputFieldPassword(
@@ -133,6 +138,7 @@ class RegistrationCard extends StatelessWidget {
                 errorMessage: value.message ?? '',
                 name: 'Confirm Password',
                 controller: confirmPassword,
+                // focusNode: confirmPasswordFocus,
               ),
               const SizedBox(height: 20),
               CheckboxLabel(
