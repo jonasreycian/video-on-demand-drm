@@ -3,7 +3,7 @@ import 'package:aq_prime/app/widgets/input_textfield.dart';
 import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
-const double defaultInputHeight = 38;
+const double defaultInputHeight = 50;
 
 class RegistraionInputField extends StatelessWidget {
   const RegistraionInputField({
@@ -15,13 +15,8 @@ class RegistraionInputField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.padding = const EdgeInsets.all(0),
     this.hintText = '',
-    this.textStyle = const TextStyle(
-      fontFamily: 'Rubik',
-      fontStyle: FontStyle.normal,
-      fontWeight: FontWeight.w400,
-      fontSize: 12,
-      color: Color(0xFF8A00),
-    ),
+    this.focusNode,
+    this.onChanged,
   }) : super(key: key);
   final String name;
   final String errorMessage;
@@ -30,7 +25,8 @@ class RegistraionInputField extends StatelessWidget {
   final EdgeInsets? padding;
   final TextInputType keyboardType;
   final String hintText;
-  final TextStyle textStyle;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,6 +45,8 @@ class RegistraionInputField extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         InputTextField(
+          onChanged: onChanged,
+          focusNode: focusNode,
           border: isError
               ? Border.all(
                   color: Colors.red,
@@ -66,7 +64,13 @@ class RegistraionInputField extends StatelessWidget {
         isError
             ? Text(
                 errorMessage,
-                style: textStyle,
+                style: TextStyle(
+                  fontFamily: 'Rubik',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: HexColor('#FF8A00'),
+                ),
               )
             : const SizedBox(),
       ],
@@ -83,6 +87,8 @@ class RegistraionInputFieldPassword extends StatelessWidget {
     required this.controller,
     required this.onPressed,
     required this.isObscureText,
+    this.onChanged,
+    this.focusNode,
   }) : super(key: key);
   final String name;
   final String errorMessage;
@@ -90,6 +96,8 @@ class RegistraionInputFieldPassword extends StatelessWidget {
   final bool isObscureText;
   final TextEditingController controller;
   final void Function() onPressed;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +117,11 @@ class RegistraionInputFieldPassword extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         InputTextField(
+          onChanged: onChanged,
+          focusNode: focusNode,
           controller: controller,
           hintText: '',
-          height: 38,
+          height: defaultInputHeight,
           keyboardType: TextInputType.text,
           obscureText: isObscureText,
           border: isError
@@ -220,6 +230,8 @@ class RegistraionInputFieldMobileNumber extends StatelessWidget {
     required this.controller,
     required this.onPressed,
     required this.isObscureText,
+    this.onChanged,
+    this.focusNode,
   }) : super(key: key);
   final String name;
   final String errorMessage;
@@ -228,6 +240,8 @@ class RegistraionInputFieldMobileNumber extends StatelessWidget {
   final String countryCode;
   final TextEditingController controller;
   final void Function() onPressed;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -247,6 +261,8 @@ class RegistraionInputFieldMobileNumber extends StatelessWidget {
         ),
         const SizedBox(height: 5),
         InputTextField(
+          onChanged: onChanged,
+          focusNode: focusNode,
           controller: controller,
           hintText: '',
           height: defaultInputHeight,
@@ -258,16 +274,17 @@ class RegistraionInputFieldMobileNumber extends StatelessWidget {
               : null,
           keyboardType: TextInputType.number,
           floatingLabelBehavior: FloatingLabelBehavior.auto,
-          padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+          padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5),
           prefixIconPadding: const EdgeInsets.only(top: 8, bottom: 10),
           prefixIcon: GestureDetector(
             onTap: onPressed,
             child: Text(
               countryCode,
               style: TextStyle(
-                  fontSize: 15,
-                  color: HexColor('#BEBBBB'),
-                  fontWeight: FontWeight.w700),
+                fontSize: 15,
+                color: HexColor('#BEBBBB'),
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
