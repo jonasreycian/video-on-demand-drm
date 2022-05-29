@@ -15,7 +15,8 @@ enum RequestType { post, get, put, delete, patch }
 class API {
   Future<Map<String, dynamic>> request({
     required RequestType requestType,
-    Object? parameter,
+    Map<String, dynamic>? parameter,
+    Map<String, dynamic>? body,
     required String endPoint,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -32,7 +33,7 @@ class API {
     Uri uri = Uri.http(
       AppConfig.host,
       AppConfig.path + AppConfig.version + endPoint,
-      // parameter,
+      parameter,
     );
     try {
       //============================================================
@@ -40,18 +41,19 @@ class API {
         response = await post(
           uri,
           headers: headers,
-          body: parameter == null ? null : jsonEncode(parameter),
+          body: body == null ? null : jsonEncode(body),
         ).timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.get) {
-        response = await get(uri, headers: headers)
-            .timeout(const Duration(seconds: 10));
+        response = await get(uri, headers: headers).timeout(
+          const Duration(seconds: 10),
+        );
       }
       if (requestType == RequestType.put) {
         response = await put(
           uri,
           headers: headers,
-          body: parameter == null ? null : jsonEncode(parameter),
+          body: body == null ? null : jsonEncode(body),
         ).timeout(const Duration(seconds: 10));
       }
       if (requestType == RequestType.delete) {
@@ -62,7 +64,7 @@ class API {
         response = await patch(
           uri,
           headers: headers,
-          body: parameter == null ? null : jsonEncode(parameter),
+          body: body == null ? null : jsonEncode(body),
         ).timeout(const Duration(seconds: 10));
       }
       debugPrint('|===============================');
@@ -70,6 +72,7 @@ class API {
         debugPrint('| METHOD ==> $requestType');
         debugPrint('| URL ==> $uri');
         debugPrint('| STATUS ==> ${response.statusCode}');
+        debugPrint('| HEADERS ==> $headers');
         if (response.statusCode == 200 && response.body.isNotEmpty) {
           debugPrint('| SIZE ==> ${(response.contentLength.toString())} Bytes');
           debugPrint('| RESPONSE ==> ${(response.body.toString())}');

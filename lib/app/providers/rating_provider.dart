@@ -8,7 +8,7 @@ class RatingProvider with ChangeNotifier {
     Map response = await API().request(
         requestType: RequestType.post,
         endPoint: '/contents/$contentId/reaction',
-        parameter: {'value': rate == Rate.up ? 'thumbs-up' : 'thumbs-down'});
+        body: {'value': rate == Rate.up ? 'thumbs-up' : 'thumbs-down'});
     return response.containsKey('success') ? response['success'] : false;
   }
 

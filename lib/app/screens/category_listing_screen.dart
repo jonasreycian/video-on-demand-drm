@@ -112,6 +112,8 @@ class CategoryListingScreen extends StatelessWidget {
                                   : SectionCard(
                                       titleSection: 'Featured',
                                       contents: value.data,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 16),
                                     );
                             },
                           ),

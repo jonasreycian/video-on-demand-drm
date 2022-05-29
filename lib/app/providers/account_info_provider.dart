@@ -51,7 +51,7 @@ class AccountInfoProvider with ChangeNotifier {
     API().request(
       requestType: RequestType.put,
       endPoint: '/users/update',
-      parameter: {
+      body: {
         'first_name': user!.firstName,
         'last_name': user!.lastName,
         'mobile': user!.mobile,
