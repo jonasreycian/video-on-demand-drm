@@ -10,7 +10,7 @@ class SecondaryButton extends StatelessWidget {
     this.isDisabled = false,
     this.fontColor = Colors.black,
     this.fontSize = 16,
-    this.image = '',
+    this.image,
     this.padding,
     Key? key,
   }) : super(key: key);
@@ -22,7 +22,7 @@ class SecondaryButton extends StatelessWidget {
   final bool isDisabled;
   final Color fontColor;
   final double fontSize;
-  final String image;
+  final Widget? image;
   EdgeInsets? padding;
   @override
   Widget build(BuildContext context) {
@@ -46,20 +46,16 @@ class SecondaryButton extends StatelessWidget {
               Colors.white,
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
             children: [
               Visibility(
-                visible: (image != ''),
-                child: Image.asset(
-                  image,
-                  height: 20,
-                  width: 20,
+                visible: image != null,
+                child: Container(
+                  margin: const EdgeInsets.only(left: 58),
+                  child: image!,
                 ),
               ),
-              const SizedBox(width: 2),
-              FittedBox(
-                fit: BoxFit.contain,
+              Center(
                 child: Text(
                   label,
                   style: TextStyle(

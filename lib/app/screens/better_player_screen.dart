@@ -78,7 +78,6 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
 
   @override
   void dispose() {
-    print(_widevineController.toString());
     _widevineController.dispose(forceDispose: true);
     super.dispose();
   }

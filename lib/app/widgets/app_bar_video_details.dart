@@ -199,6 +199,11 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                     SecondaryButton(
                       height: 50,
                       action: () {},
+                      image: Icon(
+                        Icons.play_arrow_sharp,
+                        color: Colors.black,
+                        size: 32,
+                      ),
                       width: double.infinity,
                       label: 'Watch Trailer',
                     ),
