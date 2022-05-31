@@ -43,13 +43,12 @@ class EpisodesTab extends StatelessWidget {
                   content: content,
                   videoDetailsProvider: videoDetailsProvider,
                   seasonSelectorCallback: (seasonId) {
-                    print('GOT SEASON ID ==> $seasonId');
                     value.getEpisodes(content.id!, seasonId);
                   },
                 ),
                 value.episodes.isNotEmpty
                     ? ListView.builder(
-                        padding: const EdgeInsets.only(top: 10, bottom: 0),
+                        padding: const EdgeInsets.only(top: 16, bottom: 0),
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
@@ -66,12 +65,17 @@ class EpisodesTab extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: EpisodeCard(
-                              index: index,
-                              title: value.episodes[index].title,
-                              description: value.episodes[index].description,
-                              runTime: value.episodes[index].runtime,
-                              imageUrl: content.coverPhoto!,
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: EpisodeCard(
+                                index: index,
+                                title: value.episodes[index].title!,
+                                description: value.episodes[index].synopsis!,
+                                runTime: value.episodes[index].runtime,
+                                imageUrl: content.coverPhoto!,
+                              ),
                             ),
                           );
                         },
