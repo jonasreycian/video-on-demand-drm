@@ -37,6 +37,25 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
   final Duration duration = Duration(milliseconds: 1000);
   int selectedSeasonIndex = 0;
 
+  playVideo({required String type, required Content content}) {
+    String hls;
+    switch (type) {
+      case 'series':
+        hls = content.seasons![0].hls!;
+        break;
+      default:
+        hls = content.video!.hls!;
+        break;
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return BetterPlayerScreen(hls);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -185,11 +204,9 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                           print('No hls url found');
                           return;
                         }
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                BetterPlayerScreen(widget.content.video!.hls!),
-                          ),
+                        playVideo(
+                          type: widget.content.type!,
+                          content: widget.content,
                         );
                       },
                       width: double.infinity,
@@ -198,7 +215,12 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                     const SizedBox(height: 20),
                     SecondaryButton(
                       height: 50,
-                      action: () {},
+                      action: () {
+                        playVideo(
+                          type: widget.content.type!,
+                          content: widget.content,
+                        );
+                      },
                       image: Icon(
                         Icons.play_arrow_sharp,
                         color: Colors.black,

@@ -46,7 +46,7 @@ class EpisodesTab extends StatelessWidget {
                     value.getEpisodes(content.id!, seasonId);
                   },
                 ),
-                value.episodes.isNotEmpty
+                content.type == 'series' && value.episodes.isNotEmpty
                     ? ListView.builder(
                         padding: const EdgeInsets.only(top: 16, bottom: 0),
                         physics: const NeverScrollableScrollPhysics(),
