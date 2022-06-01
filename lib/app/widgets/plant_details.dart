@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/screens/subscription_screen.dart';
 import 'package:aq_prime/app/widgets/catalogs_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -144,7 +145,10 @@ class PlanDetailsCard extends StatelessWidget {
                       const SizedBox(height: 20),
                       PrimaryButton(
                         height: 50,
-                        action: () {},
+                        action: () {
+                          Navigator.of(context)
+                              .pushNamed(SubscriptionScreen.routeName);
+                        },
                         width: double.infinity,
                         label: 'Change Plan',
                       ),

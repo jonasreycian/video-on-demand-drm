@@ -7,9 +7,11 @@ class TitleTextCard extends StatelessWidget {
     required this.name,
     this.fontSize,
     this.fontWeight,
+    this.icon,
     Key? key,
   }) : super(key: key);
   final String name;
+  final String? icon;
   double? fontSize;
   FontWeight? fontWeight;
   @override
@@ -18,15 +20,31 @@ class TitleTextCard extends StatelessWidget {
       position: 0,
       duration: const Duration(milliseconds: 1500),
       child: FadeInAnimation(
-        child: Text(
-          name,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: fontWeight ?? FontWeight.w700,
-            fontSize: fontSize ?? 21,
-            color: Colors.white,
-          ),
+        child: Row(
+          children: [
+            ...icon != null
+                ? [
+                    Image.asset(
+                      icon!,
+                      width: 48,
+                      height: 48,
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                  ]
+                : [const SizedBox()],
+            Text(
+              name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontWeight: fontWeight ?? FontWeight.w700,
+                fontSize: fontSize ?? 21,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );
