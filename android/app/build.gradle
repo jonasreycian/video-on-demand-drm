@@ -41,7 +41,7 @@ android {
 
     defaultConfig {
         applicationId "com.snapworxdigital.aq.prime"
-        minSdkVersion 16
+        minSdkVersion 29
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -53,6 +53,21 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            keyAlias 'debug'
+            keyPassword 'pass123$'
+            storePassword 'pass123$'
+        }
+        release {
+            storeFile file('release.keystore')
+            keyAlias 'release'
+            keyPassword 'pass123$'
+            storePassword 'pass123$'
+        }
+    }
+
 }
 
 flutter {
