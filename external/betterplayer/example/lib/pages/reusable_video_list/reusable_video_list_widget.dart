@@ -89,6 +89,7 @@ class _ReusableVideoListWidgetState extends State<ReusableVideoListWidget> {
     }
   }
 
+  // ignore: todo
   ///TODO: Handle "setState() or markNeedsBuild() called during build." error
   ///when fast scrolling through the list
   @override
