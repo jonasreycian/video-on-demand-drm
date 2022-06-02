@@ -12,6 +12,9 @@ class SubscriptionScreen extends StatefulWidget {
 }
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
+  bool plan1Selected = false;
+  bool plan2Selected = false;
+
   Widget buildTextWithSub(String title, String sub) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +38,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     );
   }
 
-  Widget buildItem({required String name, required int price}) {
+  Widget buildItem(
+      {required String name,
+      required int price,
+      bool selected = false,
+      Function(bool? value)? onCheckChange}) {
     return Row(
       children: [
         Expanded(
@@ -47,8 +54,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           ),
         ),
         Checkbox(
-          value: false,
-          onChanged: (value) {},
+          value: selected,
+          onChanged: onCheckChange,
           activeColor: Colors.red,
           shape: CircleBorder(),
           side: BorderSide(
@@ -69,12 +76,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         elevation: 0,
         title: TitleTextCard(
           name: 'Change Plan',
-          icon: 'assets/images/AQ_PRIME_LOGO_2.png',
+          icon: Image.asset(
+            'assets/images/AQ_PRIME_LOGO_2.png',
+            width: 48,
+            height: 48,
+          ),
         ),
         backgroundColor: Colors.transparent,
         leadingWidth: 65,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
           icon: Icon(Icons.arrow_back_rounded),
         ),
       ),
@@ -111,8 +122,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.home, color: Colors.white),
-                      Icon(Icons.home, color: Colors.white),
+                      Image.asset(
+                        'assets/images/phone@3x.png',
+                        color: HexColor('#C4C4C4'),
+                        width: 24,
+                        height: 24,
+                      ),
+                      Image.asset(
+                        'assets/images/phone_horizontal@3x.png',
+                        color: HexColor('#C4C4C4'),
+                        width: 24,
+                        height: 24,
+                      ),
                     ],
                   ),
                 )
@@ -121,10 +142,38 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             const SizedBox(height: 32),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildItem(name: 'Monthly Subscription', price: 99),
+                  buildItem(
+                    name: 'Monthly Subscription',
+                    price: 99,
+                    selected: plan1Selected,
+                    onCheckChange: (value) {
+                      setState(() {
+                        plan1Selected = !plan1Selected;
+                      });
+                    },
+                  ),
                   const SizedBox(height: 16),
-                  buildItem(name: 'Semu_Annual Subscription', price: 549),
+                  buildItem(
+                    name: 'Semi-Annual Subscription',
+                    price: 549,
+                    selected: plan2Selected,
+                    onCheckChange: (value) {
+                      setState(() {
+                        plan2Selected = !plan2Selected;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 32),
+                  Text(
+                    '*No annual subscription',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
                 ],
               ),
             ),
