@@ -63,7 +63,8 @@ class _BetterPlayerState extends State<BetterPlayer>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    // ignore: unnecessary_non_null_assertion
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -110,7 +111,8 @@ class _BetterPlayerState extends State<BetterPlayer>
           _betterPlayerConfiguration.deviceOrientationsAfterFullScreen);
     }
 
-    WidgetsBinding.instance?.removeObserver(this);
+    // ignore: unnecessary_non_null_assertion
+    WidgetsBinding.instance!.removeObserver(this);
     _controllerEventSubscription?.cancel();
     widget.controller.dispose();
     VisibilityDetectorController.instance
