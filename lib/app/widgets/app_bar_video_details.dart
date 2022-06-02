@@ -38,19 +38,14 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
   int selectedSeasonIndex = 0;
 
   playVideo({required String type, required Content content}) {
-    String hls;
-    switch (type) {
-      case 'series':
-        hls = content.seasons![0].hls!;
-        break;
-      default:
-        hls = content.video!.hls!;
-        break;
+    if (content.trailers == null || content.trailers!.isEmpty) {
+      print('No trailers available');
+      return;
     }
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return BetterPlayerScreen(hls);
+          return BetterPlayerScreen(content.trailers![0].hls!);
         },
       ),
     );
@@ -68,7 +63,7 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: widget.content.type == 'series' ? 420 : 470,
+              height: widget.content.type == 'series' ? 420 : 510,
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
