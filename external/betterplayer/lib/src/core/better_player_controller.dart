@@ -228,7 +228,7 @@ class BetterPlayerController {
     final betterPLayerControllerProvider = context
         .dependOnInheritedWidgetOfExactType<BetterPlayerControllerProvider>()!;
 
-    return betterPLayerControllerProvider.controller as BetterPlayerController;
+    return betterPLayerControllerProvider.controller;
   }
 
   ///Setup new data source in Better Player.
