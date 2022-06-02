@@ -24,6 +24,7 @@ import 'package:aq_prime/app/screens/login_screen.dart';
 import 'package:aq_prime/app/screens/nav_screen.dart';
 import 'package:aq_prime/app/screens/registration_screen.dart';
 import 'package:aq_prime/app/screens/search_screen.dart';
+import 'package:aq_prime/app/screens/subscription_screen.dart';
 import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
 import 'package:aq_prime/app/widgets/dismiss_keyboard.dart';
 import 'package:aq_prime/app/widgets/reset_password_provider.dart';
@@ -118,6 +119,7 @@ class MyApp extends StatelessWidget {
               CategoryContentsScreen.routeName: (context) =>
                   CategoryContentsScreen(),
               SearchScreen.routeName: (context) => SearchScreen(),
+              SubscriptionScreen.routeName: (context) => SubscriptionScreen(),
             },
           ),
         ),
