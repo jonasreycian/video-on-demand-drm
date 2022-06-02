@@ -1,6 +1,6 @@
 class AppConfig {
-  static const host = 'aqprimeapi.sdisend.com';
-  static const referrer = 'http://$host';
+  static const host = 'devapi.aqprimestream.com'; //'aqprimeapi.sdisend.com';
+  static const referrer = 'https://$host';
   static const path = '/api';
   static const version = '/v1';
   static String lang = 'en';

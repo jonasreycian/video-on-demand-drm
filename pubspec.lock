@@ -25,9 +25,9 @@ packages:
   better_player:
     dependency: "direct main"
     description:
-      name: better_player
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "external/betterplayer"
+      relative: true
+    source: path
     version: "0.0.82"
   bloc:
     dependency: transitive

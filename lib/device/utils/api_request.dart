@@ -30,7 +30,7 @@ class API {
       'Authorization': 'Bearer $token',
     };
     Response? response;
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       AppConfig.host,
       AppConfig.path + AppConfig.version + endPoint,
       parameter,
