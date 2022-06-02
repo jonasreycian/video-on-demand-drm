@@ -238,6 +238,39 @@ class _BetterPlayerCupertinoControlsState
     );
   }
 
+  GestureDetector _buildCloseButton(
+    Color backgroundColor,
+    Color iconColor,
+    double barHeight,
+    double iconSize,
+    double buttonPadding,
+  ) {
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: AnimatedOpacity(
+        opacity: controlsNotVisible ? 0.0 : 1.0,
+        duration: _controlsConfiguration.controlsHideTime,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            height: barHeight,
+            padding: EdgeInsets.symmetric(
+              horizontal: buttonPadding,
+            ),
+            decoration: BoxDecoration(color: backgroundColor),
+            child: Center(
+              child: Icon(
+                Icons.arrow_back_rounded,
+                color: iconColor,
+                size: iconSize,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   GestureDetector _buildExpandButton(
     Color backgroundColor,
     Color iconColor,
@@ -490,6 +523,13 @@ class _BetterPlayerCupertinoControlsState
       ),
       child: Row(
         children: <Widget>[
+          _buildCloseButton(
+            backgroundColor,
+            iconColor,
+            barHeight,
+            iconSize,
+            buttonPadding,
+          ),
           if (_controlsConfiguration.enableFullscreen)
             _buildExpandButton(
               backgroundColor,
