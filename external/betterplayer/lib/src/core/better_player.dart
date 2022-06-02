@@ -105,10 +105,13 @@ class _BetterPlayerState extends State<BetterPlayer>
     if (_isFullScreen) {
       Wakelock.disable();
       _navigatorState.maybePop();
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: _betterPlayerConfiguration.systemOverlaysAfterFullScreen);
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: _betterPlayerConfiguration.systemOverlaysAfterFullScreen,
+      );
       SystemChrome.setPreferredOrientations(
-          _betterPlayerConfiguration.deviceOrientationsAfterFullScreen);
+        _betterPlayerConfiguration.deviceOrientationsAfterFullScreen,
+      );
     }
 
     // ignore: unnecessary_non_null_assertion

@@ -38,6 +38,9 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
       autoDispose: true,
       allowedScreenSleep: false,
       useRootNavigator: true,
+      // deviceOrientationsAfterFullScreen: <DeviceOrientation>[
+      //   DeviceOrientation.portraitDown,
+      // ],
     );
 
     _widevineController = BetterPlayerController(betterPlayerConfiguration);
@@ -78,7 +81,11 @@ class _BetterPlayerScreenState extends State<BetterPlayerScreen> {
 
   @override
   void dispose() {
+    print('DISPOSING');
     _widevineController.dispose(forceDispose: true);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     super.dispose();
   }
 }
