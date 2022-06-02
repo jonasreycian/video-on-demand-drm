@@ -111,7 +111,12 @@ class _BetterPlayerMaterialControlsState
               left: 0,
               child: _buildBackButton(),
             ),
-            Positioned(bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: _buildBottomBar(),
+            ),
             _buildNextVideoWidget(),
           ],
         ),
