@@ -37,15 +37,15 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
   final Duration duration = Duration(milliseconds: 1000);
   int selectedSeasonIndex = 0;
 
-  playVideo({required String type, required Content content}) {
-    if (content.trailers == null || content.trailers!.isEmpty) {
+  playVideo({required String type, required String? streamUri}) {
+    if (streamUri == null || streamUri.isEmpty) {
       print('No trailers available');
       return;
     }
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return BetterPlayerScreen(content.trailers![0].hls!);
+          return BetterPlayerScreen(streamUri);
         },
       ),
     );
@@ -201,7 +201,7 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                         }
                         playVideo(
                           type: widget.content.type!,
-                          content: widget.content,
+                          streamUri: widget.content.video?.hls!,
                         );
                       },
                       width: double.infinity,
@@ -211,9 +211,13 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                     SecondaryButton(
                       height: 50,
                       action: () {
+                        if (widget.content.trailers.isEmpty) {
+                          print('No hls uri found');
+                          return;
+                        }
                         playVideo(
                           type: widget.content.type!,
-                          content: widget.content,
+                          streamUri: widget.content.trailers.first.hls,
                         );
                       },
                       image: Icon(
@@ -242,12 +246,12 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                               isDense: true,
                               value: selectedSeasonIndex + 1,
                               style: TextStyle(color: Colors.white),
-                              items: widget.content.seasons!.map((season) {
+                              items: widget.content.seasons.map((season) {
                                 return DropdownMenuItem<int>(
                                   value: season.id,
                                   onTap: () {},
                                   child: Text(
-                                    'Season ${widget.content.seasons!.indexOf(season) + 1}',
+                                    'Season ${widget.content.seasons.indexOf(season) + 1}',
                                   ),
                                 );
                               }).toList(),
@@ -257,12 +261,11 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                                   widget.seasonSelectorCallback!(seasonId!);
                                 }
                                 setState(() {
-                                  var temp =
-                                      widget.content.seasons!.singleWhere(
+                                  var temp = widget.content.seasons.singleWhere(
                                     (element) => element.id == seasonId,
                                   );
                                   selectedSeasonIndex =
-                                      widget.content.seasons!.indexOf(temp);
+                                      widget.content.seasons.indexOf(temp);
                                 });
                               },
                             ),

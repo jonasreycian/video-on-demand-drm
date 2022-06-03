@@ -28,8 +28,8 @@ class Content {
   int? updatedByUserId;
   int? videoId;
   Video? video;
-  List<Video>? trailers;
-  List<Video>? seasons;
+  late List<Video> trailers;
+  late List<Video> seasons;
 
   Content(
       {this.id,
@@ -59,8 +59,8 @@ class Content {
       this.updatedByUserId,
       this.videoId,
       this.video,
-      this.trailers,
-      this.seasons});
+      this.trailers = const <Video>[],
+      this.seasons = const <Video>[]});
 
   Content.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -102,13 +102,13 @@ class Content {
     if (json['trailers'] != null) {
       trailers = <Video>[];
       json['trailers'].forEach((v) {
-        trailers!.add(Video.fromJson(v));
+        trailers.add(Video.fromJson(v));
       });
     }
     if (json['seasons'] != null) {
       seasons = <Video>[];
       json['seasons'].forEach((v) {
-        seasons!.add(Video.fromJson(v));
+        seasons.add(Video.fromJson(v));
       });
     }
   }
@@ -144,12 +144,12 @@ class Content {
     if (video != null) {
       data['video'] = video!.toJson();
     }
-    if (trailers != null) {
-      data['trailers'] = trailers!.map((v) => v.toJson()).toList();
-    }
-    if (seasons != null) {
-      data['seasons'] = seasons!.map((v) => v.toJson()).toList();
-    }
+    // if (trailers != null) {
+    data['trailers'] = trailers.map((v) => v.toJson()).toList();
+    // }
+    // if (seasons != null) {
+    data['seasons'] = seasons.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }

@@ -27,7 +27,7 @@ class EpisodesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (content.type == 'series') {
-      init(context, content.id!, content.seasons![0].id!);
+      init(context, content.id!, content.seasons[0].id!);
     }
 
     return Consumer<EpisodesProvider>(
