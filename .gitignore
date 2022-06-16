@@ -45,9 +45,9 @@ app.*.map.json
 
 # Flutter/Dart/Pub related
 /android/**/*.json
-/releases/**/*.apk
-pubspec.lock
-/external/**/*.lock
 /android/**/*.keystore
+/releases/
+pubspec.lock
+**/*.keystore
 
 /external/
