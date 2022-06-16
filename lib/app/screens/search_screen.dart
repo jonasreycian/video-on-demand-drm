@@ -1,11 +1,12 @@
-import 'package:aq_prime/app/providers/search_provider.dart';
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../device/utils/hex_color.dart';
+import '../providers/search_provider.dart';
+import '../widgets/loading_indicator.dart';
+import '../widgets/thumbnail_movie_card.dart';
+import '../widgets/title_text_card.dart';
+import 'video_details/video_details_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);

@@ -1,4 +1,3 @@
-import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
 
 import 'title_text_card.dart';

@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/widgets/reset_password_email_card.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../../device/utils/hex_color.dart';
+import '../widgets/reset_password_email_card.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);

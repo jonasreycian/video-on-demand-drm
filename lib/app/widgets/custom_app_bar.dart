@@ -1,6 +1,6 @@
-import 'package:aq_prime/device/utils/assets.dart';
 import 'package:flutter/material.dart';
 
+import '../../device/utils/assets.dart';
 import 'responsive.dart';
 
 class CustomAppBar extends StatelessWidget {

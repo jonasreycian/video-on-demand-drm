@@ -1,17 +1,18 @@
-import 'package:aq_prime/app/providers/account_info_provider.dart';
-import 'package:aq_prime/app/providers/refresh_limiter.dart';
-import 'package:aq_prime/app/screens/login_screen.dart';
-import 'package:aq_prime/app/widgets/account_info_card.dart';
-import 'package:aq_prime/app/widgets/account_info_card_display.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/password_editing_card.dart';
-import 'package:aq_prime/app/widgets/plant_details.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
+
+import '../../device/utils/api_request.dart';
+import '../../device/utils/dialog.dart';
+import '../../device/utils/user_data.dart' as user_data;
+import '../providers/account_info_provider.dart';
+import '../providers/refresh_limiter.dart';
+import '../widgets/account_info_card.dart';
+import '../widgets/account_info_card_display.dart';
+import '../widgets/loading_indicator.dart';
+import '../widgets/password_editing_card.dart';
+import '../widgets/plant_details.dart';
+import '../widgets/title_text_card.dart';
+import 'login_screen.dart';
 
 class MyAccountScreen extends StatelessWidget {
   MyAccountScreen({

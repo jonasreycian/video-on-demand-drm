@@ -1,8 +1,9 @@
-import 'package:aq_prime/data/utils/utils.dart';
-import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+
+import '../../data/utils/utils.dart';
+import '../../device/utils/api_request.dart';
 
 class RegistrationProvider with ChangeNotifier {
   String _successEmail = '';

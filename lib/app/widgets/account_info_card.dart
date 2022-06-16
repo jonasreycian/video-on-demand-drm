@@ -1,10 +1,11 @@
-import 'package:aq_prime/app/providers/account_info_provider.dart';
-import 'package:aq_prime/app/widgets/input_textfield.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+
+import '../../device/utils/hex_color.dart';
+import '../providers/account_info_provider.dart';
+import 'input_textfield.dart';
+import 'primary_button.dart';
 
 class AccountInfoCardEditing extends StatelessWidget {
   AccountInfoCardEditing({

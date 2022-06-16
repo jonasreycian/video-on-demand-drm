@@ -1,7 +1,8 @@
-import 'package:aq_prime/data/utils/utils.dart';
-import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
+
+import '../../data/utils/utils.dart';
+import '../../device/utils/api_request.dart';
+import '../../device/utils/user_data.dart' as user_data;
 
 class LoginProvider with ChangeNotifier {
   bool _isSuccess = false;

@@ -1,5 +1,6 @@
-import 'package:aq_prime/device/utils/api_request.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+
+import '../../device/utils/api_request.dart';
 
 enum Rate { up, down }
 

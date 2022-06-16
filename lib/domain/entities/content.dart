@@ -1,4 +1,4 @@
-import 'package:aq_prime/domain/entities/video.dart';
+import 'video.dart';
 
 class Content {
   int? id;

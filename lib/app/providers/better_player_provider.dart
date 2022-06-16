@@ -1,6 +1,7 @@
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
+
+import '../../domain/entities/content.dart';
 
 class BetterPlayerProvider with ChangeNotifier {
   late BetterPlayerController _widevineController;

@@ -1,9 +1,9 @@
-import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
-import 'package:aq_prime/domain/entities/content.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:collection/collection.dart';
 
+import '../../domain/entities/content.dart';
+import '../providers/my_watch_list_provider.dart';
 import 'subtext_card.dart';
 
 class AddWatchListButton extends StatelessWidget {

@@ -1,14 +1,15 @@
-import 'package:aq_prime/app/cubits/app_bar/app_bar_cubit.dart';
-import 'package:aq_prime/app/providers/my_watch_list_provider.dart';
-import 'package:aq_prime/app/screens/category_listing_screen.dart';
-import 'package:aq_prime/app/screens/continue_watching_screen.dart';
-import 'package:aq_prime/app/screens/home_screen.dart';
-import 'package:aq_prime/app/screens/my_account_screen.dart';
-import 'package:aq_prime/app/screens/my_watch_list_screen.dart';
-import 'package:aq_prime/app/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+
+import '../cubits/app_bar/app_bar_cubit.dart';
+import '../providers/my_watch_list_provider.dart';
+import '../widgets/responsive.dart';
+import 'category_listing_screen.dart';
+import 'continue_watching_screen.dart';
+import 'home_screen.dart';
+import 'my_account_screen.dart';
+import 'my_watch_list_screen.dart';
 
 class NavScreen extends StatefulWidget {
   @override

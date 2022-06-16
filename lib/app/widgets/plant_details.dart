@@ -1,8 +1,8 @@
-import 'package:aq_prime/app/widgets/catalogs_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 
+import 'catalogs_card.dart';
 import 'primary_button.dart';
 
 class PlanDetailsCard extends StatelessWidget {

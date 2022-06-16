@@ -1,11 +1,12 @@
-import 'package:aq_prime/app/providers/forgot_password_provider.dart';
-import 'package:aq_prime/app/widgets/enter_otp_card.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/registration_input_field.dart';
-import 'package:aq_prime/app/widgets/reset_password_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/forgot_password_provider.dart';
+import 'enter_otp_card.dart';
+import 'primary_button.dart';
+import 'registration_input_field.dart';
+import 'reset_password_provider.dart';
 
 class NewPasswordView extends StatelessWidget {
   NewPasswordView({Key? key}) : super(key: key);

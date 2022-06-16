@@ -1,10 +1,11 @@
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
-import 'package:aq_prime/app/widgets/featured_banner_card.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../../domain/entities/content.dart';
+import '../screens/video_details/video_details_screen.dart';
+import 'featured_banner_card.dart';
+import 'loading_indicator.dart';
 
 class FeaturedSection extends StatelessWidget {
   const FeaturedSection({

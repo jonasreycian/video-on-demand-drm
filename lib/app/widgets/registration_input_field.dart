@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/widgets/calendar_card.dart';
-import 'package:aq_prime/app/widgets/input_textfield.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
+
+import '../../device/utils/hex_color.dart';
+import 'calendar_card.dart';
+import 'input_textfield.dart';
 
 const double defaultInputHeight = 50;
 

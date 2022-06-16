@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/widgets/account_info_child_card.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import 'account_info_child_card.dart';
+import 'primary_button.dart';
 
 class AccountInfoCardDisplay extends StatelessWidget {
   const AccountInfoCardDisplay({

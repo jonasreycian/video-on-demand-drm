@@ -1,8 +1,8 @@
-import 'package:aq_prime/app/providers/releted_content_provider.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/releted_content_provider.dart';
+import '../../widgets/thumbnail_movie_card.dart';
 import 'video_details_screen.dart';
 
 class MoreLikeThisTab extends StatelessWidget {

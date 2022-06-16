@@ -1,6 +1,7 @@
-import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:aq_prime/domain/entities/video.dart';
 import 'package:flutter/foundation.dart';
+
+import '../../device/utils/api_request.dart';
+import '../../domain/entities/video.dart';
 
 class EpisodesProvider with ChangeNotifier {
   bool _isLoading = true;

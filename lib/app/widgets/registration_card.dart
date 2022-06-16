@@ -1,11 +1,12 @@
-import 'package:aq_prime/app/providers/registration_provider.dart';
-import 'package:aq_prime/app/widgets/check_box.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/registration_input_field.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../device/utils/dialog.dart';
+import '../providers/registration_provider.dart';
+import 'check_box.dart';
+import 'primary_button.dart';
+import 'registration_input_field.dart';
 
 class RegistrationCard extends StatelessWidget {
   RegistrationCard({

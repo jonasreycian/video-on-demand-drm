@@ -1,18 +1,19 @@
-import 'package:aq_prime/app/providers/category_listing_provider.dart';
-import 'package:aq_prime/app/providers/featured_provider.dart';
-import 'package:aq_prime/app/providers/refresh_limiter.dart';
-import 'package:aq_prime/app/screens/search_screen.dart';
-import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
-import 'package:aq_prime/app/widgets/category_card.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/section_card.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/data/utils/utils.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
-import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../data/utils/utils.dart';
+import '../../device/utils/dialog.dart';
+import '../../domain/entities/category.dart';
+import '../providers/category_listing_provider.dart';
+import '../providers/featured_provider.dart';
+import '../providers/refresh_limiter.dart';
+import '../widgets/aq_floating_action_button.dart';
+import '../widgets/category_card.dart';
+import '../widgets/loading_indicator.dart';
+import '../widgets/search_button.dart';
+import '../widgets/section_card.dart';
+import '../widgets/title_text_card.dart';
+import 'search_screen.dart';
 
 class CategoryListingScreen extends StatelessWidget {
   CategoryListingScreen({Key? key}) : super(key: key);

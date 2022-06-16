@@ -1,6 +1,6 @@
-import 'package:aq_prime/data/extra/enums.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/extra/enums.dart';
 import 'director_card.dart';
 import 'genre_card.dart';
 import 'movie_info_card.dart';

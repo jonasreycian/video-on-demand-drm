@@ -1,19 +1,20 @@
-import 'package:aq_prime/app/providers/rating_provider.dart';
-import 'package:aq_prime/app/providers/video_details_provider.dart';
-import 'package:aq_prime/app/screens/better_player_screen.dart';
-import 'package:aq_prime/app/widgets/icon_button_with_name.dart';
-import 'package:aq_prime/app/widgets/mtrcb_rating.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/secondary_button.dart';
-import 'package:aq_prime/app/widgets/subtext_card.dart';
-import 'package:aq_prime/data/utils/utils.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../data/utils/utils.dart';
+import '../../device/utils/dialog.dart';
+import '../../device/utils/hex_color.dart';
+import '../../domain/entities/content.dart';
+import '../providers/rating_provider.dart';
+import '../providers/video_details_provider.dart';
+import '../screens/better_player_screen.dart';
+import 'icon_button_with_name.dart';
+import 'mtrcb_rating.dart';
+import 'primary_button.dart';
+import 'secondary_button.dart';
+import 'subtext_card.dart';
 
 class AppBarVideoDetails extends StatefulWidget {
   AppBarVideoDetails({

@@ -1,5 +1,6 @@
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
+
+import '../../device/utils/hex_color.dart';
 
 class AccountInfoChild extends StatelessWidget {
   const AccountInfoChild({

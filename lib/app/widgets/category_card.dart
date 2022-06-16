@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/screens/category_contents_screen.dart';
-import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../../domain/entities/category.dart';
+import '../screens/category_contents_screen.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({

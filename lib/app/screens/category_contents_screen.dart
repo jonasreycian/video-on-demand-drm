@@ -1,12 +1,13 @@
-import 'package:aq_prime/app/providers/category_contents_provider.dart';
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
-import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../domain/entities/category.dart';
+import '../providers/category_contents_provider.dart';
+import '../widgets/search_button.dart';
+import '../widgets/thumbnail_movie_card.dart';
+import '../widgets/title_text_card.dart';
 import 'search_screen.dart';
+import 'video_details/video_details_screen.dart';
 
 class CategoryContentsScreen extends StatelessWidget {
   const CategoryContentsScreen({

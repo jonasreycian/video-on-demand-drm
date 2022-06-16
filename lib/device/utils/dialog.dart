@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/providers/rating_provider.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../app/providers/rating_provider.dart';
+import '../../domain/entities/content.dart';
 
 generalDialog({
   required BuildContext context,

@@ -1,6 +1,7 @@
-import 'package:aq_prime/device/utils/api_request.dart';
-import 'package:aq_prime/domain/entities/category.dart';
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+
+import '../../device/utils/api_request.dart';
+import '../../domain/entities/category.dart';
 
 class CategoryContentsProvider with ChangeNotifier {
   bool _isLoading = true;

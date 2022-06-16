@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:aq_prime/device/utils/app_config.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:aq_prime/device/utils/user_data.dart' as user_data;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_config.dart';

@@ -1,4 +1,4 @@
-import 'package:aq_prime/domain/entities/content.dart';
+import 'content.dart';
 
 class Category {
   int? id;

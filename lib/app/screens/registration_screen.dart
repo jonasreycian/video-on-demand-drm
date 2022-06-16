@@ -1,6 +1,7 @@
-import 'package:aq_prime/app/widgets/registration_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../widgets/registration_card.dart';
 
 // ignore: must_be_immutable
 class RegistrationScreen extends StatelessWidget {

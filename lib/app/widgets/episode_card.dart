@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/widgets/subtext_card.dart';
-import 'package:aq_prime/data/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import '../../data/utils/utils.dart';
+import 'subtext_card.dart';
 
 class EpisodeCard extends StatelessWidget {
   const EpisodeCard({

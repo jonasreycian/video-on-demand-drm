@@ -1,15 +1,16 @@
-import 'package:aq_prime/app/providers/releted_content_provider.dart';
-import 'package:aq_prime/app/providers/video_details_provider.dart';
-import 'package:aq_prime/app/screens/video_details/episode_tab.dart';
-import 'package:aq_prime/app/screens/video_details/more_like_this_tab.dart';
-import 'package:aq_prime/app/screens/video_details/trailers_and_more_tab.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/sliver_appbar.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+
+import '../../../device/utils/hex_color.dart';
+import '../../../domain/entities/content.dart';
+import '../../providers/releted_content_provider.dart';
+import '../../providers/video_details_provider.dart';
+import '../../widgets/loading_indicator.dart';
+import '../../widgets/sliver_appbar.dart';
+import 'episode_tab.dart';
+import 'more_like_this_tab.dart';
+import 'trailers_and_more_tab.dart';
 
 class VideoDetailsPageArguments {
   final Content content;

@@ -1,13 +1,14 @@
-import 'package:aq_prime/app/providers/forgot_password_provider.dart';
-import 'package:aq_prime/app/widgets/enter_otp_card.dart';
-import 'package:aq_prime/app/widgets/new_password_view.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/app/widgets/registration_input_field.dart';
-import 'package:aq_prime/app/widgets/text_and_link.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+
+import '../../device/utils/hex_color.dart';
+import '../providers/forgot_password_provider.dart';
+import 'enter_otp_card.dart';
+import 'new_password_view.dart';
+import 'primary_button.dart';
+import 'registration_input_field.dart';
+import 'text_and_link.dart';
 
 class ResetPasswordCard extends StatelessWidget {
   ResetPasswordCard({

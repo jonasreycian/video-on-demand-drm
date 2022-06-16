@@ -1,7 +1,8 @@
-import 'package:aq_prime/app/screens/better_player_screen.dart';
-import 'package:aq_prime/app/widgets/trailers_card.dart';
-import 'package:aq_prime/domain/entities/video.dart';
 import 'package:flutter/material.dart';
+
+import '../../../domain/entities/video.dart';
+import '../../widgets/trailers_card.dart';
+import '../better_player_screen.dart';
 
 class TrailersAndMoreTab extends StatelessWidget {
   const TrailersAndMoreTab({

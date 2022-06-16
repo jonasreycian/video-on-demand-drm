@@ -1,11 +1,12 @@
-import 'package:aq_prime/app/providers/episodes_provider.dart';
-import 'package:aq_prime/app/providers/video_details_provider.dart';
-import 'package:aq_prime/app/screens/better_player_screen.dart';
-import 'package:aq_prime/app/widgets/app_bar_video_details.dart';
-import 'package:aq_prime/app/widgets/episode_card.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../domain/entities/content.dart';
+import '../../providers/episodes_provider.dart';
+import '../../providers/video_details_provider.dart';
+import '../../widgets/app_bar_video_details.dart';
+import '../../widgets/episode_card.dart';
+import '../better_player_screen.dart';
 
 class EpisodesTab extends StatelessWidget {
   const EpisodesTab({

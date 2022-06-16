@@ -1,8 +1,9 @@
-import 'package:aq_prime/app/screens/search_screen.dart';
-import 'package:aq_prime/app/widgets/fetured_section.dart';
-import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/fetured_section.dart';
+import '../widgets/search_button.dart';
+import '../widgets/title_text_card.dart';
+import 'search_screen.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({

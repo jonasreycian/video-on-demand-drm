@@ -1,11 +1,12 @@
-import 'package:aq_prime/app/providers/video_details_provider.dart';
-import 'package:aq_prime/app/screens/video_details/video_details_screen.dart';
-import 'package:aq_prime/app/widgets/loading_indicator.dart';
-import 'package:aq_prime/app/widgets/thumbnail_movie_card.dart';
-import 'package:aq_prime/domain/entities/content.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../domain/entities/content.dart';
+import '../providers/video_details_provider.dart';
+import '../screens/video_details/video_details_screen.dart';
+import 'loading_indicator.dart';
+import 'thumbnail_movie_card.dart';
 
 class SectionCard extends StatelessWidget {
   SectionCard({

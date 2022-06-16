@@ -1,14 +1,15 @@
-import 'package:aq_prime/app/providers/home_provider.dart';
-import 'package:aq_prime/app/providers/refresh_limiter.dart';
-import 'package:aq_prime/app/screens/search_screen.dart';
-import 'package:aq_prime/app/widgets/aq_floating_action_button.dart';
-import 'package:aq_prime/app/widgets/fetured_section.dart';
-import 'package:aq_prime/app/widgets/search_button.dart';
-import 'package:aq_prime/app/widgets/section_card.dart';
-import 'package:aq_prime/app/widgets/title_text_card.dart';
-import 'package:aq_prime/device/utils/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../device/utils/dialog.dart';
+import '../providers/home_provider.dart';
+import '../providers/refresh_limiter.dart';
+import '../widgets/aq_floating_action_button.dart';
+import '../widgets/fetured_section.dart';
+import '../widgets/search_button.dart';
+import '../widgets/section_card.dart';
+import '../widgets/title_text_card.dart';
+import 'search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

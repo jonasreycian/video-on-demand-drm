@@ -1,12 +1,13 @@
-import 'package:aq_prime/app/providers/forgot_password_provider.dart';
-import 'package:aq_prime/app/providers/otp_provider.dart';
-import 'package:aq_prime/app/widgets/primary_button.dart';
-import 'package:aq_prime/device/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+
+import '../../device/utils/hex_color.dart';
+import '../providers/forgot_password_provider.dart';
+import '../providers/otp_provider.dart';
+import 'primary_button.dart';
 
 class OtpView extends StatelessWidget {
   OtpView({Key? key}) : super(key: key);
