@@ -18,7 +18,7 @@ class RegistrationScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/background.png"),
+          image: AssetImage('assets/images/AQ_Background.jpg'),
           fit: BoxFit.cover,
         ),
       ),

@@ -36,7 +36,7 @@ class TrailersAndMoreTab extends StatelessWidget {
                     title: trailers[index].title ?? '',
                     description: trailers[index].description ?? '',
                     runTime: trailers[index].runtime,
-                    imageUrl: '',
+                    imageUrl: trailers[index].coverPhoto ?? '',
                   ),
                 );
               },

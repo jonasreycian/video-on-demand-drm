@@ -20,10 +20,8 @@ class ResetPasswordCard extends StatelessWidget {
   final TextEditingController emailNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print('Parent Rebuild');
     return Consumer<ForgotPasswordProvider>(
       builder: (context, value, _) {
-        print('child Rebuild');
         Future.delayed(const Duration(milliseconds: 1), () {
           if (!value.isLoading &&
               !value.isSuccess &&

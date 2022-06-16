@@ -67,7 +67,7 @@ class SearchScreen extends StatelessWidget {
                     color: HexColor('#000000'),
                   ),
                   onEditingComplete: () {
-                    print('SHIT');
+                    value.search(searchField.text);
                   },
                 ),
               ),

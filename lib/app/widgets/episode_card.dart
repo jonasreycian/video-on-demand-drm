@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../data/utils/utils.dart';
+import '../../device/utils/hex_color.dart';
 import 'subtext_card.dart';
 
 class EpisodeCard extends StatelessWidget {
   const EpisodeCard({
     required this.index,
-    this.title,
-    this.description,
+    required this.title,
+    this.description = '',
     this.runTime,
     required this.imageUrl,
     Key? key,
   }) : super(key: key);
   final int index;
-  final String? title;
-  final String? description;
+  final String title;
+  final String description;
   final int? runTime;
   final String imageUrl;
   @override
@@ -27,17 +28,17 @@ class EpisodeCard extends StatelessWidget {
         child: SlideAnimation(
           verticalOffset: 20,
           child: Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            padding: const EdgeInsets.only(left: 10),
+            // padding: const EdgeInsets.only(left: 10),
             color: Colors.transparent,
-            height: 85,
+            height: 79,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: 120,
+                  width: 140,
+                  height: 79,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(6),
                     child: FadeInImage.assetNetwork(
                       fadeInCurve: Curves.easeInQuart,
                       fadeOutCurve: Curves.easeInQuart,
@@ -45,7 +46,7 @@ class EpisodeCard extends StatelessWidget {
                       fadeInDuration: const Duration(milliseconds: 200),
                       fit: BoxFit.cover,
                       placeholderFit: BoxFit.cover,
-                      placeholderScale: 15,
+                      placeholderScale: 1,
                       placeholder: 'assets/images/loading1.gif',
                       imageErrorBuilder: (context, data, trace) {
                         return Image.asset('assets/images/APP.png');
@@ -58,22 +59,34 @@ class EpisodeCard extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
-                      Text(
-                        title ?? '--',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w800,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 22,
-                          color: Colors.white,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w800,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Subtext(
+                            text: Utils.netflixDurationFormat(runTime ?? 0),
+                            color: HexColor('#747474'),
+                            textStyle: TextStyle(fontSize: 10),
+                          ),
+                        ],
                       ),
+                      const SizedBox(height: 10),
                       Subtext(
-                        text: Utils.netflixDurationFormat(runTime ?? 0),
-                        color: Color.fromRGBO(140, 140, 140, 1),
+                        text: description,
+                        textStyle: TextStyle(fontSize: 10),
+                        maxLines: 3,
+                        color: HexColor('#747474'),
                       ),
                     ],
                   ),

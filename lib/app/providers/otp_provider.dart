@@ -33,7 +33,6 @@ class OtpProvider with ChangeNotifier {
       'value': value,
       'token': pin,
     };
-    print(body);
     API()
         .request(
             requestType: RequestType.post,

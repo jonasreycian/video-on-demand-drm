@@ -38,6 +38,20 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
   final Duration duration = Duration(milliseconds: 1000);
   int selectedSeasonIndex = 0;
 
+  playVideo({required String type, required String? streamUri}) {
+    if (streamUri == null || streamUri.isEmpty) {
+      print('No trailers available');
+      return;
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          return BetterPlayerScreen(streamUri);
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -50,7 +64,7 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: double.infinity,
-              height: widget.content.type == 'series' ? 420 : 470,
+              height: widget.content.type == 'series' ? 420 : 510,
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,11 +200,9 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                           print('No hls url found');
                           return;
                         }
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                BetterPlayerScreen(widget.content.video!.hls!),
-                          ),
+                        playVideo(
+                          type: widget.content.type!,
+                          streamUri: widget.content.video?.hls!,
                         );
                       },
                       width: double.infinity,
@@ -199,7 +211,21 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                     const SizedBox(height: 20),
                     SecondaryButton(
                       height: 50,
-                      action: () {},
+                      action: () {
+                        if (widget.content.trailers.isEmpty) {
+                          print('No hls uri found');
+                          return;
+                        }
+                        playVideo(
+                          type: widget.content.type!,
+                          streamUri: widget.content.trailers.first.hls,
+                        );
+                      },
+                      image: Icon(
+                        Icons.play_arrow_sharp,
+                        color: Colors.black,
+                        size: 32,
+                      ),
                       width: double.infinity,
                       label: 'Watch Trailer',
                     ),
@@ -221,12 +247,12 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                               isDense: true,
                               value: selectedSeasonIndex + 1,
                               style: TextStyle(color: Colors.white),
-                              items: widget.content.seasons!.map((season) {
+                              items: widget.content.seasons.map((season) {
                                 return DropdownMenuItem<int>(
                                   value: season.id,
                                   onTap: () {},
                                   child: Text(
-                                    'Season ${widget.content.seasons!.indexOf(season) + 1}',
+                                    'Season ${widget.content.seasons.indexOf(season) + 1}',
                                   ),
                                 );
                               }).toList(),
@@ -236,12 +262,11 @@ class _AppBarVideoDetailsState extends State<AppBarVideoDetails> {
                                   widget.seasonSelectorCallback!(seasonId!);
                                 }
                                 setState(() {
-                                  var temp =
-                                      widget.content.seasons!.singleWhere(
+                                  var temp = widget.content.seasons.singleWhere(
                                     (element) => element.id == seasonId,
                                   );
                                   selectedSeasonIndex =
-                                      widget.content.seasons!.indexOf(temp);
+                                      widget.content.seasons.indexOf(temp);
                                 });
                               },
                             ),

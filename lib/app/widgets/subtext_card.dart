@@ -17,14 +17,16 @@ class Subtext extends StatelessWidget {
   final String text;
   final int? maxLines;
   final Color? color;
-  final TextStyle? textStyle;
+  final TextStyle textStyle;
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       maxLines: maxLines ?? 1,
       overflow: TextOverflow.ellipsis,
-      style: textStyle,
+      style: textStyle.copyWith(
+        color: color ?? Colors.white,
+      ),
     );
   }
 }

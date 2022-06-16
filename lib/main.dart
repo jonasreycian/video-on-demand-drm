@@ -31,6 +31,7 @@ import 'app/screens/login_screen.dart';
 import 'app/screens/nav_screen.dart';
 import 'app/screens/registration_screen.dart';
 import 'app/screens/search_screen.dart';
+import 'app/screens/subscription_screen.dart';
 import 'app/screens/video_details/video_details_screen.dart';
 import 'app/widgets/dismiss_keyboard.dart';
 import 'app/widgets/reset_password_provider.dart';
@@ -120,6 +121,7 @@ class MyApp extends StatelessWidget {
               CategoryContentsScreen.routeName: (context) =>
                   CategoryContentsScreen(),
               SearchScreen.routeName: (context) => SearchScreen(),
+              SubscriptionScreen.routeName: (context) => SubscriptionScreen(),
             },
           ),
         ),

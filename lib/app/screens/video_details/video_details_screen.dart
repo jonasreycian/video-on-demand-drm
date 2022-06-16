@@ -26,10 +26,10 @@ class VideoDetailsPage extends StatelessWidget {
     final VideoDetailsPageArguments arguments =
         ModalRoute.of(context)!.settings.arguments as VideoDetailsPageArguments;
     final Content content = arguments.content;
-    final int videoId = content.videoId!;
+    final int contentId = content.id!;
     final String heroTag = content.title!;
     final String type = content.type!;
-    initState(context, videoId);
+    initState(context, contentId);
     return Consumer<VideoDetailsProvider>(
       child: AnimationConfiguration.staggeredList(
         position: 0,
@@ -101,7 +101,7 @@ class VideoDetailsPage extends StatelessWidget {
                           content: value.content!,
                         ),
                         TrailersAndMoreTab(
-                          trailers: value.content!.trailers ?? [],
+                          trailers: value.content!.trailers,
                         ),
                         MoreLikeThisTab(
                           contentId: value.content!.id!,
