@@ -47,6 +47,7 @@ app.*.map.json
 /android/**/*.json
 /releases/**/*.apk
 pubspec.lock
-external/**/*.lock
+/external/**/*.lock
+/android/**/*.keystore
 
 /external/
