@@ -15,7 +15,7 @@ class MyWatchListProvider with ChangeNotifier {
     var response = await API().request(
       requestType: RequestType.post,
       endPoint: '/users/watch-lists',
-      body: {'content_id': contentId.toString()},
+      parameter: {'content_id': contentId.toString()},
     );
     loadWatchList();
     return Future.value(response['success']);

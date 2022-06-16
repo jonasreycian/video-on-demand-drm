@@ -120,7 +120,7 @@ class MyAccountScreen extends StatelessWidget {
         Provider.of<AccountInfoProvider>(context, listen: false);
     if (refreshLimit.onLimit) {
       refreshLimit.setCount();
-      accountInfoProvider.loadData(true);
+      accountInfoProvider.loadData();
     } else {
       refreshLimitDialog(context: context);
     }
@@ -130,7 +130,7 @@ class MyAccountScreen extends StatelessWidget {
     Future.delayed(const Duration(milliseconds: 1), () {
       AccountInfoProvider accountInfoProvider =
           Provider.of<AccountInfoProvider>(context, listen: false);
-      accountInfoProvider.loadData(true);
+      accountInfoProvider.loadData();
     });
   }
 }

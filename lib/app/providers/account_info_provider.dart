@@ -1,44 +1,102 @@
+import 'package:aq_prime/domain/entities/user.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../device/utils/api_request.dart';
 import '../../device/utils/user_data.dart' as user_data;
-import '../../domain/entities/user.dart';
 
 class AccountInfoProvider with ChangeNotifier {
   bool _isLoading = true;
   bool _isSuccess = false;
-  bool _isEditing = false;
-  bool _isEditingPassword = false;
-  User? _user;
+
+  int? _id;
+  String? _firstName;
+  String? _lastName;
+  String? _mobile;
+  String? _email;
+  bool? _status;
+  String? _createdAt;
+  Map<String, dynamic> _plan = {};
+  int? get id => _id;
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+  String? get mobile => _mobile;
+  String? get email => _email;
+  bool? get status => _status;
+  String? get createdAt => _createdAt;
+  Map<String, dynamic> get plan => _plan;
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
-  bool get isEditing => _isEditing;
-  bool get isEditingPassword => _isEditingPassword;
-  User? get user => _user;
 
-  setIsEditing() {
+  bool _isEditing = false;
+  bool get isEditing => _isEditing;
+  void setIsEditing() {
     _isEditing = !_isEditing;
     notifyListeners();
   }
 
-  setIsEditingPassword() {
-    _isEditingPassword = !_isEditingPassword;
+  User? _user;
+  User? get user => _user;
+  void setUser(User? user) {
+    _user = user;
     notifyListeners();
   }
 
-  setFirstName(value) => _user!.firstName = value;
-  setLastName(value) => _user!.lastName = value;
-  setMobile(value) => _user!.mobile = value;
-  setEmail(value) => _user!.email = value;
+  void setFirstName(String? value) {
+    _firstName = value;
+    notifyListeners();
+  }
 
-  loadData(bool withReset) async {
-    if (withReset) reset();
-    API().request(requestType: RequestType.get, endPoint: '/me').then((value) {
+  void setLastName(String? value) {
+    _lastName = value;
+    notifyListeners();
+  }
+
+  void setEmail(String? value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  void setMobile(String? value) {
+    _mobile = value;
+    notifyListeners();
+  }
+
+  void update() {
+    _isLoading = true;
+    notifyListeners();
+    API().request(
+        requestType: RequestType.post,
+        endPoint: '/update-account-info',
+        parameter: {
+          'firstName': _firstName,
+          'lastName': _lastName,
+          'email': _email,
+          'mobile': _mobile,
+        }).then((value) {
+      _isLoading = false;
+      _isSuccess = true;
+      notifyListeners();
+    }).catchError((error) {
+      _isLoading = false;
+      _isSuccess = false;
+      notifyListeners();
+    });
+  }
+
+  loadData() async {
+    await user_data.prepareUserData();
+    API()
+        .request(requestType: RequestType.get, endPoint: '/v1/me')
+        .then((value) {
       if (value['success'] != null) {
         _isSuccess = true;
         _isLoading = false;
-        _user = User.fromJson(value['data']);
-        user_data.saveLoggedIn(value['data']);
+        _id = value['data']['id'];
+        _firstName = value['data']['first_name'];
+        _lastName = value['data']['last_name'];
+        _mobile = value['data']['mobile'];
+        _email = value['data']['email'];
+        _plan = value['data']['plan'];
         notifyListeners();
       } else {
         _isSuccess = false;
@@ -46,38 +104,5 @@ class AccountInfoProvider with ChangeNotifier {
         notifyListeners();
       }
     });
-  }
-
-  update() {
-    API().request(
-      requestType: RequestType.put,
-      endPoint: '/users/update',
-      body: {
-        'first_name': user!.firstName,
-        'last_name': user!.lastName,
-        'mobile': user!.mobile,
-        'email': user!.email,
-        'birthdate': user!.birthdate,
-        'status': true,
-      },
-    ).then((value) {
-      if (value['success'] != null) {
-        _user = User.fromJson(value['data']);
-        user_data.saveLoggedIn(value['data']);
-        // notifyListeners();
-        // loadData(false);
-      } else {
-        _isSuccess = false;
-        _isLoading = false;
-        notifyListeners();
-      }
-    });
-  }
-
-  reset() {
-    _isSuccess = false;
-    _isLoading = false;
-    _user = null;
-    notifyListeners();
   }
 }

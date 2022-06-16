@@ -1,3 +1,4 @@
+import 'package:aq_prime/app/providers/continue_watching_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -107,6 +108,7 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.black,
             ),
             initialRoute: initialRoute,
+            home: LoginScreen(),
             routes: {
               NavScreen.routeName: (context) => NavScreen(),
               LoginScreen.routeName: (context) => LoginScreen(),

@@ -3,88 +3,61 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_config.dart';
 import 'user_data.dart' as user_data;
 
-enum RequestType { post, get, put, delete, patch }
+enum RequestType { post, get, put, delete }
 
 class API {
   Future<Map<String, dynamic>> request({
-    required RequestType requestType,
+    RequestType requestType = RequestType.post,
     Map<String, dynamic>? parameter,
-    Map<String, dynamic>? body,
     required String endPoint,
   }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token =
         ((prefs.getString("token") == null) ? '' : prefs.getString("token"))!;
-    debugPrint('token:${user_data.token} : Parameter: $parameter');
+    debugPrint('token:${user_data.token} : API REQUEST: $parameter');
     Map<String, String>? headers = <String, String>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Referer': AppConfig.referrer,
+      'Referer': AppConfig.endPoint,
       'Authorization': 'Bearer $token',
     };
-    Response? response;
-    Uri uri = Uri.http(
-      AppConfig.host,
-      AppConfig.path + AppConfig.version + endPoint,
-      parameter,
-    );
+    http.Response response;
     try {
       //============================================================
       if (requestType == RequestType.post) {
-        response = await post(
-          uri,
-          headers: headers,
-          body: body == null ? null : jsonEncode(body),
-        ).timeout(const Duration(seconds: 10));
-      }
-      if (requestType == RequestType.get) {
-        response = await get(uri, headers: headers).timeout(
-          const Duration(seconds: 10),
-        );
-      }
-      if (requestType == RequestType.put) {
-        response = await put(
-          uri,
-          headers: headers,
-          body: body == null ? null : jsonEncode(body),
-        ).timeout(const Duration(seconds: 10));
-      }
-      if (requestType == RequestType.delete) {
-        response = await delete(uri, headers: headers)
+        response = await http
+            .post(
+              Uri.http(AppConfig.host, AppConfig.path + endPoint),
+              headers: headers,
+              body: parameter == null ? null : jsonEncode(parameter),
+            )
+            .timeout(const Duration(seconds: 10));
+      } else {
+        response = await http
+            .get(
+              Uri.http(AppConfig.host, AppConfig.path + endPoint, parameter),
+              headers: headers,
+            )
             .timeout(const Duration(seconds: 10));
       }
-      if (requestType == RequestType.patch) {
-        response = await patch(
-          uri,
-          headers: headers,
-          body: body == null ? null : jsonEncode(body),
-        ).timeout(const Duration(seconds: 10));
-      }
-      debugPrint('|===============================');
-      if (response != null) {
-        debugPrint('| METHOD ==> $requestType');
-        debugPrint('| URL ==> $uri');
-        debugPrint('| STATUS ==> ${response.statusCode}');
-        debugPrint('| HEADERS ==> $headers');
-        if (response.statusCode == 200 && response.body.isNotEmpty) {
-          debugPrint('| SIZE ==> ${(response.contentLength.toString())} Bytes');
-          debugPrint('| RESPONSE ==> ${(response.body.toString())}');
-          return jsonDecode(response.body);
-        } else {
-          debugPrint('| ERROR ==> ${response.body}');
-          return jsonDecode(response.body);
-        }
+      //============================================================
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        debugPrint(
+            'API RESPONSE (${(response.contentLength.toString())} Bytes): ${(response.body.toString())}');
+        Map<String, dynamic> data = jsonDecode(response.body);
+
+        data['needPopUpError'] = false;
+        return data;
       } else {
-        debugPrint('RESPONSE OBJECT IS NULL');
+        debugPrint(response.body);
+        return jsonDecode(response.body);
       }
-      debugPrint('|===============================');
-      return <String, dynamic>{};
     } on TimeoutException catch (e) {
       debugPrint('Timeout Error: ${e.toString()}');
       return {
